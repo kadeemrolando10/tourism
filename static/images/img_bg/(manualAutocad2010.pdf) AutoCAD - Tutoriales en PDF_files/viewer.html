@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!-- saved from url=(0103)http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#zoom=90 -->
+<html dir="ltr" mozdisallowselectionprint="" moznomarginboxes=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="google" content="notranslate">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>PDF.js viewer</title>
+<link rel="stylesheet" href="./viewer.css">
+
+<link rel="resource" type="application/l10n" href="http://tutorialesenpdf.com/pdfjs/web/locale/locale.properties">
+<script src="./pdf.js.descarga"></script>
+<script src="./viewer.js.descarga"></script>
+</head>
+<body tabindex="1" class="">
+<div id="outerContainer">
+<div id="sidebarContainer">
+<div id="toolbarSidebar">
+<div class="splitToolbarButton toggled">
+<button id="viewThumbnail" class="toolbarButton toggled" title="Mostrar miniaturas" tabindex="2" data-l10n-id="thumbs">
+<span data-l10n-id="thumbs_label">Miniaturas</span>
+</button>
+<button id="viewOutline" class="toolbarButton" title="Mostrar resumen del documento (doble clic para expandir/contraer todos los elementos)" tabindex="3" data-l10n-id="document_outline" disabled="">
+<span data-l10n-id="document_outline_label">Resumen de documento</span>
+</button>
+<button id="viewAttachments" class="toolbarButton" title="Mostrar adjuntos" tabindex="4" data-l10n-id="attachments" disabled="">
+<span data-l10n-id="attachments_label">Adjuntos</span>
+</button>
+</div>
+</div>
+<div id="sidebarContent">
+<div id="thumbnailView"><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=1" title="Página 1"><div class="thumbnail selected" data-page-number="1"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=2" title="Página 2"><div class="thumbnail" data-page-number="2"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=3" title="Página 3"><div class="thumbnail" data-page-number="3"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=4" title="Página 4"><div class="thumbnail" data-page-number="4"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=5" title="Página 5"><div class="thumbnail" data-page-number="5"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=6" title="Página 6"><div class="thumbnail" data-page-number="6"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=7" title="Página 7"><div class="thumbnail" data-page-number="7"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=8" title="Página 8"><div class="thumbnail" data-page-number="8"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=9" title="Página 9"><div class="thumbnail" data-page-number="9"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=10" title="Página 10"><div class="thumbnail" data-page-number="10"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a></div>
+<div id="outlineView" class="hidden"></div>
+<div id="attachmentsView" class="hidden"></div>
+</div>
+<div id="sidebarResizer" class=""></div>
+</div> 
+<div id="mainContainer">
+<div class="findbar hidden doorHanger" id="findbar">
+<div id="findbarInputContainer">
+<input id="findInput" class="toolbarField" title="Buscar" placeholder="Buscar en el documento…" tabindex="91" data-l10n-id="find_input">
+<div class="splitToolbarButton">
+<button id="findPrevious" class="toolbarButton findPrevious" title="Encontrar la anterior aparición de la frase" tabindex="92" data-l10n-id="find_previous">
+<span data-l10n-id="find_previous_label">Anterior</span>
+</button>
+<div class="splitToolbarButtonSeparator"></div>
+<button id="findNext" class="toolbarButton findNext" title="Encontrar la siguiente aparición de esta frase" tabindex="93" data-l10n-id="find_next">
+<span data-l10n-id="find_next_label">Siguiente</span>
+</button>
+</div>
+</div>
+<div id="findbarOptionsContainer">
+<input type="checkbox" id="findHighlightAll" class="toolbarField" tabindex="94">
+<label for="findHighlightAll" class="toolbarLabel" data-l10n-id="find_highlight">Resaltar todos</label>
+<input type="checkbox" id="findMatchCase" class="toolbarField" tabindex="95">
+<label for="findMatchCase" class="toolbarLabel" data-l10n-id="find_match_case_label">Coincidencia de mayús./minús.</label>
+<span id="findResultsCount" class="toolbarLabel hidden"></span>
+</div>
+<div id="findbarMessageContainer">
+<span id="findMsg" class="toolbarLabel"></span>
+</div>
+</div> 
+<div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight">
+<div id="secondaryToolbarButtonContainer">
+<button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView" title="Cambiar al modo presentación" tabindex="51" data-l10n-id="presentation_mode">
+<span data-l10n-id="presentation_mode_label">Modo presentación</span>
+</button>
+<button id="secondaryOpenFile" class="secondaryToolbarButton openFile visibleLargeView" title="Abrir archivo" tabindex="52" data-l10n-id="open_file">
+<span data-l10n-id="open_file_label">Abrir</span>
+</button>
+<button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView" title="Imprimir" tabindex="53" data-l10n-id="print">
+<span data-l10n-id="print_label">Imprimir</span>
+</button>
+<button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView" title="Descargar" tabindex="54" data-l10n-id="download">
+<span data-l10n-id="download_label">Descargar</span>
+</button>
+<a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=1&amp;zoom=90,-231,759" id="secondaryViewBookmark" class="secondaryToolbarButton bookmark visibleSmallView" title="Vista actual (copiar o abrir en una nueva ventana)" tabindex="55" data-l10n-id="bookmark">
+<span data-l10n-id="bookmark_label">Vista actual</span>
+</a>
+<div class="horizontalToolbarSeparator visibleLargeView"></div>
+<button id="firstPage" class="secondaryToolbarButton firstPage" title="Ir a la primera página" tabindex="56" data-l10n-id="first_page" disabled="">
+<span data-l10n-id="first_page_label">Ir a la primera página</span>
+</button>
+<button id="lastPage" class="secondaryToolbarButton lastPage" title="Ir a la última página" tabindex="57" data-l10n-id="last_page">
+<span data-l10n-id="last_page_label">Ir a la última página</span>
+</button>
+<div class="horizontalToolbarSeparator"></div>
+<button id="pageRotateCw" class="secondaryToolbarButton rotateCw" title="Rotar en sentido horario" tabindex="58" data-l10n-id="page_rotate_cw">
+<span data-l10n-id="page_rotate_cw_label">Rotar en sentido horario</span>
+</button>
+<button id="pageRotateCcw" class="secondaryToolbarButton rotateCcw" title="Rotar en sentido antihorario" tabindex="59" data-l10n-id="page_rotate_ccw">
+<span data-l10n-id="page_rotate_ccw_label">Rotar en sentido antihorario</span>
+</button>
+<div class="horizontalToolbarSeparator"></div>
+<button id="cursorSelectTool" class="secondaryToolbarButton selectTool toggled" title="Activar herramienta de selección de texto" tabindex="60" data-l10n-id="cursor_text_select_tool">
+<span data-l10n-id="cursor_text_select_tool_label">Herramienta de selección de texto</span>
+</button>
+<button id="cursorHandTool" class="secondaryToolbarButton handTool" title="Activar herramienta de mano" tabindex="61" data-l10n-id="cursor_hand_tool">
+<span data-l10n-id="cursor_hand_tool_label">Herramienta de mano</span>
+</button>
+<div class="horizontalToolbarSeparator"></div>
+<button id="documentProperties" class="secondaryToolbarButton documentProperties" title="Propiedades del documento…" tabindex="62" data-l10n-id="document_properties">
+<span data-l10n-id="document_properties_label">Propiedades del documento…</span>
+</button>
+</div>
+</div> 
+<div class="toolbar">
+<div id="toolbarContainer">
+<div id="toolbarViewer">
+<div id="toolbarViewerLeft">
+<button id="sidebarToggle" class="toolbarButton" title="Cambiar barra lateral" tabindex="11" data-l10n-id="toggle_sidebar">
+ <span data-l10n-id="toggle_sidebar_label">Cambiar barra lateral</span>
+</button>
+<div class="toolbarButtonSpacer"></div>
+<button id="viewFind" class="toolbarButton" title="Buscar en el documento" tabindex="12" data-l10n-id="findbar">
+<span data-l10n-id="findbar_label">Buscar</span>
+</button>
+<div class="splitToolbarButton hiddenSmallView">
+<button class="toolbarButton pageUp" title="Página anterior" id="previous" tabindex="13" data-l10n-id="previous" disabled="">
+<span data-l10n-id="previous_label">Anterior</span>
+</button>
+<div class="splitToolbarButtonSeparator"></div>
+<button class="toolbarButton pageDown" title="Página siguiente" id="next" tabindex="14" data-l10n-id="next">
+<span data-l10n-id="next_label">Siguiente</span>
+</button>
+</div>
+<input type="number" id="pageNumber" class="toolbarField pageNumber" title="Página" value="1" size="4" min="1" tabindex="15" data-l10n-id="page" max="10">
+<span id="numPages" class="toolbarLabel">de 10</span>
+</div>
+<div id="toolbarViewerRight">
+<button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView" title="Cambiar al modo presentación" tabindex="31" data-l10n-id="presentation_mode">
+<span data-l10n-id="presentation_mode_label">Modo presentación</span>
+</button>
+<button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Abrir archivo" tabindex="32" data-l10n-id="open_file">
+<span data-l10n-id="open_file_label">Abrir</span>
+</button>
+<button id="print" class="toolbarButton print hiddenMediumView" title="Imprimir" tabindex="33" data-l10n-id="print">
+<span data-l10n-id="print_label">Imprimir</span>
+</button>
+<button id="download" class="toolbarButton download hiddenMediumView" title="Descargar" tabindex="34" data-l10n-id="download">
+<span data-l10n-id="download_label">Descargar</span>
+</button>
+<a href="http://tutorialesenpdf.com/pdfjs/web/viewer.html?file=%2Fpdfs%2Fpreview%2FmanualAutocad2010.pdf#page=1&amp;zoom=90,-231,759" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView" title="Vista actual (copiar o abrir en una nueva ventana)" tabindex="35" data-l10n-id="bookmark">
+<span data-l10n-id="bookmark_label">Vista actual</span>
+</a>
+<div class="verticalToolbarSeparator hiddenSmallView"></div>
+<button id="secondaryToolbarToggle" class="toolbarButton" title="Herramientas" tabindex="36" data-l10n-id="tools">
+<span data-l10n-id="tools_label">Herramientas</span>
+</button>
+</div>
+<div id="toolbarViewerMiddle">
+<div class="splitToolbarButton">
+<button id="zoomOut" class="toolbarButton zoomOut" title="Reducir" tabindex="21" data-l10n-id="zoom_out">
+<span data-l10n-id="zoom_out_label">Reducir</span>
+</button>
+<div class="splitToolbarButtonSeparator"></div>
+<button id="zoomIn" class="toolbarButton zoomIn" title="Aumentar" tabindex="22" data-l10n-id="zoom_in">
+<span data-l10n-id="zoom_in_label">Aumentar</span>
+</button>
+</div>
+<span id="scaleSelectContainer" class="dropdownToolbarButton" style="display: inherit;">
+<select id="scaleSelect" title="Tamaño" tabindex="23" data-l10n-id="zoom">
+<option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">Tamaño automático</option>
+<option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Tamaño real</option>
+<option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Ajuste de la página</option>
+<option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Anchura de la página</option>
+<option id="customScaleOption" title="" value="custom" disabled="disabled" hidden="true">90%</option>
+<option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 50 }">50%</option>
+<option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 75 }">75%</option>
+<option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 100 }">100%</option>
+<option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 125 }">125%</option>
+<option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 150 }">150%</option>
+<option title="" value="2" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 200 }">200%</option>
+<option title="" value="3" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 300 }">300%</option>
+<option title="" value="4" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 400 }">400%</option>
+</select>
+</span>
+</div>
+</div>
+<div id="loadingBar" class="hidden">
+<div class="progress" style="height: 100%; width: 100%;">
+<div class="glimmer">
+</div>
+</div>
+</div>
+</div>
+</div>
+<menu type="context" id="viewerContextMenu">
+<menuitem id="contextFirstPage" label="First Page" data-l10n-id="first_page" title="Ir a la primera página"></menuitem>
+<menuitem id="contextLastPage" label="Last Page" data-l10n-id="last_page" title="Ir a la última página"></menuitem>
+<menuitem id="contextPageRotateCw" label="Rotate Clockwise" data-l10n-id="page_rotate_cw" title="Rotar en sentido horario"></menuitem>
+<menuitem id="contextPageRotateCcw" label="Rotate Counter-Clockwise" data-l10n-id="page_rotate_ccw" title="Rotar en sentido antihorario"></menuitem>
+</menu>
+<div id="viewerContainer" tabindex="0">
+<div id="viewer" class="pdfViewer"><div class="page" data-page-number="1" data-loaded="true" style="width: 734px; height: 950px;"><div class="canvasWrapper" style="width: 734px; height: 950px;"><canvas id="page1" width="735" height="951" style="width: 735px; height: 951px;"></canvas></div><div class="textLayer" style="width: 734px; height: 950px;"><div style="left: 275.111px; top: 215.111px; font-size: 19.224px; font-family: sans-serif; transform: scaleX(0.93585);">Universidad de Oriente </div><div style="left: 276.047px; top: 240.168px; font-size: 19.224px; font-family: sans-serif; transform: scaleX(0.967596);">Núcleo de Anzoátegui </div><div style="left: 246.744px; top: 265.224px; font-size: 19.224px; font-family: sans-serif; transform: scaleX(0.891712);">Escuela de Ing. y Cs. Aplicadas </div><div style="left: 239.401px; top: 290.281px; font-size: 19.224px; font-family: sans-serif; transform: scaleX(0.948713);">Departamento de Ing. Industrial </div><div style="left: 232.056px; top: 666.167px; font-size: 21.6px; font-family: sans-serif; transform: scaleX(1.06029);">Manual de Autocad 2D y 3D </div><div style="left: 365.76px; top: 706.509px; font-size: 13.176px; font-family: serif; transform: scaleX(1.24739);">By Longo:                                                         </div><div style="left: 365.76px; top: 721.883px; font-size: 16.776px; font-family: sans-serif; transform: scaleX(0.932463);">Msc. Joseph Stalin Loján Paladines </div><div style="left: 251.28px; top: 825.167px; font-size: 13.176px; font-family: serif; transform: scaleX(1.2247);">Barcelona - Venezuela, Enero 2.010 </div><div class="endOfContent"></div></div></div><div class="page" data-page-number="2" style="width: 734px; height: 950px;" data-loaded="true"><div class="canvasWrapper" style="width: 734px; height: 950px;"><canvas id="page2" width="735" height="951" style="width: 735px; height: 951px;"></canvas></div><div class="textLayer" style="width: 734px; height: 950px;"><div style="left: 68.04px; top: 96.1297px; font-size: 16.776px; font-family: sans-serif; transform: scaleX(1.0023);">CONTENIDO </div><div style="left: 68.04px; top: 142.978px; font-size: 14.4px; font-family: serif; transform: scaleX(1.05804);">INTRODUCCIÓN</div><div style="left: 183.96px; top: 142.978px; font-size: 14.4px; font-family: serif; transform: scaleX(0.997292);">  ..................................................................................................................  </div><div style="left: 630.72px; top: 142.978px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00667);">3 </div><div style="left: 68.04px; top: 159.538px; font-size: 14.4px; font-family: serif; transform: scaleX(0.994426);">Conociendo Autocad  ...........................................................................................................</div><div style="left: 579.6px; top: 159.538px; font-size: 14.4px; font-family: serif; transform: scaleX(0.940002);">......  </div><div style="left: 630.72px; top: 159.538px; font-size: 14.4px; font-family: serif; transform: scaleX(0.920001);">4 </div><div style="left: 68.04px; top: 192.802px; font-size: 14.4px; font-family: serif; transform: scaleX(1.04054);">DIBUJO EN 2D </div><div style="left: 272.376px; top: 209.362px; font-size: 14.4px; font-family: serif; transform: scaleX(1.04764);">CREACION DE ENTIDADES </div><div style="left: 68.04px; top: 225.778px; font-size: 14.4px; font-family: serif; transform: scaleX(0.995613);">1.- Line  .....................................................................................................................</div><div style="left: 540px; top: 225.778px; font-size: 14.4px; font-family: serif; transform: scaleX(0.974739);">.................  </div><div style="left: 630.72px; top: 225.778px; font-size: 14.4px; font-family: serif; transform: scaleX(0.920001);">8 </div><div style="left: 68.04px; top: 242.338px; font-size: 14.4px; font-family: serif; transform: scaleX(0.998298);">2.- Parámetros de dibujo  .....................................................................................................</div><div style="left: 579.6px; top: 242.338px; font-size: 14.4px; font-family: serif; transform: scaleX(0.940002);">......  </div><div style="left: 623.52px; top: 242.338px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">10 </div><div style="left: 68.04px; top: 258.898px; font-size: 14.4px; font-family: serif; transform: scaleX(0.998579);">3.- Comandos básicos de visualización .....................................................................................  </div><div style="left: 623.606px; top: 258.898px; font-size: 14.4px; font-family: serif; transform: scaleX(1.0002);">13</div><div style="left: 68.04px; top: 275.458px; font-size: 14.4px; font-family: serif; transform: scaleX(0.998406);">4.- Rectangle  ................................................................................................................</div><div style="left: 554.4px; top: 275.458px; font-size: 14.4px; font-family: serif; transform: scaleX(0.968002);">.............  </div><div style="left: 623.52px; top: 275.458px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">15 </div><div style="left: 68.04px; top: 292.018px; font-size: 14.4px; font-family: serif; transform: scaleX(0.995845);">5.- Polygon ...................................................................................................................</div><div style="left: 550.8px; top: 292.018px; font-size: 14.4px; font-family: serif; transform: scaleX(0.970002);">..............  </div><div style="left: 623.52px; top: 292.018px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">15 </div><div style="left: 68.04px; top: 308.578px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999872);">6.- Circle ....................................................................................................................</div><div style="left: 543.6px; top: 308.578px; font-size: 14.4px; font-family: serif; transform: scaleX(0.973336);">................  </div><div style="left: 623.52px; top: 308.578px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">16 </div><div style="left: 68.04px; top: 325.138px; font-size: 14.4px; font-family: serif; transform: scaleX(0.998175);">7.- Arc  ......................................................................................................................</div><div style="left: 540px; top: 325.138px; font-size: 14.4px; font-family: serif; transform: scaleX(0.974739);">.................  </div><div style="left: 623.52px; top: 325.138px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">17 </div><div style="left: 68.04px; top: 341.698px; font-size: 14.4px; font-family: serif; transform: scaleX(0.997305);">8.- Ellipse  ..................................................................................................................</div><div style="left: 543.6px; top: 341.698px; font-size: 14.4px; font-family: serif; transform: scaleX(0.973336);">................  </div><div style="left: 623.52px; top: 341.698px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">19 </div><div style="left: 68.04px; top: 358.258px; font-size: 14.4px; font-family: serif; transform: scaleX(0.995829);">9.- Polyline ..................................................................................................................</div><div style="left: 547.2px; top: 358.258px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 358.258px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">20 </div><div style="left: 254.808px; top: 391.522px; font-size: 14.4px; font-family: serif; transform: scaleX(1.05137);">MODIFICACION DE ENTIDADES </div><div style="left: 68.04px; top: 407.938px; font-size: 14.4px; font-family: serif; transform: scaleX(0.993287);">10.- Copy  ....................................................................................................................</div><div style="left: 547.2px; top: 407.938px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 407.938px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">22 </div><div style="left: 68.04px; top: 424.498px; font-size: 14.4px; font-family: serif; transform: scaleX(0.994238);">11.- Mirror  ..................................................................................................................</div><div style="left: 547.2px; top: 424.498px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 424.498px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">23 </div><div style="left: 68.04px; top: 441.058px; font-size: 14.4px; font-family: serif; transform: scaleX(0.998894);">12.- Offset  ..................................................................................................................</div><div style="left: 547.2px; top: 441.058px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 441.058px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">24 </div><div style="left: 68.04px; top: 457.618px; font-size: 14.4px; font-family: serif; transform: scaleX(0.995663);">13.- Array  ...................................................................................................................</div><div style="left: 547.2px; top: 457.618px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 457.618px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">25 </div><div style="left: 68.04px; top: 474.178px; font-size: 14.4px; font-family: serif; transform: scaleX(0.995696);">14.- Move  ....................................................................................................................</div><div style="left: 550.8px; top: 474.178px; font-size: 14.4px; font-family: serif; transform: scaleX(0.970002);">..............  </div><div style="left: 623.52px; top: 474.178px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">26 </div><div style="left: 68.04px; top: 490.738px; font-size: 14.4px; font-family: serif; transform: scaleX(0.99479);">15.- Rotate  ..................................................................................................................</div><div style="left: 547.2px; top: 490.738px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 490.738px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">27 </div><div style="left: 68.04px; top: 507.226px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999557);">16.- Trim  ....................................................................................................................</div><div style="left: 547.2px; top: 507.226px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 507.226px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">28 </div><div style="left: 68.04px; top: 523.786px; font-size: 14.4px; font-family: serif; transform: scaleX(0.995711);">17.- Extend  ..................................................................................................................</div><div style="left: 550.8px; top: 523.786px; font-size: 14.4px; font-family: serif; transform: scaleX(0.970002);">..............  </div><div style="left: 623.52px; top: 523.786px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">29 </div><div style="left: 68.04px; top: 540.346px; font-size: 14.4px; font-family: serif; transform: scaleX(0.994712);">18.- Fillet  ..................................................................................................................</div><div style="left: 540px; top: 540.346px; font-size: 14.4px; font-family: serif; transform: scaleX(0.974739);">.................  </div><div style="left: 623.52px; top: 540.346px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">30 </div><div style="left: 68.04px; top: 573.61px; font-size: 14.4px; font-family: serif; transform: scaleX(1.04054);">DIBUJO EN 3D </div><div style="left: 68.04px; top: 590.026px; font-size: 14.4px; font-family: serif; transform: scaleX(0.996916);">Generalidades de 3D  ..........................................................................................................</div><div style="left: 576px; top: 590.026px; font-size: 14.4px; font-family: serif; transform: scaleX(0.946669);">.......  </div><div style="left: 623.52px; top: 590.026px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">32 </div><div style="left: 68.04px; top: 606.586px; font-size: 14.4px; font-family: serif; transform: scaleX(0.997311);">1.- Vpoint  ...................................................................................................................</div><div style="left: 547.2px; top: 606.586px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 606.586px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">34 </div><div style="left: 68.04px; top: 623.146px; font-size: 14.4px; font-family: serif; transform: scaleX(0.995146);">2.- 3Dorbit  ..................................................................................................................</div><div style="left: 547.2px; top: 623.146px; font-size: 14.4px; font-family: serif; transform: scaleX(0.971767);">...............  </div><div style="left: 623.52px; top: 623.146px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">35 </div><div style="left: 68.04px; top: 639.706px; font-size: 14.4px; font-family: serif; transform: scaleX(0.996594);">3.- Properties  ...............................................................................................................</div><div style="left: 550.8px; top: 639.706px; font-size: 14.4px; font-family: serif; transform: scaleX(0.970002);">..............  </div><div style="left: 623.52px; top: 639.706px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">36 </div><div style="left: 68.04px; top: 656.266px; font-size: 14.4px; font-family: serif; transform: scaleX(0.997603);">4.- Orthograpic UCS  ..........................................................................................................</div><div style="left: 576px; top: 656.266px; font-size: 14.4px; font-family: serif; transform: scaleX(0.946669);">.......  </div><div style="left: 623.52px; top: 656.266px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">37 </div><div style="left: 68.04px; top: 672.826px; font-size: 14.4px; font-family: serif; transform: scaleX(0.99902);">5.- New UCS/3 Point  ..........................................................................................................</div><div style="left: 579.6px; top: 672.826px; font-size: 14.4px; font-family: serif; transform: scaleX(0.940002);">......  </div><div style="left: 623.52px; top: 672.826px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">38 </div><div style="left: 68.04px; top: 689.386px; font-size: 14.4px; font-family: serif; transform: scaleX(0.994962);">6.- 3DFace  ...................................................................................................................</div><div style="left: 550.8px; top: 689.386px; font-size: 14.4px; font-family: serif; transform: scaleX(0.970002);">..............  </div><div style="left: 623.52px; top: 689.386px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">39 </div><div style="left: 68.04px; top: 705.946px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999882);">7.- Ruled Surface .............................................................................................................</div><div style="left: 565.2px; top: 705.946px; font-size: 14.4px; font-family: serif; transform: scaleX(0.960002);">..........  </div><div style="left: 623.52px; top: 705.946px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">40 </div><div style="left: 68.04px; top: 722.506px; font-size: 14.4px; font-family: serif; transform: scaleX(0.998893);">8.- Tabulated Surface  ........................................................................................................</div><div style="left: 572.4px; top: 722.506px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952002);">........  </div><div style="left: 623.52px; top: 722.506px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">41 </div><div style="left: 68.04px; top: 739.066px; font-size: 14.4px; font-family: serif; transform: scaleX(0.99523);">9.- Edge Surface  .............................................................................................................</div><div style="left: 561.6px; top: 739.066px; font-size: 14.4px; font-family: serif; transform: scaleX(0.963079);">...........  </div><div style="left: 623.52px; top: 739.066px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">42 </div><div style="left: 68.04px; top: 755.626px; font-size: 14.4px; font-family: serif; transform: scaleX(0.994425);">10.- Revolved Surface  ........................................................................................................</div><div style="left: 576px; top: 755.626px; font-size: 14.4px; font-family: serif; transform: scaleX(0.946669);">.......  </div><div style="left: 623.52px; top: 755.626px; font-size: 14.4px; font-family: serif; transform: scaleX(0.952001);">43 </div><div class="endOfContent"></div></div></div><div class="page" data-page-number="3" style="width: 734px; height: 950px;" data-loaded="true"><div class="canvasWrapper" style="width: 734px; height: 950px;"><canvas id="page3" width="735" height="951" style="width: 735px; height: 951px;"></canvas></div><div class="textLayer" style="width: 734px; height: 950px;"><div style="left: 68.04px; top: 43.0585px; font-size: 12.024px; font-family: sans-serif; transform: scaleX(0.926632);">Serie de consulta LONGO                                                                                                    Auto</div><div style="left: 529.992px; top: 43.0585px; font-size: 12.024px; font-family: sans-serif; transform: scaleX(0.941966);">cad 2 Dimensiones   -  3  - </div><div style="left: 288.144px; top: 102.115px; font-size: 21.6px; font-family: sans-serif; transform: scaleX(0.940166);">INTRODUCCION </div><div style="left: 68.04px; top: 181.312px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(1.00782);">Autodesk AutoCAD</div><div style="left: 193.104px; top: 181.312px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.961253);"> es un programa de diseño asistido por computadora (CAD </div><div style="left: 558.504px; top: 180.523px; font-size: 15.2189px; font-family: sans-serif; transform: scaleX(0.940881);">"Computer Aided </div><div style="left: 68.0397px; top: 199.315px; font-size: 15.2189px; font-family: sans-serif; transform: scaleX(0.865013);">Design"</div><div style="left: 113.688px; top: 200.104px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.899268);">)  para  dibujo  en  2D  y  3D.  Actualmente  es  </div><div style="left: 386.424px; top: 200.104px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.89765);">desarrollado  y  comercializado  por  la  empresa  </div><div style="left: 68.04px; top: 218.968px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.970816);">Autodesk. </div><div style="left: 68.04px; top: 254.464px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.948103);">Al igual que otros programas de Diseño Asistido </div><div style="left: 363.168px; top: 254.464px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.975608);">por Computadora (CAD), AutoCAD gestiona una </div><div style="left: 68.04px; top: 273.256px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.881723);">base  de  datos  de  entidades  geométricas  (puntos,  línea</div><div style="left: 401.976px; top: 273.256px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.84972);">s,  arcos,  etc)  con  la  que  se  puede  operar  a  </div><div style="left: 68.04px; top: 292.048px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.909444);">través de una pantalla gráfica en la que se muestran</div><div style="left: 373.104px; top: 292.048px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.939346);"> éstas, el llamado editor de dibujo. La interacción </div><div style="left: 68.04px; top: 310.84px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.919942);">del usuario se realiza a través de comandos, de edi</div><div style="left: 370.656px; top: 310.84px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.965865);">ción o dibujo, desde la </div><div style="left: 512.856px; top: 310.84px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.925953);">línea de órdenes, a la que </div><div style="left: 68.04px; top: 329.632px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.90823);">el  programa  está  fundamentalmente  orientado.  La</div><div style="left: 376.272px; top: 329.632px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.876069);">s  versiones  modernas  del  programa  permiten  la  </div><div style="left: 68.04px; top: 348.424px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.956609);">introducción de éstas mediante una interfaz gráfica</div><div style="left: 379.656px; top: 348.424px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.970896);"> de usuario o en inglés GUI, que automatiza el </div><div style="left: 68.04px; top: 367.288px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.909299);">proceso. </div><div style="left: 68.04px; top: 402.784px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.942318);">Como todos los programas de CAD, procesa imágen</div><div style="left: 386.28px; top: 402.784px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.950823);">es de tipo vectorial, aun</div><div style="left: 530.856px; top: 402.784px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.9701);">que admite incorporar </div><div style="left: 68.04px; top: 421.576px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.89305);">archivos  de  tipo  fotográfico  o  mapa  de  bits,  donde  </div><div style="left: 388.368px; top: 421.576px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.870016);">se  dibujan  figuras  básicas  o  primitivas  (líneas,  </div><div style="left: 68.04px; top: 440.368px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.960638);">arcos,  rectángulos,  textos,  etc.),  y  mediante</div><div style="left: 354.816px; top: 440.368px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.946559);">  herramientas  de  edición  se  crean  gráficos  más  </div><div style="left: 68.04px; top: 459.16px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.961182);">complejos. El programa permite or</div><div style="left: 279.72px; top: 459.16px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.962056);">ganizar los objetos por medio de </div><div style="left: 483.696px; top: 458.371px; font-size: 15.2189px; font-family: sans-serif; transform: scaleX(0.759857);">capas</div><div style="left: 514.512px; top: 459.16px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.956633);"> o estratos, ordenando el </div><div style="left: 68.04px; top: 478.024px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.93133);">dibujo en partes independientes </div><div style="left: 261.864px; top: 478.024px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.963179);">con diferente color y grafismo.  </div><div style="left: 68.04px; top: 513.52px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.894989);">Parte  del  programa  AutoCAD  está  orientado  a  la  </div><div style="left: 377.568px; top: 513.52px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.892068);">producción  de  planos,  empleando  para  ello  los  </div><div style="left: 68.04px; top: 532.312px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.881692);">recursos  tradicionales  de  grafismo  </div><div style="left: 279.072px; top: 532.312px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.917598);">en  el  dibujo,  como  color,  groso</div><div style="left: 476.64px; top: 532.312px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.848139);">r  de  líneas  y  texturas  tramadas.  </div><div style="left: 68.04px; top: 551.104px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.920698);">AutoCAD,  a  partir  de  la  versió</div><div style="left: 261.864px; top: 551.104px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.896491);">n  11,  utiliza  el  concepto  de  </div><div style="left: 438.84px; top: 550.315px; font-size: 15.2189px; font-family: sans-serif; transform: scaleX(0.871091);">espacio  modelo</div><div style="left: 535.32px; top: 551.104px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.847314);">  y  </div><div style="left: 554.976px; top: 550.315px; font-size: 15.2189px; font-family: sans-serif; transform: scaleX(0.820334);">espacio  papel</div><div style="left: 635.4px; top: 551.104px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.828967);">  para  </div><div style="left: 68.0399px; top: 569.896px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.83558);">separar  las  fases  de  diseño  y  dibujo  en  2D  y  3D,  de</div><div style="left: 380.232px; top: 569.896px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.842067);">  las  específicas  para  obtener  planos  trazados  en  </div><div style="left: 68.0399px; top: 588.688px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.841795);">papel  a  su  correspondiente  escala.  La  </div><div style="left: 296.424px; top: 588.688px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.889498);">extensión  del  archivo  de  AutoCAD  es  </div><div style="left: 533.52px; top: 588.688px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.923873);">.dwg</div><div style="left: 561.672px; top: 588.688px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.883626);">,  aunque  permite  </div><div style="left: 68.0399px; top: 607.552px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.94745);">exportar en otros formatos (el más conocido es el </div><div style="left: 371.304px; top: 607.552px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.9632);">.dxf</div><div style="left: 393.624px; top: 607.552px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(1.00883);">).  </div><div style="left: 68.0399px; top: 643.048px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.973988);">El  formato.dxf  permite  compartir  dibujos  con  ot</div><div style="left: 381.312px; top: 643.048px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.91538);">ras  plataformas  de  dibujo  CAD,  reservándose  </div><div style="left: 68.0399px; top: 661.84px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.970544);">AutoCAD el formato.dwg para sí mismo. El format</div><div style="left: 377.208px; top: 661.84px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.936168);">o.dxf puede editarse con un procesador de texto </div><div style="left: 68.0399px; top: 680.632px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.876384);">básico,  por  lo  que  se  puede  decir  que  es  abierto.  </div><div style="left: 379.44px; top: 680.632px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.897257);">En  cambio,  el.dwg  sólo  podía  ser  editado  con  </div><div style="left: 68.0399px; top: 699.424px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.939079);">AutoCAD, si bien desde hace poco </div><div style="left: 281.52px; top: 699.424px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.945899);">tiempo se ha liberado este form</div><div style="left: 472.248px; top: 699.424px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.981824);">ato (DWG), con lo que muchos </div><div style="left: 68.0399px; top: 718.216px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.963289);">programas CAD distintos del AutoCA</div><div style="left: 296.352px; top: 718.216px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.96834);">D lo incorporan, y permiten abri</div><div style="left: 490.896px; top: 718.216px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.921364);">r y guardar en esta extensión, </div><div style="left: 68.0399px; top: 737.08px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.938814);">con lo cual lo del DXF ha quedado </div><div style="left: 278.352px; top: 737.08px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.865797);">relegado a necesidades específicas.</div><div class="endOfContent"></div></div></div><div class="page" data-page-number="4" style="width: 734px; height: 950px;" data-loaded="true"><div class="canvasWrapper" style="width: 734px; height: 950px;"><canvas id="page4" width="735" height="951" style="width: 735px; height: 951px;"></canvas></div><div class="textLayer" style="width: 734px; height: 950px;"><div style="left: 68.04px; top: 43.0585px; font-size: 12.024px; font-family: sans-serif; transform: scaleX(0.926632);">Serie de consulta LONGO                                                                                                    Auto</div><div style="left: 529.992px; top: 43.0585px; font-size: 12.024px; font-family: sans-serif; transform: scaleX(0.948931);">cad 2 Dimensiones   -  4  - </div><div style="left: 68.04px; top: 102.61px; font-size: 16.776px; font-family: sans-serif; transform: scaleX(1.01218);">CONOCIENDO AUTOCAD </div><div style="left: 68.04px; top: 149.328px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(1.07082);">Entorno de AutoCAD</div><div style="left: 68.04px; top: 573.476px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.999795);">• </div><div style="left: 77.112px; top: 573.682px; font-size: 14.4px; font-family: serif; transform: scaleX(1.08091);">Área gráfica: </div><div style="left: 162.648px; top: 573.682px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00018);">Zona central de la figura. </div><div style="left: 110.52px; top: 590.242px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999854);">Es donde se realiza el dibujo. </div><div style="left: 68.04px; top: 606.668px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.999795);">• </div><div style="left: 77.112px; top: 606.874px; font-size: 14.4px; font-family: serif; transform: scaleX(1.08916);">Barra de menús: </div><div style="left: 183.888px; top: 606.874px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999894);">Parte superior de la figura. </div><div style="left: 110.52px; top: 623.434px; font-size: 14.4px; font-family: serif; transform: scaleX(1.01761);">Archivo, Edición, Ver... </div><div style="left: 110.52px; top: 639.994px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00002);">Permite el acceso a la mayoría de comandos y utilidades de AutoCAD. </div><div style="left: 68.04px; top: 656.42px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.999795);">• </div><div style="left: 77.112px; top: 656.626px; font-size: 14.4px; font-family: serif; transform: scaleX(1.09581);">Barra de herramientas estándar (o normal): </div><div style="left: 352.152px; top: 656.626px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999894);">Parte superior de la figura. </div><div style="left: 110.52px; top: 673.186px; font-size: 14.4px; font-family: serif; transform: scaleX(1.0003);">Incluye botones con los comandos bási</div><div style="left: 335.736px; top: 673.186px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00652);">cos como: Nuevo, Abrir, Guardar... </div><div style="left: 68.04px; top: 689.612px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.999795);">• </div><div style="left: 77.112px; top: 689.818px; font-size: 14.4px; font-family: serif; transform: scaleX(1.09335);">Barra de herramientas flotantes: </div><div style="left: 282.6px; top: 689.818px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00045);">Parte superior y laterales de la figura. </div><div style="left: 110.592px; top: 706.378px; font-size: 14.4px; font-family: serif; transform: scaleX(1.01744);">Se agrupan en diferentes barras de herramienta</div><div style="left: 385.488px; top: 706.378px; font-size: 14.4px; font-family: serif; transform: scaleX(1.02523);">s, que contienen la mayoría de los comandos de </div><div style="left: 110.592px; top: 722.938px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00165);">AutoCAD.  Se  pueden  activar  /  desactivar  y  situ</div><div style="left: 409.752px; top: 722.938px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00211);">ar  en  cualquier  parte  </div><div style="left: 545.904px; top: 722.938px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00167);">de  la  pantalla,  pero  </div><div style="left: 110.592px; top: 739.498px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00058);">generalmente se suelen anclar</div><div style="left: 282.96px; top: 739.498px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999878);"> en los laterales o en la pa</div><div style="left: 431.28px; top: 739.498px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999165);">rte superior de la pantalla. </div><div style="left: 68.04px; top: 755.924px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.999795);">• </div><div style="left: 77.112px; top: 756.13px; font-size: 14.4px; font-family: serif; transform: scaleX(1.0926);">Barra de herramientas de propiedades: </div><div style="left: 323.064px; top: 756.13px; font-size: 14.4px; font-family: serif; transform: scaleX(1.00017);">Está en la parte superior </div><div style="left: 465.84px; top: 756.13px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999599);">de la pantalla (ByLayer). </div><div style="left: 110.592px; top: 772.618px; font-size: 14.4px; font-family: serif; transform: scaleX(1.02028);">Controla las propiedades de los distintos objetos</div><div style="left: 394.704px; top: 772.618px; font-size: 14.4px; font-family: serif; transform: scaleX(1.03496);"> que forman parte del dibujo: color, capa, tipo </div><div style="left: 110.592px; top: 789.178px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999709);">de línea... </div><div style="left: 68.04px; top: 805.604px; font-size: 14.4px; font-family: sans-serif; transform: scaleX(0.999795);">• </div><div style="left: 77.112px; top: 805.81px; font-size: 14.4px; font-family: serif; transform: scaleX(1.07774);">Barras de desplazamiento: </div><div style="left: 244.728px; top: 805.81px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999984);">Derecha y parte inferior de la figura. </div><div style="left: 110.592px; top: 822.37px; font-size: 14.4px; font-family: serif; transform: scaleX(0.999974);">Permiten ver las zonas del dibujo que se encuentran fuera de los límites de la pantalla. </div><div class="endOfContent"></div></div></div><div class="page" data-page-number="5" style="width: 734px; height: 950px;"><div class="loadingIcon"></div></div><div class="page" data-page-number="6" style="width: 734px; height: 950px;"><div class="loadingIcon"></div></div><div class="page" data-page-number="7" style="width: 734px; height: 950px;"><div class="loadingIcon"></div></div><div class="page" data-page-number="8" style="width: 734px; height: 950px;"><div class="loadingIcon"></div></div><div class="page" data-page-number="9" style="width: 734px; height: 950px;"><div class="loadingIcon"></div></div><div class="page" data-page-number="10" style="width: 734px; height: 950px;"><div class="loadingIcon"></div></div></div>
+</div>
+<div id="errorWrapper" hidden="true">
+<div id="errorMessageLeft">
+<span id="errorMessage"></span>
+<button id="errorShowMore" data-l10n-id="error_more_info">Más información</button>
+<button id="errorShowLess" data-l10n-id="error_less_info" hidden="true">Menos información</button>
+</div>
+<div id="errorMessageRight">
+<button id="errorClose" data-l10n-id="error_close">Cerrar</button>
+</div>
+<div class="clearBoth"></div>
+<textarea id="errorMoreInfo" hidden="true" readonly="readonly"></textarea>
+</div>
+</div> 
+ <div id="overlayContainer" class="hidden">
+<div id="passwordOverlay" class="container hidden">
+<div class="dialog">
+<div class="row">
+<p id="passwordText" data-l10n-id="password_label">Introduzca la contraseña para abrir este archivo PDF.</p>
+</div>
+<div class="row">
+<input type="password" id="password" class="toolbarField">
+</div>
+<div class="buttonRow">
+<button id="passwordCancel" class="overlayButton"><span data-l10n-id="password_cancel">Cancelar</span></button>
+<button id="passwordSubmit" class="overlayButton"><span data-l10n-id="password_ok">Aceptar</span></button>
+</div>
+</div>
+</div>
+<div id="documentPropertiesOverlay" class="container hidden">
+<div class="dialog">
+<div class="row">
+<span data-l10n-id="document_properties_file_name">Nombre de archivo:</span> <p id="fileNameField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_file_size">Tamaño de archivo:</span> <p id="fileSizeField">-</p>
+</div>
+<div class="separator"></div>
+<div class="row">
+<span data-l10n-id="document_properties_title">Título:</span> <p id="titleField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_author">Autor:</span> <p id="authorField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_subject">Asunto:</span> <p id="subjectField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_keywords">Palabras clave:</span> <p id="keywordsField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_creation_date">Fecha de creación:</span> <p id="creationDateField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_modification_date">Fecha de modificación:</span> <p id="modificationDateField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_creator">Creador:</span> <p id="creatorField">-</p>
+</div>
+<div class="separator"></div>
+<div class="row">
+<span data-l10n-id="document_properties_producer">Productor PDF:</span> <p id="producerField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_version">Versión PDF:</span> <p id="versionField">-</p>
+</div>
+<div class="row">
+<span data-l10n-id="document_properties_page_count">Número de páginas:</span> <p id="pageCountField">-</p>
+</div>
+<div class="buttonRow">
+<button id="documentPropertiesClose" class="overlayButton"><span data-l10n-id="document_properties_close">Cerrar</span></button>
+</div>
+</div>
+</div>
+<div id="printServiceOverlay" class="container hidden">
+<div class="dialog">
+<div class="row">
+<span data-l10n-id="print_progress_message">Preparando documento para impresión…</span>
+</div>
+<div class="row">
+<progress value="0" max="100"></progress>
+<span data-l10n-id="print_progress_percent" data-l10n-args="{ &quot;progress&quot;: 0 }" class="relative-progress">0%</span>
+</div>
+<div class="buttonRow">
+<button id="printCancel" class="overlayButton"><span data-l10n-id="print_progress_close">Cancelar</span></button>
+</div>
+</div>
+</div>
+</div> 
+</div> 
+<div id="printContainer"></div>
+
+
+<input id="fileInput" class="fileInput" type="file"></body></html>
