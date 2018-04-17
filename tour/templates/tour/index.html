@@ -1,0 +1,226 @@
+{% extends 'tour/base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+{% block content %}
+	<div class="content">
+		<aside id="colorlib-hero">
+				<div class="flexslider">
+					<ul class="slides">
+					<li style="background-image: url({% static 'images/img_bg/img_bg_1.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>Templo Colonial "SAN FRANCISCO"</h2>
+										<h1>POTOSI</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url({% static 'images/img_bg/img_bg_2.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>Salar de Uyuni</h2>
+										<h1>DANIEL CAMPOS-POTOSI</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url({% static 'images/img_bg/img_bg_5.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluids">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>Vista Panoramica de la ciudad de Potosi</h2>
+										<h1>POTOSI</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url({% static 'images/img_bg/img_bg_3.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>Huellas de Dinosaurios en Toro Toro</h2>
+										<h1>CHARCAS-POTOSI</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url({% static 'images/img_bg/img_bg_4.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>Laguna Colorada</h2>
+										<h1>SUD LIPEZ-POTOSI</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+						<li style="background-image: url({% static 'images/img_bg/img_bg_6.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>Casa de la Moneda</h2>
+										<h1>POTOSI</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+						<li style="background-image: url({% static 'images/img_bg/img_bg_7.jpg' %});">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+									<div class="slider-text-inner text-center">
+										<h2>Laguna Verde</h2>
+										<h1>SUD LIPEZ-POTOSI</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					</ul>
+				</div>
+		</aside>
+
+
+		<div id="colorlib-reservation">
+				<!-- <div class="container"> -->
+				<div class="row">
+						<div class="search-wrap">
+						  <div class="container">
+								<ul class="nav nav-tabs">
+									<li class="active"><a data-toggle="tab" href="#flight"><i class="flaticon-plane"></i> Vuelos</a></li>
+									<li><a data-toggle="tab" href="#hotel"><i class="flaticon-resort"></i> Hospedaje</a></li>
+									<li><a data-toggle="tab" href="#car"><i class="flaticon-car"></i> Autotransporte</a></li>
+									<li><a data-toggle="tab" href="#restaurant"><i class="flaticon-cocktail"></i> Restaurantes</a></li>
+									<li><a data-toggle="tab" href="#tourist"><i class="flaticon-landmark"></i> Sitios Turisticos</a></li>
+
+								</ul>
+							</div>
+							<div class="tab-content">
+								 <div id="flight" class="tab-pane fade in active">
+									<form method="post" class="colorlib-form">
+									<div class="row">
+										 <div class="col-md-3">
+											<div class="form-group">
+												<label>Ubicacion:</label>
+												<div class="form-field">
+												  <input type="text" id="location1" class="form-control" placeholder="Introduzca su ubicacion">
+												</div>
+											</div>
+										 </div>
+										<div class="col-md-2">
+										  <input type="submit" name="submit" id="submit1" value="Buscar vuelo" class="btn btn-primary btn-block">
+										</div>
+									</div>
+									</form>
+								 </div>
+								 <div id="hotel" class="tab-pane fade">
+									  <form method="post" class="colorlib-form">
+										<div class="row">
+											<div class="col-md-4">
+											<div class="form-group">
+											<label>Ubicacion:</label>
+											<div class="form-field">
+											  <input type="text" id="location2" class="form-control" placeholder="Introduzca su ubicacion">
+											</div>
+										  </div>
+										 </div>
+											<div class="col-md-4">
+												<div class="form-group">
+												<label>Calificacion</label>
+													<div class="form-field">
+													  <i class="icon icon-arrow-down3"></i>
+														<select name="people" id="people" class="form-control">
+															<option value="#">1</option>
+															<option value="#">2</option>
+															<option value="#">3</option>
+															<option value="#">4</option>
+															<option value="#">5+</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-2">
+											  <input type="submit" name="submit" id="submit2" value="Buscar Hospedaje" class="btn btn-primary btn-block">
+											</div>
+										</div>
+									  </form>
+								 </div>
+								 <div id="car" class="tab-pane fade">
+									<form method="post" class="colorlib-form">
+										<div class="row">
+											 <div class="col-md-4">
+												<div class="form-group">
+													<label>Ubicacion:</label>
+													<div class="form-field">
+													  <input type="text" id="location3" class="form-control" placeholder="Introduzca su ubicacion">
+													</div>
+												</div>
+											 </div>
+											 <div class="col-md-2">
+												<input type="submit" name="submit" id="submit3" value="Buscar autotransporte" class="btn btn-primary btn-block">
+											 </div>
+									  </div>
+									</form>
+								 </div>
+								 <div id="restaurant" class="tab-pane fade">
+									  <form method="post" class="colorlib-form">
+										<div class="row">
+											 <div class="col-md-4">
+												<div class="form-group">
+													<label>Ubicacion:</label>
+													<div class="form-field">
+													  <input type="text" id="location4" class="form-control" placeholder="Introduzca su ubicacion">
+													</div>
+												</div>
+											 </div>
+											 <div class="col-md-2">
+											   <input type="submit" name="submit" id="submit4" value="Buscar restaurante" class="btn btn-primary btn-block">
+											 </div>
+										</div>
+									  </form>
+								 </div>
+								 <div id="sites" class="tab-pane fade">
+									  <form method="post" class="colorlib-form">
+										<div class="row">
+											 <div class="col-md-4">
+												<div class="form-group">
+													<label>Ubicacion:</label>
+													<div class="form-field">
+													  <input type="text" id="location5" class="form-control" placeholder="Introduzca su ubicacion">
+													</div>
+												</div>
+											 </div>
+											 <div class="col-md-2">
+											  <input type="submit" name="submit" id="submit5" value="Buscar sitio turistico" class="btn btn-primary btn-block">
+											 </div>
+										</div>
+									  </form>
+								 </div>
+							</div>
+						</div>
+				</div>
+		</div>
+	</div>
+{% endblock %}
