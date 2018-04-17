@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'tour',
-    'bootstrap3',
 ]
 
 MIDDLEWARE = [
