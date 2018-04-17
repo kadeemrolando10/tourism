@@ -55,7 +55,7 @@ ROOT_URLCONF = 'tour_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,18 +74,23 @@ WSGI_APPLICATION = 'tour_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bd_django',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+import dj_database_url
 
+DATABASES = {}
 
+DATABASES['default'] = dj_database_url.config()
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+try:
+    import os
+
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    DEBUG = True
+
+    from .local_settings import *
+except ImportError:
+    pass
 
 
 # Password validation
@@ -124,12 +129,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = (os.path.join(BASE_DIR, "media/"),)
+STATIC_URL = '/static/'
 
-STATIC_URL = "/static/"
-STATIC_ROOT = (os.path.join(BASE_DIR, "static/"),)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
 
-TEMPLATE_DIR = (
-    (os.path.join(BASE_DIR, "templates/"),)
-)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
