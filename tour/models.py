@@ -7,7 +7,8 @@ class Event(models.Model):
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion')
     location = models.URLField(verbose_name='Ubicacion')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='Publicacion' )
+    event_date = models.DateTimeField( verbose_name='Fecha de Evento' )
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
         return self.title
@@ -36,6 +37,7 @@ class Restaurant(models.Model):
     )
     rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
         return self.title
@@ -73,6 +75,7 @@ class Transport(models.Model):
     )
     rating = models.CharField(max_length=100, choices=rating_data, default=1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
         return self.title
@@ -110,6 +113,7 @@ class Lodgment(models.Model):
     )
     rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
         return self.title
@@ -138,6 +142,7 @@ class Agency(models.Model):
     )
     rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Telefono')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
         return self.title
@@ -157,6 +162,7 @@ class Tourism_site(models.Model):
     )
     rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
         return self.title

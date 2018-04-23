@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+  <!-- ***** Breadcumb Area Start ***** -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
+    <!-- ***** Breadcumb Area End ***** -->
+
+    <div class="contact-text">
+        {% for agency in agencys %}
+        <div class="col-12 col-sm-6">
+            <h4>{{agency.title}} - {{agency.rating}}</h4>
+            <div class="contact-info">
+                <div class="single-contact-info">
+                    <img src="{{ agency.image.url }}" alt="">
+                    <h6><i class="fa fa-map-signs" aria-hidden="true"></i> {{agency.service}}</h6>
+                </div>
+                <div class="single-contact-info">
+                    <h6><i class="fa fa-envelope-o" aria-hidden="true"></i>{{agency.address}}</h6>
+                    <h6><i class="fa fa-phone" aria-hidden="true"></i>{{agency.phone}}</h6>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

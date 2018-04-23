@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+  <!-- ***** Breadcumb Area Start ***** -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
+    <!-- ***** Breadcumb Area End ***** -->
+
+    <!-- ***** Listing Destinations Area Start ***** -->
+    <section class="dorne-listing-destinations-area section-padding-100-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading dark text-center">
+                        <span></span>
+                        <h4>Restaurantes</h4>
+                        <p>Donde comer ?</p>
+                        <h4> </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Features Area -->
+
+                {% for restaurant in restaurants %}
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-features-area mb-50">
+                        <img src="{{ restaurant.image.url }}" alt="">
+                        <!-- Price -->
+                        <div class="price-start">
+                            <p>{{restaurant.rating}}</p>
+                        </div>
+                        <div class="feature-content d-flex align-items-center justify-content-between">
+                            <div class="feature-title">
+                                <h5>{{restaurant.title}}</h5>
+                                <p>{{restaurant.title}}</p>
+                            </div>
+                            <div class="feature-favourite">
+                                <a href="#">{{restaurant.rating}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- ***** Listing Destinations Area End ***** -->
+
+{% endblock %}
