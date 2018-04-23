@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from tour.forms import EventForm
-from tour.models import Event, Restaurant, Tourism_site, Transport, Lodgment, Agency
+from tour.models import Event, Restaurant, Tourism_site, Transport, Lodgment, Agency, Service_Transport, Service_Agency
 from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -46,7 +46,7 @@ def agency_index(request):
     agencys = Agency.objects.all
     return render(request, 'tour/agencys-index.html', {
         'agencys': agencys,
-        'agency_obj': Agency
+        'agency_obj': Agency,
     })
 
 

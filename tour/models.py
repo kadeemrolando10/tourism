@@ -28,15 +28,8 @@ class Restaurant(models.Model):
     service = models.ManyToManyField(Service_Restaurant)
     address = models.CharField(max_length=150, unique=True, default='S/N',verbose_name='Direccion')
     location = models.URLField(verbose_name='Ubicacion')
-    rating_data = (
-        (u'1', u'✭'),
-        (u'2', u'✭✭'),
-        (u'3', u'✭✭✭'),
-        (u'4', u'✭✭✭✭'),
-        (u'5', u'✭✭✭✭✭'),
-    )
-    rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
+    rating = models.DecimalField( max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
@@ -66,14 +59,7 @@ class Transport(models.Model):
                (7, 'BENI'),
                (8, 'PANDO'),)
     destination = MultiSelectField(choices=DESTINY, max_choices=100, max_length=100, default=1, verbose_name='Destinos')
-    rating_data = (
-        (u'1', u'✭'),
-        (u'2', u'✭✭'),
-        (u'3', u'✭✭✭'),
-        (u'4', u'✭✭✭✭'),
-        (u'5', u'✭✭✭✭✭'),
-    )
-    rating = models.CharField(max_length=100, choices=rating_data, default=1, verbose_name='Calificacion')
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
@@ -104,14 +90,7 @@ class Lodgment(models.Model):
     service = models.ManyToManyField(Service_Lodgment)
     address = models.CharField(max_length=150, unique=True, default='S/N',verbose_name='Direccion')
     location = models.URLField(verbose_name='Ubicacion')
-    rating_data = (
-        (u'1', u'✭'),
-        (u'2', u'✭✭'),
-        (u'3', u'✭✭✭'),
-        (u'4', u'✭✭✭✭'),
-        (u'5', u'✭✭✭✭✭'),
-    )
-    rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Calificacion')
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
@@ -133,14 +112,7 @@ class Agency(models.Model):
     service = models.ManyToManyField(Service_Agency)
     address = models.CharField(max_length=150, unique=True, default='S/N',verbose_name='Direccion' )
     location = models.URLField(verbose_name='Ubicacion')
-    rating_data = (
-        (u'1', u'✭'),
-        (u'2', u'✭✭'),
-        (u'3', u'✭✭✭'),
-        (u'4', u'✭✭✭✭'),
-        (u'5', u'✭✭✭✭✭'),
-    )
-    rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Telefono')
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
@@ -153,14 +125,7 @@ class Tourism_site(models.Model):
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion')
     location = models.URLField(verbose_name='Ubicacion')
-    rating_data = (
-        (u'1', u'✭'),
-        (u'2', u'✭✭'),
-        (u'3', u'✭✭✭'),
-        (u'4', u'✭✭✭✭'),
-        (u'5', u'✭✭✭✭✭'),
-    )
-    rating = models.CharField(max_length=100, choices=rating_data, default=1,verbose_name='Calificacion')
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 

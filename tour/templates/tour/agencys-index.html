@@ -8,21 +8,52 @@
     <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
     <!-- ***** Breadcumb Area End ***** -->
 
-    <div class="contact-text">
-        {% for agency in agencys %}
-        <div class="col-12 col-sm-6">
-            <h4>{{agency.title}} - {{agency.rating}}</h4>
-            <div class="contact-info">
-                <div class="single-contact-info">
-                    <img src="{{ agency.image.url }}" alt="">
-                    <h6><i class="fa fa-map-signs" aria-hidden="true"></i> {{agency.service}}</h6>
-                </div>
-                <div class="single-contact-info">
-                    <h6><i class="fa fa-envelope-o" aria-hidden="true"></i>{{agency.address}}</h6>
-                    <h6><i class="fa fa-phone" aria-hidden="true"></i>{{agency.phone}}</h6>
+    <section class="dorne-editors-pick-area bg-img bg-overlay-9 section-padding-100" style="background-image: url(/static/img/bg-img/hero-2.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <h4>AGENCIAS DE TURISMO</h4>
+                        <span></span>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% for agency in agencys %}
+            <div class=" contact-text row">
+                <div class="agency col-12 col-lg-6">
+                    <div class="imga single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <img src="{{ agency.image.url }}" alt="">
+                        <div class="ratings-map-area d-flex">
+                                <a href="#">{{agency.rating}}</a>
+                                <a href="#openModal"><img src="{% static 'img/core-img/map.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="contact-text">
+                        <h4>{{agency.title}}</h4>
+                        <p>{{agency.service}}</p>
+                        <div class="contact-info d-lg-flex">
+                    <div class="single-contact-info">
+                            <div id="openModal" class="modalDialog">
+                                <div>
+                                    <a href="#close" title="Close" class="close">x</a>
+                                    <iframe src="{{ agency.location }}" width="700" height="400" frameborder="2" style="border:0" allowfullscreen="">
+
+                                    </iframe>
+                                </div>
+                            </div>
+                        <p> <i class="fa fa-map-signs" aria-hidden="true"></i>.  No. 25-33</p>
+                        <p> <i class="fa fa-envelope-o" aria-hidden="true"></i>.  {{ agency.address }}</p>
+                        <p> <i class="fa fa-phone" aria-hidden="true"></i>.  {{ agency.phone}}</p>
+                    </div>
+                </div>
+            </div>
+
+                </div>
+            </div>
         {% endfor %}
-    </div>
+        </div>
+    </section>
+
 {% endblock %}
