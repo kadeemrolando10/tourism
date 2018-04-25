@@ -37,7 +37,11 @@
                     <div class="col-12 col-lg-6">
                         <div class="contact-text">
                             <h4>{{ agency.title }}</h4>
-                            <p>{{ agency.service.all }}</p>
+                            <p>
+                                {% for service in agency.service.all %}
+                                    {{ service }}<br>
+                                {% endfor %}
+                            </p>
                             <div class="contact-info d-lg-flex">
                                 <div class="single-contact-info">
                                     <p><i class="fa fa-map-signs" aria-hidden="true"></i>. No. 25-33</p>
