@@ -2,51 +2,49 @@
 {% load staticfiles %}
 {% load static %}
 
-
 {% block content %}
   <!-- ***** Breadcumb Area Start ***** -->
     <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
     <!-- ***** Breadcumb Area End ***** -->
 
-    <!-- ***** Listing Destinations Area Start ***** -->
-    <section class="dorne-listing-destinations-area section-padding-100-50">
-        <div class="container">
+   <section class="dorne-features-restaurant-area bg-default">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="section-heading dark text-center">
+                    <div class="section-heading text-center">
                         <span></span>
                         <h4>Restaurantes</h4>
-                        <p>Donde comer ?</p>
-                        <h4> </h4>
+                        <p>Donde comer ?</p><hr>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <!-- Single Features Area -->
 
-                {% for restaurant in restaurants %}
-                <div class="col-12 col-sm-6 col-lg-4">
+            <div class="row">
+                {% for rest in restaurants %}
+                <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-features-area mb-50">
-                        <img src="{{ restaurant.image.url }}" alt="">
-                        <!-- Price -->
-                        <div class="price-start">
-                            <p>{{restaurant.rating}}</p>
-                        </div>
-                        <div class="feature-content d-flex align-items-center justify-content-between">
+                        <div class="single-features-area">
+                            <img src="{{ rest.image.url }}" alt="">
+                            <!-- Rating & Map Area -->
+                            <div class="ratings-map-area d-flex">
+                                <a href="#">{{rest.rating}}</a>
+                                <a href="#"><img src="{% static 'img/core-img/show.png' %}" alt=""></a>
+                            </div>
+                             <div class="feature-content d-flex align-items-center justify-content-between">
                             <div class="feature-title">
-                                <h5>{{restaurant.title}}</h5>
-                                <p>{{restaurant.title}}</p>
+                                <h5>{{rest.title}}</h5>
+                                <p>{{rest.address}}</p>
                             </div>
                             <div class="feature-favourite">
-                                <a href="#">{{restaurant.rating}}</a>
+                                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                 {% endfor %}
             </div>
         </div>
-    </section>
-    <!-- ***** Listing Destinations Area End ***** -->
+   </section>
 
 {% endblock %}

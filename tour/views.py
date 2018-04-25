@@ -10,6 +10,10 @@ def index(request):
         return render(request, 'tour/index.html', {})
 
 
+def secretary(request):
+    return render(request, 'tour/secretary.html', {})
+
+
 def event_index(request):
     events = Event.objects.all
     return render(request, 'tour/events-index.html', {

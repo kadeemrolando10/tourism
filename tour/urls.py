@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
         url(r'^$', views.index, name='base'),
+        path('secretaria/', views.secretary, name='secretary'),
         path('events/', include([
                     path('', views.event_index, name='events-index'),
                     #path('new/', views.events_new, name='events-new'),

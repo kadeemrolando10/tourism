@@ -96,7 +96,7 @@ h6 {
 
 p {
     padding-top: 1px;
-    color: #f1f8ff;
+    color: #01070e;
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
@@ -141,17 +141,21 @@ p {
     max-width: 100%;
     height: auto;
     padding-top: 15px;
+
 }
 .contact-text {
-     background-color: #6771e6;
+     background-color: #e3e0e8;
      margin: 0 auto 15px;
-     text-align: center;
+     text-align: start;
+     padding-top: 15px;
+     border-radius: 5px;
 }
 
 
 img {
     max-width: 100%;
     height: auto;
+    border-radius: 5px;
 }
 
 .mt-15 {
@@ -356,7 +360,7 @@ li {
 }
 
 .bg-overlay-9:after {
-    background-color: rgba(14, 2, 35, 0.9);
+    background-color: rgba(14, 2, 35, 0.35);
 }
 
 .bg-gray {
@@ -930,6 +934,7 @@ li {
     bottom: 0;
     right: 0;
     z-index: 99
+
 }
 
 .feature-events-content h5 {
@@ -971,6 +976,7 @@ li {
 .dorne-footer-area {
     padding: 50px 35px;
     border-top: 1px solid #bec0cc;
+    background-color: #0f0727;
 }
 
 .footer-text p {
@@ -981,9 +987,9 @@ li {
 
 .footer-social-btns > a {
     display: inline-block;
-    color: #464646;
+    color: #ffc107;
     padding: 0 15px;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 /* Breadcumb Area CSS */
@@ -1025,6 +1031,7 @@ li {
     font-size: 14px;
     line-height: 2;
     margin: 0;
+    #color: #0db136;
 }
 
 .single-contact-info {
@@ -1373,10 +1380,11 @@ li {
 }
 
 .reviewer-meta > img {
-    width: 73px !important;
-    height: 73px !important;
+    width: 150px !important;
+    height: 150px !important;
     border-radius: 50%;
     margin-right: 20px;
+    align-content: center;
 }
 
 .review-title-ratings h5 {
@@ -1387,6 +1395,7 @@ li {
 
 .single-review-area {
     margin-bottom: 50px;
+    text-align: center;
 }
 
 .reviewer-content p {
@@ -1442,7 +1451,7 @@ li {
 	margin: 10% auto;
 	padding: 5px 5px 5px 5px;
 	border-radius: 2px;
-	background:#6771e6 ;
+	background: #e3e0e8;
   -webkit-transition: opacity 400ms ease-in;
 -moz-transition: opacity 400ms ease-in;
 transition: opacity 400ms ease-in;
@@ -1467,3 +1476,6 @@ transition: opacity 400ms ease-in;
 }
 .close:hover { background: #00d9ff; }
 
+.white {
+    color: white;
+}
