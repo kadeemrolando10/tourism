@@ -36,3 +36,7 @@ activate env windows
 
 
 python3 manage.py startapp reservations
+
+** create requirements.txt
+
+pip freeze > requirements.txt
