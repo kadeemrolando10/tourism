@@ -24,114 +24,141 @@
 
 
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="dorne-load"></div>
-    </div>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="dorne-load"></div>
+</div>
 
-    <!-- ***** Search Form Area ***** -->
-    <div class="dorne-search-form d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="search-close-btn" id="closeBtn">
-                        <i class="pe-7s-close-circle" aria-hidden="true"></i>
-                    </div>
-                    <form action="#" method="get">
-                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
-                        <input type="submit" class="d-none" value="submit">
-                    </form>
+<!-- ***** Search Form Area ***** -->
+<div class="dorne-search-form d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-close-btn" id="closeBtn">
+                    <i class="pe-7s-close-circle" aria-hidden="true"></i>
                 </div>
+                <form action="#" method="get">
+                    <input type="search" name="caviarSearch" id="search"
+                           placeholder="Search Your Desire Destinations or Events">
+                    <input type="submit" class="d-none" value="submit">
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header_area" id="header">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <div class="col-12 h-100">
-                    <nav class="h-100 navbar navbar-expand-lg">
-                        <a class="navbar-brand" href="index.html"><img src="{% static 'img/core-img/turismo.png' %}" width="230px" height="70px" alt=""></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-                        <!-- Nav -->
-                        <div class="collapse navbar-collapse" id="dorneNav">
-                            <ul class="navbar-nav mr-auto" id="dorneMenu">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{% url 'base' %}">Inicio <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Turismo <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{% url 'torism_sites-index' %}">Sitios Turisticos</a>
-                                        <a class="dropdown-item" href="{% url 'transports-index' %}">Transporte</a>
-                                        <a class="dropdown-item" href="{% url 'lodgments-index' %}"><i class="fa fa-building" aria-hidden="true"></i>Hospedaje</a>
-                                        <a class="dropdown-item" href="{% url 'restaurants-index' %}"><i class="fas fa-angle-down"></i>Restaurant</a>
-                                        <a class="dropdown-item" href="{% url 'agencys-index' %}">Agencias de turismo</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'events-index' %}">Eventos</a>
-                                </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'secretary' %}">Secretaria</a>
-                                </li>
-                            </ul>
-                            <!-- Search btn -->
-                            <div class="dorne-search-btn">
-                                <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Buscar</a>
-                            </div>
-                            <!-- Signin btn -->
-                            <div class="dorne-signin-btn">
-                                <a href="#">Login</a>
-                            </div>
+<!-- ***** Header Area Start ***** -->
+<header class="header_area" id="header">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-12 h-100">
+                <nav class="h-100 navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html"><img src="{% static 'img/core-img/turismo.png' %}"
+                                                                   width="230px" height="70px" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav"
+                            aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                            class="fa fa-bars"></span></button>
+                    <!-- Nav -->
+                    <div class="collapse navbar-collapse" id="dorneNav">
+                        <ul class="navbar-nav mr-auto" id="dorneMenu">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'base' %}">Inicio <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Turismo <i
+                                        class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'torism_sites-index' %}">Sitios Turisticos</a>
+                                    <a class="dropdown-item" href="{% url 'transports-index' %}">Transporte</a>
+                                    <a class="dropdown-item" href="{% url 'lodgments-index' %}"><i
+                                            class="fa fa-building" aria-hidden="true"></i>Hospedaje</a>
+                                    <a class="dropdown-item" href="{% url 'restaurants-index' %}"><i
+                                            class="fas fa-angle-down"></i>Restaurant</a>
+                                    <a class="dropdown-item" href="{% url 'agencys-index' %}">Agencias de turismo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'events-index' %}">Eventos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'secretary' %}">Secretaria</a>
+                            </li>
+                        </ul>
+                        <!-- Search btn -->
+                        <div class="dorne-search-btn">
+                            <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Buscar</a>
                         </div>
-                    </nav>
+                        <!-- Signin btn -->
+                        <div class="dorne-signin-btn">
+                            <a href="#">Login</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+{% block content %}
+{% endblock %}
+<!-- ****** Footer Area Start ****** -->
+<footer class="dorne-footer-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 d-md-flex align-items-center justify-content-between">
+                <div class="footer-text ">
+                    <h6>
+                        <i class="fa fa-heart-o" aria-hidden="true"> </i> . GOBIERNO AUTONOMO DEPARTAMENTAL DE POTOSI
+                    </h6>
+                </div>
+                <div class="footer-social-btns">
+                    <a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
+                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
                 </div>
             </div>
         </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-    {% block content %}
-    {% endblock %}
-    <!-- ****** Footer Area Start ****** -->
-    <footer class="dorne-footer-area">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 d-md-flex align-items-center justify-content-between">
-                    <div class="footer-text ">
-                        <h6>
-                            <i class="fa fa-heart-o" aria-hidden="true"> </i> .  GOBIERNO AUTONOMO DEPARTAMENTAL DE POTOSI
-                        </h6>
-                    </div>
-                    <div class="footer-social-btns">
-                        <a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
-                        <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-                        <a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
-                    </div>
-                </div>
+    </div>
+</footer>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-    </footer>
-    <!-- ****** Footer Area End ****** -->
+            <div class="modal-body">
 
-    <!-- jQuery-2.2.4 js -->
-    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
-    <!-- Popper js -->
-    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
-    <!-- Bootstrap-4 js -->
-    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
-    <!-- All Plugins js -->
-    <script src="{% static 'js/others/plugins.js' %}"></script>
-    <!-- Active JS -->
-    <script src="{% static 'js/active.js' %}"></script>
-    <!--
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ****** Footer Area End ****** -->
+
+<!-- jQuery-2.2.4 js -->
+<script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+<!-- Popper js -->
+<script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+<!-- Bootstrap-4 js -->
+<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+<!-- All Plugins js -->
+<script src="{% static 'js/others/plugins.js' %}"></script>
+<!-- Active JS -->
+<script src="{% static 'js/active.js' %}"></script>
+<!--
     <script src="{% static 'js/google-map/explore-map-active.js' %}"></script>
     <script src="{% static 'js/google-map/location-map-active.js' %}"></script>
     <script src="{% static 'js/google-map/map-active.js' %}"></script>
     -->
+{% block js_code %}
+{% endblock %}
 </body>
 
 </html>
