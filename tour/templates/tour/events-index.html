@@ -17,7 +17,6 @@
                 </div>
             </div>
 
-
             <div class="hero-search-form">
                         <!-- Tabs -->
                     {% for event in events %}
@@ -30,7 +29,7 @@
                             <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
                                 <h4 class="white">{{ event.title }}</h4>
 
-                            <h6>{{event.event_date}}</h6>
+                                <h6>{{event.event_date}}</h6>
                                 <div class="row">
                                     <div class="col-12 col-lg-5">
                                         <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
@@ -42,14 +41,12 @@
                                     </div>
                                 </div>
 
-                                </div>
+                            </div>
                     </div>
                     <h2> <hr></h2>
                     {% endfor %}
             </div>
         </div>
     </section>
-
-
 
 {% endblock %}

@@ -53,8 +53,9 @@
         <div class="row h-100">
             <div class="col-12 h-100">
                 <nav class="h-100 navbar navbar-expand-lg">
-                    <a class="navbar-brand" href="index.html"><img src="{% static 'img/core-img/turismo.png' %}"
-                                                                   width="230px" height="70px" alt=""></a>
+                    <a class="navbar-brand" href="index.html">
+                        <img src="/static/img/core-img/turismo.png" width="230px" height="70px" alt="" class="d-none d-sm-block">
+                        <img src="/static/img/core-img/turismo1.png" width="70px" height="70px" alt="" class="d-block d-sm-none"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav"
                             aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span
                             class="fa fa-bars"></span></button>
@@ -62,7 +63,7 @@
                     <div class="collapse navbar-collapse" id="dorneNav">
                         <ul class="navbar-nav mr-auto" id="dorneMenu">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'base' %}">Inicio <span
+                                <a class="nav-link" href="{% url 'base' %}"><i class="fa fa-home" aria-hidden="true"></i> Inicio <span
                                         class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item dropdown">
@@ -70,20 +71,25 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Turismo <i
                                         class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'torism_sites-index' %}">Sitios Turisticos</a>
-                                    <a class="dropdown-item" href="{% url 'transports-index' %}">Transporte</a>
-                                    <a class="dropdown-item" href="{% url 'lodgments-index' %}"><i
-                                            class="fa fa-building" aria-hidden="true"></i>Hospedaje</a>
-                                    <a class="dropdown-item" href="{% url 'restaurants-index' %}"><i
-                                            class="fas fa-angle-down"></i>Restaurant</a>
-                                    <a class="dropdown-item" href="{% url 'agencys-index' %}">Agencias de turismo</a>
+                                    <a class="dropdown-item" href="{% url 'torism_sites-index' %}">
+                                        <i class="fa fa-video-camera" aria-hidden="true"></i> Sitios Turisticos</a>
+                                    <a class="dropdown-item" href="{% url 'transports-index' %}">
+                                        <i class="fa fa-bus" aria-hidden="true"></i> Transporte</a>
+                                    <a class="dropdown-item" href="{% url 'lodgments-index' %}">
+                                        <i class="fa fa-hotel" aria-hidden="true"></i> Hospedaje</a>
+                                    <a class="dropdown-item" href="{% url 'restaurants-index' %}">
+                                        <i class="fa fa-cutlery"></i> Restaurant</a>
+                                    <a class="dropdown-item" href="{% url 'agencys-index' %}">
+                                        <i class="fa fa-street-view" aria-hidden="true"></i> Agencias de turismo</a>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'events-index' %}">Eventos</a>
+                                <a class="nav-link" href="{% url 'events-index' %}">
+                                    <i class="fa fa-bell" aria-hidden="true"></i> Eventos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'secretary' %}">Secretaria</a>
+                                <a class="nav-link" href="{% url 'secretary' %}">
+                                    <i class="fa fa-institution " aria-hidden="true"></i> Secretaria</a>
                             </li>
                         </ul>
                         <!-- Search btn -->
@@ -114,9 +120,9 @@
                     </h6>
                 </div>
                 <div class="footer-social-btns">
-                    <a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
-                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
                     <a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
                     <a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
                 </div>

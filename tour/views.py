@@ -1,17 +1,37 @@
 from django.shortcuts import render
 from tour.forms import EventForm
-from tour.models import Event, Restaurant, Tourism_site, Transport, Lodgment, Agency, Service_Transport, Service_Agency
+from tour.models import Event, Restaurant, Tourism_site, Transport, Lodgment, Agency, Objetive, Function,Document
 from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 
 def index(request):
-        return render(request, 'tour/index.html', {})
+    events = Event.objects.all
+    restaurants = Restaurant.objects.all
+    transports = Transport.objects.all
+    tourism_sites = Restaurant.objects.all
+    agencys = Agency.objects.all
+    lodgments = Lodgment.objects.all
+    return render(request, 'tour/index.html', {
+        'events': events,
+        'restaurants': restaurants,
+        'transports': transports,
+        'tourism_sites': tourism_sites,
+        'agencys': agencys,
+        'lodgments': lodgments,
+    })
 
 
 def secretary(request):
-    return render(request, 'tour/secretary.html', {})
+    obj = Objetive.objects.all
+    func = Function.objects.all
+    doc = Document.objects.all
+    return render(request, 'tour/secretary.html', {
+        'objetivos': obj,
+        'funciones': func,
+        'documento': doc
+    })
 
 
 def event_index(request):
@@ -39,9 +59,9 @@ def transport_index(request):
 
 
 def torism_site_index(request):
-    tourism_sites = Restaurant.objects.all
+    tourism_sites = Tourism_site.objects.all
     return render(request, 'tour/tourism_sites-index.html', {
-        'tourism_sites': tourism_sites,
+        'tourism': tourism_sites,
         'tourism_site_obj': Tourism_site
     })
 

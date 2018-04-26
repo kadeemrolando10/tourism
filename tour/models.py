@@ -7,7 +7,7 @@ class Event(models.Model):
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion')
     location = models.URLField(verbose_name='Ubicacion')
-    event_date = models.DateTimeField( verbose_name='Fecha de Evento' )
+    event_date = models.DateTimeField(verbose_name='Fecha de Evento')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
@@ -26,10 +26,10 @@ class Restaurant(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     service = models.ManyToManyField(Service_Restaurant)
-    address = models.CharField(max_length=150, unique=True, default='S/N',verbose_name='Direccion')
+    address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     location = models.URLField(verbose_name='Ubicacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
-    rating = models.DecimalField( max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
@@ -38,7 +38,7 @@ class Restaurant(models.Model):
 
 class Service_Transport(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
-    description = models.TextField( verbose_name='Descripcion')
+    description = models.TextField(verbose_name='Descripcion')
 
     def __str__(self):
         return self.title
@@ -77,7 +77,7 @@ class Lodgment_type(models.Model):
 
 class Service_Lodgment(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
-    description = models.TextField( verbose_name='Descripcion')
+    description = models.TextField(verbose_name='Descripcion')
 
     def __str__(self):
         return self.title
@@ -88,7 +88,7 @@ class Lodgment(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     service = models.ManyToManyField(Service_Lodgment)
-    address = models.CharField(max_length=150, unique=True, default='S/N',verbose_name='Direccion')
+    address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     location = models.URLField(verbose_name='Ubicacion')
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
@@ -110,7 +110,7 @@ class Agency(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     service = models.ManyToManyField(Service_Agency)
-    address = models.CharField(max_length=150, unique=True, default='S/N',verbose_name='Direccion' )
+    address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     location = models.URLField(verbose_name='Ubicacion')
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
@@ -128,6 +128,36 @@ class Tourism_site(models.Model):
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
+    address = models.CharField(max_length=150, verbose_name='Direccion', default='sn')
+    web = models.CharField(max_length=150, verbose_name='Pagina Web', default='nn')
+    schedule = models.CharField(max_length=150, verbose_name='Horarios', default='--')
 
     def __str__(self):
         return self.title
+
+
+class Objetive(models.Model):
+    description = models.TextField(verbose_name='Descripcion', unique=True)
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
+
+    def __str__(self):
+        return self.description
+
+
+class Function(models.Model):
+    description = models.TextField(verbose_name='Descripcion', unique=True)
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
+
+    def __str__(self):
+        return self.description
+
+
+class Document(models.Model):
+    filename = models.CharField(max_length=100, verbose_name='Titulo')
+    description = models.TextField(verbose_name='Descripcion', unique=True)
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d', verbose_name='Archivo pdf')
+
+    def __str__(self):
+        return self.description
+
+
