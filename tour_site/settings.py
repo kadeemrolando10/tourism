@@ -143,3 +143,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 APPEND_SLASH = False
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

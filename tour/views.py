@@ -50,6 +50,16 @@ def restaurant_index(request):
     })
 
 
+def restaurant_show(request, id):
+    restaurant = Restaurant.objects.get(id=id)
+    restaurants = Restaurant.objects.all
+    return render(request, 'tour/restaurants-show.html', {
+        'restaurant': restaurant,
+        'restaurants': restaurants,
+        'restaurant_obj': Restaurant
+    })
+
+
 def transport_index(request):
     transports = Transport.objects.all
     return render(request, 'tour/transports-index.html', {

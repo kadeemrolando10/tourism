@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+{% block content %}
+
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+
+<!-- ***** Single Listing Area Start ***** -->
+<section class="dorne-single-listing-area section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Listing Content -->
+            <div class="col-12 col-lg-8">
+                <div class="single-listing-content">
+
+                    <div class="listing-title">
+                        <h4>{{restaurant.title}}</h4>
+                        <h6>{{restaurant.address}}</h6>
+                    </div>
+
+                    <div class="single-listing-nav">
+                        <nav>
+                            <ul id="listingNav">
+                                <li><a href="#menu">Menu</a></li>
+                                <li class="active"><a href="#overview">Servicios</a></li>
+                                <li><a href="#lomap">Ubicacion en mapa</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="listing-menu-area mt-100" id="menu">
+                        <h4>MENU</h4>
+                        {% for m in restaurant.menu.all %}
+                        <div class="single-listing-menu d-flex justify-content-between">
+                            <!-- Listing Menu Title -->
+                            <div class="listing-menu-title">
+                                <h6>{{m.title}}</h6>
+                                <p>{{m.description}}</p>
+                            </div>
+                            <!-- Listing Menu Price -->
+                            <div class="listing-menu-price">
+                                <h6>{{m.price}} Bs.</h6>
+                            </div>
+                        </div>
+                        {% endfor%}
+                    </div>
+
+                    <div class=" listing-menu-area overview-content mt-50" id="overview">
+                        <h4>SERVICIOS</h4>
+                        <div class="row mt-5">
+
+                            {% for s in restaurant.service.all %}
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">{{ s.title }}</span>
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="location-on-map mt-50" id="lomap">
+                        <h4>Ubicacion en mapa</h4>
+                        <div class="location-map">
+                            <iframe src="{{ restaurant.location }}" width="100%" height="400" frameborder="5" allowfullscreen="">
+                            </iframe>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Listing Sidebar -->
+            <div class="col-12 col-md-8 col-lg-4">
+
+                <div class="listing-sidebar">
+                    <div class="opening-hours-widget mt-50">
+                        <h6>Informacion</h6>
+                        <ul class="opening-hours">
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ restaurant.rating }}</p></li>
+                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ restaurant.phone }}</p></li>
+                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ restaurant.web }}</p></li>
+                        </ul>
+                    </div>
+
+                    <div class="opening-hours-widget mt-50">
+                        <h6>Horarios de Atencion</h6>
+                        <ul class="opening-hours">
+                            {% for q in restaurant.schedule.all %}
+                            <li>
+                                <p>{{q.day}}</p>
+                                <p>{{q.description}}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Single Listing Area End ***** -->
+
+{% endblock %}
+
