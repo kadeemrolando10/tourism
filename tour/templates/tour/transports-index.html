@@ -1,47 +1,58 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load static %}
-
+{% load utils %}
 
 {% block content %}
-  <!-- ***** Breadcumb Area Start ***** -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
-    <!-- ***** Breadcumb Area End ***** -->
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
 
- <section class="dorne-listing-destinations-area section-padding-100-50">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading dark text-center">
-                        <span></span>
-                        <h4>Transportes</h4>
-                        <p>En que viajar ?</p><HR>
-                    </div>
+<section class="dorne-listing-destinations-area section-padding-100-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading dark text-center">
+                    <span></span>
+                    <h4>Transportes</h4>
+                    <p>En que viajar ?</p>
+                    <HR>
                 </div>
-            </div>
-            <div class="row">
-                {% for transport in transports %}
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-features-area mb-50">
-                        <img src="{{ transport.image.url }}" alt="">
-                        <!-- Price -->
-                        <div class="price-start">
-                            <p>{{ transport.rating }}</p>
-                        </div>
-                        <div class="feature-content d-flex align-items-center justify-content-between">
-                            <div class="feature-title">
-                                <h5>{{ transport.title }}</h5>
-                                <p>{{ transport.phone }}</p>
-                            </div>
-                            <div class="feature-favourite">
-                                <a href="#"><img src="{% static 'img/core-img/details.png' %}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
-    </section>
-    <!-- ***** Listing Destinations Area End ***** -->
+        <div class="row">
+            {% for transport in transports %}
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="single-features-area mb-50">
+                    <img src="{{ transport.image.url }}" alt="">
+                    <!-- Price -->
+                    <div class="price-start">
+                        <p>{{ transport.rating }}</p>
+                    </div>
+                    <div class="feature-content d-flex align-items-center justify-content-between">
+                        <div class="feature-title">
+
+                            <h5>{{ transport.title }}</h5>
+                            <p> <i class="fa fa-phone" aria-hidden="true"></i>.
+                                {{ transport.phone }}
+                            </p>
+                            {% get_destiny_transport transport.id as destiny %}
+                            <p><i class="fa fa-car" aria-hidden="true"></i>.
+                                {% for a in destiny %}
+                                {{ a.title }},
+                                {% endfor %}
+                            </p>
+                        </div>
+                        <div class="feature-favourite">
+                            <a href="{% url 'transports-show' transport.id %}"><img
+                                    src="{% static 'img/core-img/details.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- ***** Listing Destinations Area End ***** -->
 {% endblock %}

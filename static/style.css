@@ -973,9 +973,12 @@ li {
 /* Footer Area CSS */
 
 .dorne-footer-area {
-    padding: 50px 35px;
+    padding: 5px 3px;
     border-top: 1px solid #bec0cc;
-    background-color: #0f0727;
+    background-color: #ffffff;
+    height: 70px;
+    width: 100%;
+     padding-top: 60px;
 }
 
 .footer-text p {

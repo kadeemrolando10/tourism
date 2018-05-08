@@ -1,0 +1,6 @@
+<html>
+<form method="post">{% csrf_token %}
+    ¿Estás seguro que deseas borrar el restaurante "{{ object }}"?
+    <input type="submit" value="Submit"/>
+</form>
+</html>

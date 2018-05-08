@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load utils %}
+
+{% block content %}
+
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+
+<!-- ***** Single Listing Area Start ***** -->
+<section class="dorne-single-listing-area section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Listing Content -->
+            <div class="col-12 col-lg-8">
+                <div class="single-listing-content">
+                    <div class="listing-title">
+                        <h6>{{lodging.type.title}}</h6>
+                        <h4>{{lodging.title}}</h4>
+                        <h6>{{lodging.address}}</h6>
+                    </div>
+
+                    <div class="single-listing-nav">
+                        <nav>
+                            <ul id="listingNav">
+                                <li><a href="#menu">Servicios</a></li>
+                                <li><a href="#room">Habitaciones</a></li>
+                                <li><a href="#lomap">Ubicacion en mapa</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="listing-menu-area mt-100" id="menu">
+                        <h4>Servicios</h4>
+                        <div class="location-map">
+
+                            <table class="table table-light table-responsive-sm">
+                                <tbody>
+                                {% for s in lodging.service.all %}
+                                <tr style="text-align:center;">
+                                    <td class="table-warning" colspan="5" scope="col">
+                                        <img src="{{s.image.url}}" height="30px" width="30px">
+                                    </td>
+                                    <td class="table-dark" colspan="3" width="80%" scope="col">{{ s.title }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="listing-menu-area mt-100" id="room">
+                        <h4>Habitaciones</h4>
+                        <div class="location-map bg-info">
+                            {% for r in room %}
+                            <div class="single-listing-menu d-flex justify-content-between">
+                                <!-- Listing Menu Title -->
+                                <div class="listing-menu-title">
+                                    <h6 class="alert alert-info">{{r.title}}</h6>
+                                    <img src="{{r.image.url}}">
+                                    <p>{{r.description}}</p>
+                                </div>
+                                <!-- Listing Menu Price -->
+                                <div class="listing-menu-price" style="align:center;">
+                                    <h6 class="alert alert-success">{{r.price}}Bs.</h6>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="listing-menu-area mt-100" id="lomap">
+                        <h4>Ubicacion en mapa</h4>
+                        <div class="location-map">
+                            <iframe src="{{ lodging.location }}" width="100%" height="400" frameborder="5"
+                                    allowfullscreen="">
+                            </iframe>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Listing Sidebar -->
+            <div class="col-12 col-md-8 col-lg-4">
+
+                <div class="listing-sidebar">
+                    <div class="opening-hours-widget mt-50 ">
+                        <h6>Informacion</h6>
+                        <ul class="  alert alert-dark opening-hours">
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ lodging.rating }}</p></li>
+                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ lodging.phone }}</p></li>
+                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ lodging.web }}</p></li>
+                        </ul>
+                    </div>
+
+                    <div class="opening-hours-widget mt-50">
+                        <h6>Horarios de Atencion</h6>
+                        <ul class="  alert alert-dark opening-hours" role="alert">
+                            {% for q in lodging.schedule.all %}
+                            <li>
+                                <p>{{q.day}}</p>
+                                <p>{{q.description}}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js_code %}
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+{% endblock %}

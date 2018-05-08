@@ -46,7 +46,7 @@
                             <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
                                 <div class="catagory-content">
                                     <img src="{% static 'img/core-img/hotel.png' %}" alt="">
-                                    <a href="{% url 'lodgments-index' %}">
+                                    <a href="{% url 'lodging-index' %}">
                                         <h6>Hospedajes</h6>
                                     </a>
                                 </div>
@@ -90,7 +90,7 @@
                             <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
                                 <div class="catagory-content">
                                     <img src="{% static 'img/core-img/sitios.png' %}" alt="">
-                                    <a href="{% url 'torism_sites-index' %}">
+                                    <a href="{% url 'tourism_sites-index' %}">
                                         <h6>Sitios Turisticos</h6>
                                     </a>
                                 </div>
@@ -193,7 +193,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="features-slides owl-carousel">
-                    {% for r in lodgments %}
+                    {% for r in lodging %}
                     <div class="single-features-area">
                         <img src="{{ r.image.url }}" alt="">
                         <!-- Price -->
@@ -301,13 +301,11 @@
      data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
      data-show-facepile="true">
     <blockquote cite="https://www.facebook.com/Secretaria-De-Turismo-Y-Cultura-Potosi-Bolivia-292810844120569/"
-                class="fb-xfbml-parse-ignore"><a
-            href="https://www.facebook.com/Secretaria-De-Turismo-Y-Cultura-Potosi-Bolivia-292810844120569/">Secretaria
-        De Turismo Y Cultura Potosi Bolivia</a></blockquote>
+                class="fb-xfbml-parse-ignore">
+        <a href="https://www.facebook.com/Secretaria-De-Turismo-Y-Cultura-Potosi-Bolivia-292810844120569/"></a>
+    </blockquote>
 </div>
-<a href="whatsapp://send?text=Hello%20World!">Tutoriales En Linea!</a>
-<!-- ***** Features Events Area End ***** -->
-<!-- ***** Clients Area Start ***** -->
+
 <div class="dorne-clients-area section-padding-100">
     <div class="container-fluid">
         <div class="row">
@@ -323,18 +321,5 @@
         </div>
     </div>
 </div>
-<!-- ***** Clients Area End ***** -->
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.12';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-</script>
 
 {% endblock %}

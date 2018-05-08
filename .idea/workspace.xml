@@ -1,24 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list id="00badabf-c86a-492c-b462-a9d11b814099" name="fine function" comment="" />
-    <list default="true" id="52413bdc-b67c-4f51-a410-bbd240d2735d" name="Default" comment="fine function">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/tour_site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tour_site.iml" afterDir="false" />
+    <list default="true" id="52413bdc-b67c-4f51-a410-bbd240d2735d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/lodging-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/lodging-show.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/restaurants/delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/restaurants/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/restaurants/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/restaurants/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/restaurants/new.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/tourism_site-show.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tour/templates/tour/transports-show.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/bg-img/hero-3o.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/core-img/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/core-img/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tour/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/tour/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/tour/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0002_auto_20180413_1630.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0003_auto_20180413_1717.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0004_auto_20180413_1815.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0005_auto_20180413_1818.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0006_auto_20180413_1916.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0007_auto_20180413_1925.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0008_auto_20180413_1929.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0009_auto_20180414_0944.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0010_auto_20180414_1033.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0011_auto_20180420_1512.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0012_auto_20180423_1643.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0013_auto_20180423_1647.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0014_auto_20180425_1705.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0015_funciones_objetivos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0016_auto_20180426_1035.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0017_document.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0018_auto_20180426_1526.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0019_auto_20180427_1509.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0020_menu_restaurant.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0021_auto_20180430_1509.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0022_auto_20180430_1622.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0023_auto_20180430_1727.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/migrations/0024_auto_20180430_1737.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tour/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tour/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tour/templates/tour/agencys-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tour/templates/tour/agencys-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tour/templates/tour/events-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tour/templates/tour/events-index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tour/templates/tour/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tour/templates/tour/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/templates/tour/lodgments-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/templates/tour/restaurants-show.html" beforeDir="false" afterPath="$PROJECT_DIR$/tour/templates/tour/restaurants-show.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tour/templates/tour/secretary.html" beforeDir="false" afterPath="$PROJECT_DIR$/tour/templates/tour/secretary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tour/templates/tour/tourism_sites-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tour/templates/tour/tourism_sites-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/templates/tour/transports-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tour/templates/tour/transports-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tour/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tour/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tour/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tour_site/local_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tour_site/local_settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tour_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tour_site/settings.py" afterDir="false" />
     </list>
+    <list id="00badabf-c86a-492c-b462-a9d11b814099" name="fine function" comment="" />
     <ignored path="C:\Sites\tour_site\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,15 +61,110 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="tour_site" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="secretary.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tour/templates/tour/secretary.html">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+            <state relative-caret-position="1428">
+              <caret line="92" column="68" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tourism_site-show.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/templates/tour/tourism_site-show.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1292">
+              <caret line="76" column="65" selection-start-line="76" selection-start-column="65" selection-end-line="76" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lodging-show.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/templates/tour/lodging-show.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="71" selection-end-column="69" />
+              <folding>
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" />
+                <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="restaurants-show.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants-show.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="918">
+              <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="61" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tourism_sites-index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/templates/tour/tourism_sites-index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="33" column="49" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transports-index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/templates/tour/transports-index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="782">
+              <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/templatetags/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+              <folding>
+                <element signature="e#17#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transports-show.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tour/templates/tour/transports-show.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="51" column="57" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tour/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2125">
+              <caret line="126" column="15" selection-start-line="126" selection-start-column="15" selection-end-line="126" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,6 +205,9 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -87,27 +219,44 @@
         <option value="$PROJECT_DIR$/tour_site/urls.py" />
         <option value="$PROJECT_DIR$/static/styles/news_styles.css" />
         <option value="$PROJECT_DIR$/static/styles/Roling" />
-        <option value="$PROJECT_DIR$/tour/forms.py" />
         <option value="$PROJECT_DIR$/tour/templates/tour/lodgments.html" />
         <option value="$PROJECT_DIR$/tour/templates/tour/transports.html" />
         <option value="$PROJECT_DIR$/static/styles/roling.css" />
         <option value="$PROJECT_DIR$/tour_site/services.py" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/events-index.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/agencys-index.html" />
         <option value="$PROJECT_DIR$/tour/templates/tour/restaurants-index.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/transport-show.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/secretary.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurants-show.html" />
+        <option value="$PROJECT_DIR$/static/style.css" />
+        <option value="$PROJECT_DIR$/tour/migrations/0006_auto_20180504_1007.py" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/lodgments-show.html" />
         <option value="$PROJECT_DIR$/tour/templates/tour/lodgments-index.html" />
         <option value="$PROJECT_DIR$/tour/templates/tour/transports-index.html" />
-        <option value="$PROJECT_DIR$/tour_site/settings.py" />
         <option value="$PROJECT_DIR$/tour_site/local_settings.py" />
-        <option value="$PROJECT_DIR$/tour/templates/tour/events-index.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurant-form.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurant-list.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurants/edit.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurants/new.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurants/list.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurants/detail.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurants/delete.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/restaurants-new.html" />
+        <option value="$PROJECT_DIR$/tour_site/settings.py" />
+        <option value="$PROJECT_DIR$/tour/forms.py" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/lodging-show.html" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/lodging-index.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/tour/urls.py" />
-        <option value="$PROJECT_DIR$/tour/templates/tour/tourism_sites-index.html" />
         <option value="$PROJECT_DIR$/tour/templates/tour/index.html" />
-        <option value="$PROJECT_DIR$/tour/templates/tour/agencys-index.html" />
         <option value="$PROJECT_DIR$/tour/admin.py" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/tourism_sites-index.html" />
+        <option value="$PROJECT_DIR$/tour/urls.py" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/tourism_site-show.html" />
         <option value="$PROJECT_DIR$/tour/models.py" />
         <option value="$PROJECT_DIR$/tour/views.py" />
-        <option value="$PROJECT_DIR$/static/style.css" />
-        <option value="$PROJECT_DIR$/tour/templates/tour/secretary.html" />
+        <option value="$PROJECT_DIR$/tour/templatetags/utils.py" />
+        <option value="$PROJECT_DIR$/tour/templates/tour/transports-show.html" />
       </list>
     </option>
   </component>
@@ -117,7 +266,9 @@
     <option name="width" value="725" />
     <option name="height" value="735" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -134,7 +285,36 @@
             <path>
               <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="tour_site" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tour_site" type="462c0819:PsiDirectoryNode" />
+              <item name="tour" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tour_site" type="462c0819:PsiDirectoryNode" />
+              <item name="tour" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tour_site" type="462c0819:PsiDirectoryNode" />
+              <item name="tour" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="tour" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tour_site" type="462c0819:PsiDirectoryNode" />
+              <item name="tour" type="462c0819:PsiDirectoryNode" />
+              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tour_site" type="462c0819:PsiDirectoryNode" />
+              <item name="tour_site" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -148,16 +328,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Sites\tour_site\templates" />
+      <recent name="C:\Sites\tour_site\static\css\others" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Sites\tour_site\tour\templates\tour\restaurants" />
       <recent name="C:\Sites\tour_site\static" />
       <recent name="C:\Sites\tour_site" />
       <recent name="C:\Sites\tour_site\tour" />
       <recent name="C:\Sites\tour_site\tour\templates\tour" />
-      <recent name="C:\Sites\tour_site\tour\static" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Sites\tour_site\templates" />
-      <recent name="C:\Sites\tour_site\static\css\others" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -260,7 +440,28 @@
       <option name="project" value="LOCAL" />
       <updated>1524620616293</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add functions beta 70%">
+      <created>1524779484613</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1524779484613</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add functions beta 70%">
+      <created>1524779560173</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1524779560173</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add function completed restaurant">
+      <created>1525266151237</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1525266151237</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -274,15 +475,15 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1436012" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4975" visible="true" weight="0.15848215" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.48735118" weight="0.32352942" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5126488" side_tool="true" weight="0.32352942" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32352942" />
-      <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.49702382" weight="0.32843137" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5126488" side_tool="true" weight="0.32352942" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32352942" />
+      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49702382" weight="0.32843137" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49925596" weight="0.32843137" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Structure" order="1" sideWeight="0.5025" side_tool="true" weight="0.1436012" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49925596" visible="true" weight="0.34640524" />
+      <window_info id="Favorites" order="2" sideWeight="0.5025" side_tool="true" weight="0.1436012" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -291,27 +492,27 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1436012" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4975" visible="true" weight="0.15848215" />
+      <window_info id="Structure" order="1" sideWeight="0.5025" side_tool="true" weight="0.1436012" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.48735118" weight="0.32352942" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49702382" weight="0.32843137" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49925596" weight="0.32843137" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5126488" side_tool="true" weight="0.32352942" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32352942" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="8" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49925596" weight="0.34640524" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5126488" side_tool="true" weight="0.32352942" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32352942" />
+      <window_info id="Favorites" order="2" sideWeight="0.5025" side_tool="true" weight="0.1436012" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49702382" weight="0.32843137" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -323,7 +524,9 @@
     <MESSAGE value="add section agency" />
     <MESSAGE value="add pol" />
     <MESSAGE value="fine function" />
-    <option name="LAST_COMMIT_MESSAGE" value="fine function" />
+    <MESSAGE value="add functions beta 70%" />
+    <MESSAGE value="add function completed restaurant" />
+    <option name="LAST_COMMIT_MESSAGE" value="add function completed restaurant" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -338,89 +541,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tour/admin.py">
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/transports-show.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/base.html" />
-    <entry file="file://$PROJECT_DIR$/tour/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour_site/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="13" lean-forward="true" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour_site/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="76" selection-start-line="28" selection-start-column="76" selection-end-line="28" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/base.html" />
-    <entry file="file://$PROJECT_DIR$/tour/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        <state relative-caret-position="867">
+          <caret line="51" column="57" lean-forward="true" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -468,21 +592,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tour/migrations/0011_auto_20180414_1012.py" />
-    <entry file="file://$PROJECT_DIR$/tour/migrations/0009_auto_20180414_0944.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/migrations/0009_auto_20180414_0944.py" />
     <entry file="file://$PROJECT_DIR$/tour/templates/tour/base.html" />
-    <entry file="file://$PROJECT_DIR$/.idea/tour_site.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base1.html" />
     <entry file="file://$PROJECT_DIR$/static/styles/news_styles.css" />
     <entry file="file://$PROJECT_DIR$/static/styles/roling.css" />
@@ -507,45 +618,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tour/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tour_site/services.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour_site/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/transports-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="89" selection-start-line="36" selection-start-column="89" selection-end-line="36" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour_site/local_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour_site/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2278">
-          <caret line="134" selection-start-line="134" selection-end-line="138" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -556,111 +632,223 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/lodgments-index.html">
+    <entry file="file://$PROJECT_DIR$/.idea/tour_site.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="27" lean-forward="true" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="99" />
+        <state relative-caret-position="204">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tour/templates/tour/events-index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="21" column="45" lean-forward="true" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/tourism_sites-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4590">
-          <caret line="274" column="22" selection-start-line="274" selection-start-column="22" selection-end-line="274" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#section#3;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#section#4;n#!!top" />
-            <element signature="n#style#0;n#section#6;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="157" column="11" selection-start-line="157" selection-start-column="4" selection-end-line="157" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/agencys-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="32" column="89" selection-start-line="31" selection-start-column="87" selection-end-line="32" selection-end-column="89" />
+          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="1385" column="26" lean-forward="true" selection-start-line="1385" selection-start-column="26" selection-end-line="1385" selection-end-column="26" />
+        <state relative-caret-position="218">
+          <caret line="980" column="23" selection-start-line="980" selection-start-column="23" selection-end-line="980" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/migrations/0005_auto_20180504_0932.py" />
+    <entry file="file://$PROJECT_DIR$/tour/migrations/0006_auto_20180504_1007.py" />
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/secretary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="119" column="51" lean-forward="true" selection-start-line="119" selection-start-column="32" selection-end-line="119" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour_site/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour_site/local_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="27" column="45" lean-forward="true" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants/new.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants/delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants-new.html" />
+    <entry file="file://$PROJECT_DIR$/tour_site/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="55" column="36" lean-forward="true" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="36" column="23" lean-forward="true" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/agencys-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="40" column="32" lean-forward="true" selection-start-line="40" selection-start-column="32" selection-end-line="42" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
+          <caret line="8" column="57" lean-forward="true" selection-start-line="8" selection-start-column="57" selection-end-line="8" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="92" column="53" lean-forward="true" selection-start-line="92" selection-start-column="53" selection-end-line="92" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/lodging-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/lodging-show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="71" selection-end-column="69" />
+          <folding>
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/tourism_sites-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="33" column="49" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/tourism_site-show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="76" column="65" selection-start-line="76" selection-start-column="65" selection-end-line="76" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2125">
+          <caret line="126" column="15" selection-start-line="126" selection-start-column="15" selection-end-line="126" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tour/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="33" column="6" lean-forward="true" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+        <state relative-caret-position="1428">
+          <caret line="92" column="68" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tour/templates/tour/secretary.html">
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/transports-index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+        <state relative-caret-position="782">
+          <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/restaurants-show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="61" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templatetags/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#17#44#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tour/templates/tour/transports-show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="51" column="57" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
         </state>
       </provider>
     </entry>

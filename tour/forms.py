@@ -1,16 +1,42 @@
+from django import forms
+
 from tour_site.services import BaseForm
-from .models import Event, Restaurant, Tourism_site, Transport, Lodgment, Agency
+from .models import Event, Restaurant, TourismSite, Transport, Lodging, Agency
+
+
+class RestaurantForm(forms.ModelForm):
+    class Meta:
+        model = Restaurant
+        fields = [
+            'title',
+            'image',
+            'service',
+            'menu',
+            'schedule',
+            'address',
+            'location',
+            'phone',
+            'rating',
+            'web'
+        ]
+
+        widgets = {
+            'title':forms.TextInput(attrs={'class':'form-control'}),
+            'image':forms.ClearableFileInput(attrs={'class':'form-control'}),
+            'service':forms.CheckboxSelectMultiple(),
+            'menu':forms.CheckboxSelectMultiple(),
+            'schedule':forms.CheckboxSelectMultiple(),
+            'address':forms.TextInput(attrs={'class':'form-control'}),
+            'location':forms.URLInput(attrs={'class':'form-control'}),
+            'phone':forms.TextInput(attrs={'class':'form-control'}),
+            'rating':forms.TextInput(attrs={'class':'form-control'}),
+            'web':forms.TextInput(attrs={'class':'form-control'})
+        }
 
 
 class EventForm(BaseForm):
     class Meta:
         model = Event
-        fields = '__all__'
-
-
-class RestaurantForm(BaseForm):
-    class Meta:
-        model = Restaurant
         fields = '__all__'
 
 
@@ -20,15 +46,15 @@ class TransportForm(BaseForm):
         fields = '__all__'
 
 
-class Tourism_siteForm(BaseForm):
+class TourismSiteForm(BaseForm):
     class Meta:
-        model = Tourism_site
+        model = TourismSite
         fields = '__all__'
 
 
-class LodgmentForm(BaseForm):
+class LodgingForm(BaseForm):
     class Meta:
-        model = Lodgment
+        model = Lodging
         fields = '__all__'
 
 
@@ -36,4 +62,3 @@ class AgencyForm(BaseForm):
     class Meta:
         model = Agency
         fields = '__all__'
-

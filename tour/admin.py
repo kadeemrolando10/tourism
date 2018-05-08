@@ -1,19 +1,28 @@
 from django.contrib import admin
-from .models import Event, Transport, Agency, Tourism_site, Restaurant, Lodgment, Lodgment_type, \
-    Service_Transport, Service_Lodgment, Service_Agency, Service_Restaurant, Function, Objetive, Document, \
-    Menu_Restaurant, Schedule_Restaurant
+from .models import Event, Transport, Agency, TourismSite, Restaurant, Lodging, LodgingType, \
+    TransportService, LodgingService, AgencyService, RestaurantService, Function, Objetive, Document, \
+    RestaurantMenu, Schedule, TransportDestination, TransportTypeService, \
+    LodgingRoom, TourismSiteDestiny, TourismSiteService, TourismSiteType
 
+admin.site.register(TourismSiteType)
+admin.site.register(TourismSiteService)
+admin.site.register(TourismSiteDestiny)
+admin.site.register(Objetive)
+admin.site.register(Function)
 admin.site.register(Event)
 admin.site.register(Transport)
-admin.site.register(Tourism_site)
+admin.site.register(TourismSite)
 admin.site.register(Agency)
 admin.site.register(Restaurant)
-admin.site.register(Lodgment_type)
-admin.site.register(Lodgment)
-admin.site.register(Service_Restaurant)
-admin.site.register(Service_Agency)
-admin.site.register(Service_Transport)
-admin.site.register(Service_Lodgment)
+admin.site.register(LodgingService)
+admin.site.register(LodgingRoom)
+admin.site.register(Lodging)
+admin.site.register(RestaurantService)
+admin.site.register(AgencyService)
+admin.site.register(TransportService)
+admin.site.register(LodgingType)
 admin.site.register(Document)
-admin.site.register(Menu_Restaurant)
-admin.site.register(Schedule_Restaurant)
+admin.site.register(RestaurantMenu)
+admin.site.register(Schedule)
+admin.site.register(TransportDestination)
+admin.site.register(TransportTypeService)
