@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from tour.forms import EventForm
-from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, Objetive, Function, Document, \
+from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, Objective, Function, Document, \
     TransportDestination, TransportTypeService, TransportService, LodgingService, LodgingRoom, LodgingType, \
     TourismSiteDestiny
 from tour.forms import RestaurantForm
@@ -27,7 +27,7 @@ def index(request):
 
 
 def secretary(request):
-    obj = Objetive.objects.all
+    obj = Objective.objects.all
     func = Function.objects.all
     doc = Document.objects.all
     return render(request, 'tour/secretary.html', {
@@ -99,9 +99,9 @@ def transport_show(request, id):
 
 
 def tourism_site_index(request):
-    tourism_sites = TourismSite.objects.all
+    destiny = TourismSiteDestiny.objects.all
     return render(request, 'tour/tourism_sites-index.html', {
-        'tourism': tourism_sites,
+        'destiny': destiny,
         'tourism_site_obj': TourismSite
     })
 

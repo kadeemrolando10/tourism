@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load static %}
-
+{% load utils %}
 
 {% block content %}
 <!-- ***** Breadcumb Area Start ***** -->
@@ -21,29 +21,50 @@
                 </div>
             </div>
         </div>
-<div class="card-deck">
-            {% for s in tourism %}
-            <div class="w-57 card border-info mb-3 " style="max-width: 18rem;">
-                <div class="card-header bg-info border-info">
-                    <div class="row">
-                        <div class="col-4">
-                           <a href="{% url 'tourism_sites-show' s.id %}"><img src="{% static 'img/core-img/show.png' %}" alt=""></a>
-                        </div>
-                        <div class="col-5"></div>
-                        <div align="center" class="col-3 contact-text">
-                            {{s.rating}}
+
+        <div class="row">
+            {% for d in destiny %}
+            <div class="col-12 text-center section-heading">
+                {% get_type_tourism_site d.id as types %}
+                {% if types %}
+                <h4>{{d.title}}</h4>
+                {% endif %}
+            </div>
+
+            {% for t in types %}
+            <div class="col-12 text-center section-heading">
+                {% get_tourism_site t.id as sites %}
+                {% if sites %}
+                <h4>{{t.title}}</h4>
+                {% endif %}
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig"
+                     data-wow-delay="0.2s">
+
+                    {% for s in sites %}
+                    <div class="feature-events-thumb">
+                        <img src="{{ s.image.url }}" alt="">
+                        <div class="date-map-area d-flex">
+                            <a href="#">{{s.rating}}</a>
                         </div>
                     </div>
+                    <div class="feature-events-content">
+                        <h5>{{s.title}}</h5>
+                        <h6>Potosi</h6>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i>. {{ s.address }}</p>
+                        <p><i class="fa fa-phone" aria-hidden="true"></i>. {{ s.phone }}</p>
+                    </div>
+                    <div class="feature-events-details-btn">
+                        <a href="{% url 'tourism_sites-show' s.id %}"><img src="{% static 'img/core-img/show.png' %}"
+                                                                     alt=""></a>
+                    </div>
+                    {% endfor %}
                 </div>
-                <img class="card-img-top" src="{{s.image.url}}" alt="Card image cap">
-                <div class="card-body text-info">
-                    <h5 class="card-title">{{s.title}}</h5>
-                    <p class="card-text">{{s.address}}</p>
-                </div>
-                <div class="card-footer bg-transparent border-info">{{s.phone}}</div>
             </div>
             {% endfor %}
-</div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 

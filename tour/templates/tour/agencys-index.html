@@ -4,63 +4,80 @@
 
 
 {% block content %}
-    <!-- ***** Breadcumb Area Start ***** -->
-    <div class="breadcumb-area bg-img bg-overlay"
-         style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
-    <!-- ***** Breadcumb Area End ***** -->
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay"
+     style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
 
-    <section class="dorne-editors-pick-area bg-img bg-overlay-9 section-padding-100"
-             style="background-image: url(/static/img/bg-img/hero-2.jpg);">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading text-center">
-                        <h4>AGENCIAS DE TURISMO</h4>
-                        <span></span>
+<section class="dorne-editors-pick-area bg-img bg-overlay-9 section-padding-100"
+         style="background-image: url(/static/img/bg-img/hero-2.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h4>AGENCIAS DE TURISMO</h4>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        {% for agency in agencys %}
+        <div class="contact-text row">
+            <div class="agency col-12 text-center " align="center">
+                <h3 class="alert alert-dark">{{ agency.title }}</h3>
+            </div>
+
+            <div class="agency col-12 col-lg-6 ">
+                <div class="imga single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s"
+                     style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+
+
+                    <img src="{{ agency.image.url }}" alt="">
+                    <div class="ratings-map-area d-flex">
+                        <a href="#">{{ agency.rating }}</a>
+                        <a href="#" data-toggle="modal" data-target="#exampleModal"
+                           data-url="{{ agency.location }}" class="open-frame"><img
+                                src="{% static 'img/core-img/map.png' %}" alt=""></a>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <div class="single-listing-menu">
+                        <p><i class="fa fa-envelope-o" aria-hidden="true"></i>. {{ agency.address }}</p>
+                        <p><i class="fa fa-phone" aria-hidden="true"></i>. {{ agency.phone }}</p>
+                        <p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ agency.web }}</p>
                     </div>
                 </div>
             </div>
-            {% for agency in agencys %}
-                <div class="contact-text row">
-                    <div class="agency col-12 col-lg-6">
-                        <div class="imga single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s"
-                             style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                            <img src="{{ agency.image.url }}" alt="">
-                            <div class="ratings-map-area d-flex">
-                                <a href="#">{{ agency.rating }}</a>
-                                <a href="#" data-toggle="modal" data-target="#exampleModal"
-                                   data-url="{{ agency.location }}" class="open-frame"><img
-                                        src="{% static 'img/core-img/map.png' %}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="contact-text">
-                            <h4>{{ agency.title }}</h4>
-                            <p>
-                                {% for service in agency.service.all %}
-                                    {{ service }}<br>
-                                {% endfor %}
-                            </p>
-                            <div class="contact-info d-lg-flex">
-                                <div class="single-contact-info">
-                                    <p><i class="fa fa-envelope-o" aria-hidden="true"></i>. {{ agency.address }}</p>
-                                    <p><i class="fa fa-phone" aria-hidden="true"></i>. {{ agency.phone }}</p>
-                                    <p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ agency.web }}</p>
-                                    <p><i class="fa fa-calendar" aria-hidden="true"></i>. {{ agency.schedule }}</p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-12 col-lg-6">
 
+                <div class="contact-text">
+
+                    {% for s in agency.service.all %}
+                    <div class="single-listing-menu justify-content-between">
+                        <!-- Listing Menu Title -->
+                        <div class="listing-menu-title justify-content-between">
+                            <h6 class="alert alert-info">{{s.title}}</h6>
+                            <p>Duracion: {{s.duration}}</p>
+                            <p>Salidas: {{s.departures}}</p>
+                            <p>Lugar de Inicio: {{s.place_start}}</p>
+                            <p>Lugares a conocer: {{s.places_to_known}}</p>
+                        </div>
                     </div>
+
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
+
+
         </div>
-    </section>
+        {% endfor %}
+    </div>
+
+</section>
 {% endblock %}
 
 {% block js_code %}
-    <script>
+<script>
         $(document).ready(function () {
             $('.open-frame').on('click', function () {
                 var url = $(this).attr('data-url');
@@ -70,6 +87,23 @@
                 )
             })
         })
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 {% endblock %}
 

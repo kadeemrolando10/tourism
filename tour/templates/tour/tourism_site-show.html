@@ -19,7 +19,7 @@
                     <div class="listing-title">
                         <h4>{{site.title}}</h4>
                         <h6>{{site.type.title}}</h6>
-                        <h6>{{ site.type.destination.title }}</h6>
+                        <h6>{{site.type.destination.title }}</h6>
                     </div>
                     <div class="single-listing-nav">
                         <nav>
@@ -50,51 +50,63 @@
                         </div>
                     </div>
                     <div class="listing-menu-area mt-100" id="room">
-                        <h4>Galeria</h4>
+                        <h4>Atractivos</h4>
                         <div class="location-map bg-info">
+                            {% get_tourism_site_menu site.id as menu %}
+                            {% for m in menu %}
+                            <div class="single-listing-menu justify-content-between">
+                                <!-- Listing Menu Title -->
+                                <div class="listing-menu-title">
 
-                        </div>
-                    </div>
-                        <div class="listing-menu-area mt-100" id="lomap">
-                            <h4>Ubicacion en mapa</h4>
-                            <div class="location-map">
-                                <iframe src="{{ site.location }}" width="100%" height="400" frameborder="5"
-                                        allowfullscreen="">
-                                </iframe>
-
+                                    <img src="{{m.image.url}}">
+                                    <h6 class="alert alert-info">{{m.title}}</h6>
+                                    <p>{{m.description}}</p>
+                                </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
-                <!-- Listing Sidebar -->
-                <div class="col-12 col-md-8 col-lg-4">
 
-                    <div class="listing-sidebar">
-                        <div class="opening-hours-widget mt-50">
-                            <h6>Informacion</h6>
-                            <ul class="opening-hours">
-                                <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ site.rating }}</p></li>
-                                <li><p><i class="fa fa-crosshairs" aria-hidden="true"></i>. {{ site.address }}</p></li>
-                                <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ site.phone }}</p></li>
-                                <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ site.web }}</p></li>
-                            </ul>
-                        </div>
+                    <div class="listing-menu-area mt-100" id="lomap">
+                        <h4>Ubicacion en mapa</h4>
+                        <div class="location-map">
+                            <iframe src="{{ site.location }}" width="100%" height="400" frameborder="5"
+                                    allowfullscreen="">
+                            </iframe>
 
-                        <div class="opening-hours-widget mt-50">
-                            <h6>Horarios de Atencion</h6>
-                            <ul class="opening-hours">
-                                {% for q in site.schedule.all %}
-                                <li>
-                                    <p>{{q.day}}</p>
-                                    <p>{{q.description}}</p>
-                                </li>
-                                {% endfor %}
-                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Listing Sidebar -->
+            <div class="col-12 col-md-8 col-lg-4">
+
+                <div class="listing-sidebar">
+                    <div class="opening-hours-widget mt-50">
+                        <h6>Informacion</h6>
+                        <ul class="opening-hours">
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ site.rating }}</p></li>
+                            <li><p><i class="fa fa-crosshairs" aria-hidden="true"></i>. {{ site.address }}</p></li>
+                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ site.phone }}</p></li>
+                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ site.web }}</p></li>
+                        </ul>
+                    </div>
+
+                    <div class="opening-hours-widget mt-50">
+                        <h6>Horarios de Atencion</h6>
+                        <ul class="opening-hours">
+                            {% for q in site.schedule.all %}
+                            <li>
+                                <p>{{q.day}}</p>
+                                <p>{{q.description}}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 </section>
 <!-- ***** Single Listing Area End ***** -->
 
@@ -105,6 +117,7 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
 
 
 

@@ -44,7 +44,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% get_typeservices d.id as types %}
+                            {% get_types_services_transport d.id as types %}
                             {% for t in types %}
                             <tr>
                                 <td>{{ t.title }}</td>

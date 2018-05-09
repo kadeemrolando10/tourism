@@ -6,6 +6,7 @@ from tour.models import TransportService
 from tour.models import TransportTypeService
 from tour.models import TransportDestination
 from tour.models import TourismSiteType
+from tour.models import TourismSiteMenu
 from tour.models import TourismSite
 from tour.models import Lodging
 register = template.Library()
@@ -17,27 +18,15 @@ def to_int(value):
 
 
 @register.simple_tag
-def get_services(id):
+def get_destiny_transport(id):
     id = int(id)
-    return TransportService.objects.filter(type_id=id)
+    return TransportDestination.objects.filter(transport=id)
 
 
 @register.simple_tag
-def get_typeservices(id):
+def get_types_services_transport(id):
     id = int(id)
     return TransportTypeService.objects.filter(destination_id=id).order_by('price')
-
-
-@register.simple_tag
-def get_typeservicest(id):
-    id = int(id)
-    return TourismSiteType.objects.filter(destination=id)
-
-
-@register.simple_tag
-def get_servicest(id):
-    id = int(id)
-    return TourismSite.objects.filter(type=id)
 
 
 @register.simple_tag
@@ -47,9 +36,21 @@ def get_lodging(id):
 
 
 @register.simple_tag
-def get_destiny_transport(id):
+def get_type_tourism_site(id):
     id = int(id)
-    return TransportDestination.objects.filter(transport=id)
+    return TourismSiteType.objects.filter(destination=id)
+
+
+@register.simple_tag
+def get_tourism_site(id):
+    id = int(id)
+    return TourismSite.objects.filter(type=id)
+
+
+@register.simple_tag
+def get_tourism_site_menu(id):
+    id = int(id)
+    return TourismSiteMenu.objects.filter(site=id)
 
 
 @register.simple_tag

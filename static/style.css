@@ -123,7 +123,7 @@ p {
 }
 
 .section-padding-100 {
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 100px;
 }
 
@@ -175,7 +175,7 @@ img {
 }
 
 .mt-100 {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .mt-150 {
@@ -790,6 +790,12 @@ li {
     padding: 40px 30px;
 }
 
+.feature-title {
+    padding: 5px 5px;
+    color: #fff;
+    text-align: center;
+}
+
 .feature-content .feature-title h5 {
     font-size: 18px;
     font-weight: 800;
@@ -1358,7 +1364,7 @@ li {
 .listing-menu-area h4 {
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 60px;
+    margin-bottom: 5px;
 }
 
 .single-listing-menu {

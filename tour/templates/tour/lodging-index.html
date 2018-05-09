@@ -25,11 +25,11 @@
         <div class="row">
             {% for types in typeslod %}
             {% get_lodging types.id as lod %}
+            {% if lod %}
             <div class="col-12 text-center section-heading">
-                {% if lod %}
                 <h4>{{types.title}}</h4>
-                {% endif %}
             </div>
+
             <div class="col-12 col-lg-6">
                 <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig"
                      data-wow-delay="0.2s">
@@ -49,11 +49,12 @@
                     </div>
                     <div class="feature-events-details-btn">
                         <a href="{% url 'lodging-show' t.id %}"><img src="{% static 'img/core-img/show.png' %}"
-                                                                       alt=""></a>
+                                                                     alt=""></a>
                     </div>
                     {% endfor %}
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

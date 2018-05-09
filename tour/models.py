@@ -217,29 +217,32 @@ class LodgingRoom(models.Model):
 
 class AgencyService(models.Model):
     title = models.CharField(max_length=150, verbose_name='Titulo')
-    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
+    duration = models.CharField(max_length=150, default='S/N', verbose_name='Duracion')
+    departures = models.CharField(max_length=150, default='S/N', verbose_name='Salidas')
+    place_start = models.CharField(max_length=150, default='S/N', verbose_name='Lugar de Inicio')
+    places_to_known = models.CharField(max_length=500, default='S/N', verbose_name='Lugares a conocer')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'Servicio de Agencia'
-        verbose_name_plural = 'Servicios de Agencias'
+        verbose_name = 'Paquete de Agencia'
+        verbose_name_plural = 'Paquetes de Agencias'
         ordering = ['title']
 
 
 class Agency(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
-    service = models.ManyToManyField(AgencyService, verbose_name='Horario')
-    address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
-    location = models.URLField(max_length=500, blank=True, default='', verbose_name='Ubicacion')
+    service = models.ManyToManyField(AgencyService, verbose_name='Paquetes de turismo')
+    schedule = models.ManyToManyField(Schedule, verbose_name='Horario')
+    address = models.CharField(max_length=150, default='S/N', verbose_name='Direccion')
+    location = models.URLField(max_length=500, default='', verbose_name='Ubicacion')
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.1, verbose_name='Calificacion')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', default='nn')
-    schedule = models.CharField(max_length=150, verbose_name='Horarios', default='--')
 
     def __str__(self):
         return self.title
@@ -314,7 +317,23 @@ class TourismSite(models.Model):
         ordering = ['rating']
 
 
-class Objetive(models.Model):
+class TourismSiteMenu(models.Model):
+    site = models.ForeignKey(TourismSite, on_delete=models.CASCADE, verbose_name='Sitio')
+    title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
+    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    description = models.TextField(verbose_name='Descripcion')
+    published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Menu de Sitio Turistico'
+        verbose_name_plural = 'Menu  de Sitios Turisticos'
+        ordering = ['title']
+
+
+class Objective(models.Model):
     description = models.TextField(verbose_name='Descripcion', unique=True)
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
@@ -353,4 +372,3 @@ class Document(models.Model):
         verbose_name = 'Documento'
         verbose_name_plural = 'Documentos'
         ordering = ['file']
-
