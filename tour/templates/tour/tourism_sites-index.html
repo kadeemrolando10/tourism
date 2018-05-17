@@ -5,11 +5,12 @@
 
 {% block content %}
 <!-- ***** Breadcumb Area Start ***** -->
-<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
+<div class="breadcumb-area bg-img bg-overlay"
+     style="background-image: url({% static 'img/bg-img/casa-moneda-potosi.jpg' %})"></div>
 <!-- ***** Breadcumb Area End ***** -->
 
 
-<section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-100-50"
+<section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-0-50"
          style="background-image: url({% static 'img/bg-img/hero-20.jpg' %})">
     <div class="container">
         <div class="row ">
@@ -24,24 +25,23 @@
 
         <div class="row">
             {% for d in destiny %}
+            {% get_type_tourism_site d.id as types %}
+            {% if types %}
             <div class="col-12 text-center section-heading">
-                {% get_type_tourism_site d.id as types %}
-                {% if types %}
                 <h4>{{d.title}}</h4>
-                {% endif %}
             </div>
+            {% endif %}
 
             {% for t in types %}
+            {% get_tourism_site t.id as sites %}
+            {% if sites %}
             <div class="col-12 text-center section-heading">
-                {% get_tourism_site t.id as sites %}
-                {% if sites %}
                 <h4>{{t.title}}</h4>
-                {% endif %}
             </div>
+
             <div class="col-12 col-lg-6">
                 <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig"
                      data-wow-delay="0.2s">
-
                     {% for s in sites %}
                     <div class="feature-events-thumb">
                         <img src="{{ s.image.url }}" alt="">
@@ -56,12 +56,12 @@
                         <p><i class="fa fa-phone" aria-hidden="true"></i>. {{ s.phone }}</p>
                     </div>
                     <div class="feature-events-details-btn">
-                        <a href="{% url 'tourism_sites-show' s.id %}"><img src="{% static 'img/core-img/show.png' %}"
-                                                                     alt=""></a>
+                        <a href="{% url 'tourism_sites-show' s.id %}"><i class="fa fa-plus"></i></a>
                     </div>
                     {% endfor %}
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
             {% endfor %}
         </div>

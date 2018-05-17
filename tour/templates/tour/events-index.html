@@ -1,52 +1,66 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load static %}
-
+{% load utils %}
 
 {% block content %}
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/img_90386435f5e7.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
 
- <section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-100-50" style="background-image: url({% static 'img/bg-img/hero-20.jpg' %})">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading text-center">
-                        <span></span>
-                        <h4>Eventos</h4>
-                        <p>Nuestros eventos</p>
-                    </div>
+<section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-0-50"
+         style="background-image: url({% static 'img/bg-img/hero-23.jpg' %})">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <span></span>
+                    <h4>Eventos</h4>
+                    <p>Nuestros eventos</p>
                 </div>
             </div>
-
-            <div class="hero-search-form">
-                        <!-- Tabs -->
-                    {% for event in events %}
-                    <div class="nav nav-tabs" id="heroTab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-places-tab" data-toggle="tab" href="#nav-places"
-                               role="tab" aria-controls="nav-places" aria-selected="true">Potosi
-                            </a>
-                    </div>
-                    <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
-                                <h4 class="white">{{ event.title }}</h4>
-
-                                <h6>{{event.event_date}}</h6>
-                                <div class="row">
-                                    <div class="col-12 col-lg-5">
-                                        <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                                           <img src="{{ event.image.url }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-lg-7 contact-text">
-                                               <p>{{ event.description }}</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                    </div>
-                    <h2> <hr></h2>
-                    {% endfor %}
-            </div>
         </div>
-    </section>
+
+        <div class="hero-search-form">
+            <!-- Tabs -->
+            {% for event in events %}
+            <div class="nav nav-tabs" id="heroTab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-places-tab" data-toggle="tab" href="#nav-places"
+                   role="tab" aria-controls="nav-places" aria-selected="true">Potosi
+                </a>
+            </div>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
+                    <h4 class="white">{{ event.title }}</h4>
+
+                    <h6>{{event.event_date}}</h6>
+                    <div class="row">
+                        <div class="col-12 col-lg-5">
+                            <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s"
+                                 style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                {% is_image event.file as r %}
+                                {% if  r %}
+                                <img src="{{ event.file.url }}" alt="">
+                                {% else %}
+                                 <video width="100%" controls poster preload>
+                                    <source src="{{ event.file.url }}">
+                                </video>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-7 contact-text">
+                            <p>{{ event.description }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <h2>
+                <hr>
+            </h2>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
 {% endblock %}

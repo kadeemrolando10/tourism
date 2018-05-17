@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 class Event(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Titulo')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    file = models.FileField(upload_to='media/', null='true', verbose_name='Imagen o Video')
     description = models.TextField(verbose_name='Descripcion')
     location = models.URLField(max_length=500, blank=True, default='', verbose_name='Ubicacion')
     event_date = models.DateField(verbose_name='Fecha de Evento')
@@ -35,6 +35,7 @@ class Schedule(models.Model):
 
 class RestaurantMenu(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
+    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion')
     price = models.DecimalField(max_digits=5, decimal_places=2, default=5.1, verbose_name='Precio')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
@@ -107,6 +108,7 @@ class Transport(models.Model):
 class TransportDestination(models.Model):
     transport = models.ForeignKey(Transport, on_delete=models.CASCADE, verbose_name='Transporte')
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
+    schedules_out = models.CharField(max_length=150, default='NA', verbose_name='Horarios de salida')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
@@ -134,9 +136,11 @@ class TransportService(models.Model):
 
 class TransportTypeService(models.Model):
     destination = models.ForeignKey(TransportDestination, on_delete=models.CASCADE, verbose_name='Destino')
-    service = models.ManyToManyField(TransportService, verbose_name='Servicios')
     title = models.CharField(max_length=150, default='NA', verbose_name='Tipo de Servicio')
     price = models.DecimalField(max_digits=5, decimal_places=2, default=5.1, verbose_name='Precio')
+    service = models.ManyToManyField(TransportService, verbose_name='Servicios')
+    image_bus = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Bus')
+    image_seat = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Butacas')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):
@@ -219,6 +223,7 @@ class AgencyService(models.Model):
     title = models.CharField(max_length=150, verbose_name='Titulo')
     duration = models.CharField(max_length=150, default='S/N', verbose_name='Duracion')
     departures = models.CharField(max_length=150, default='S/N', verbose_name='Salidas')
+    schedule = models.CharField(max_length=150, default='S/N', verbose_name='Horas de Expedicion')
     place_start = models.CharField(max_length=150, default='S/N', verbose_name='Lugar de Inicio')
     places_to_known = models.CharField(max_length=500, default='S/N', verbose_name='Lugares a conocer')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
@@ -321,7 +326,7 @@ class TourismSiteMenu(models.Model):
     site = models.ForeignKey(TourismSite, on_delete=models.CASCADE, verbose_name='Sitio')
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
-    description = models.TextField(verbose_name='Descripcion')
+    description = models.CharField(max_length=150, default='NA', verbose_name='Descripcion')
     published_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de Publicacion')
 
     def __str__(self):

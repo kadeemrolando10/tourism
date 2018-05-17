@@ -6,11 +6,11 @@
 {% block content %}
 <!-- ***** Breadcumb Area Start ***** -->
 <div class="breadcumb-area bg-img bg-overlay"
-     style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
+     style="background-image: url({% static 'img/bg-img/_potosi_noche.jpg' %})"></div>
 <!-- ***** Breadcumb Area End ***** -->
 
-<section class="dorne-editors-pick-area bg-img bg-overlay-9 section-padding-100"
-         style="background-image: url(/static/img/bg-img/hero-2.jpg);">
+<section class="dorne-editors-pick-area bg-img bg-overlay-9 section-padding-0-50"
+         style="background-image: url(/static/img/bg-img/salt-lake-594606_960_720.jpg);">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -21,9 +21,9 @@
             </div>
         </div>
         {% for agency in agencys %}
-        <div class="contact-text row">
+        <div class=" row">
             <div class="agency col-12 text-center " align="center">
-                <h3 class="alert alert-dark">{{ agency.title }}</h3>
+                <h5 class="alert alert-dark-agency">{{ agency.title }}</h5>
             </div>
 
             <div class="agency col-12 col-lg-6 ">
@@ -49,26 +49,35 @@
                 </div>
             </div>
             <div class="col-12 col-lg-6">
-
                 <div class="contact-text">
 
                     {% for s in agency.service.all %}
-                    <div class="single-listing-menu justify-content-between">
-                        <!-- Listing Menu Title -->
-                        <div class="listing-menu-title justify-content-between">
-                            <h6 class="alert alert-info">{{s.title}}</h6>
-                            <p>Duracion: {{s.duration}}</p>
-                            <p>Salidas: {{s.departures}}</p>
-                            <p>Lugar de Inicio: {{s.place_start}}</p>
-                            <p>Lugares a conocer: {{s.places_to_known}}</p>
+                    <div id="accordion">
+                        <div class="card">
+
+                            <div class="col-12 card-headertitle">
+
+                                    <a href="" class=" card-body " data-toggle="collapse"
+                                       data-target="#{{s.id}}"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                         <p class="pp">{{s.title}}</p>
+                                    </a>
+
+                            </div>
+                            <div id="{{s.id}}" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#{{s.id}}">
+                                <div class="card-body contact-text">
+                                    <p><strong>Duracion:</strong> {{s.duration}}</p>
+                                    <p><strong>Salidas:</strong> {{s.departures}}</p>
+                                    <p><strong>Lugar de Inicio:</strong> {{s.place_start}}</p>
+                                    <p><strong>Lugares a conocer:</strong> {{s.places_to_known}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                     {% endfor %}
                 </div>
             </div>
-
-
         </div>
         {% endfor %}
     </div>
@@ -87,12 +96,6 @@
                 )
             })
         })
-
-
-
-
-
-
 
 
 

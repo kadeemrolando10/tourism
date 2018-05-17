@@ -9,6 +9,7 @@ from tour.models import TourismSiteType
 from tour.models import TourismSiteMenu
 from tour.models import TourismSite
 from tour.models import Lodging
+
 register = template.Library()
 
 
@@ -20,7 +21,19 @@ def to_int(value):
 @register.simple_tag
 def get_destiny_transport(id):
     id = int(id)
+
     return TransportDestination.objects.filter(transport=id)
+
+
+@register.simple_tag
+def is_image(value):
+    if (value.name.endswith('.png') or
+            value.name.endswith('.jpg') or
+            value.name.endswith('.gif') or
+            value.name.endswith('.bmp')):
+        return True
+    else:
+        return False
 
 
 @register.simple_tag
@@ -54,7 +67,11 @@ def get_tourism_site_menu(id):
 
 
 @register.simple_tag
+def get_services(id):
+    id = int(id)
+    return Age.objects.filter(site=id)
+
+
+@register.simple_tag
 def get_response_value(diagnose, formdiagnose, q):
     pass
-
-

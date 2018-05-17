@@ -19,9 +19,10 @@ urlpatterns = [
         path('new/', views.restaurant_new, name='restaurants-new'),
         #path('<int:id>/edit/', views.restaurants_edit, name='restaurants-edit'),
         path('<int:id>/', views.restaurant_show, name='restaurants-show'),
-       # path('<int:id>/delete/', views.restaurants_delete, name='restaurants-delete'),
+        #path('<int:id>/delete/', views.restaurants_delete, name='restaurants-delete'),
     ])),
     path('transports/', include([
+
         path('', views.transport_index, name='transports-index'),
         # path('new/', views.events_new, name='events-new'),
         # path('<int:id>/edit/', views.events_edit, name='events-edit'),

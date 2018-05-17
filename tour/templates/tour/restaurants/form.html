@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+<div class="container">
+    <h5>Nuevo Restaurante</h5>
+    <form method="post" class="form-control form-group">
+        {% csrf_token %}
+        {{form.as_table}}
+        <br>
+        <button  class="btn btn-primary" type="submit">Guardar</button>
+    </form>
+</div>
+
+{% endblock %}

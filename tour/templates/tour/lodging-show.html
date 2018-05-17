@@ -10,14 +10,13 @@
 <!-- ***** Breadcumb Area End ***** -->
 
 <!-- ***** Single Listing Area Start ***** -->
-<section class="dorne-single-listing-area section-padding-100">
+<section class="dorne-single-listing-area section-padding-0-50">
     <div class="container">
         <div class="row justify-content-center">
             <!-- Single Listing Content -->
             <div class="col-12 col-lg-8">
                 <div class="single-listing-content">
                     <div class="listing-title">
-                        <h6>{{lodging.type.title}}</h6>
                         <h4>{{lodging.title}}</h4>
                         <h6>{{lodging.address}}</h6>
                     </div>
@@ -25,9 +24,10 @@
                     <div class="single-listing-nav">
                         <nav>
                             <ul id="listingNav">
-                                <li><a href="#menu">Servicios</a></li>
-                                <li><a href="#room">Habitaciones</a></li>
-                                <li><a href="#lomap">Ubicacion en mapa</a></li>
+
+                                <li><a href="#menu">Servicios <i class="fa fa-twitch"></i></a></li>
+                                <li><a href="#room">Habitaciones <i class="fa fa-hand-lizard-o"></i></a></li>
+                                <li><a href="#lomap">Ubicacion en mapa <i class="fa fa-map-marker"></i></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -57,13 +57,13 @@
                             <div class="single-listing-menu d-flex justify-content-between">
                                 <!-- Listing Menu Title -->
                                 <div class="listing-menu-title">
-                                    <h6 class="alert alert-info">{{r.title}}</h6>
+                                     <h4><span class="badge badge-pill badge-info">{{r.title}}</span></h4>
                                     <img src="{{r.image.url}}">
                                     <p>{{r.description}}</p>
                                 </div>
                                 <!-- Listing Menu Price -->
                                 <div class="listing-menu-price" style="align:center;">
-                                    <h6 class="alert alert-success">{{r.price}}Bs.</h6>
+                                    <h4><span class="badge badge-pill badge-success">{{r.price}}Bs.</span></h4>
                                 </div>
                             </div>
                             {% endfor %}
@@ -86,7 +86,7 @@
                 <div class="listing-sidebar">
                     <div class="opening-hours-widget mt-50 ">
                         <h6>Informacion</h6>
-                        <ul class="  alert alert-dark opening-hours">
+                        <ul class="opening-hours">
                             <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ lodging.rating }}</p></li>
                             <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ lodging.phone }}</p></li>
                             <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ lodging.web }}</p></li>
@@ -94,8 +94,8 @@
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6>Horarios de Atencion</h6>
-                        <ul class="  alert alert-dark opening-hours" role="alert">
+                        <h6> <i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <ul class="opening-hours" role="alert">
                             {% for q in lodging.schedule.all %}
                             <li>
                                 <p>{{q.day}}</p>
@@ -116,5 +116,6 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
 </script>
 {% endblock %}

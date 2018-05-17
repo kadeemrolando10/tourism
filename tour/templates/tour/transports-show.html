@@ -10,7 +10,7 @@
 <!-- ***** Breadcumb Area End ***** -->
 
 <!-- ***** Single Listing Area Start ***** -->
-<section class="dorne-single-listing-area section-padding-100">
+<section class="dorne-single-listing-area section-padding-0-50">
     <div class="container">
         <div class="row justify-content-center">
             <!-- Single Listing Content -->
@@ -24,8 +24,8 @@
                     <div class="single-listing-nav">
                         <nav>
                             <ul id="listingNav">
-                                <li><a href="#menu">Destinos</a></li>
-                                <li><a href="#lomap">Ubicacion en mapa</a></li>
+                                <li><a href="#menu"> Destinos <i class="fa fa-bus"></i></a></li>
+                                <li><a href="#lomap"> Ubicacion en mapa <i class="fa fa-map-marker"></i></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -34,18 +34,21 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="table-warning" colspan="5" scope="col">{{d.title}}
+                                <th class="table-warning" colspan="6" scope="col" style="text-align:center;">{{d.title}}
                                 </th>
                             </tr>
+
                             <tr class="table-info" style="text-align:center;">
                                 <th scope="col">Buses</th>
                                 <th colspan="3" width="55%" scope="col">Servicios</th>
                                 <th scope="col">Precio</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            {% get_types_services_transport d.id as types %}
-                            {% for t in types %}
+                            <tr>
+                                {% get_types_services_transport d.id as types %}
+                                {% for t in types %}
+
                             <tr>
                                 <td>{{ t.title }}</td>
                                 <td colspan="3" width="55%" style="text-align:center;">
@@ -55,6 +58,29 @@
                                     {% endfor %}
                                 </td>
                                 <td style="text-align:center;">{{ t.price }} Bs.</td>
+                                <td style="text-align:center;">
+                                    <button class="btn btn-dark" type="button" data-toggle="collapse"
+                                            data-target="#{{t.id}}" aria-expanded="false"
+                                            aria-controls="collapseExample"><i class="fa fa-plus"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="collapse" id="{{t.id}}">
+                                        <div class="card card-body">
+                                            <table>
+                                                <tr>
+                                                    <td width="50%"><img src="{{t.image_bus.url}}" width="300px"
+                                                                         height="150px"></td>
+                                                    <td width="50%"><img src="{{t.image_seat.url}}" width="300px"
+                                                                         height="150px"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -65,7 +91,8 @@
                     <div class="listing-menu-area mt-100" id="lomap">
                         <h4>Ubicacion en mapa</h4>
                         <div class="location-map">
-                            <iframe src="{{ transport.location }}" width="100%" height="400" frameborder="5" allowfullscreen="">
+                            <iframe src="{{ transport.location }}" width="100%" height="400" frameborder="5"
+                                    allowfullscreen="">
                             </iframe>
 
                         </div>
@@ -86,7 +113,7 @@
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6>Horarios de Atencion</h6>
+                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours">
                             {% for q in transport.schedule.all %}
                             <li>
@@ -110,6 +137,22 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

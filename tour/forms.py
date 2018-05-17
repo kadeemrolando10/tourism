@@ -19,18 +19,17 @@ class RestaurantForm(forms.ModelForm):
             'rating',
             'web'
         ]
-
         widgets = {
-            'title':forms.TextInput(attrs={'class':'form-control'}),
-            'image':forms.ClearableFileInput(attrs={'class':'form-control'}),
-            'service':forms.CheckboxSelectMultiple(),
-            'menu':forms.CheckboxSelectMultiple(),
-            'schedule':forms.CheckboxSelectMultiple(),
-            'address':forms.TextInput(attrs={'class':'form-control'}),
-            'location':forms.URLInput(attrs={'class':'form-control'}),
-            'phone':forms.TextInput(attrs={'class':'form-control'}),
-            'rating':forms.TextInput(attrs={'class':'form-control'}),
-            'web':forms.TextInput(attrs={'class':'form-control'})
+            'title': forms.TextInput(attrs={'class': 'form-control', }),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'service': forms.CheckboxSelectMultiple(attrs={'class': 'form-controll'}),
+            'menu': forms.CheckboxSelectMultiple(attrs={'class': 'form-controll'}),
+            'schedule': forms.CheckboxSelectMultiple(attrs={'class': 'form-controll'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'location': forms.URLInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'rating': forms.TextInput(attrs={'class': 'form-control'}),
+            'web': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 

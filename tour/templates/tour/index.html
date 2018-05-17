@@ -3,7 +3,9 @@
 {% load static %}
 {% load utils %}
 {% block content %}
-<!-- ***** Welcome Area Start ***** -->
+
+
+
 <section class="dorne-welcome-area bg-img bg-overlay"
          style="background-image: url({% static 'img/bg-img/hero-11.jpg' %});">
     <div class="container h-100">
@@ -35,14 +37,14 @@
 
 <!-- ***** Welcome Area End ***** -->
 <!-- ***** Catagory Area Start ***** -->
-<section class="dorne-catagory-area">
-    <div class="container">
+<section class="dorne-catagory-area tab-pane active" name="tourism" id="tourism">
+    <div class="container" >
         <div class="row">
             <div class="col-12">
                 <div class="all-catagories">
                     <div class="row">
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md">
+                        <div class="col-12 col-sm-6 col-md" >
                             <a href="{% url 'lodging-index' %}">
                                 <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
                                     <div class="catagory-content">
@@ -107,7 +109,7 @@
 </section>
 <!-- ***** Catagory Area End ***** -->
 <!-- ***** About Area Start ***** -->
-<section class="dorne-about-area section-padding-0-100">
+<section class="dorne-about-area section-padding-0-10">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -310,29 +312,22 @@
     </div>
 </section>
 
-<div class="fb-page"
-     data-href="https://www.facebook.com/Secretaria-De-Turismo-Y-Cultura-Potosi-Bolivia-292810844120569/"
-     data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
-     data-show-facepile="true">
-    <blockquote cite="https://www.facebook.com/Secretaria-De-Turismo-Y-Cultura-Potosi-Bolivia-292810844120569/"
-                class="fb-xfbml-parse-ignore">
-        <a href="https://www.facebook.com/Secretaria-De-Turismo-Y-Cultura-Potosi-Bolivia-292810844120569/"></a>
-    </blockquote>
-</div>
 
 <div class="dorne-clients-area section-padding-100">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="clients-logo d-md-flex align-items-center justify-content-around">
-                    <img src="{% static 'img/clients-img/2.png' %}" alt="">
-                    <img src="{% static 'img/clients-img/3.png' %}" alt="">
-                    <img src="{% static 'img/clients-img/4.png' %}" alt="">
-                    <img src="{% static 'img/clients-img/5.png' %}" alt="">
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
+{% endblock %}
+
+{% block js_scripts%}
+<!-- end feedwind code -->
 {% endblock %}

@@ -12,7 +12,7 @@
 
     <!-- Title -->
     <title>SIS-TOUR</title>
-    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+    <link rel="icon" href="{% static 'img/core-img/icon.ico' %}">
 
     <!-- Core Stylesheet -->
     <link href="{% static 'style.css' %}" rel="stylesheet">
@@ -62,15 +62,17 @@
                             aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span
                             class="fa fa-bars"></span></button>
                     <!-- Nav -->
-                    <div class="collapse navbar-collapse" id="dorneNav">
-                        <ul class="navbar-nav mr-auto" id="dorneMenu">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="\"><i class="fa fa-home" aria-hidden="true"></i> Inicio <span
-                                        class="sr-only">(current)</span></a>
+                    <div class="collapse navbar-collapse" id="dorneNav" style="text-align:center;">
+                        <ul class="navbar-nav mr-auto" id="dorneMenu" style="text-align:center;">
+                            <li class="nav-item" style="text-align:center;">
+                                <a class="nav-link " href="\"><i class="fa fa-home" aria-hidden="true"></i> <br>Inicio
+                                </a>
                             </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Turismo <i
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                        class="fa fa-camera-retro" aria-hidden="true"></i> <br>Turismo <i
                                         class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{% url 'transports-index' %}">
@@ -85,20 +87,24 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'events-index' %}">
-                                    <i class="fa fa-bell" aria-hidden="true"></i> Eventos</a>
+                                    <i class="fa fa-bell" aria-hidden="true"></i> <br>Eventos Culturales</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'tourism_sites-index' %}">
-                                    <i class="fa fa-video-camera" aria-hidden="true"></i> Sitios Turisticos</a>
+                                    <i class="fa fa-universal-access" aria-hidden="true"></i><br> Sitios Turisticos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'tourism_sites-index' %}">
+                                    <i class="fa fa-road" aria-hidden="true"></i><br>Rutas Turisticas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'secretary' %}">
-                                    <i class="fa fa-institution " aria-hidden="true"></i> Secretaria</a>
+                                    <i class="fa fa-institution " aria-hidden="true"></i> <br>Secretaria</a>
                             </li>
                         </ul>
                         <!-- Search btn -->
                         <div class="dorne-search-btn">
-                            <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Buscar</a>
+                            <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> <br>Buscar</a>
                         </div>
                         <!-- Signin btn -->
                         <div class="dorne-signin-btn">
@@ -113,10 +119,13 @@
 <!-- ***** Header Area End ***** -->
 {% block content %}
 {% endblock %}
+
 <!-- ****** Footer Area Start ****** -->
 <footer class="dorne-footer-area d-none d-sm-block">
     <div class="container-fluid">
-        <div class="row">
+        <div class="contact-text" >
+            <p align="center">NUMERO DE VISITANTES</p>
+            <div id="sfcsen2cy3y4ay1nccclpz5shgxxjyaxfzz" align="center"></div>
         </div>
         <div class="row">
             <div class="col-12 d-md-flex align-items-center justify-content-between">
@@ -124,7 +133,6 @@
                     <p>GOBIERNO AUTONOMO DEPARTAMENTAL DE POTOSI</p>
                 </div>
                 <div class="footer-social-btns">
-                    <a href="#"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
                     <a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                     <a href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
                     <a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
@@ -150,6 +158,9 @@
         </div>
     </div>
 </div>
+
+<div class="floating-wpp"></div>
+
 <!-- ****** Footer Area End ****** -->
 
 <!-- jQuery-2.2.4 js -->
@@ -162,11 +173,40 @@
 <script src="{% static 'js/others/plugins.js' %}"></script>
 <!-- Active JS -->
 <script src="{% static 'js/active.js' %}"></script>
+
 <!--
     <script src="{% static 'js/google-map/explore-map-active.js' %}"></script>
     <script src="{% static 'js/google-map/location-map-active.js' %}"></script>
     <script src="{% static 'js/google-map/map-active.js' %}"></script>
     -->
+
+<script type="text/javascript"
+        src="https://counter8.allfreecounter.com/private/counter.js?c=sen2cy3y4ay1nccclpz5shgxxjyaxfzz&down=async"
+        async>
+</script>
+<!-- WhatsHelp.io widget -->
+<script type="text/javascript">
+    (function () {
+        var options = {
+            facebook: "292810844120569", // Facebook page ID
+            whatsapp: "+59172434117", // WhatsApp number
+            call_to_action: "Contactese...", // Call to action
+            button_color: "#932C8B", // Color of button
+            position: "left", // Position may be 'right' or 'left'
+            order: "facebook,whatsapp", // Order of buttons
+        };
+        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+
+
+
+
+
+</script>
+<!-- /WhatsHelp.io widget -->
 {% block js_code %}
 {% endblock %}
 </body>

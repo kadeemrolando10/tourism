@@ -4,9 +4,11 @@
 
 {% block content %}
   <!-- ***** Breadcumb Area Start ***** -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/IMG_2263.jpg' %})"></div>
     <!-- ***** Breadcumb Area End ***** -->
-
+    <div class="container">
+   <a href="{% url 'restaurants-new'%}">Nuevo restaurant</a>
+    </div>
    <section class="dorne-features-restaurant-area bg-default">
         <div class="container-fluid">
             <div class="row">
@@ -28,7 +30,7 @@
                             <!-- Rating & Map Area -->
                             <div class="ratings-map-area d-flex">
                                 <a href="#">{{rest.rating}}</a>
-                                <a href="{% url 'restaurants-show' rest.id %}"><img src="{% static 'img/core-img/show.png' %}" alt=""></a>
+                                <a href="{% url 'restaurants-show' rest.id %}"><i class="fa fa-plus"></i></a>
                             </div>
                              <div class="feature-content d-flex align-items-center justify-content-between">
                             <div class="feature-title">

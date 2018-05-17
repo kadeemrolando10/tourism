@@ -9,7 +9,7 @@
 <!-- ***** Breadcumb Area End ***** -->
 
 <!-- ***** Single Listing Area Start ***** -->
-<section class="dorne-single-listing-area section-padding-100">
+<section class="dorne-single-listing-area section-padding-0-50">
     <div class="container">
         <div class="row justify-content-center">
             <!-- Single Listing Content -->
@@ -24,28 +24,11 @@
                     <div class="single-listing-nav">
                         <nav>
                             <ul id="listingNav">
-                                <li><a href="#menu">Menu</a></li>
-                                <li class="active"><a href="#overview">Servicios</a></li>
-                                <li><a href="#lomap">Ubicacion en mapa</a></li>
+                                <li class="active"><a href="#overview"><i class="fa fa-child"></i> Servicios</a></li>
+                                <li><a href="#menu"><i class="fa fa-cutlery"></i> Menu</a></li>
+                                <li><a href="#lomap"><i class="fa fa-map-marker"></i> Ubicacion en mapa</a></li>
                             </ul>
                         </nav>
-                    </div>
-
-                    <div class="listing-menu-area mt-100" id="menu">
-                        <h4>MENU</h4>
-                        {% for m in restaurant.menu.all %}
-                        <div class="single-listing-menu d-flex justify-content-between">
-                            <!-- Listing Menu Title -->
-                            <div class="listing-menu-title">
-                                <h6>{{m.title}}</h6>
-                                <p>{{m.description}}</p>
-                            </div>
-                            <!-- Listing Menu Price -->
-                            <div class="listing-menu-price">
-                                <h6>{{m.price}}Bs.</h6>
-                            </div>
-                        </div>
-                        {% endfor%}
                     </div>
 
                     <div class=" listing-menu-area overview-content mt-50" id="overview">
@@ -55,16 +38,30 @@
                         <table class="table table-light table-hover">
                             <tbody>
                             <tr>
-                                <td width="20%" align="center">
+                                <td width="20%" align="center" class="alert-info">
                                     <img src="{{s.image.url}}" width="40px" height="40px">
                                 </td>
-                                <td>
-                                    {{ s.title }}
-                                </td>
+                                <td>{{ s.title }}</td>
                             </tr>
                             </tbody>
                         </table>
                         {% endfor %}
+                    </div>
+                    <div class="listing-menu-area mt-100" id="menu">
+                        <h4>MENU</h4>
+                        {% for m in restaurant.menu.all %}
+                        <div class="single-listing-menu d-flex justify-content-between">
+                            <!-- Listing Menu Title -->
+                            <div class="listing-menu-title">
+                                <h6>{{m.title}}</h6>
+                                <p>{{m.description}}</p>
+                                <span class="badge badge-primary">{{m.price}}Bs.</span>
+                            </div>
+                            <div class="listing-menu-title">
+                                <img src="{{m.image.url}}" width="300px">
+                            </div>
+                        </div>
+                        {% endfor%}
                     </div>
 
                     <div class="location-on-map mt-50" id="lomap">
@@ -73,10 +70,8 @@
                             <iframe src="{{ restaurant.location }}" width="100%" height="400" frameborder="5"
                                     allowfullscreen="">
                             </iframe>
-
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -94,7 +89,7 @@
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6>Horarios de Atencion</h6>
+                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours">
                             {% for q in restaurant.schedule.all %}
                             <li>

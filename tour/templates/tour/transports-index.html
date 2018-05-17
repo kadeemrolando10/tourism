@@ -5,10 +5,12 @@
 
 {% block content %}
 <!-- ***** Breadcumb Area Start ***** -->
-<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-2.jpg' %})"></div>
+<div class="breadcumb-area bg-img bg-overlay"
+     style="background-image: url({% static 'img/bg-img/ciudad-de-noche.jpg' %})"></div>
 <!-- ***** Breadcumb Area End ***** -->
 
-<section class="dorne-listing-destinations-area section-padding-100-50">
+<section class="dorne-listing-destinations-area section-padding-0-50"
+         style="background-image: url({% static 'img/bg-img/DSCN0079.jpg' %})">>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -33,7 +35,7 @@
                         <div class="feature-title">
 
                             <h5>{{ transport.title }}</h5>
-                            <p> <i class="fa fa-phone" aria-hidden="true"></i>.
+                            <p><i class="fa fa-phone" aria-hidden="true"></i>.
                                 {{ transport.phone }}
                             </p>
                             {% get_destiny_transport transport.id as destiny %}
@@ -44,8 +46,7 @@
                             </p>
                         </div>
                         <div class="feature-favourite">
-                            <a href="{% url 'transports-show' transport.id %}"><img
-                                    src="{% static 'img/core-img/details.png' %}" alt=""></a>
+                            <a href="{% url 'transports-show' transport.id %}"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
                 </div>

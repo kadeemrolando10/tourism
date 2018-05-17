@@ -77,7 +77,7 @@ def restaurant_new(request):
             messages.add_message(request, messages.ERROR, message)
     else:
         form = RestaurantForm()
-    return render(request, 'tour/restaurants-new.html', {'form': form})
+    return render(request, 'tour/restaurants/form.html', {'form': form})
 
 
 def transport_index(request):

@@ -28,7 +28,7 @@
 
 #preloader {
     overflow: hidden;
-    background-color: rgba(52, 26, 121, 0.99);
+    background-color: #ff6600;
     height: 100%;
     left: 0;
     position: fixed;
@@ -96,7 +96,7 @@ h6 {
 
 p {
     padding-top: 1px;
-    color: #01070e;
+    color: #fff;
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
@@ -137,17 +137,35 @@ p {
     padding-bottom: 100px;
 }
 
+.section-padding-0-10 {
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+
+.section-padding-0-50 {
+    padding-top: 0;
+    padding-bottom: 50px;
+}
+
 .imga {
     max-width: 100%;
     height: auto;
     padding-top: 15px;
 
 }
+
+.alert-dark-agency {
+    color: #e4eaf1;
+    background-color: #0e0e0e;
+    border-color: #0a79e8;
+    text-transform: uppercase;
+}
 .contact-text {
-     background-color: #e3e0e8;
+     background-color: #ff6600d6;
      margin: 0 auto 15px;
      text-align: start;
      padding-top: 15px;
+     padding-bottom:15px;
      border-radius: 5px;
 }
 
@@ -156,6 +174,7 @@ img {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .mt-15 {
@@ -327,7 +346,7 @@ li {
     font-size: 18px;
     right: 0;
     width: 40px;
-    background-color: #341a79;
+    background-color: #ff3300;
     color: #fff;
     text-align: center;
     height: 40px;
@@ -368,7 +387,7 @@ li {
 }
 
 .bg-default {
-    background-color: #341a79;
+    background-color: #ff3300;
 }
 
 .dorne-btn {
@@ -475,8 +494,8 @@ li {
 }
 
 .sticky .header_area {
-    background-color: rgba(14, 2, 35, 0.9);
-    height: 80px;
+    background: linear-gradient(to bottom, #000000 0%, #ff6000 150%);;
+    height: 100px;
     z-index: 9999;
     border-bottom: 1px solid transparent;
 }
@@ -498,12 +517,12 @@ li {
     padding-right: 15px;
     padding-left: 15px;
     color: #fff;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-item.active .nav-link {
-    color: #7643ea;
+    color: #000;
 }
 
 .dorne-search-btn > a,
@@ -511,7 +530,7 @@ li {
     color: #fff;
     display: inline-block;
     margin-right: 40px;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .dorne-search-btn > a i {
@@ -584,13 +603,13 @@ li {
 
 .hero-search-form .nav-tabs .nav-link.active {
     color: #fff;
-    background-color: rgba(67, 25, 161, 0.65);
+    background-color: #000;
     border-color: transparent;
 }
 
 .hero-search-form .tab-content .tab-pane {
     padding: 35px;
-    background-color: rgba(67, 25, 161, 0.65);
+    background-color: #ff6600ba;
 }
 
 .hero-search-form .tab-content .tab-pane h6 {
@@ -659,12 +678,13 @@ li {
 /* Catagory Area CSS */
 
 .dorne-catagory-area {
+    padding-top: 20px;
     position: relative;
     z-index: 9;
 }
 
 .single-catagory-area {
-    background-color: #7643ea;
+    background:  #ff6600;
     text-align: center;
     padding: 60px 15px;
     -webkit-transition-duration: 500ms;
@@ -672,13 +692,13 @@ li {
 }
 
 .single-catagory-area:hover {
-    box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .all-catagories {
     position: relative;
-    top: -50%;
-    z-index: 15;
+    top: 20%;
+    z-index: 25;
 }
 
 .single-catagory-area .catagory-content img {
@@ -696,7 +716,7 @@ li {
     font-size: 42px;
     font-weight: 800;
     text-transform: uppercase;
-    margin-bottom: 60px;
+    margin-top: 60px;
 }
 
 .about-content span {
@@ -721,7 +741,7 @@ li {
     height: 70px;
     display: inline-block;
     line-height: 70px;
-    background-color: #7643ea;
+    background-color: #ff6600;
     padding: 0 50px;
     font-size: 14px;
     text-transform: uppercase;
@@ -766,7 +786,7 @@ li {
 .single-features-area {
     position: relative;
     z-index: 1;
-    background-color: #f4f6f8;
+    background-color: #fff;
     -webkit-transition-duration: 500ms;
             transition-duration: 500ms;
 }
@@ -775,7 +795,7 @@ li {
     position: absolute;
     top: 20px;
     left: 20px;
-    background-color: #7643ea;
+    background-color: #ff6600;
     height: 35px;
     font-size: 12px;
     line-height: 35px;
@@ -807,6 +827,7 @@ li {
 
 .feature-content .feature-title p {
     font-size: 14px;
+    color: #000;
     margin-bottom: 0;
     -webkit-transition-duration: 500ms;
             transition-duration: 500ms;
@@ -818,7 +839,7 @@ li {
 }
 
 .single-features-area:hover {
-    background-color: #7643ea;
+    background-color: #ff6600;
     box-shadow: 3px 15px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -839,7 +860,7 @@ li {
 }
 
 .ratings-map-area > a:last-child {
-    background-color: #2a2a2a;
+    background-color: #ff6600;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -899,7 +920,7 @@ li {
 }
 
 .date-map-area > a:last-child {
-    background-color: #30c0a3;
+    background-color: #1E90FF;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -920,6 +941,10 @@ li {
             flex: 0 0 170px;
 }
 
+.feature-events-content > p {
+    color:#000;
+}
+
 .feature-events-content {
     position: relative;
     z-index: 2;
@@ -929,7 +954,7 @@ li {
 .feature-events-details-btn > a {
     width: 65px;
     height: 50px;
-    background-color: #2a2a2a;
+    background-color: #2F4F4F;
     display: block;
     font-size: 24px;
     color: #fff;
@@ -954,7 +979,7 @@ li {
 .feature-events-content h6 {
     font-size: 14px;
     font-weight: 400;
-    color: #bfb1de;
+    color: #111;
     margin-bottom: 15px;
     -webkit-transition-duration: 500ms;
             transition-duration: 500ms;
@@ -968,7 +993,7 @@ li {
 }
 
 .single-feature-events-area:hover {
-    background-color: #7643ea;
+    background-color: #ff6600;
 }
 
 .single-feature-events-area:hover .feature-events-content h5,
@@ -1238,17 +1263,21 @@ li {
 
 .opening-hours-widget {
     padding: 50px 30px;
-    background-color: #f3edff;
+    background-color: #007bff;
     position: relative;
     z-index: 1;
 }
 
 .opening-hours-widget h6 {
     margin-bottom: 30px;
+    text-align:center;
     font-size: 18px;
+    color:lime;
+    text-transform:uppercase;
 }
 
 .opening-hours li {
+    color: black;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1257,9 +1286,6 @@ li {
             justify-content: space-between;
 }
 
-.opening-hours li:first-child p {
-    color: #7643ea;
-}
 
 .opening-hours li:last-child p {
     margin-bottom: 0;
@@ -1327,17 +1353,19 @@ li {
 }
 
 .single-listing-nav li a {
-    padding: 30px 10px;
+    background-color: #007bff;
+    padding: 10px 10px;
     font-size: 14px;
-    display: block;
-    color: #2a2a2a;
+    display: radius;
+    color: #fff;
     position: relative;
     z-index: 1;
 }
 
 .single-listing-nav li.active a,
 .single-listing-nav li a:hover {
-    color: #7643ea;
+    color: #000;
+    background-color: orange;
 }
 
 .single-listing-nav li.active a:after {
@@ -1368,7 +1396,7 @@ li {
 }
 
 .single-listing-menu {
-    background-color: #f3edff;
+    background-color: #ff7907d9;
     padding: 20px 40px;
     margin-bottom: 5px;
 }
@@ -1378,7 +1406,7 @@ li {
 }
 
 .single-listing-menu:nth-child(odd) {
-    background-color: #fbf9ff;
+    background-color: #868e96;
 }
 
 .listing-reviews-area h4 {
@@ -1445,6 +1473,150 @@ li {
 }
 
 
+.card-headertitle {
+    padding-top: 1px;
+    padding-bottom:1px;
+    text-align:center;
+    }
+
+.pp {
+    color: #111;
+    font-weight: bold;
+    }
+
+.floating-wpp {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    font-family: 'Open sans';
+    font-size: 14px;
+    transition: bottom 0.2s;
+}
+
+.floating-wpp .floating-wpp-button {
+    width: 72px;
+    height: 72px;
+    background-color: #25D366;
+    background-image: url('whatsapp.svg');
+    background-position: center;
+    background-size: 180%;
+    border-radius: 50%;
+    box-shadow: 1px 1px 4px rgba(60, 60, 60, 0.4);
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.floating-wpp:hover {
+    bottom: 17px;
+}
+
+.floating-wpp:hover .floating-wpp-button {
+    box-shadow: 1px 2px 8px rgba(60, 60, 60, 0.4);
+}
+
+.floating-wpp .floating-wpp-popup {
+    /*border: 2px solid white;*/
+    border-radius: 6px;
+    background-color: #E5DDD5;
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    box-shadow: 1px 2px 8px rgba(60, 60, 60, 0.25);
+    width: 0px;
+    height: 0px;
+    bottom: 82px;
+    transition: width 0.2s, height 0.2s, padding 0.2s;
+    /*transition-delay: 0.2s;*/
+    transform-origin: bottom;
+}
+
+.floating-wpp .floating-wpp-popup.active {
+    padding: 0 12px 12px 12px;
+    width: 260px;
+    height: auto;
+}
+
+.floating-wpp .floating-wpp-popup .floating-wpp-message {
+    background-color: white;
+    padding: 8px;
+    border-radius: 0px 5px 5px 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.floating-wpp .floating-wpp-popup.active .floating-wpp-message {
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.floating-wpp .floating-wpp-popup .floating-wpp-head {
+    text-align: right;
+    color: white;
+    margin: 0 -15px 10px -15px;
+    padding: 6px 12px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.floating-wpp .floating-wpp-input-message {
+    background-color: white;
+    margin: 10px -15px -15px -15px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+.floating-wpp .floating-wpp-input-message textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 8px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none;
+}
+
+.floating-wpp .floating-wpp-btn-send {
+    margin-left: 12px;
+    font-size: 0;
+    cursor: pointer;
+}
+
+.form-control {
+    display: block;
+    width:100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #000;
+    background-color: #e9ecef;
+    background-image: none;
+    background-clip: padding-box;
+    border: 2px solid #10f544;
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.form-controll{
+    display: block;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+
 body {
   position: relative;
 }
+
