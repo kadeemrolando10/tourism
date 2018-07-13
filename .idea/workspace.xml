@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list id="00badabf-c86a-492c-b462-a9d11b814099" name="fine function" comment="" />
     <list default="true" id="52413bdc-b67c-4f51-a410-bbd240d2735d" name="Default" comment="add function 1">
-      <change beforePath="$PROJECT_DIR$/Procfile.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/master_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/master_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
     </list>
+    <list id="00badabf-c86a-492c-b462-a9d11b814099" name="fine function" comment="" />
     <ignored path="C:\Sites\tour_site\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -249,11 +248,6 @@
             <path>
               <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
               <item name="tour_site" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tour_site" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tour_site" type="b2602c69:ProjectViewProjectNode" />
