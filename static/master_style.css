@@ -14793,3 +14793,6 @@ img.away, img.busy, img.offline, img.online {
     text-align:center;
     color: #000;
 }
+
+.oldclass { color: blue }
+.newclass { background-color: yellow }
