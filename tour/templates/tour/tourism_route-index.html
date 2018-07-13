@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load utils %}
+
+{% block content %}
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay"
+     style="background-image: url({% static 'img/bg-img/casa-moneda-potosi.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+
+
+<section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-0-50"
+         style="background-image: url({% static 'img/bg-img/hero-20.jpg' %})">
+    <div class="container">
+        <div class="row ">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <span></span>
+                    <h4>Rutas Turisticas</h4>
+                    <p>Lugares a conocer ?</p><br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+             {% for d in destiny %}
+            {% get_tourism_route d.id as des %}
+             {% if des %}
+            <div class="col-12 text-center section-heading">
+                <h4>{{d.title}}</h4>
+            </div>
+            {% endif %}
+            {% for s in des %}
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="single-features-area mb-50">
+                    <img class="imgstyle" src="{{ s.image.url }}" alt="">
+                    <!-- Price -->
+                    <div class="price-start">
+                        <p>{{ s.score }}</p>
+                    </div>
+                    <div class="feature-content d-flex align-items-center justify-content-between">
+                        <div class="feature-title">
+
+                            <h5>{{ s.title }}</h5>
+                            <p><i class="fa fa-phone" aria-hidden="true"></i>.
+                                {{ s.date }}
+                            </p>
+                        </div>
+                        <div class="feature-favourite">
+                            <a href="{% url 'tourism_routes-show' s.id %}"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

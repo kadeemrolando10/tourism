@@ -33,55 +33,48 @@
                         {% for d in destinations %}
                         <table class="table table-bordered">
                             <thead>
-                            <tr>
-                                <th class="table-warning" colspan="6" scope="col" style="text-align:center;">{{d.title}}
-                                </th>
-                            </tr>
-
-                            <tr class="table-info" style="text-align:center;">
-                                <th scope="col">Buses</th>
-                                <th colspan="3" width="55%" scope="col">Servicios</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col"></th>
-                            </tr>
+                                <tr>
+                                    <th class="th_violet center1" colspan="6">{{d.title}}</th>
+                                </tr>
+                                <tr class="th_orange center1">
+                                    <th>Buses</th>
+                                    <th colspan="3">Servicios</th>
+                                    <th>Precio</th>
+                                    <th></th>
+                                </tr>
                             </thead>
-                            <tr>
-                                {% get_types_services_transport d.id as types %}
-                                {% for t in types %}
+                            <tbody>
+                            {% get_types_services_transport d.id as types %}
+                            {% for t in types %}
+                                <tr>
+                                    <td>{{ t.title }}</td>
+                                    <td  colspan="3" class="center1">
+                                        {% for s in t.service.all %}
+                                        <img class="imgp" src="{{ s.image.url }}" data-toggle="tooltip" data-placement="top"
+                                             title="{{s.title}}">
+                                        {% endfor %}
+                                    </td>
+                                    <td class="center1">{{ t.price }} Bs.</td>
+                                    <td class="center1">
+                                        <button class="btn btn-dark" type="button" data-toggle="collapse"
+                                                data-target="#{{t.id}}" aria-expanded="false"
+                                                aria-controls="collapseExample"><i class="fa fa-plus"></i>
+                                        </button>
 
-                            <tr>
-                                <td>{{ t.title }}</td>
-                                <td colspan="3" width="55%" style="text-align:center;">
-                                    {% for s in t.service.all %}
-                                    <img src="{{ s.image.url }}" data-toggle="tooltip" data-placement="top"
-                                         title="{{s.title}}" width="50px" height="50px">
-                                    {% endfor %}
-                                </td>
-                                <td style="text-align:center;">{{ t.price }} Bs.</td>
-                                <td style="text-align:center;">
-                                    <button class="btn btn-dark" type="button" data-toggle="collapse"
-                                            data-target="#{{t.id}}" aria-expanded="false"
-                                            aria-controls="collapseExample"><i class="fa fa-plus"></i>
-                                    </button>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="6">
-                                    <div class="collapse" id="{{t.id}}">
-                                        <div class="card card-body">
-                                            <table>
-                                                <tr>
-                                                    <td width="50%"><img src="{{t.image_bus.url}}" width="300px"
-                                                                         height="150px"></td>
-                                                    <td width="50%"><img src="{{t.image_seat.url}}" width="300px"
-                                                                         height="150px"></td>
-                                                </tr>
-                                            </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  colspan="6">
+                                        <div class="collapse" id="{{t.id}}">
+                                            <div class="card card-body">
+                                                <div class="row">
+                                                        <img src="{{t.image_bus.url}}" class="col-6 img_transport">
+                                                        <img src="{{t.image_seat.url}}" class="col-6 img_transport">
+                                                   </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             {% endfor %}
                             </tbody>
                         </table>
@@ -90,11 +83,10 @@
                     </div>
                     <div class="listing-menu-area mt-100" id="lomap">
                         <h4>Ubicacion en mapa</h4>
-                        <div class="location-map">
-                            <iframe src="{{ transport.location }}" width="100%" height="400" frameborder="5"
-                                    allowfullscreen="">
-                            </iframe>
-
+                        <div class="location-map" onload="initialize()">
+                            <div class="white-box">
+                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +98,7 @@
                     <div class="opening-hours-widget mt-50">
                         <h6>Informacion</h6>
                         <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ transport.rating }}</p></li>
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ transport.score }}</p></li>
                             <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ transport.phone }}</p></li>
                             <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ transport.web }}</p></li>
                         </ul>
@@ -115,10 +107,10 @@
                     <div class="opening-hours-widget mt-50">
                         <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours">
-                            {% for q in transport.schedule.all %}
+                            {% for q in schedule %}
                             <li>
-                                <p>{{q.day}}</p>
-                                <p>{{q.description}}</p>
+                                <p>{% get_days q.day%}</p>
+                                <p>{{q.schedule}}</p>
                             </li>
                             {% endfor %}
                         </ul>
@@ -133,27 +125,38 @@
 {% endblock %}
 
 {% block js_code %}
-<script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ transport.lat }}';
+        var lng = '{{ transport.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
 
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
 
+        window.onload = function () {
+            initialize()
+        };
 
-
-
-
-
-
-
-
-
-
-
-
-
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
 
 
 </script>
 {% endblock %}
+

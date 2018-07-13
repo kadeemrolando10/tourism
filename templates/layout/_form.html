@@ -1,0 +1,52 @@
+{% extends 'layout/base.html' %}
+
+{% block layout %}
+    <div class="white-box">
+        <form method="post" action="" class="form-horizontal">
+            {% csrf_token %}
+            {% block cuerpo_formulario %}
+                {% for field in form %}
+
+                    <div class="form-group {{ field.name }} {% if field.errors %}has-error{% endif %}">
+
+                        <label class="control-label col-sm-3" for="{{ field.auto_id }}">
+                            {{ field.label }}
+                            {% if field.field.required %}<span class="special_class">*</span>{% endif %}
+                        </label>
+
+                        <div class="col-sm-9">
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                            <span class="message-help-block"></span>
+                        </div>
+
+                        {% if field.help_text %}
+                            <span class="help-block">{{ field.help_text }}</span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endblock %}
+            <div class="form-group m-b-0">
+                <div class="col-lg-9 col-lg-offset-3">
+                    <button type="submit" class="btn btn-info waves-effect waves-light">
+                        {% block submit %}
+                            Guardar
+                        {% endblock %}
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    {% block script_aux %}
+
+    {% endblock %}
+{% endblock %}
+
+
+{% block information %}
+
+{% endblock %}

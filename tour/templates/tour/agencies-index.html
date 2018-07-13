@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load utils %}
+
+{% block content %}
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay"
+     style="background-image: url({% static 'img/bg-img/hero-23.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+<!-- ***** Features Events Area Start ***** -->
+<section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-0-50"
+         style="background-image: url({% static 'img/bg-img/wp-1489485631735.jpg' %})">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <span></span>
+                    <h4>Agencias de Turismo</h4>
+                    <p>Donde ir a visitar ?</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for agency in agencies %}
+            <div class="col-12 col-md-5 col-lg-5">
+                <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig"
+                     data-wow-delay="0.2s">
+                    <div class="feature-events-thumb">
+                        <img class="imgstyle" src="{{ agency.image.url }}" alt="">
+                        <div class="date-map-area d-flex">
+                            <a href="#">{{agency.score}}</a>
+                        </div>
+                    </div>
+                    <div class="feature-events-content">
+                        <h5>{{agency.title}}</h5>
+                        <h6>Potosi</h6>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i>. {{ agency.address }}</p>
+                        <p><i class="fa fa-phone" aria-hidden="true"></i>. {{ agency.phone }}</p>
+                    </div>
+                    <div class="feature-events-details-btn">
+                        <a href="{% url 'agencies-show' agency.id %}"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- ***** Features Events Area End ***** -->
+{% endblock %}

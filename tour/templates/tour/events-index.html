@@ -40,9 +40,9 @@
                                  style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                                 {% is_image event.file as r %}
                                 {% if  r %}
-                                <img src="{{ event.file.url }}" alt="">
+                                <img class="imgstyle" src="{{ event.file.url }}" alt="">
                                 {% else %}
-                                 <video width="100%" controls poster preload>
+                                 <video class="imgstyle" controls poster preload>
                                     <source src="{{ event.file.url }}">
                                 </video>
                                 {% endif %}

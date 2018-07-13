@@ -25,32 +25,25 @@
 
         <div class="row">
             {% for d in destiny %}
-            {% get_type_tourism_site d.id as types %}
-            {% if types %}
             <div class="col-12 text-center section-heading">
                 <h4>{{d.title}}</h4>
             </div>
-            {% endif %}
 
-            {% for t in types %}
-            {% get_tourism_site t.id as sites %}
+            {% get_tourism_site d.id as sites %}
             {% if sites %}
-            <div class="col-12 text-center section-heading">
-                <h4>{{t.title}}</h4>
-            </div>
-
             <div class="col-12 col-lg-6">
                 <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig"
                      data-wow-delay="0.2s">
                     {% for s in sites %}
                     <div class="feature-events-thumb">
-                        <img src="{{ s.image.url }}" alt="">
+                        <img class="imgstyle" src="{{ s.image.url }}" alt="">
                         <div class="date-map-area d-flex">
-                            <a href="#">{{s.rating}}</a>
+                            <a href="#">{{s.score}}</a>
                         </div>
                     </div>
                     <div class="feature-events-content">
                         <h5>{{s.title}}</h5>
+                        <h6>{{s.type}}</h6>
                         <h6>Potosi</h6>
                         <p><i class="fa fa-envelope" aria-hidden="true"></i>. {{ s.address }}</p>
                         <p><i class="fa fa-phone" aria-hidden="true"></i>. {{ s.phone }}</p>
@@ -62,7 +55,6 @@
                 </div>
             </div>
             {% endif %}
-            {% endfor %}
             {% endfor %}
         </div>
     </div>

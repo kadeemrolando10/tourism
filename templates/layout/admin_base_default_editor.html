@@ -1,0 +1,25 @@
+{% extends 'layout/admin_base.html' %}
+{% load static %}
+{% block content_body %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    {% block layout_header %}
+                    {% endblock %}
+                </div>
+                <div class="card-content">
+                    {% block layout %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_css %}
+{% endblock %}
+
+{% block custom_js %}
+    {{ form.media }}
+{% endblock %}

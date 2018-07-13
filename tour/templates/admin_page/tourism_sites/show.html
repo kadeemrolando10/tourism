@@ -1,0 +1,73 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+
+{% block content-header %}
+    <a href="{% url 'tourism_sites-index-admin'%}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+        class="fa fa-arrow-circle-left"></i></a>Mostrando Sitios Turisticos
+    <h6 class="title_main">{{destiny_title}}</h6>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name site_obj 'title' %}</strong> {{ site.title }}</p>
+        <p><strong>{% get_field_name site_obj 'address' %}</strong> {{ site.address }}</p>
+        <p><strong>{% get_field_name site_obj 'phone' %}</strong> {{ site.phone }}</p>
+        <p><strong>{% get_field_name site_obj 'score' %}</strong> {{ site.score }}</p>
+        <p><strong>{% get_field_name site_obj 'web' %}</strong> {{ site.web }}</p>
+        <p><strong>{% get_field_name site_obj 'lat' %}</strong> {{ site.lat }}</p>
+        <p><strong>{% get_field_name site_obj 'lng' %}</strong> {{ site.lng }}</p>
+        <p><strong>{% get_field_name site_obj 'published_date' %}</strong> {{ site.published_date }}</p>
+        <hr>
+        <p>
+            {% url 'tourism_sites-menus-index-admin' as view_url %}
+            {% include 'partials/actions/menu.html' with type='button' url=view_url title='Ir a Menu' %}
+        </p>
+        <p>
+            {% url 'tourism_sites-schedules-index-admin' as view_url %}
+            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
+        </p>
+    </div>
+    <div class="col-md-8 box-body" onload="initialize()">
+        <div class="white-box">
+             <p><strong>Ubicacion</strong></p>
+            <div id="gmap" class="map"></div>
+        </div>
+        <div class="white-box">
+            <p><strong>{% get_field_name site_obj 'image' %}</strong></p>
+            <img src="{{ site.image.url }}">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+    {% include 'partials/_url_gmaps.html' %}
+    <script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ site.lat }}';
+        var lng = '{{ site.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 16,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+    </script>
+{% endblock %}

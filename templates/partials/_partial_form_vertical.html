@@ -1,0 +1,35 @@
+<form id="{{ id_form }}" method="post" action="{{ url_form }}" novalidate enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for field in form %}
+
+        <div class="form-group {{ field.name }} {% if field.errors %}has-error{% endif %}">
+
+            <label for="{{ field.auto_id }}">
+                {{ field.label }}
+                {% if field.field.required %}<span class="special_class">*</span>{% endif %}
+            </label>
+            {{ field }}
+            {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+            {% endfor %}
+            <span class="message-help-block"></span>
+
+            {% if field.help_text %}
+                <span class="help-block">{{ field.help_text }}</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div class="text-right">
+        {% if hidden_submit != 'true' %}
+            <button class="btn btn-info waves-effect waves-light">
+                {% if btn_title %}
+                    {{ btn_title }}
+                {% else %}
+                    Guardar
+                {% endif %}
+            </button>
+        {% endif %}
+    </div>
+
+</form>

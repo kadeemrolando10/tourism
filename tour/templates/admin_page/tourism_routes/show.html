@@ -1,0 +1,92 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+{% load static %}
+
+{% block content-header %}
+<a href="{% url 'tourism_routes-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+        class="fa fa-arrow-circle-left"></i></a> Mostrando Rutas Turisticas
+ <h6 class="title_main">{{destiny_title}}</h6>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name route_obj 'title' %}</strong> {{ route.title }}</p>
+        <p><strong>{% get_field_name route_obj 'description' %}</strong> {{ route.description }}</p>
+        <p><strong>{% get_field_name route_obj 'date' %}</strong> {{ route.date }}</p>
+        <p><strong>{% get_field_name route_obj 'score' %}</strong> {{ route.score }}</p>
+        <p><strong>{% get_field_name route_obj 'lat_origin' %}</strong> {{ route.lat_origin }}</p>
+        <p><strong>{% get_field_name route_obj 'lng_origin' %}</strong> {{ route.lng_origin }}</p>
+        <p><strong>{% get_field_name route_obj 'lat_destination' %}</strong> {{ route.lat_destination }}</p>
+        <p><strong>{% get_field_name route_obj 'lng_destination' %}</strong> {{ route.lng_destination }}</p>
+        <p><strong>{% get_field_name route_obj 'published_date' %}</strong> {{ route.published_date }}</p>
+        <hr>
+        <p>
+            {% url 'tourism_routes-menus-index-admin' as view_url %}
+            {% include 'partials/actions/menu.html' with type='button' url=view_url title='Ir a Menu' %}
+        </p>
+    </div>
+    <div class="col-md-8 box box-body" onload="initialize()">
+        <div class="white-box">
+             <p><strong>Ubicacion</strong></p>
+            <div id="gmap" class="map"></div>
+        </div><br>
+        <div class="white-box">
+             <p><strong>{% get_field_name route_obj 'image' %}</strong></p>
+             <img src="{{ route.image.url }}">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+    {% include 'partials/_url_gmaps.html' %}
+    <script src="{% static 'assets/vendor_components/gmaps/gmaps.min.js' %}"></script>
+<script type="text/javascript">
+        var map;
+        var lat_or = '{{ route.lat_origin }}';
+        var lng_or = '{{ route.lng_origin }}';
+        var lat_des = '{{ route.lat_destination }}';
+        var lng_des = '{{ route.lng_destination }}';
+        function initialize() {
+            map = new GMaps({
+                el: '#gmap',
+                lat: lat_or,
+                lng: lng_or,
+                zoom : 10,
+              });
+            map.addMarker({
+                lat: lat_or,
+                lng: lng_or,
+                title: 'Marker with InfoWindow',
+                infoWindow: {
+                  content: '<h6>Partida</h6>'
+                }
+            });
+            map.addMarker({
+                lat: lat_des,
+                lng: lng_des,
+                title: 'Marker with InfoWindow',
+                infoWindow: {
+                  content: '<h6>LLegada</h6>'
+                }
+            });
+            map.drawRoute({
+                origin: [lat_or, lng_or ],
+                destination: [lat_des, lng_des],
+                travelMode: 'walking',
+                strokeColor: '#000',
+                strokeOpacity: 0.6,
+                strokeWeight: 6
+              });
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+
+</script>
+{% endblock %}

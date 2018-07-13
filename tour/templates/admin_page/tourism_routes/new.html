@@ -1,0 +1,104 @@
+{% extends 'admin.html' %}
+
+{% block content-header %}
+<a href="{% url 'tourism_routes-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
+    <i class="fa fa-arrow-circle-left"></i></a> Agregando Rutas Turisticas
+ <h6 class="title_main">{{destiny_title}}</h6>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h6>Ubicacion Origen</h6>
+                    <div id="gmaplocation" class="map"></div>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <div class="white-box">
+                     <h6>Ubicacion Destino</h6>
+                    <div id="gmaplocation2" class="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var map2;
+        var markers = [];
+        var markers2 = [];
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(-19.5874135,-65.7624432);
+            var myOptions = {
+                zoom: 16,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+
+            map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
+            google.maps.event.addListener(map, "click", function (event) {
+                // get lat/lon of click
+                var clickLat = event.latLng.lat();
+                var clickLon = event.latLng.lng();
+
+                // show in input box
+                document.getElementById("id_lat_origin").value = clickLat;
+                document.getElementById("id_lng_origin").value = clickLon;
+                clearMapOnAll(null);
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(clickLat, clickLon),
+                    map: map
+                });
+                markers.push(marker)
+            });
+
+            map2 = new google.maps.Map(document.getElementById("gmaplocation2"), myOptions);
+            google.maps.event.addListener(map2, "click", function (event) {
+                // get lat/lon of click
+                var clickLat2 = event.latLng.lat();
+                var clickLon2 = event.latLng.lng();
+
+                // show in input box
+                document.getElementById("id_lat_destination").value = clickLat2;
+                document.getElementById("id_lng_destination").value = clickLon2;
+                clearMapOnAll2(null);
+
+                var marker2 = new google.maps.Marker({
+                    position: new google.maps.LatLng(clickLat2, clickLon2),
+                    map: map2
+                });
+                markers2.push(marker2)
+            });
+        }
+        function clearMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        function clearMapOnAll2(map2) {
+            for (var i = 0; i < markers2.length; i++) {
+                markers2[i].setMap(map2);
+            }
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+
+</script>
+{% endblock %}

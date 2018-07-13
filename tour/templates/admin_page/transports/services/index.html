@@ -1,0 +1,65 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+{% load static %}
+
+{% block content-header %}
+    <h6>Servicios de Transporte</h6>
+    {% url 'transports-services-new-admin' as view_url %}
+    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+{% endblock %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th data-field="image" data-sortable="true">{% get_field_name service_obj 'image' %}</th>
+            <th data-field="title" data-sortable="true">{% get_field_name service_obj 'title' %}</th>
+            <th data-field="published_date" data-sortable="true">{% get_field_name service_obj 'published_date' %}</th>
+            <th class="text-center">Opciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for service in services %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><img src="{{ service.image.url }}"></td>
+            <td>{{ service.title }}</td>
+            <td>{{ service.published_date }}</td>
+            <td class="text-center">
+                {% url 'transports-services-edit-admin' service.id as edit_url %}
+                {% include 'partials/actions/edit.html' with url=edit_url %}
+                {% url 'transports-services-delete-admin' service.id as delete_url %}
+                {% include 'partials/actions/delete.html' with url=delete_url %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block code_js %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-tooltip="tooltip"]').tooltip();
+            $('[title]').tooltip();
+
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+
+                var title = $(e.relatedTarget).data('title');
+                var message = $(e.relatedTarget).data('message');
+
+                if (title !== undefined)
+                    $(this).find('.modal-header').html(title);
+                if (message !== undefined)
+                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+        })
+
+</script>
+{% endblock %}

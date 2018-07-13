@@ -1,0 +1,57 @@
+<form method="post" action="{{ url_form }}" class="form-horizontal" novalidate enctype="multipart/form-data">
+    {% csrf_token %}
+    {% block cuerpo_formulario %}
+        {% for field in form %}
+
+            <div class="form-group {{ field.name }} {% if field.errors %}has-error{% endif %}">
+                <label class="control-label col-sm-3" for="{{ field.auto_id }}">
+                    {{ field.label }}
+                </label>
+
+                <div class="col-sm-9">
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                    <span class="message-help-block"></span>
+                </div>
+
+                {% if field.help_text %}
+                    <span class="help-block">{{ field.help_text }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% for field in form_second %}
+
+            <div class="form-group {{ field.name }} {% if field.errors %}has-error{% endif %}">
+
+                <label class="control-label col-sm-3" for="{{ field.auto_id }}">
+                    {{ field.label }}
+                </label>
+
+                <div class="col-sm-9">
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                    <span class="message-help-block"></span>
+                    {% if field.help_text %}
+                        <span class="help-block">{{ field.help_text|safe }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+    <div class="form-group m-b-0">
+        <div class="col-lg-9 col-lg-offset-3 text-right">
+            <button type="submit" class="btn btn-info waves-effect waves-light">
+                {% if btn_title %}
+                    {{ btn_title }}
+                {% else %}
+                    Guardar
+                {% endif %}
+            </button>
+        </div>
+    </div>
+
+</form>

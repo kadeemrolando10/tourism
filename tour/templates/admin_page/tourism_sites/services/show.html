@@ -1,0 +1,24 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+
+{% block content-header %}
+<a href="{% url 'agencies-services-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
+    <i class="fa fa-arrow-circle-left"></i></a> Mostrando Servicios de Agencias
+<br>
+<h6 class="title_main">{{agency_title}}</h6>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7 box box-body">
+        <p><strong>{% get_field_name service_obj 'title' %}</strong> {{ service.title }}</p>
+        <p><strong>{% get_field_name service_obj 'duration' %}</strong> {{ service.duration }}</p>
+        <p><strong>{% get_field_name service_obj 'departures' %}</strong> {{ service.departures }}</p>
+        <p><strong>{% get_field_name service_obj 'schedule' %}</strong> {{ service.schedule }}</p>
+        <p><strong>{% get_field_name service_obj 'place_start' %}</strong> {{ service.place_start }}</p>
+        <p><strong>{% get_field_name service_obj 'places_to_known' %}</strong> {{ service.places_to_known }}</p>
+        <p><strong>{% get_field_name service_obj 'published_date' %}</strong> {{ service.published_date }}</p>
+    </div>
+</div>
+{% endblock %}

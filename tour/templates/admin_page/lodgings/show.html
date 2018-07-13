@@ -1,0 +1,75 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+
+{% block content-header %}
+<a href="{% url 'lodgings-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+        class="fa fa-arrow-circle-left"></i></a> Mostrando Hospedajes
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name lodging_obj 'title' %}</strong> {{ lodging.title }}</p>
+        <p><strong>{% get_field_name lodging_obj 'address' %}</strong> {{ lodging.address }}</p>
+        <p><strong>{% get_field_name lodging_obj 'phone' %}</strong> {{ lodging.phone }}</p>
+        <p><strong>{% get_field_name lodging_obj 'score' %}</strong> {{ lodging.score }}</p>
+        <p><strong>{% get_field_name lodging_obj 'web' %}</strong> {{ lodging.web }}</p>
+        <p><strong>{% get_field_name lodging_obj 'lat' %}</strong> {{ lodging.lat }}</p>
+        <p><strong>{% get_field_name lodging_obj 'lng' %}</strong> {{ lodging.lng }}</p>
+        <p><strong>{% get_field_name lodging_obj 'service' %}</strong><br> {% for s in lodging.service.all %}{{s.title}}<br>{% endfor %}</p>
+        <p><strong>{% get_field_name lodging_obj 'published_date' %}</strong> {{ lodging.published_date }}</p>
+         <hr>
+        <p>
+            {% url 'lodgings-room-index-admin' as room_url %}
+            {% include 'partials/actions/room.html' with type='button' url=room_url title='Ir a Habitaciones' %}
+        </p>
+        <p>
+            {% url 'lodgings-schedules-index-admin' as view_url %}
+            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
+        </p>
+    </div>
+    <div class="col-md-8 box box-body" onload="initialize()">
+        <div class="white-box">
+            <p><strong>Ubicacion</strong></p>
+            <div id="gmap" class="map"></div>
+        </div>
+        <br>
+        <div class="white-box">
+            <p><strong>{% get_field_name lodging_obj 'image' %}</strong></p>
+            <img src="{{ lodging.image.url }}">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ lodging.lat }}';
+        var lng = '{{ lodging.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 16,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+
+</script>
+{% endblock %}

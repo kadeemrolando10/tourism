@@ -1,0 +1,69 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+{% load static %}
+
+{% block content-header %}
+<h6>Agencias</h6>
+    {% url 'agencies-new-admin' as view_url %}
+    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+{% endblock %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th data-field="title" data-sortable="true">{% get_field_name agency_obj 'title' %}</th>
+            <th data-field="address" data-sortable="true">{% get_field_name agency_obj 'address' %}</th>
+            <th data-field="phone" data-sortable="true">{% get_field_name agency_obj 'phone' %}</th>
+            <th data-field="description" data-sortable="true">{% get_field_name agency_obj 'score' %}</th>
+            <th class="text-center">Opciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for agency in agencies %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ agency.title }}</td>
+            <td>{{ agency.address }}</td>
+            <td>{{ agency.phone }}</td>
+            <td>{{ agency.score }}</td>
+            <td class="text-center">
+                {% url 'agencies-show-admin' agency.id as view_url %}
+                {% include 'partials/actions/view.html' with url=view_url %}
+                {% url 'agencies-edit-admin' agency.id as edit_url %}
+                {% include 'partials/actions/edit.html' with url=edit_url %}
+                {% url 'agencies-delete-admin' agency.id as delete_url %}
+                {% include 'partials/actions/delete.html' with url=delete_url %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block code_js %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-tooltip="tooltip"]').tooltip();
+            $('[title]').tooltip();
+
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+
+                var title = $(e.relatedTarget).data('title');
+                var message = $(e.relatedTarget).data('message');
+
+                if (title !== undefined)
+                    $(this).find('.modal-header').html(title);
+                if (message !== undefined)
+                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+        })
+
+</script>
+{% endblock %}

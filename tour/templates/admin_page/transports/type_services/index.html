@@ -1,0 +1,74 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+{% load static %}
+
+{% block content-header %}
+<a href="{% url 'transports-destination-show-admin' destination_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+        class="fa fa-arrow-circle-left"></i></a> Tipos de Servicios de Transporte
+    <h6 class="title_main">{{transport_title}}</h6>
+    <h6 class="title_main">{{destination_title}}</h6>
+    {% url 'transports-type-services-new-admin' as view_url %}
+    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+{% endblock %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th data-field="title" data-sortable="true">{% get_field_name type_service_obj 'title' %}</th>
+            <th data-field="price" data-sortable="true">{% get_field_name type_service_obj 'price' %}</th>
+            <th data-field="service" data-sortable="true">{% get_field_name type_service_obj 'service' %}</th>
+            <th data-field="image_bus" data-sortable="true">{% get_field_name type_service_obj 'image_bus' %}</th>
+            <th data-field="image_seat" data-sortable="true">{% get_field_name type_service_obj 'image_seat' %}</th>
+            <th data-field="published_date" data-sortable="true">{% get_field_name type_service_obj 'published_date' %}</th>
+            <th class="text-center">Opciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for type_service in type_services %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ type_service.title }}</td>
+            <td>{{ type_service.price }}</td>
+            <td>{% for s in type_service.service.all %}-{{s.title}}<br>{% endfor %}</td>
+            <td><img src="{{ type_service.image_bus.url }}" width="800px" height="100"></td>
+            <td><img src="{{ type_service.image_seat.url }}" width="800px" height="100"></td>
+            <td>{{ type_service.published_date }}</td>
+            <td class="text-center">
+                {% url 'transports-type-services-edit-admin' type_service.id as edit_url %}
+                {% include 'partials/actions/edit.html' with url=edit_url %}
+                {% url 'transports-type-services-delete-admin' type_service.id as delete_url %}
+                {% include 'partials/actions/delete.html' with url=delete_url %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block code_js %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-tooltip="tooltip"]').tooltip();
+            $('[title]').tooltip();
+
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+
+                var title = $(e.relatedTarget).data('title');
+                var message = $(e.relatedTarget).data('message');
+
+                if (title !== undefined)
+                    $(this).find('.modal-header').html(title);
+                if (message !== undefined)
+                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+        })
+
+</script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+
+{% block content-header %}
+<a href="{% url 'events-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+        class="fa fa-arrow-circle-left"></i></a> Mostrando Eventos
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name event_obj 'title' %}</strong> {{ event.title }}</p>
+        <p><strong>{% get_field_name event_obj 'description' %}</strong> {{ event.description }}</p>
+        <p><strong>{% get_field_name event_obj 'event_date' %}</strong> {{ event.event_date }}</p>
+        <p><strong>{% get_field_name event_obj 'lat' %}</strong> {{ event.lat }}</p>
+        <p><strong>{% get_field_name event_obj 'lng' %}</strong> {{ event.lng }}</p>
+        <p><strong>{% get_field_name event_obj 'published_date' %}</strong> {{ event.published_date }}</p>
+    </div>
+    <div class="col-md-8 box box-body" onload="initialize()">
+        <div class="white-box">
+            <p><strong>Ubicacion</strong></p>
+            <div id="gmap" class="map"></div>
+        </div><br>
+        <div class="white-box">
+            <p><strong>{% get_field_name event_obj 'file' %}</strong></p>
+            {% is_image event.file as r %}
+                {% if  r %}
+                <img class="imgstyle" src="{{ event.file.url }}" alt="">
+                {% else %}
+                 <video class="imgstyle" controls poster preload>
+                    <source src="{{ event.file.url }}">
+                </video>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ event.lat }}';
+        var lng = '{{ event.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 16,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+
+</script>
+{% endblock %}

@@ -8,12 +8,13 @@
     .dorne-search-btn > a,
     .dorne-signin-btn > a {
         margin-right: 15px;
-        font-size: 14px;
+        font-size: 12px;
     }
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 7px;
         padding-left: 7px;
-        font-size: 14px;
+        padding-bottom: 7px;
+        font-size: 12px;
     }
     .hero-content h2 {
         font-size: 50px;
@@ -141,6 +142,12 @@
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
+    .imgp {
+        height: 25px;
+        widht: 25px;
+        border-radius: 25px;
+    }
+
     .header_area {
         padding: 0;
     }
@@ -285,7 +292,7 @@
         padding: 0 20px;
     }
     .single-listing-nav li a {
-        padding: 30px 5px;
+        padding: 8px 5px;
         font-size: 12px;
     }
     .contact-form-area,
@@ -317,7 +324,7 @@
         padding: 0 30px;
     }
     .single-listing-nav li a {
-        padding: 30px 10px;
+        padding: 8px 10px;
         font-size: 14px;
     }
 }

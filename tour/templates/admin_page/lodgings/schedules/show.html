@@ -1,0 +1,19 @@
+{% extends 'admin.html' %}
+{% load utils %}
+
+{% block content-header %}
+<a href="{% url 'agencies-schedules-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
+    <i class="fa fa-arrow-circle-left"></i></a> Mostrando Horarios de Agencias
+<br>
+<h6 class="title_main">{{lodging_title}}</h6>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7 box box-body">
+        <p><strong>{% get_field_name schedule_obj 'day' %}</strong>{% get_days schedule.day %}</p>
+        <p><strong>{% get_field_name schedule_obj 'schedule' %}</strong> {{ schedule.schedule }}</p>
+        <p><strong>{% get_field_name schedule_obj 'published_date' %}</strong> {{ schedule.published_date }}</p>
+    </div>
+</div>
+{% endblock %}

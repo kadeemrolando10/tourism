@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block css %}
+    {% endblock %}
+    {% block custom_css %}
+    {% endblock %}
+</head>
+
+<body>
+{% block content_main %}
+    <div class="wrapper">
+        {% block header %}
+            {% include 'partials/_header_sidebar.html' %}
+        {% endblock %}
+
+        <div class="main-panel">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-minimize">
+                        <button id="minimizeSidebar" class="btn btn-fill btn-icon">
+                            <i class="ti-more-alt"></i>
+                        </button>
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar bar1"></span>
+                            <span class="icon-bar bar2"></span>
+                            <span class="icon-bar bar3"></span>
+                        </button>
+                        <span class="navbar-brand">
+                        {% block title_main %}
+                        {% endblock %}
+                        </span>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{% url 'log_out' %}" class="waves-effect"><i class="icon-logout fa-fw"></i>
+                                    <span class="hide-menu">Salir</span></a>
+                            </li>
+                            <li class="separator hidden-lg hidden-md"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            {% block content_body %}
+                <div class="content">
+                    <div class="container-fluid">
+                        {% block layout %}
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+{% include 'partials/_modal_delete.html' %}
+</body>
+{% block js %}
+{% endblock %}
+{% include 'layout/_messages.html' %}
+
+{% block custom_js %}
+{% endblock %}
+
+{% block code_js %}
+{% endblock %}
+</html>

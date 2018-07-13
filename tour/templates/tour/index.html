@@ -44,9 +44,9 @@
                 <div class="all-catagories">
                     <div class="row">
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md" >
+                        <div class=" col-12 col-sm-6 col-md " >
                             <a href="{% url 'lodging-index' %}">
-                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
                                     <div class="catagory-content">
                                         <img src="{% static 'img/core-img/hotel.png' %}" alt="">
                                         <h6>Hospedajes</h6>
@@ -57,7 +57,7 @@
                         <!-- Single Catagory Area -->
                         <div class="col-12 col-sm-6 col-md">
                             <a href="{% url 'restaurants-index' %}">
-                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.4s">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.4s">
                                     <div class="catagory-content">
                                         <img src="{% static 'img/core-img/restaurant.png' %}" alt="">
                                         <h6>Restaurantes</h6>
@@ -66,22 +66,20 @@
                             </a>
                         </div>
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md">
+                        <div class="col-12 col-sm-6 col-md ">
                             <a href="{% url 'transports-index' %}">
-                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.6s">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.6s">
                                     <div class="catagory-content">
                                         <img src="{% static 'img/core-img/transporte.png' %}" alt="">
-
                                         <h6>Transportes</h6>
-
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md">
-                            <a href="{% url 'agencys-index' %}">
-                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.8s">
+                        <div class="col-12 col-sm-6 col-md ">
+                            <a href="{% url 'agencies-index' %}">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.8s">
                                     <div class="catagory-content">
                                         <img src="{% static 'img/core-img/agencia.png'%}" alt="">
                                         <h6>Agencias de Turismo</h6>
@@ -91,9 +89,9 @@
                             </a>
                         </div>
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-md">
+                        <div class="col-12 col-sm-6 col-md ">
                             <a href="{% url 'tourism_sites-index' %}">
-                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
                                     <div class="catagory-content">
                                         <img src="{% static 'img/core-img/sitios.png' %}" alt="">
                                         <h6>Sitios Turisticos</h6>
@@ -124,7 +122,7 @@
 <!-- ***** About Area End ***** -->
 
 <section class="dorne-editors-pick-area bg-img bg-overlay-9 section-padding-100"
-         style="background-image: url({% static 'img/bg-img/hero-2.jpg' %});">
+         style="background-color:#30c0a3;">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -139,7 +137,7 @@
         <div class="row">
             <div class="col-12 col-lg-6">
                 <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s">
-                    <img src="{% static 'img/bg-img/uyuni.jpg' %}" alt="">
+                    <img class="imgstyle" src="{% static 'img/bg-img/uyuni.jpg' %}" alt="">
                     <div class="editors-pick-info">
                         <div class="places-total-destinations d-flex">
                             <a href="#">Uyuni</a>
@@ -153,7 +151,7 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.4s">
-                    <img src="{% static 'img/bg-img/potosi.jpg' %}" alt="">
+                    <img class="imgstyle" src="{% static 'img/bg-img/potosi.jpg' %}" alt="">
                     <div class="editors-pick-info">
                         <div class="places-total-destinations d-flex">
                             <a href="#">Potosi</a>
@@ -165,7 +163,7 @@
                     </div>
                 </div>
                 <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.6s">
-                    <img src="{% static 'img/bg-img/tupiza.jpg' %}" alt="">
+                    <img class="imgstyle" src="{% static 'img/bg-img/tupiza.jpg' %}" alt="">
                     <div class="editors-pick-info">
                         <div class="places-total-destinations d-flex">
                             <a href="#">Tupiza</a>
@@ -199,12 +197,12 @@
             <div class="col-12">
                 <div class="features-slides owl-carousel">
                     {% for r in lodging %}
-                    <div class="single-features-area">
+                    <div class=" single-features-area">
                         <a href="{% url 'lodging-show' r.id %}">
-                            <img src="{{ r.image.url }}" alt="">
+                            <img class="imgstyle" src="{{ r.image.url }}" alt="">
                             <!-- Price -->
                             <div class="price-start">
-                                <p>{{r.rating}}</p>
+                                <p>{{r.score}}</p>
                             </div>
                             <div class="feature-content d-flex align-items-center justify-content-between">
                                 <div class="feature-title">
@@ -243,10 +241,10 @@
                     {% for l in restaurants %}
                     <div class="single-features-area">
                         <a href="{% url 'restaurants-show' l.id %}">
-                            <img src="{{ l.image.url }}" alt="">
+                            <img class="imgstyle" src="{{ l.image.url }}" alt="">
                             <!-- Rating & Map Area -->
                             <div class="ratings-map-area d-flex">
-                                <span class="alert alert-dark">{{l.rating}}</span>
+                                <span class="alert alert-dark">{{l.score}}</span>
                             </div>
                             <div class="feature-content d-flex align-items-center justify-content-between">
                                 <div class="feature-title">
@@ -270,7 +268,7 @@
 <!-- ***** Features Restaurant Area End ***** -->
 <!-- ***** Features Events Area Start ***** -->
 <section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-100-50"
-         style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})">
+         style="background-image: url({% static 'img/bg-img/maxresdefault.jpg' %})">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -291,7 +289,7 @@
                             <div class="feature-title">
                                 <h5>{{t.title}}</h5>
                             </div>
-                            <img src="{{ t.image.url }}" alt="">
+                            <img class="imgstyle" src="{{ t.image.url }}" alt="">
                             <div class="feature-content d-flex align-items-center justify-content-between">
                                 <div class="feature-title">
                                     {% get_destiny_transport t.id as destiny %}

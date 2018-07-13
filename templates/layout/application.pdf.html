@@ -1,0 +1,182 @@
+{# encoding=utf-8 #}
+<!DOCType HTML>
+<html lang="es">
+<head>
+    <title>{{ title|default:"" }}</title>
+    <style>
+        @page {
+            size: {{ pagesize|default:"A4" }};
+            margin-left: 1cm;
+            margin-top: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 1cm;
+            @frame header {
+        -pdf-frame-content:header-content;
+            margin-top: 1cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+        }
+        @frame footer {
+        -pdf-frame-content:page-footer;
+        bottom: 0cm;
+        margin-left: 1cm;
+        margin-right: 1cm;
+        height: 1cm;
+        }
+        }
+
+        .text-center {
+            text-align: center;
+            vertical-align: top;
+        }
+        .text-right {
+            text-align: right;
+            vertical-align: top;
+        }
+
+        table {
+            max-width: 100%;
+            background-color: transparent;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        table .black{
+            background-color: #000000;
+            color: white;
+        }
+
+        table.border-none {
+            border: none;
+        }
+
+        .table th, .table td {
+            padding: 2px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        td.border-left {
+            border-left: 1px solid #000000;
+        }
+
+        td.border-right {
+            border-right: 1px solid #000000;
+        }
+
+        td.border-top {
+            border-top: 1px solid #000000;
+        }
+
+        td.border-botton {
+            border-bottom: 1px solid #000000;
+        }
+
+        td.border-button-double {
+            border-bottom: 5px double black;
+        }
+        table.border td, th{
+            border: 1px solid #000000;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #000000;
+        }
+
+        .table th {
+            font-weight: bolder;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table tbody tr.success td {
+            background-color: #dff0d8;
+        }
+
+        .table-1 th, .table-1 td {
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .table td.left {
+            text-align: left;
+        }
+
+        .table td.right {
+            text-align: right;
+        }
+
+        p {
+            color: #000000;
+        }
+
+        img {
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header h2 {
+            width: 30%;
+        }
+
+        .header img {
+            width: 300px;
+            float: right;
+            position: relative;
+        }
+
+        .page-content {
+
+        }
+
+        .module-content ul {
+            padding: 0px;
+        }
+
+        .module-content li {
+            padding: 4px 2px;
+            border-bottom: 1px solid #eee;
+            line-height: 25px;
+            min-height: 25px;
+            min-width: 190px;
+            overflow: hidden;
+        }
+
+        .module-content li label {
+            width: 30%;
+            display: block;
+            float: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: normal;
+        }
+
+        .box {
+            width: 100%;
+            border: 2px solid #000000;
+
+        }
+
+    </style>
+</head>
+<body>
+<div id="header-content">
+    <header>
+    </header>
+</div>
+<div class="page-content">
+    {% block yield %}
+    {% endblock %}
+</div>
+
+<div id="page-footer">
+    {% block page_foot %}
+        <pdf:pagenumber/>
+    {% endblock %}
+</div>
+</body>
+</html>

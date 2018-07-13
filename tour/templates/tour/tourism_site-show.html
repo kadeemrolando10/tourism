@@ -55,12 +55,14 @@
                             {% get_tourism_site_menu site.id as menu %}
                             {% for m in menu %}
                             <div class="single-listing-menu justify-content-between">
-                                <!-- Listing Menu Title -->
-                                <div class="listing-menu-title">
-
-                                    <img src="{{m.image.url}}">
-                                    <h6 class="alert alert-info">{{m.title}}</h6>
-                                    <p>{{m.description}}</p>
+                                <div class="row">
+                                    <div class="col-12 col-md-5 col-lg-5">
+                                        <img class="imgstyle" src="{{m.image.url}}">
+                                    </div>
+                                    <div class="col-12 col-md-7 col-lg-7">
+                                        <h6><span class="badge badge-pill badge-info">{{m.title}}</span></h6>
+                                        <p>{{m.description}}</p>
+                                    </div>
                                 </div>
                             </div>
                             {% endfor %}
@@ -69,11 +71,10 @@
 
                     <div class="listing-menu-area mt-100" id="lomap">
                         <h4>Ubicacion en mapa</h4>
-                        <div class="location-map">
-                            <iframe src="{{ site.location }}" width="100%" height="400" frameborder="5"
-                                    allowfullscreen="">
-                            </iframe>
-
+                        <div class="location-map" onload="initialize()">
+                            <div class="white-box">
+                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +86,7 @@
                     <div class="opening-hours-widget mt-50">
                         <h6>Informacion</h6>
                         <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ site.rating }}</p></li>
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ site.score }}</p></li>
                             <li><p><i class="fa fa-crosshairs" aria-hidden="true"></i>. {{ site.address }}</p></li>
                             <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ site.phone }}</p></li>
                             <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ site.web }}</p></li>
@@ -95,10 +96,10 @@
                     <div class="opening-hours-widget mt-50">
                         <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours">
-                            {% for q in site.schedule.all %}
+                           {% for q in schedule %}
                             <li>
-                                <p>{{q.day}}</p>
-                                <p>{{q.description}}</p>
+                                <p>{% get_days q.day%}</p>
+                                <p>{{q.schedule}}</p>
                             </li>
                             {% endfor %}
                         </ul>
@@ -113,13 +114,35 @@
 {% endblock %}
 
 {% block js_code %}
-<script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ site.lat }}';
+        var lng = '{{ site.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
 
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
 
+        window.onload = function () {
+            initialize()
+        };
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
 
 </script>
 {% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load utils %}
+
+{% block content %}
+
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+
+<!-- ***** Single Listing Area Start ***** -->
+<section class="dorne-single-listing-area section-padding-0-50">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Listing Content -->
+            <div class="col-12 col-lg-8">
+                <div class="single-listing-content">
+                    <div class="listing-title">
+                        <h4>{{agency.title}}</h4>
+                        <h6>{{agency.address}}</h6>
+                    </div>
+
+                    <div class="single-listing-nav">
+                        <nav>
+                            <ul id="listingNav">
+                                <li><a href="#menu">Servicios</a></li>
+                                <li><a href="#lomap">Ubicacion en mapa</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="listing-menu-area mt-100" id="menu">
+                        <h4>Servicios</h4>
+                        <div class="location-map">
+
+                            <table class="table table-light table-responsive-sm">
+                                <tbody>
+                                {% for s in services %}
+                                <tr style="text-align:center;">
+                                    <td>{{ s.title }}</td>
+                                    <td>{{ s.duration }}</td>
+                                    <td> {{ s.departures }}</td>
+                                    <td>{{ s.schedule }}</td>
+                                    <td>{{ s.place_start }}</td>
+                                    <td>{{ s.places_to_known }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="listing-menu-area mt-100" id="lomap">
+                        <h4>Ubicacion en mapa</h4>
+                        <div class="location-map" onload="initialize()">
+                            <div class="white-box">
+                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Listing Sidebar -->
+            <div class="col-12 col-md-8 col-lg-4">
+
+                <div class="listing-sidebar">
+                    <div class="opening-hours-widget mt-50 ">
+                        <h6>Informacion</h6>
+                        <ul class="opening-hours">
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ agency.score }}</p></li>
+                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ agency.phone }}</p></li>
+                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ agency.web }}</p></li>
+                        </ul>
+                    </div>
+
+                    <div class="opening-hours-widget mt-50">
+                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <ul class="opening-hours" role="alert">
+                            {% for q in schedule %}
+                            <li>
+                                <p>{% get_days q.day%}</p>
+                                <p>{{q.schedule}}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js_code %}
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ agency.lat }}';
+        var lng = '{{ agency.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })
+
+</script>
+{% endblock %}
+

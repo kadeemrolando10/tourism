@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load static %}
+{% load utils %}
 
 {% block content %}
 
@@ -37,7 +38,7 @@
                         {% for s in restaurant.service.all %}
                         <table class="table table-light table-hover">
                             <tbody>
-                            <tr>
+                            <tr class="ser">
                                 <td width="20%" align="center" class="alert-info">
                                     <img src="{{s.image.url}}" width="40px" height="40px">
                                 </td>
@@ -49,7 +50,7 @@
                     </div>
                     <div class="listing-menu-area mt-100" id="menu">
                         <h4>MENU</h4>
-                        {% for m in restaurant.menu.all %}
+                        {% for m in menu %}
                         <div class="single-listing-menu d-flex justify-content-between">
                             <!-- Listing Menu Title -->
                             <div class="listing-menu-title">
@@ -58,18 +59,18 @@
                                 <span class="badge badge-primary">{{m.price}}Bs.</span>
                             </div>
                             <div class="listing-menu-title">
-                                <img src="{{m.image.url}}" width="300px">
+                                <img src="{{m.image.url}}" width="300px" height="150px">
                             </div>
                         </div>
                         {% endfor%}
                     </div>
 
-                    <div class="location-on-map mt-50" id="lomap">
+                    <div id="lomap">
                         <h4>Ubicacion en mapa</h4>
-                        <div class="location-map">
-                            <iframe src="{{ restaurant.location }}" width="100%" height="400" frameborder="5"
-                                    allowfullscreen="">
-                            </iframe>
+                        <div class="location-map" onload="initialize()">
+                            <div class="white-box">
+                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +83,7 @@
                     <div class="opening-hours-widget mt-50">
                         <h6>Informacion</h6>
                         <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ restaurant.rating }}</p></li>
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ restaurant.score }}</p></li>
                             <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ restaurant.phone }}</p></li>
                             <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ restaurant.web }}</p></li>
                         </ul>
@@ -91,10 +92,10 @@
                     <div class="opening-hours-widget mt-50">
                         <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours">
-                            {% for q in restaurant.schedule.all %}
+                            {% for q in schedule %}
                             <li>
-                                <p>{{q.day}}</p>
-                                <p>{{q.description}}</p>
+                                <p>{% get_days q.day%}</p>
+                                <p>{{q.schedule}}</p>
                             </li>
                             {% endfor %}
                         </ul>
@@ -108,3 +109,34 @@
 
 {% endblock %}
 
+{% block js_code %}
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ restaurant.lat }}';
+        var lng = '{{ restaurant.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+
+</script>
+{% endblock %}

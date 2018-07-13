@@ -25,9 +25,9 @@
                         <nav>
                             <ul id="listingNav">
 
-                                <li><a href="#menu">Servicios <i class="fa fa-twitch"></i></a></li>
-                                <li><a href="#room">Habitaciones <i class="fa fa-hand-lizard-o"></i></a></li>
-                                <li><a href="#lomap">Ubicacion en mapa <i class="fa fa-map-marker"></i></a></li>
+                                <li><a href="#menu">Servicios</a></li>
+                                <li><a href="#room">Habitaciones</a></li>
+                                <li><a href="#lomap">Ubicacion en mapa</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -57,13 +57,13 @@
                             <div class="single-listing-menu d-flex justify-content-between">
                                 <!-- Listing Menu Title -->
                                 <div class="listing-menu-title">
-                                     <h4><span class="badge badge-pill badge-info">{{r.title}}</span></h4>
+                                    <h5><span class="badge badge-pill badge-info">{{r.title}}</span></h5>
                                     <img src="{{r.image.url}}">
                                     <p>{{r.description}}</p>
                                 </div>
                                 <!-- Listing Menu Price -->
                                 <div class="listing-menu-price" style="align:center;">
-                                    <h4><span class="badge badge-pill badge-success">{{r.price}}Bs.</span></h4>
+                                    <h5><span class="badge badge-pill badge-success">{{r.price}}Bs.</span></h5>
                                 </div>
                             </div>
                             {% endfor %}
@@ -71,11 +71,10 @@
                     </div>
                     <div class="listing-menu-area mt-100" id="lomap">
                         <h4>Ubicacion en mapa</h4>
-                        <div class="location-map">
-                            <iframe src="{{ lodging.location }}" width="100%" height="400" frameborder="5"
-                                    allowfullscreen="">
-                            </iframe>
-
+                        <div class="location-map" onload="initialize()">
+                            <div class="white-box">
+                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,19 +86,19 @@
                     <div class="opening-hours-widget mt-50 ">
                         <h6>Informacion</h6>
                         <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ lodging.rating }}</p></li>
+                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ lodging.score }}</p></li>
                             <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ lodging.phone }}</p></li>
                             <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ lodging.web }}</p></li>
                         </ul>
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6> <i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours" role="alert">
-                            {% for q in lodging.schedule.all %}
+                            {% for q in schedule %}
                             <li>
-                                <p>{{q.day}}</p>
-                                <p>{{q.description}}</p>
+                                <p>{% get_days q.day%}</p>
+                                <p>{{q.schedule}}</p>
                             </li>
                             {% endfor %}
                         </ul>
@@ -112,10 +111,36 @@
 {% endblock %}
 
 {% block js_code %}
-<script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ lodging.lat }}';
+        var lng = '{{ lodging.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })
 </script>
 {% endblock %}
+

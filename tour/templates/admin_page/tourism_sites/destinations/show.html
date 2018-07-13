@@ -1,0 +1,21 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+
+{% block content-header %}
+<a href="{% url 'tourism_sites-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
+    <i class="fa fa-arrow-circle-left"></i></a> Mostrando Localizacion de Sitios Turisticos
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7 box box-body">
+        <p><strong>{% get_field_name destination_obj 'title' %}</strong> {{ destination.title }}</p>
+        <p><strong>{% get_field_name destination_obj 'published_date' %}</strong> {{ destination.published_date }}</p>
+        <p>
+            {% url 'tourism_sites-index-admin' as view_url %}
+            {% include 'partials/actions/types.html' with type='button' url=view_url title='Añadir' %}
+        </p>
+    </div>
+</div>
+{% endblock %}

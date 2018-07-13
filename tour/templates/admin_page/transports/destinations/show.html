@@ -1,0 +1,25 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+
+{% block content-header %}
+<a href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
+    <i class="fa fa-arrow-circle-left"></i></a> Mostrando Destino de Trransporte
+<br>
+<h6 class="title_main">{{transport_title}}</h6>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7 box box-body">
+        <p><strong>{% get_field_name destination_obj 'title' %}</strong> {{ destination.title }}</p>
+        <p><strong>{% get_field_name destination_obj 'schedules_out' %}</strong> {{ destination.schedules_out }}</p>
+        <p><strong>{% get_field_name destination_obj 'published_date' %}</strong> {{ destination.published_date }}</p>
+         <hr>
+        <p>
+            {% url 'transports-type-services-index-admin' as type_url %}
+            {% include 'partials/actions/type.html' with type='button' url=type_url title='Ir a Tipos de Servicios' %}
+        </p>
+    </div>
+</div>
+{% endblock %}

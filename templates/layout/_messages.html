@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        {% if messages %}
+            {% for message in messages %}
+                var messageType = "{% if message.tags %}{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}";
+
+                $.notify({
+                    //icon: 'ti-gift',
+                    message: "{{ message|safe }}"
+
+                }, {
+                    type: messageType,
+                    timer: 4000
+                });
+
+            {% endfor %}
+        {% endif %}
+    });
+</script>

@@ -1,0 +1,18 @@
+{% extends 'admin.html' %}
+
+{% block content-header %}
+    <a href="{% url 'lodgings-types-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
+    <i class="fa fa-arrow-circle-left"></i></a> Agregando Tipos de Hospedajes
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+{% endblock %}

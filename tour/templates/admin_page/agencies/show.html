@@ -1,0 +1,76 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+
+{% block content-header %}
+<a href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+        class="fa fa-arrow-circle-left"></i></a> Mostrando Agencias
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name agency_obj 'title' %}</strong> {{ agency.title }}</p>
+        <p><strong>{% get_field_name agency_obj 'address' %}</strong> {{ agency.address }}</p>
+        <p><strong>{% get_field_name agency_obj 'phone' %}</strong> {{ agency.phone }}</p>
+        <p><strong>{% get_field_name agency_obj 'score' %}</strong> {{ agency.score }}</p>
+        <p><strong>{% get_field_name agency_obj 'web' %}</strong> {{ agency.web }}</p>
+        <p><strong>{% get_field_name agency_obj 'lat' %}</strong> {{ agency.lat }}</p>
+        <p><strong>{% get_field_name agency_obj 'lng' %}</strong> {{ agency.lng }}</p>
+        <p><strong>{% get_field_name agency_obj 'published_date' %}</strong> {{ agency.published_date }}</p>
+        <hr>
+        <p>
+            {% url 'agencies-services-index-admin' as view_url %}
+            {% include 'partials/actions/service.html' with type='button' url=view_url title='Ir a Servicios' %}
+        </p>
+        <p>
+            {% url 'agencies-schedules-index-admin' as view_url %}
+            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
+        </p>
+
+
+    </div>
+    <div class="col-md-8 box box-body" onload="initialize()">
+        <div class="white-box">
+            <p><strong>Ubicacion</strong></p>
+            <div id="gmap" class="map"></div>
+        </div>
+        <br>
+        <div class="white-box">
+            <p><strong>{% get_field_name agency_obj 'image' %}</strong></p>
+            <img src="{{ agency.image.url }}">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ agency.lat }}';
+        var lng = '{{ agency.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 16,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+
+
+</script>
+{% endblock %}

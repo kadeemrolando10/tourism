@@ -1,0 +1,74 @@
+{% extends 'admin.html' %}
+
+{% block content-header %}
+<a href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+        class="fa fa-arrow-circle-left"></i></a> Modificando Agencia
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="white-box">
+                {% include 'partials/_partial_form_horizontal.html' %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="white-box">
+                <div id="gmaplocation" class="map"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block code_js %}
+    {% include 'partials/_url_gmaps.html' %}
+    <script type="text/javascript">
+        var map;
+        var markers = [];
+
+        function initialize() {
+            var myLatlng = new google.maps.LatLng('{{ agency.lat }}', '{{ agency.lng }}');
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+            };
+
+            map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
+            // marker refers to a global variable
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng('{{ agency.lat }}', '{{ agency.lng }}'),
+                map: map
+            });
+            markers.push(marker);
+
+            google.maps.event.addListener(map, "click", function (event) {
+                // get lat/lon of click
+                var clickLat = event.latLng.lat();
+                var clickLon = event.latLng.lng();
+
+                // show in input box
+                document.getElementById("id_lat").value = clickLat;
+                document.getElementById("id_lng").value = clickLon;
+                clearMapOnAll(null);
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(clickLat, clickLon),
+                    map: map
+                });
+                markers.push(marker)
+            });
+        }
+
+        function clearMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+    </script>
+{% endblock %}

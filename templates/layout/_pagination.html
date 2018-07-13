@@ -1,0 +1,15 @@
+<nav class="text-center">
+    <ul class="pagination">
+        {% if objects.has_previous %}
+            <li><a href="?page={{ objects.previous_page_number }}" aria-label="Previous">&laquo; Anterior</a></li>
+        {% endif %}
+        <li class="disabled">
+            <a href="#">
+                Página {{ objects.number }} de {{ objects.paginator.num_pages }}.
+            </a>
+        </li>
+        {% if objects.has_next %}
+            <li><a href="?page={{ objects.next_page_number }}" aria-label="Next">Siguiente &raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>

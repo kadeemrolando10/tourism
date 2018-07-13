@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load utils %}
+
+{% block content %}
+
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-3.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+
+<!-- ***** Single Listing Area Start ***** -->
+<section class="dorne-single-listing-area section-padding-0-50">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Listing Content -->
+            <div class="col-12 col-lg-8">
+                <div class="single-listing-content">
+                    <div class="listing-title">
+                        <h4>{{route.title}}</h4>
+                        <h6>{{route.destination.title}}</h6>
+                    </div>
+                    <div class="single-listing-nav">
+                        <nav>
+                            <ul id="listingNav">
+                                <li><a href="#room">Atractivos</a></li>
+                                <li><a href="#lomap">Ubicacion en mapa</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="listing-menu-area mt-100" id="room">
+                        <h4>Atractivos</h4>
+                        <div class="location-map bg-info">
+                            {% get_tourism_route_menu route.id as menu %}
+                            {% for m in menu %}
+                            <div class="single-listing-menu justify-content-between">
+                                <div class="row">
+                                    <div class="col-12 col-md-5 col-lg-5">
+                                        <img class="imgstyle" src="{{m.image.url}}">
+                                    </div>
+                                    <div class="col-12 col-md-7 col-lg-7">
+                                        <h6><span class="badge badge-pill badge-info">{{m.title}}</span></h6>
+                                        <p>{{m.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="listing-menu-area mt-100" id="lomap">
+                        <h4>Ubicacion en mapa</h4>
+                        <div class="location-map" onload="initialize()">
+                            <div class="white-box">
+                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Listing Sidebar -->
+            <div class="col-12 col-md-8 col-lg-4">
+
+                <div class="listing-sidebar">
+                    <div class="opening-hours-widget mt-50">
+                        <h6>Fecha de Evento</h6>
+                        <ul class="opening-hours"  >
+                            <li><p align="center"> {{ route.date }}</p></li>
+                            <li><p align="center" href="#">{{ route.score }}</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Single Listing Area End ***** -->
+
+{% endblock %}
+
+{% block js_code %}
+{% include 'partials/_url_gmaps.html' %}
+    <script src="{% static 'assets/vendor_components/gmaps/gmaps.min.js' %}"></script>
+<script type="text/javascript">
+        var map;
+        var lat_or = '{{ route.lat_origin }}';
+        var lng_or = '{{ route.lng_origin }}';
+        var lat_des = '{{ route.lat_destination }}';
+        var lng_des = '{{ route.lng_destination }}';
+        function initialize() {
+            map = new GMaps({
+                el: '#gmap',
+                lat: lat_or,
+                lng: lng_or,
+                zoom : 10,
+              });
+            map.addMarker({
+                lat: lat_or,
+                lng: lng_or,
+                title: 'Marker with InfoWindow',
+                infoWindow: {
+                  content: '<h6>Partida</h6>'
+                }
+            });
+            map.addMarker({
+                lat: lat_des,
+                lng: lng_des,
+                title: 'Marker with InfoWindow',
+                infoWindow: {
+                  content: '<h6>LLegada</h6>'
+                }
+            });
+            map.drawRoute({
+                origin: [lat_or, lng_or ],
+                destination: [lat_des, lng_des],
+                travelMode: 'walking',
+                strokeColor: '#000',
+                strokeOpacity: 0.6,
+                strokeWeight: 6
+              });
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+
+</script>
+{% endblock %}

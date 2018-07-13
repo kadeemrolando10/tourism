@@ -1,0 +1,22 @@
+<div class="text-center">
+    <div class="row text-center">
+        <div class="col-lg-offset-2 col-lg-8">
+            <div class="input-group">
+                <input type="text" class="form-control" id="q" name='q' placeholder="nombres" value="{{ query|escape }}"
+                       autofocus="true">
+
+                <div class="input-group-addon btn btn-primary submit-search">
+                    <i class="fa fa-search"></i>
+                    <span id="spinner"><i class="fa fa-spinner fa-spin"></i></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div><br>
+<div class="query text-center">
+    {% if query %}
+        Se encontraron "<strong>{{ counts|escape }}</strong>" resultados para <strong>{{ query|escape }}</strong>
+    {% endif %}
+</div>
