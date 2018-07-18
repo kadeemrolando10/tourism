@@ -22,7 +22,7 @@ class Agency(models.Model):
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
-
+    is_active = models.BooleanField(default=True)
     def __str__(self):
         return self.title
 
@@ -74,6 +74,7 @@ class Event(models.Model):
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     event_date = models.DateField(verbose_name='Fecha de Evento')
     published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -109,6 +110,7 @@ class Restaurant(models.Model):
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -161,6 +163,7 @@ class Transport(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -272,6 +275,7 @@ class Lodging(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -368,6 +372,7 @@ class TourismSite(models.Model):
     published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
     address = models.CharField(max_length=150, verbose_name='Direccion', default=' ')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -434,6 +439,7 @@ class TourismRoute(models.Model):
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     date = models.DateField (verbose_name='Fecha de Evento', blank=True)
     published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -486,7 +492,7 @@ class Function(models.Model):
         ordering = ['description']
 
 
-class Document(models.Model):
+class Law(models.Model):
     title = models.CharField(max_length=100, verbose_name='Titulo')
     description = models.TextField(verbose_name='Descripcion', unique=True, blank=True,)
     file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, verbose_name='Archivo pdf')
@@ -498,4 +504,4 @@ class Document(models.Model):
     class Meta:
         verbose_name = 'Documento'
         verbose_name_plural = 'Documentos'
-        ordering = ['file']
+        ordering = ['title']

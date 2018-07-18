@@ -25,11 +25,11 @@
             <span></span>
         </div>
         <div class="social-btns">
-            <a href="#"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
+            <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/carlosdmesag"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
+            <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
+            <a href="https://www.facebook.com/secretariadepartamentaldeturismo/?ref=br_rs"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
             <a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-            <a href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
         </div>
     </div>
 </section>
@@ -196,7 +196,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="features-slides owl-carousel">
-                    {% for r in lodging %}
+                    {% for r in lodgings %}
                     <div class=" single-features-area">
                         <a href="{% url 'lodging-show' r.id %}">
                             <img class="imgstyle" src="{{ r.image.url }}" alt="">

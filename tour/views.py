@@ -6,11 +6,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
-from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, Objective, Function, Document, \
+from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, Objective, Function, \
     TransportDestination, LodgingRoom, LodgingType, TourismSiteDestiny, LodgingSchedule, TourismRouteDestiny, \
     TourismRoute, TourismSiteSchedule, TransportSchedule, RestaurantSchedule, LodgingService, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantMenu, TransportService, TransportTypeService, TourismSiteMenu, \
-    TourismSiteType, TourismSiteService, TourismRouteMenu
+    TourismSiteType, TourismSiteService, TourismRouteMenu, Law
 
 from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, TourismSiteForm, TourismRouteForm, \
     LodgingForm, AgencyServiceForm, AgencyScheduleForm, RestaurantMenuForm, RestaurantScheduleForm, \
@@ -18,6 +18,7 @@ from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, Tou
     TransportScheduleForm, TourismSiteMenuForm, TourismSiteScheduleForm, TourismSiteDestinyForm, TourismSiteTypeForm, \
     TourismSiteServiceForm, TourismRouteMenuForm, TourismRouteDestinyForm, LodgingRoomForm, LodgingScheduleForm, \
     LodgingTypeForm, LodgingServiceForm
+
 
 def register(request):
     if request.method == 'POST':
@@ -33,7 +34,7 @@ def register(request):
 
 
 def users_index(request):
-    users= User.objects.all
+    users = User.objects.all
     return render(request, 'registration/users_index.html', {
         'users': users,
     })
@@ -49,21 +50,21 @@ def index(request):
     transports = Transport.objects.all
     tourism_sites = Restaurant.objects.all
     agencys = Agency.objects.all
-    lodging = Lodging.objects.all
+    lodgings = Lodging.objects.all
     return render(request, 'tour/index.html', {
         'events': events,
         'restaurants': restaurants,
         'transports': transports,
         'tourism_sites': tourism_sites,
         'agencys': agencys,
-        'lodgings': lodging,
+        'lodgings': lodgings,
     })
 
 
 def secretary(request):
     obj = Objective.objects.all
     func = Function.objects.all
-    doc = Document.objects.all
+    doc = Law.objects.all
     return render(request, 'tour/secretary.html', {
         'objetivos': obj,
         'funciones': func,
