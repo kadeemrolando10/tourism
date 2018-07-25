@@ -21,7 +21,7 @@
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name schedule_obj 'day' %}</th>
             <th data-field="address" data-sortable="true">{% get_field_name schedule_obj 'schedule' %}</th>
-            <th data-field="phone" data-sortable="true">{% get_field_name schedule_obj 'published_date' %}</th>
+            <th data-field="phone" data-sortable="true">{% get_field_name schedule_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -32,7 +32,7 @@
             <td>{{ forloop.counter }}</td>
             <td>{% get_days schedule.day %}</td>
             <td>{{ schedule.schedule }}</td>
-            <td>{{ schedule.published_date }}</td>
+            <td>{{ schedule.register_at }}</td>
             <td class="text-center">
                 {% url 'tourism_sites-schedules-edit-admin' schedule.id as edit_url %}
                 {% include 'partials/actions/edit.html' with url=edit_url %}

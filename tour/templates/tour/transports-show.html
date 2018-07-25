@@ -18,6 +18,11 @@
                 <div class="single-listing-content">
                     <div class="listing-title">
                         <h4>{{transport.title}}</h4>
+                        <h6>
+                            {% for i in score|times %}
+                            <i class="fa fa-star underline-star"></i>
+                            {% endfor %}
+                        </h6>
                         <h6>{{transport.address}}</h6>
                     </div>
 
@@ -31,50 +36,53 @@
                     </div>
                     <div class="listing-menu-area mt-100" id="menu">
                         {% for d in destinations %}
-                        <table class="table table-bordered">
+                        <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th class="th_violet center1" colspan="6">{{d.title}}</th>
-                                </tr>
-                                <tr class="th_orange center1">
-                                    <th>Buses</th>
-                                    <th colspan="3">Servicios</th>
-                                    <th>Precio</th>
-                                    <th></th>
-                                </tr>
+                            <tr>
+                                <th class="th_violet center1" colspan="6">{{d.title}}</th>
+                            </tr>
+                            <tr class="th_orange center1">
+                                <th>Buses</th>
+                                <th colspan="3">Servicios</th>
+                                <th>Precio</th>
+                                <th></th>
+                            </tr>
                             </thead>
                             <tbody>
                             {% get_types_services_transport d.id as types %}
                             {% for t in types %}
-                                <tr>
-                                    <td>{{ t.title }}</td>
-                                    <td  colspan="3" class="center1">
-                                        {% for s in t.service.all %}
-                                        <img class="imgp" src="{{ s.image.url }}" data-toggle="tooltip" data-placement="top"
-                                             title="{{s.title}}">
-                                        {% endfor %}
-                                    </td>
-                                    <td class="center1">{{ t.price }} Bs.</td>
-                                    <td class="center1">
-                                        <button class="btn btn-dark" type="button" data-toggle="collapse"
-                                                data-target="#{{t.id}}" aria-expanded="false"
-                                                aria-controls="collapseExample"><i class="fa fa-plus"></i>
-                                        </button>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td  colspan="6">
-                                        <div class="collapse" id="{{t.id}}">
-                                            <div class="card card-body">
-                                                <div class="row">
-                                                        <img src="{{t.image_bus.url}}" class="col-6 img_transport">
-                                                        <img src="{{t.image_seat.url}}" class="col-6 img_transport">
-                                                   </div>
+                            <tr>
+                                <td>{{ t.title }}</td>
+                                <td colspan="3" class="center1">
+                                    {% for s in t.service.all %}
+                                    <img class="imgp" src="{{ s.image.url }}" data-toggle="tooltip" data-placement="top"
+                                         title="{{s.title}}">
+                                    {% endfor %}
+                                </td>
+                                <td class="center1">{{ t.price }} Bs.</td>
+                                <td class="center1">
+                                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                                            data-target="#{{t.id}}" aria-expanded="false"
+                                            aria-controls="collapseExample"><i class="fa fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="collapse" id="{{t.id}}">
+                                        <div class="card card-body">
+                                            <div class="row">
+                                                <div class="col-6 img_transport">
+                                                    <img src="{{t.image_bus.url}}" class="img_transport">
+                                                </div>
+                                                <div class="col-6 img_transport">
+                                                    <img src="{{t.image_seat.url}}" class="img_transport">
+                                                </div>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                            </tr>
                             {% endfor %}
                             </tbody>
                         </table>
@@ -85,7 +93,7 @@
                         <h4>Ubicacion en mapa</h4>
                         <div class="location-map" onload="initialize()">
                             <div class="white-box">
-                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                                <div id="gmap" style="width: 100%; height: 450px" class="border-map"></div>
                             </div>
                         </div>
                     </div>
@@ -96,22 +104,29 @@
 
                 <div class="listing-sidebar">
                     <div class="opening-hours-widget mt-50">
-                        <h6>Informacion</h6>
-                        <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ transport.score }}</p></li>
-                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ transport.phone }}</p></li>
-                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ transport.web }}</p></li>
-                        </ul>
+                        <h6 class="underline">Informacion</h6>
+                        <div class="opening-hours">
+                            <p>
+                                <i class="fa fa-phone" aria-hidden="true"></i><label class="les">Telefono</label><br>
+                                <span class="alert alert-light">{{ transport.phone }}</span>
+                            </p>
+                            <p>
+                                <i class="fa fa-chrome" aria-hidden="true"></i><label class="les">Sitio Web</label><br>
+                                <span class="alert alert-light link"><a href="{{ transport.web }}" target="_blank">{{ transport.web }}</a></span>
+                            </p>
+                        </div>
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
-                        <ul class="opening-hours">
+                        <h6 class="underline"><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <ul class="opening-hours" role="alert">
                             {% for q in schedule %}
-                            <li>
-                                <p>{% get_days q.day%}</p>
-                                <p>{{q.schedule}}</p>
-                            </li>
+                            <table class="table table-light table-striped">
+                                <tr>
+                                    <td class="align-right">{% get_days q.day%}</td>
+                                    <td class="float-right">{{q.schedule}}</td>
+                                </tr>
+                            </table>
                             {% endfor %}
                         </ul>
                     </div>
@@ -155,6 +170,7 @@
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         })
+
 
 
 </script>

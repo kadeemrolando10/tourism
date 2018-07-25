@@ -4,9 +4,17 @@
 {% load static %}
 
 {% block content-header %}
-    <h6>Servicios de Transporte</h6>
+<div class="float-right">
     {% url 'transports-services-new-admin' as view_url %}
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <h6>Servicios de Transporte</h6>
+    </li>
+  </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +25,7 @@
             <th>#</th>
             <th data-field="image" data-sortable="true">{% get_field_name service_obj 'image' %}</th>
             <th data-field="title" data-sortable="true">{% get_field_name service_obj 'title' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name service_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name service_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -26,9 +34,9 @@
         {% for service in services %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td><img src="{{ service.image.url }}"></td>
+            <td class="text-center"><img src="{{ service.image.url }}" width="50px"></td>
             <td>{{ service.title }}</td>
-            <td>{{ service.published_date }}</td>
+            <td>{{ service.register_at }}</td>
             <td class="text-center">
                 {% url 'transports-services-edit-admin' service.id as edit_url %}
                 {% include 'partials/actions/edit.html' with url=edit_url %}

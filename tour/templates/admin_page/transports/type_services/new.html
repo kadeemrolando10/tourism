@@ -1,11 +1,27 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-    <a href="{% url 'transports-type-services-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
-    <i class="fa fa-arrow-circle-left"></i></a> Agregando Tipo de Servicio de  Transporte
-<br>
-    <h6 class="title_main">{{transport_title}}</h6>
-    <h6 class="title_main">{{destination_title}}</h6>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Transportes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip" data-placement="right"
+               title="{{transport_title}}">{{transport_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="{{destination_title}}">{{destination_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{% url 'transports-type-services-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Tipos de Servicios">Tipos de Servicios</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Agregando</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

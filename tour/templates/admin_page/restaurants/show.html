@@ -17,7 +17,7 @@
         <p><strong>{% get_field_name restaurant_obj 'web' %}</strong> {{ restaurant.web }}</p>
         <p><strong>{% get_field_name restaurant_obj 'lat' %}</strong> {{ restaurant.lat }}</p>
         <p><strong>{% get_field_name restaurant_obj 'lng' %}</strong> {{ restaurant.lng }}</p>
-        <p><strong>{% get_field_name restaurant_obj 'published_date' %}</strong> {{ restaurant.published_date }}</p>
+        <p><strong>{% get_field_name restaurant_obj 'register_at' %}</strong> {{ restaurant.register_at }}</p>
         <hr>
         <p>
             {% url 'restaurants-menus-index-admin' as view_url %}

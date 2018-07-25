@@ -3,8 +3,25 @@
 {% load utils %}
 
 {% block content-header %}
-<a href="{% url 'lodgings-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Mostrando Hospedajes
+<div class="float-right">
+    <span>
+        {% url 'lodgings-room-index-admin' as room_url %}
+        {% include 'partials/actions/room.html' with type='button' url=room_url title='Ir a Habitaciones' %}
+    </span>
+    <span>
+        {% url 'lodgings-schedules-index-admin' as view_url %}
+        {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'lodgings-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Hospedajes</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -17,17 +34,12 @@
         <p><strong>{% get_field_name lodging_obj 'web' %}</strong> {{ lodging.web }}</p>
         <p><strong>{% get_field_name lodging_obj 'lat' %}</strong> {{ lodging.lat }}</p>
         <p><strong>{% get_field_name lodging_obj 'lng' %}</strong> {{ lodging.lng }}</p>
-        <p><strong>{% get_field_name lodging_obj 'service' %}</strong><br> {% for s in lodging.service.all %}{{s.title}}<br>{% endfor %}</p>
-        <p><strong>{% get_field_name lodging_obj 'published_date' %}</strong> {{ lodging.published_date }}</p>
-         <hr>
-        <p>
-            {% url 'lodgings-room-index-admin' as room_url %}
-            {% include 'partials/actions/room.html' with type='button' url=room_url title='Ir a Habitaciones' %}
-        </p>
-        <p>
-            {% url 'lodgings-schedules-index-admin' as view_url %}
-            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
-        </p>
+        <p><strong>{% get_field_name lodging_obj 'service' %}</strong><br>
+            {% for s in lodging.service.all %}
+            {{s.title}}<br>
+            {% endfor %}</p>
+        <p><strong>{% get_field_name lodging_obj 'register_at' %}</strong> {{ lodging.register_at }}</p>
+
     </div>
     <div class="col-md-8 box box-body" onload="initialize()">
         <div class="white-box">
@@ -69,7 +81,6 @@
         window.onload = function () {
             initialize()
         };
-
 
 </script>
 {% endblock %}

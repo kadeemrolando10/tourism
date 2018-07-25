@@ -20,7 +20,7 @@
         <p><strong>{% get_field_name route_obj 'lng_origin' %}</strong> {{ route.lng_origin }}</p>
         <p><strong>{% get_field_name route_obj 'lat_destination' %}</strong> {{ route.lat_destination }}</p>
         <p><strong>{% get_field_name route_obj 'lng_destination' %}</strong> {{ route.lng_destination }}</p>
-        <p><strong>{% get_field_name route_obj 'published_date' %}</strong> {{ route.published_date }}</p>
+        <p><strong>{% get_field_name route_obj 'register_at' %}</strong> {{ route.register_at }}</p>
         <hr>
         <p>
             {% url 'tourism_routes-menus-index-admin' as view_url %}

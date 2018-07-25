@@ -21,7 +21,7 @@
             <th data-field="title" data-sortable="true">{% get_field_name menu_obj 'title' %}</th>
             <th data-field="departures" data-sortable="true">{% get_field_name menu_obj 'image' %}</th>
             <th data-field="place_start" data-sortable="true">{% get_field_name menu_obj 'description' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name menu_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name menu_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -33,7 +33,7 @@
             <td>{{ menu.title }}</td>
             <td><img src="{{ menu.image.url }}" width="200px"></td>
             <td>{{ menu.description }}</td>
-            <td>{{ menu.published_date }}</td>
+            <td>{{ menu.register_at }}</td>
             <td class="text-center">
                 {% url 'tourism_routes-menus-edit-admin' menu.id as edit_url %}
                 {% include 'partials/actions/edit.html' with url=edit_url %}

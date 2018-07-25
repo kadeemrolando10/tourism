@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='media/', verbose_name='Imagen')),
                 ('lat', models.CharField(max_length=50, verbose_name='Latitud')),
                 ('lng', models.CharField(max_length=50, verbose_name='Longitud')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Agencia de turismo',
@@ -39,13 +39,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('day', models.CharField(choices=[('LU', 'LUNES'), ('MA', 'MARTES'), ('MI', 'MIERCOLES'), ('JU', 'JUEVES'), ('VI', 'VIERNES'), ('SA', 'SABADO'), ('DO', 'DOMINGO')], default='1', max_length=2, verbose_name='Dia')),
                 ('schedule', models.CharField(default='8:00 - 22:00', max_length=50, verbose_name='Horario')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('agency', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Agency', verbose_name='Agencia')),
             ],
             options={
                 'verbose_name': 'Horario de Atencion',
                 'verbose_name_plural': 'Horarios de Atencion',
-                'ordering': ['published_date'],
+                'ordering': ['register_at'],
             },
         ),
         migrations.CreateModel(
@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
                 ('schedule', models.CharField(default='S/N', max_length=150, verbose_name='Horas de Expedicion')),
                 ('place_start', models.CharField(default='S/N', max_length=150, verbose_name='Lugar de Inicio')),
                 ('places_to_known', models.CharField(default='S/N', max_length=500, verbose_name='Lugares a conocer')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('agency', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Agency', verbose_name='Agencia')),
             ],
             options={
@@ -74,7 +74,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100, null=True, verbose_name='Titulo')),
                 ('description', models.TextField(unique=True, verbose_name='Descripcion')),
                 ('file', models.FileField(null=True, upload_to='documents/%Y/%m/%d', verbose_name='Archivo pdf')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Documento',
@@ -92,7 +92,7 @@ class Migration(migrations.Migration):
                 ('lat', models.CharField(max_length=50, verbose_name='Latitud')),
                 ('lng', models.CharField(max_length=50, verbose_name='Longitud')),
                 ('event_date', models.DateField(verbose_name='Fecha de Evento')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Evento',
@@ -105,7 +105,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('description', models.TextField(unique=True, verbose_name='Descripcion')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Funcion',
@@ -124,7 +124,7 @@ class Migration(migrations.Migration):
                 ('lng', models.CharField(max_length=50, verbose_name='Longitud')),
                 ('score', models.DecimalField(decimal_places=1, default=5.1, max_digits=2, verbose_name='Calificacion')),
                 ('phone', models.CharField(max_length=20, verbose_name='Telefono')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('web', models.CharField(default='nn', max_length=150, verbose_name='Pagina Web')),
             ],
             options={
@@ -141,7 +141,7 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='media/', verbose_name='Imagen')),
                 ('description', models.TextField(verbose_name='Descripcion')),
                 ('price', models.DecimalField(decimal_places=2, default=5.1, max_digits=5, verbose_name='Precio')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('lodging', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Lodging', verbose_name='Tipo')),
             ],
             options={
@@ -156,13 +156,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('day', models.CharField(choices=[('LU', 'LUNES'), ('MA', 'MARTES'), ('MI', 'MIERCOLES'), ('JU', 'JUEVES'), ('VI', 'VIERNES'), ('SA', 'SABADO'), ('DO', 'DOMINGO')], default='1', max_length=2, verbose_name='Dia')),
                 ('schedule', models.CharField(default='7:00 - 23:00', max_length=50, verbose_name='Horario')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('lodging', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Lodging', verbose_name='Hospedaje')),
             ],
             options={
                 'verbose_name': 'Horario de Atencion de Hospedaje',
                 'verbose_name_plural': 'Horarios de Atencion de Hospedajes',
-                'ordering': ['published_date'],
+                'ordering': ['register_at'],
             },
         ),
         migrations.CreateModel(
@@ -171,7 +171,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(default='NA', max_length=150, verbose_name='Titulo')),
                 ('image', models.ImageField(null='true', upload_to='media/', verbose_name='Imagen')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Servicio de Hospedaje',
@@ -184,7 +184,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=150, verbose_name='Titulo')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Tipo de Hospedaje',
@@ -197,7 +197,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('description', models.TextField(unique=True, verbose_name='Descripcion')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Objetivo',
@@ -216,7 +216,7 @@ class Migration(migrations.Migration):
                 ('lng', models.CharField(max_length=50, verbose_name='Longitud')),
                 ('phone', models.CharField(max_length=20, verbose_name='Telefono')),
                 ('score', models.DecimalField(decimal_places=1, default=5.1, max_digits=2, verbose_name='Calificacion')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('web', models.CharField(default='nn', max_length=150, verbose_name='Pagina Web')),
             ],
             options={
@@ -233,7 +233,7 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(null='true', upload_to='media/', verbose_name='Imagen')),
                 ('description', models.TextField(verbose_name='Descripcion')),
                 ('price', models.DecimalField(decimal_places=2, default=5.1, max_digits=5, verbose_name='Precio')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('restaurant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Restaurant', verbose_name='Restaurant')),
             ],
             options={
@@ -248,13 +248,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('day', models.CharField(choices=[('LU', 'LUNES'), ('MA', 'MARTES'), ('MI', 'MIERCOLES'), ('JU', 'JUEVES'), ('VI', 'VIERNES'), ('SA', 'SABADO'), ('DO', 'DOMINGO')], default='1', max_length=2, verbose_name='Dia')),
                 ('schedule', models.CharField(default='NA', max_length=50, verbose_name='Horario')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('restaurant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Restaurant', verbose_name='Restaurant')),
             ],
             options={
                 'verbose_name': 'Horario de Atencion de Restaurant',
                 'verbose_name_plural': 'Horarios de Atencion de Restaurantes',
-                'ordering': ['published_date'],
+                'ordering': ['register_at'],
             },
         ),
         migrations.CreateModel(
@@ -263,7 +263,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.TextField(default='NA', max_length=150, verbose_name='Titulo')),
                 ('image', models.ImageField(null='true', upload_to='media/', verbose_name='Imagen')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Servicio de Restaurante',
@@ -284,7 +284,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(verbose_name='Descripcion')),
                 ('score', models.DecimalField(decimal_places=1, default=5.1, max_digits=2, verbose_name='Calificacion')),
                 ('date', models.DateField(default=datetime.datetime(2018, 6, 20, 17, 52, 47, 468685), verbose_name='Fecha de Evento')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Ruta turistica',
@@ -297,7 +297,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=150, verbose_name='Titulo')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Destino de Ruta Turistica',
@@ -312,7 +312,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(default='NA', max_length=150, verbose_name='Titulo')),
                 ('image', models.ImageField(upload_to='media/', verbose_name='Imagen')),
                 ('description', models.CharField(default='NA', max_length=350, verbose_name='Descripcion')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('route', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.TourismRoute', verbose_name='Ruta Turistica')),
             ],
             options={
@@ -332,7 +332,7 @@ class Migration(migrations.Migration):
                 ('lng', models.CharField(max_length=50, verbose_name='Longitud')),
                 ('score', models.DecimalField(decimal_places=1, default=5.1, max_digits=2, verbose_name='Calificacion')),
                 ('phone', models.CharField(max_length=20, verbose_name='Telefono')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('address', models.CharField(default='sn', max_length=150, verbose_name='Direccion')),
                 ('web', models.CharField(default='nn', max_length=150, verbose_name='Pagina Web')),
             ],
@@ -347,7 +347,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=150, verbose_name='Titulo')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Destino de Sitio Turistico',
@@ -362,7 +362,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(default='NA', max_length=150, verbose_name='Titulo')),
                 ('image', models.ImageField(upload_to='media/', verbose_name='Imagen')),
                 ('description', models.CharField(default='NA', max_length=150, verbose_name='Descripcion')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('site', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.TourismSite', verbose_name='Sitio Turistico')),
             ],
             options={
@@ -377,13 +377,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('day', models.CharField(choices=[('LU', 'LUNES'), ('MA', 'MARTES'), ('MI', 'MIERCOLES'), ('JU', 'JUEVES'), ('VI', 'VIERNES'), ('SA', 'SABADO'), ('DO', 'DOMINGO')], default='1', max_length=2, verbose_name='Dia')),
                 ('schedule', models.CharField(default='NA', max_length=50, verbose_name='Horario')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('site', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.TourismSite', verbose_name='Sitio Turistico')),
             ],
             options={
                 'verbose_name': 'Horario de Atencion de Sitio Turistico',
                 'verbose_name_plural': 'Horarios de Atencion de Sitios Turisticos',
-                'ordering': ['published_date'],
+                'ordering': ['register_at'],
             },
         ),
         migrations.CreateModel(
@@ -392,7 +392,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(default='NA', max_length=150, verbose_name='Item de servicio')),
                 ('image', models.ImageField(null='true', upload_to='media/', verbose_name='Imagen')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Servicio de Sitio Turistico',
@@ -405,7 +405,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=150, verbose_name='Titulo')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Tipo de Sitio Turistico',
@@ -424,7 +424,7 @@ class Migration(migrations.Migration):
                 ('lng', models.CharField(max_length=50, verbose_name='Longitud')),
                 ('score', models.DecimalField(decimal_places=1, default=5.1, max_digits=2, verbose_name='Calificacion')),
                 ('phone', models.CharField(max_length=20, verbose_name='Telefono')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('web', models.CharField(default='nn', max_length=150, verbose_name='Pagina Web')),
             ],
             options={
@@ -439,7 +439,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(default='NA', max_length=150, verbose_name='Titulo')),
                 ('schedules_out', models.CharField(default='NA', max_length=150, verbose_name='Horarios de salida')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('transport', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Transport', verbose_name='Transporte')),
             ],
             options={
@@ -454,13 +454,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('day', models.CharField(choices=[('LU', 'LUNES'), ('MA', 'MARTES'), ('MI', 'MIERCOLES'), ('JU', 'JUEVES'), ('VI', 'VIERNES'), ('SA', 'SABADO'), ('DO', 'DOMINGO')], default='1', max_length=2, verbose_name='Dia')),
                 ('schedule', models.CharField(default='NA', max_length=50, verbose_name='Horario')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('transport', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.Transport', verbose_name='Transporte')),
             ],
             options={
                 'verbose_name': 'Horario de Atencion de Transporte',
                 'verbose_name_plural': 'Horarios de Atencion de Transportes',
-                'ordering': ['published_date'],
+                'ordering': ['register_at'],
             },
         ),
         migrations.CreateModel(
@@ -469,7 +469,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(default='NA', max_length=150, verbose_name='Item de servicio')),
                 ('image', models.ImageField(null='true', upload_to='media/', verbose_name='Imagen')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
             ],
             options={
                 'verbose_name': 'Servicio de Transporte',
@@ -485,7 +485,7 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(decimal_places=2, default=5.1, max_digits=5, verbose_name='Precio')),
                 ('image_bus', models.ImageField(null='true', upload_to='media/', verbose_name='Imagen de Bus')),
                 ('image_seat', models.ImageField(null='true', upload_to='media/', verbose_name='Imagen de Butacas')),
-                ('published_date', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
+                ('register_at', models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')),
                 ('destination', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tour.TransportDestination', verbose_name='Destino')),
                 ('service', models.ManyToManyField(to='tour.TransportService', verbose_name='Servicios')),
             ],

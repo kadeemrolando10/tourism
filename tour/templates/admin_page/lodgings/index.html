@@ -4,9 +4,16 @@
 {% load static %}
 
 {% block content-header %}
-    <h6>Hospedajes</h6>
-    {% url 'lodgings-new-admin' as view_url %}
-    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+<div class="float-right">
+{% url 'lodgings-new-admin' as view_url %}
+{% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active page" aria-current="page" >Hospedajes</li>
+    </ol>
+</nav>
+
 {% endblock %}
 
 {% block content %}
@@ -64,6 +71,8 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
+
 
 </script>
 {% endblock %}

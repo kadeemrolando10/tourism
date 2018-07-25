@@ -17,7 +17,13 @@
             <div class="col-12 col-lg-8">
                 <div class="single-listing-content">
                     <div class="listing-title">
+
                         <h4>{{lodging.title}}</h4>
+                        <h6>
+                            {% for i in score|times %}
+                            <i class="fa fa-star underline-star"></i>
+                            {% endfor %}
+                        </h6>
                         <h6>{{lodging.address}}</h6>
                     </div>
 
@@ -35,14 +41,14 @@
                         <h4>Servicios</h4>
                         <div class="location-map">
 
-                            <table class="table table-light table-responsive-sm">
+                            <table class="table table-striped table-responsive-sm" border="0">
                                 <tbody>
-                                {% for s in lodging.service.all %}
-                                <tr style="text-align:center;">
-                                    <td class="table-warning" colspan="5" scope="col">
-                                        <img src="{{s.image.url}}" height="30px" width="30px">
+                                {% for service in lodging.service.all %}
+                                <tr>
+                                    <td colspan="5" scope="col" style="text-align:center;">
+                                        <img src="{{service.image.url}}" height="50px" width="50px">
                                     </td>
-                                    <td class="table-dark" colspan="3" width="80%" scope="col">{{ s.title }}</td>
+                                    <td colspan="3" width="80%" scope="col"><strong>{{ service.title }}</strong></td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>
@@ -57,14 +63,22 @@
                             <div class="single-listing-menu d-flex justify-content-between">
                                 <!-- Listing Menu Title -->
                                 <div class="listing-menu-title">
-                                    <h5><span class="badge badge-pill badge-info">{{r.title}}</span></h5>
-                                    <img src="{{r.image.url}}">
-                                    <p>{{r.description}}</p>
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 col-lg-8">
+                                            <h5><span class="badge badge-pill badge-info">{{r.title}}</span></h5>
+                                            <img src="{{r.image.url}}" class="img-lodging">
+                                        </div>
+                                        <div class="col-12 col-md-4 col-lg-4">
+                                            <div class="listing-menu-price" style="align:center;">
+                                                <h5><span class="badge badge-pill badge-success">{{r.price}}Bs.</span>
+                                                </h5>
+                                            </div>
+                                            <p>{{r.description}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- Listing Menu Price -->
-                                <div class="listing-menu-price" style="align:center;">
-                                    <h5><span class="badge badge-pill badge-success">{{r.price}}Bs.</span></h5>
-                                </div>
+
                             </div>
                             {% endfor %}
                         </div>
@@ -73,7 +87,7 @@
                         <h4>Ubicacion en mapa</h4>
                         <div class="location-map" onload="initialize()">
                             <div class="white-box">
-                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                                <div id="gmap" style="width: 100%; height: 450px" class="border-map"></div>
                             </div>
                         </div>
                     </div>
@@ -84,22 +98,29 @@
 
                 <div class="listing-sidebar">
                     <div class="opening-hours-widget mt-50 ">
-                        <h6>Informacion</h6>
-                        <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ lodging.score }}</p></li>
-                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ lodging.phone }}</p></li>
-                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ lodging.web }}</p></li>
-                        </ul>
+                        <h6 class="underline">Informacion</h6>
+                        <div class="opening-hours">
+                            <p>
+                                <i class="fa fa-phone" aria-hidden="true"></i><label class="les">Telefono</label><br>
+                                <span class="alert alert-light">{{ lodging.phone }}</span>
+                            </p>
+                            <p>
+                                <i class="fa fa-chrome" aria-hidden="true"></i><label class="les">Sitio Web</label><br>
+                                <span class="alert alert-light link"><a href="{{ lodging.web }}" target="_blank">{{ lodging.web }}</a></span>
+                            </p>
+                        </div>
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <h6 class="underline"><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours" role="alert">
                             {% for q in schedule %}
-                            <li>
-                                <p>{% get_days q.day%}</p>
-                                <p>{{q.schedule}}</p>
-                            </li>
+                            <table class="table table-light table-striped">
+                                <tr>
+                                    <td class="align-right">{% get_days q.day%}</td>
+                                    <td class="float-right">{{q.schedule}}</td>
+                                </tr>
+                            </table>
                             {% endfor %}
                         </ul>
                     </div>
@@ -120,7 +141,7 @@
         function initialize() {
             var myLatlng = new google.maps.LatLng(lat, lng);
             var myOptions = {
-                zoom: 14,
+                zoom: 17,
                 center: myLatlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -141,6 +162,10 @@
         $(function () {
         $('[data-toggle="tooltip"]').tooltip()
         })
+
+
+
+
 </script>
 {% endblock %}
 

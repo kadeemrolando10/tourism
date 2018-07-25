@@ -7,10 +7,14 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='base'),
     path('index_admin/', views.index_admin, name='index_admin'),
-    path('register/', views.register, name='register'),
     url(r'^logout/$', logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
-    path('users/', views.users_index, name='users-index'),
+    path('users/', include([
+            path('', views.user_index, name='user-index'),
+            path('new/', views.user_new, name='user-new'),
+            path('<int:id>/edit/', views.user_edit, name='user-edit'),
+            path('<int:id>/delete/', views.user_delete, name='user-delete'),
 
+    ])),
     path('secretaria/', views.secretary, name='secretary'),
 
     path('agencies/', include([

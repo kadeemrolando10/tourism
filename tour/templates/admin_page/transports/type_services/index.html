@@ -4,15 +4,40 @@
 {% load static %}
 
 {% block content-header %}
-<a href="{% url 'transports-destination-show-admin' destination_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Tipos de Servicios de Transporte
-    <h6 class="title_main">{{transport_title}}</h6>
-    <h6 class="title_main">{{destination_title}}</h6>
+<div class="float-right">
     {% url 'transports-type-services-new-admin' as view_url %}
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Transportes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip"
+               data-placement="right"
+               title="{{transport_title}}">{{transport_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
+               title="{{destination_title}}">{{destination_title}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Tipos de Servicios</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
+
+<div class="row">
+    <div class="col-md-7 box box-body">
+        <p><strong>{% get_field_name destination_obj 'title' %}</strong> {{ destination.title }}</p>
+        <p><strong>{% get_field_name destination_obj 'schedules_out' %}</strong> {{ destination.schedules_out }}</p>
+        <p><strong>{% get_field_name destination_obj 'register_at' %}</strong> {{ destination.register_at }}</p>
+    </div>
+</div>
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <thead>
@@ -23,7 +48,7 @@
             <th data-field="service" data-sortable="true">{% get_field_name type_service_obj 'service' %}</th>
             <th data-field="image_bus" data-sortable="true">{% get_field_name type_service_obj 'image_bus' %}</th>
             <th data-field="image_seat" data-sortable="true">{% get_field_name type_service_obj 'image_seat' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name type_service_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name type_service_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -37,7 +62,7 @@
             <td>{% for s in type_service.service.all %}-{{s.title}}<br>{% endfor %}</td>
             <td><img src="{{ type_service.image_bus.url }}" width="800px" height="100"></td>
             <td><img src="{{ type_service.image_seat.url }}" width="800px" height="100"></td>
-            <td>{{ type_service.published_date }}</td>
+            <td>{{ type_service.register_at }}</td>
             <td class="text-center">
                 {% url 'transports-type-services-edit-admin' type_service.id as edit_url %}
                 {% include 'partials/actions/edit.html' with url=edit_url %}
@@ -69,6 +94,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 </script>
 {% endblock %}

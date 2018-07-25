@@ -48,6 +48,7 @@ import icon and fonts Styles
 @import 'assets/vendor_components/flag-icon/css/flag-icon.css';
 @import 'assets/vendor_components/material-design-iconic-font/css/materialdesignicons.css';
 @import 'assets/vendor_components/simple-line-icons-master/css/simple-line-icons.css';
+@import 'assets/vendor_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
@@ -59,6 +60,7 @@ Body :		Poppins, sans-serif;
 -------------------------------------------------------------------*/
 
 /*Body, layout*/
+
 .layout-boxed body, .layout-boxed html, .wrapper, body, html {
     height: 100%}
 .wrapper, body {
@@ -1823,8 +1825,8 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
 }
 [type=checkbox]:checked, [type=checkbox]:not(:checked) {
     position: absolute;
-    left: -9999px;
-    opacity: 0;
+    left: 120px;
+    opacity: 1;
 }
 [type=checkbox]+label {
     font-weight: 300;
@@ -14793,6 +14795,33 @@ img.away, img.busy, img.offline, img.online {
     text-align:center;
     color: #000;
 }
+.page{
+    font-weight:bold;
+    color:#745af2;
+}
+.page_second{
+    font-weight:bold;
+    color:#f44336;
+}
+.page_third{
+ font-weight:bold;
+    color:#00c297;
+}
 
-.oldclass { color: blue }
-.newclass { background-color: yellow }
+label {
+    position: static;;
+    cursor:pointer;
+}
+label [type="checkbox"] {
+    display: inline-block;
+}
+[type="checkbox"] + span {
+    display:inline-block;
+    padding:1em;
+}
+:checked + span {
+    background:#0f0;
+}
+[type="checkbox"][disabled] + span {
+    background:#f00;
+}​

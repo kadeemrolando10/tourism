@@ -21,7 +21,7 @@
             <th data-field="departures" data-sortable="true">{% get_field_name service_obj 'departures' %}</th>
             <th data-field="place_start" data-sortable="true">{% get_field_name service_obj 'place_start' %}</th>
             <th data-field="places_to known" data-sortable="true">{% get_field_name service_obj 'places_to_known' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name service_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name service_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -34,7 +34,7 @@
             <td>{{ service.departures }}</td>
             <td>{{ service.place_start }}</td>
             <td>{{ service.places_to_known }}</td>
-            <td>{{ service.published_date }}</td>
+            <td>{{ service.register_at }}</td>
             <td class="text-center">
                 {% url 'agencies-services-show-admin' service.id as view_url %}
                 {% include 'partials/actions/view.html' with url=view_url %}

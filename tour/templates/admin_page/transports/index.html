@@ -4,9 +4,16 @@
 {% load static %}
 
 {% block content-header %}
-    <h5>Transportes</h5>
+<div class="float-right">
     {% url 'transports-new-admin' as view_url %}
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active page" aria-current="page">Transportes</li>
+    </ol>
+</nav>
+
 {% endblock %}
 
 {% block content %}
@@ -64,6 +71,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 </script>
 {% endblock %}

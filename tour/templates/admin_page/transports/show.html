@@ -3,8 +3,25 @@
 {% load utils %}
 
 {% block content-header %}
-<a href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Mostrando Transportes
+<div class="float-right">
+    <span>
+        {% url 'transports-destination-index-admin' as view_url %}
+        {% include 'partials/actions/destination.html' with type='button' url=view_url title='Ir a Destinos' %}
+    </span>
+    <span>
+        {% url 'transports-schedules-index-admin' as view_url %}
+        {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Transporte</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -17,22 +34,14 @@
         <p><strong>{% get_field_name transport_obj 'web' %}</strong> {{ transport.web }}</p>
         <p><strong>{% get_field_name transport_obj 'lat' %}</strong> {{ transport.lat }}</p>
         <p><strong>{% get_field_name transport_obj 'lng' %}</strong> {{ transport.lng }}</p>
-        <p><strong>{% get_field_name transport_obj 'published_date' %}</strong> {{ transport.published_date }}</p>
-        <hr>
-        <p>
-            {% url 'transports-destination-index-admin' as view_url %}
-            {% include 'partials/actions/destination.html' with type='button' url=view_url title='Ir a Destinos' %}
-        </p>
-        <p>
-            {% url 'transports-schedules-index-admin' as view_url %}
-            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
-        </p>
+        <p><strong>{% get_field_name transport_obj 'register_at' %}</strong> {{ transport.register_at }}</p>
     </div>
     <div class="col-md-8 box box-body" onload="initialize()">
         <div class="white-box">
             <p><strong>Ubicacion</strong>
             <div id="gmap" class="map"></div>
-        </div><br>
+        </div>
+        <br>
         <div class="white-box">
             <p><strong>{% get_field_name transport_obj 'image' %}</strong></p>
             <img src="{{ transport.image.url }}">
@@ -67,6 +76,7 @@
         window.onload = function () {
             initialize()
         };
+
 
 
 

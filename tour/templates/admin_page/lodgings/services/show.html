@@ -3,8 +3,15 @@
 {% load utils %}
 
 {% block content-header %}
-<a href="{% url 'agencies-services-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
-    <i class="fa fa-arrow-circle-left"></i></a> Mostrando Servicios de Agencias
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'lodgings-services-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Servicio de Hospedajes</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -16,7 +23,7 @@
         <p><strong>{% get_field_name service_obj 'schedule' %}</strong> {{ service.schedule }}</p>
         <p><strong>{% get_field_name service_obj 'place_start' %}</strong> {{ service.place_start }}</p>
         <p><strong>{% get_field_name service_obj 'places_to_known' %}</strong> {{ service.places_to_known }}</p>
-        <p><strong>{% get_field_name service_obj 'published_date' %}</strong> {{ service.published_date }}</p>
+        <p><strong>{% get_field_name service_obj 'register_at' %}</strong> {{ service.register_at }}</p>
     </div>
 </div>
 {% endblock %}

@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-md-7 box box-body">
         <p><strong>{% get_field_name destination_obj 'title' %}</strong> {{ destination.title }}</p>
-        <p><strong>{% get_field_name destination_obj 'published_date' %}</strong> {{ destination.published_date }}</p>
+        <p><strong>{% get_field_name destination_obj 'register_at' %}</strong> {{ destination.register_at }}</p>
         <p>
             {% url 'tourism_routes-index-admin' as view_url %}
             {% include 'partials/actions/types.html' with type='button' url=view_url title='Añadir' %}

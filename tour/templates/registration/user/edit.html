@@ -1,0 +1,24 @@
+{% extends 'admin.html' %}
+{% load utils %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'user-index' %}" class="page">Clientes</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+    </ol>
+</nav>
+
+{% include 'partials/_partial_form_horizontal.html' %}
+{% endblock %}
+
+{% block code_js %}
+<script>
+        $(document).ready(function () {
+            $('input').addClass('form-control');
+        });
+
+</script>
+{% endblock %}

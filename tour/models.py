@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from django.contrib.auth.models import User
 from django.db import models
 
 DAYS = (
@@ -21,8 +23,9 @@ class Agency(models.Model):
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
-    is_active = models.BooleanField(default=True)
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
+    is_active = models.BooleanField(default=False)
+
     def __str__(self):
         return self.title
 
@@ -40,7 +43,7 @@ class AgencyService(models.Model):
     schedule = models.CharField(max_length=150, default='S/N', verbose_name='Horas de Expedicion', blank=True)
     place_start = models.CharField(max_length=150, default='S/N', verbose_name='Lugar de Inicio')
     places_to_known = models.CharField(max_length=500, default='S/N', verbose_name='Lugares a conocer')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -55,7 +58,7 @@ class AgencySchedule(models.Model):
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name='Agencia')
     day = models.CharField(max_length=2, choices=DAYS, default='1', verbose_name='Dia')
     schedule = models.CharField(max_length=50, default='8:00 - 22:00', verbose_name='Horario')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.day
@@ -63,7 +66,7 @@ class AgencySchedule(models.Model):
     class Meta:
         verbose_name = 'Horario de Atencion'
         verbose_name_plural = 'Horarios de Atencion'
-        ordering = ['published_date']
+        ordering = ['register_at']
 
 
 class Event(models.Model):
@@ -73,8 +76,8 @@ class Event(models.Model):
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     event_date = models.DateField(verbose_name='Fecha de Evento')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
-    is_active = models.BooleanField(default=True)
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -88,7 +91,7 @@ class Event(models.Model):
 class RestaurantService(models.Model):
     title = models.TextField(max_length=150, default='NA', verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -108,9 +111,9 @@ class Restaurant(models.Model):
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -125,7 +128,7 @@ class RestaurantSchedule(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, verbose_name='Restaurant')
     day = models.CharField(max_length=2, choices=DAYS, default='1', verbose_name='Dia')
     schedule = models.CharField(max_length=50, default='NA', verbose_name='Horario')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.day
@@ -133,7 +136,7 @@ class RestaurantSchedule(models.Model):
     class Meta:
         verbose_name = 'Horario de Atencion de Restaurant'
         verbose_name_plural = 'Horarios de Atencion de Restaurantes'
-        ordering = ['published_date']
+        ordering = ['register_at']
 
 
 class RestaurantMenu(models.Model):
@@ -142,7 +145,7 @@ class RestaurantMenu(models.Model):
     image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion', blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=5.1, verbose_name='Precio')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -161,9 +164,9 @@ class Transport(models.Model):
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion' , blank=True)
     phone = models.CharField(max_length=20, verbose_name='Telefono')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -178,7 +181,7 @@ class TransportDestination(models.Model):
     transport = models.ForeignKey(Transport, on_delete=models.CASCADE, verbose_name='Transporte')
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
     schedules_out = models.CharField(max_length=150, default='NA', verbose_name='Horarios de salida', blank=True)
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -192,7 +195,7 @@ class TransportDestination(models.Model):
 class TransportService(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Item de servicio')
     image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -210,7 +213,7 @@ class TransportTypeService(models.Model):
     service = models.ManyToManyField(TransportService, verbose_name='Servicios', null=True, blank=True)
     image_bus = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Bus')
     image_seat = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Butacas')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -225,7 +228,7 @@ class TransportSchedule(models.Model):
     transport = models.ForeignKey(Transport, on_delete=models.CASCADE, verbose_name='Transporte')
     day = models.CharField(max_length=2, choices=DAYS, default='1', verbose_name='Dia')
     schedule = models.CharField(max_length=50, default='NA', verbose_name='Horario')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.day
@@ -233,12 +236,12 @@ class TransportSchedule(models.Model):
     class Meta:
         verbose_name = 'Horario de Atencion de Transporte'
         verbose_name_plural = 'Horarios de Atencion de Transportes'
-        ordering = ['published_date']
+        ordering = ['register_at']
 
 
 class LodgingType(models.Model):
     title = models.CharField(max_length=150, verbose_name='Titulo')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -252,7 +255,7 @@ class LodgingType(models.Model):
 class LodgingService(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -273,9 +276,9 @@ class Lodging(models.Model):
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     phone = models.CharField(max_length=20, verbose_name='Telefono')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -292,7 +295,7 @@ class LodgingRoom(models.Model):
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion', blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=100, verbose_name='Precio')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -307,7 +310,7 @@ class LodgingSchedule(models.Model):
     lodging = models.ForeignKey(Lodging, on_delete=models.CASCADE, verbose_name='Hospedaje')
     day = models.CharField(max_length=2, choices=DAYS, default='1', verbose_name='Dia')
     schedule = models.CharField(max_length=50, default='7:00 - 23:00', verbose_name='Horario')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.day
@@ -315,12 +318,12 @@ class LodgingSchedule(models.Model):
     class Meta:
         verbose_name = 'Horario de Atencion de Hospedaje'
         verbose_name_plural = 'Horarios de Atencion de Hospedajes'
-        ordering = ['published_date']
+        ordering = ['register_at']
 
 
 class TourismSiteDestiny(models.Model):
     title = models.CharField(max_length=150, verbose_name='Titulo')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -333,7 +336,7 @@ class TourismSiteDestiny(models.Model):
 
 class TourismSiteType(models.Model):
     title = models.CharField(max_length=150, verbose_name='Titulo')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -347,7 +350,7 @@ class TourismSiteType(models.Model):
 class TourismSiteService(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Item de servicio')
     image = models.ImageField(upload_to='media/',verbose_name='Imagen')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -369,10 +372,10 @@ class TourismSite(models.Model):
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     phone = models.CharField(max_length=20, verbose_name='Telefono')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     address = models.CharField(max_length=150, verbose_name='Direccion', default=' ')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -388,7 +391,7 @@ class TourismSiteMenu(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion', blank=True)
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -403,7 +406,7 @@ class TourismSiteSchedule(models.Model):
     site = models.ForeignKey(TourismSite, on_delete=models.CASCADE, verbose_name='Sitio Turistico')
     day = models.CharField(max_length=2, choices=DAYS, default='1', verbose_name='Dia')
     schedule = models.CharField(max_length=50, default='NA', verbose_name='Horario')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.day
@@ -411,12 +414,12 @@ class TourismSiteSchedule(models.Model):
     class Meta:
         verbose_name = 'Horario de Atencion de Sitio Turistico'
         verbose_name_plural = 'Horarios de Atencion de Sitios Turisticos'
-        ordering = ['published_date']
+        ordering = ['register_at']
 
 
 class TourismRouteDestiny(models.Model):
     title = models.CharField(max_length=150, verbose_name='Titulo')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -438,8 +441,8 @@ class TourismRoute(models.Model):
     description = models.TextField(verbose_name='Descripcion', blank=True)
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     date = models.DateField (verbose_name='Fecha de Evento', blank=True)
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
-    is_active = models.BooleanField(default=True)
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -455,7 +458,7 @@ class TourismRouteMenu(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     description = models.TextField(default='NA', verbose_name='Descripcion', blank=True)
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.title
@@ -468,7 +471,7 @@ class TourismRouteMenu(models.Model):
 
 class Objective(models.Model):
     description = models.TextField(verbose_name='Descripcion', unique=True)
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.description
@@ -481,7 +484,7 @@ class Objective(models.Model):
 
 class Function(models.Model):
     description = models.TextField(verbose_name='Descripcion', unique=True)
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.description
@@ -496,7 +499,7 @@ class Law(models.Model):
     title = models.CharField(max_length=100, verbose_name='Titulo')
     description = models.TextField(verbose_name='Descripcion', unique=True, blank=True,)
     file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, verbose_name='Archivo pdf')
-    published_date = models.DateTimeField(auto_now=True, verbose_name='F. Actualizacion')
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
         return self.description
@@ -505,3 +508,32 @@ class Law(models.Model):
         verbose_name = 'Documento'
         verbose_name_plural = 'Documentos'
         ordering = ['title']
+
+
+GENDER = (('F', 'FEMENINO'), ('M', 'MASCULINO'))
+
+ROLE_USERS = (
+    ('AD', 'ADMINISTRADOR'),
+    ('US', 'USUARIO'),
+)
+
+
+class Client(models.Model):
+    user = models.OneToOneField(User, unique=True, blank=True, null=True, on_delete=models.CASCADE)
+    ci = models.CharField(max_length=12, unique=True, verbose_name='CI')
+    first_name = models.CharField(max_length=100, default='', verbose_name='Nombres')
+    last_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='Apellidos')
+    gender = models.CharField(max_length=2, choices=GENDER, verbose_name=u'Género')
+    rol = models.CharField(max_length=2, choices=ROLE_USERS, default='R', verbose_name='Rol')
+    register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
+
+    def __unicode__(self):
+        return "%s %s" % (self.last_name, self.first_name)
+
+    def __str__(self):
+        return "%s %s" % (self.last_name, self.first_name)
+
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
+        ordering = ['last_name', 'first_name']

@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.shortcuts import render, render_to_response
 from django.contrib import messages
 from django.urls import reverse
@@ -10,34 +10,92 @@ from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agen
     TransportDestination, LodgingRoom, LodgingType, TourismSiteDestiny, LodgingSchedule, TourismRouteDestiny, \
     TourismRoute, TourismSiteSchedule, TransportSchedule, RestaurantSchedule, LodgingService, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantMenu, TransportService, TransportTypeService, TourismSiteMenu, \
-    TourismSiteType, TourismSiteService, TourismRouteMenu, Law
+    TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS
 
 from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, TourismSiteForm, TourismRouteForm, \
     LodgingForm, AgencyServiceForm, AgencyScheduleForm, RestaurantMenuForm, RestaurantScheduleForm, \
     RestaurantServiceForm, TransportDestinationForm, TransportServiceForm, TransportTypeServiceForm, \
     TransportScheduleForm, TourismSiteMenuForm, TourismSiteScheduleForm, TourismSiteDestinyForm, TourismSiteTypeForm, \
     TourismSiteServiceForm, TourismRouteMenuForm, TourismRouteDestinyForm, LodgingRoomForm, LodgingScheduleForm, \
-    LodgingTypeForm, LodgingServiceForm
+    LodgingTypeForm, LodgingServiceForm, ClientForm, ClientFormEdit
 
 
-def register(request):
+def user_index(request):
+    users = Client.objects.all
+    template = 'registration/user/index.html'
+    params = {'users': users, 'role_users': ROLE_USERS}
+
+    if request.is_ajax():
+        template = 'registration/user/users.html'
+        params = {'users': users}
+
+    return render(request, template, params)
+
+
+def user_new(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            new_user = form.save()
-            return HttpResponseRedirect("/books/")
+        formUser = UserCreationForm(request.POST)
+        form = ClientForm(request.POST)
+        if formUser.is_valid() and form.is_valid():
+            user = formUser.save()
+            client = form.save(commit=False)
+            client.user = user
+            client.save()
+
+            if client.rol == 'AD':  # ADMINISTRADOR
+                g = Group.objects.get(id=1)
+                g.user_set.add(user.id)
+            elif client.rol == 'US':  # USUARIO
+                g = Group.objects.get(id=2)
+                g.user_set.add(user.id)
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse(user_index))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
     else:
-        form = UserCreationForm()
-    return render_to_response("registration/register.html", {
+        formUser = UserCreationForm()
+        form = ClientForm()
+    return render(request, 'registration/user/new.html', {
         'form': form,
+        'form_second': formUser,
     })
 
 
-def users_index(request):
-    users = User.objects.all
-    return render(request, 'registration/users_index.html', {
-        'users': users,
+def user_edit(request, id):
+    client = Client.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = ClientFormEdit(request.POST, instance=client)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('user-index'))
+    else:
+        form = ClientFormEdit(instance=client)
+    return render(request, 'registration/user/edit.html', {
+        'form': form,
+        'client': client
     })
+
+
+def user_delete(request, id):
+    client = Client.objects.get(id=id)
+    client.delete()
+    is_exist = Client.objects.filter(id=id).exists()
+
+    if is_exist:
+        message = 'No se pudo eliminar'
+        messages.add_message(request, messages.ERROR, message)
+    else:
+        message = 'Eliminado!'
+        messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse(user_index))
 
 
 def index_admin(request):
@@ -419,7 +477,7 @@ def restaurant_index(request):
 def restaurant_show(request, id):
     restaurant = Restaurant.objects.get(id=id)
     menu = RestaurantMenu.objects.filter(restaurant=id).order_by('price')
-    schedule = RestaurantSchedule.objects.filter(restaurant=id).order_by('published_date')
+    schedule = RestaurantSchedule.objects.filter(restaurant=id).order_by('register_at')
     return render(request, 'tour/restaurants-show.html', {
         'restaurant': restaurant,
         'restaurant_obj': Restaurant,
@@ -738,12 +796,14 @@ def transport_index(request):
 
 def transport_show(request, id):
     transport = Transport.objects.get(id=id)
-    schedule = TransportSchedule.objects.filter(transport=id).order_by('published_date')
+    schedule = TransportSchedule.objects.filter(transport=id).order_by('register_at')
     destinations = TransportDestination.objects.filter(transport__id=id)
+    score = round(transport.score / 2);
     return render(request, 'tour/transports-show.html', {
         'transport': transport,
         'destinations': destinations,
         'schedule': schedule,
+        'score': score,
         'transport_obj': Transport
     })
 
@@ -835,14 +895,8 @@ def transport_destination_index_admin(request):
 
 def transport_destination_show_admin(request, id):
     transport = request.session['transports']
-    destination = TransportDestination.objects.filter(transport=transport).get(id=id)
-    transport_title = Transport.objects.get(id=transport)
     request.session['destination'] = id
-    return render(request, 'admin_page/transports/destinations/show.html', {
-        'destination': destination,
-        'destination_obj': TransportDestination,
-        'transport_title': transport_title
-    })
+    return HttpResponseRedirect(reverse(transport_type_service_index_admin))
 
 
 def transport_destination_new_admin(request):
@@ -864,7 +918,8 @@ def transport_destination_new_admin(request):
         form = TransportDestinationForm(initial={'transport': transport})
     return render(request, 'admin_page/transports/destinations/new.html', {
         'form': form,
-        'transport_title': transport_title
+        'transport_title': transport_title,
+        'transport_id': transport
     })
 
 
@@ -886,7 +941,8 @@ def transport_destination_edit_admin(request, id):
         'destination': destination,
         'form': form,
         'destination_obj': TransportDestination,
-        'transport_title': transport_title
+        'transport_title': transport_title,
+        'transport_id': transport
     })
 
 
@@ -971,17 +1027,22 @@ def transport_service_delete_admin(request, id):
 
 def transport_type_service_index_admin(request):
     transport = request.session['transports']
-    destination = request.session['destination']
-    type_services = TransportTypeService.objects.filter(destination=destination)
     transport_title = Transport.objects.get(id=transport)
-    destination_title = TransportDestination.objects.get(id=destination)
-    destination_id = destination
+    destination_id = request.session['destination']
+    destination_title = TransportDestination.objects.get(id=destination_id)
+    destination = TransportDestination.objects.filter(transport=transport).get(id=destination_id)
+    type_services = TransportTypeService.objects.filter(destination=destination_id)
+
     return render(request, 'admin_page/transports/type_services/index.html', {
         'type_services': type_services,
         'type_service_obj': TransportTypeService,
         'transport_title': transport_title,
         'destination_title': destination_title,
-        'destination_id': destination_id
+        'destination_id': destination_id,
+        'destination': destination,
+        'destination_obj': TransportDestination,
+        'transport_id': transport
+
     })
 
 
@@ -995,7 +1056,8 @@ def transport_type_service_show_admin(request, id):
         'type_service': type_service,
         'type_service_obj': TransportTypeService,
         'transport_title': transport_title,
-        'destination_title': destination_title
+        'destination_title': destination_title,
+        'transport_id': transport
     })
 
 
@@ -1007,7 +1069,7 @@ def transport_type_service_new_admin(request):
     if request.method == 'POST':
         form = TransportTypeServiceForm(request.POST, request.FILES)
         if form.is_valid():
-            type_service = form.save(commit=False)
+            type_service = form.save(commit=True)
             type_service.save()
 
             message = 'Registrado correctamente!'
@@ -1021,14 +1083,15 @@ def transport_type_service_new_admin(request):
     return render(request, 'admin_page/transports/type_services/new.html', {
         'form': form,
         'transport_title': transport_title,
-        'destination_title': destination_title
+        'destination_title': destination_title,
+        'transport_id': transport
     })
 
 
 def transport_type_service_edit_admin(request, id):
     transport = request.session['transports']
     destination = request.session['destination']
-    type_service = TransportTypeService.objects.get(destination=destination)
+    type_service = TransportTypeService.objects.filter(destination=destination).get(id=id)
     transport_title = Transport.objects.get(id=transport)
     destination_title = TransportDestination.objects.get(id=destination)
     if request.method == 'POST':
@@ -1046,7 +1109,8 @@ def transport_type_service_edit_admin(request, id):
         'form': form,
         'type_service_obj': TransportTypeService,
         'transport_title': transport_title,
-        'destination_title': destination_title
+        'destination_title': destination_title,
+        'transport_id': transport
     })
 
 
@@ -1155,7 +1219,7 @@ def tourism_site_index(request):
 
 def tourism_site_show(request, id):
     site = TourismSite.objects.get(id=id)
-    schedule = TourismSiteSchedule.objects.filter(site=id).order_by('published_date')
+    schedule = TourismSiteSchedule.objects.filter(site=id).order_by('register_at')
     return render(request, 'tour/tourism_site-show.html', {
         'site': site,
         'schedule': schedule,
@@ -1899,14 +1963,16 @@ def lodging_index(request):
 
 
 def lodging_show(request, id):
-    lod = Lodging.objects.get(id=id)
+    lodging = Lodging.objects.get(id=id)
     room = LodgingRoom.objects.filter(lodging=id).order_by('price')
-    schedule = LodgingSchedule.objects.filter(lodging=id).order_by('published_date')
+    schedule = LodgingSchedule.objects.filter(lodging=id).order_by('register_at')
+    score = round(lodging.score / 2);
     return render(request, 'tour/lodging-show.html', {
-        'lodging': lod,
+        'lodging': lodging,
         'room': room,
         'schedule': schedule,
-        'lodging_obj': Lodging
+        'lodging_obj': Lodging,
+        'score': score
     })
 
 
@@ -1923,7 +1989,7 @@ def lodging_index_admin(request):
 def lodging_show_admin(request, id):
     lodging = Lodging.objects.get(id=id)
     room = LodgingRoom.objects.filter(lodging=id).order_by('price')
-    schedule = LodgingSchedule.objects.filter(lodging=id).order_by('published_date')
+    schedule = LodgingSchedule.objects.filter(lodging=id).order_by('register_at')
     request.session['lodgings'] = id
     return render(request, 'admin_page/lodgings/show.html', {
         'lodging': lodging,
@@ -1937,7 +2003,7 @@ def lodging_new_admin(request):
     if request.method == 'POST':
         form = LodgingForm(request.POST, request.FILES)
         if form.is_valid():
-            lodging = form.save(commit=False)
+            lodging = form.save(commit=True)
             lodging.save()
 
             message = 'Registrado correctamente!'
@@ -1987,12 +2053,11 @@ def lodging_room_index_admin(request):
     lodging = request.session['lodgings']
     rooms = LodgingRoom.objects.filter(lodging=lodging)
     lodging_title = Lodging.objects.get(id=lodging)
-    lodging_id = lodging
     return render(request, 'admin_page/lodgings/rooms/index.html', {
         'rooms': rooms,
         'room_obj': LodgingRoom,
         'lodging_title': lodging_title,
-        'lodging_id': lodging_id
+        'lodging_id': lodging
     })
 
 
@@ -2003,7 +2068,8 @@ def lodging_room_show_admin(request, id):
     return render(request, 'admin_page/lodgings/rooms/show.html', {
         'room': room,
         'room_obj': LodgingRoom,
-        'lodging_title': lodging_title
+        'lodging_title': lodging_title,
+        'lodging_id': lodging
     })
 
 
@@ -2026,7 +2092,8 @@ def lodging_room_new_admin(request):
         form = LodgingRoomForm(initial={'lodging': lodging})
     return render(request, 'admin_page/lodgings/rooms/new.html', {
         'form': form,
-        'lodging_title': lodging_title
+        'lodging_title': lodging_title,
+        'lodging_id': lodging
     })
 
 
@@ -2048,7 +2115,8 @@ def lodging_room_edit_admin(request, id):
         'room': room,
         'form': form,
         'room_obj': LodgingRoom,
-        'lodging_title': lodging_title
+        'lodging_title': lodging_title,
+        'lodging_id': lodging
     })
 
 
@@ -2108,7 +2176,8 @@ def lodging_schedule_new_admin(request):
         form = LodgingScheduleForm(initial={'lodging': lodging})
     return render(request, 'admin_page/lodgings/schedules/new.html', {
         'form': form,
-        'lodging_title': lodging_title
+        'lodging_title': lodging_title,
+        'lodging_id': lodging
     })
 
 
@@ -2130,7 +2199,8 @@ def lodging_schedule_edit_admin(request, id):
         'schedule': schedule,
         'form': form,
         'schedule_obj': LodgingSchedule,
-        'lodging_title': lodging_title
+        'lodging_title': lodging_title,
+        'lodging_id': lodging
     })
 
 

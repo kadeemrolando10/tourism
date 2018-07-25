@@ -2,7 +2,7 @@
 from django import template
 from django.apps import apps
 
-from tour.models import TransportService, DAYS, TourismRoute, TourismRouteMenu
+from tour.models import TransportService, DAYS, TourismRoute, TourismRouteMenu, ROLE_USERS, GENDER
 from tour.models import TransportTypeService
 from tour.models import TransportDestination
 from tour.models import TourismSiteType
@@ -94,11 +94,25 @@ def get_tourism_route_menu(id):
     id = int(id)
     return TourismRouteMenu.objects.filter(route=id)
 
-@register.simple_tag
-def get_services(id):
-    id = int(id)
-    return Age.objects.filter(site=id)
 
+@register.simple_tag
+def get_gender_user(gender):
+    for status in GENDER:
+        if status[0] == gender:
+            return status[1]
+    return None
+
+
+@register.simple_tag
+def get_role_user(rol):
+    for status in ROLE_USERS:
+        if status[0] == rol:
+            return status[1]
+    return None
+
+@register.filter(name='times')
+def times(number):
+    return range(number)
 
 @register.simple_tag
 def get_response_value(diagnose, formdiagnose, q):

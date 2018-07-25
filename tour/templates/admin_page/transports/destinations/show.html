@@ -14,7 +14,7 @@
     <div class="col-md-7 box box-body">
         <p><strong>{% get_field_name destination_obj 'title' %}</strong> {{ destination.title }}</p>
         <p><strong>{% get_field_name destination_obj 'schedules_out' %}</strong> {{ destination.schedules_out }}</p>
-        <p><strong>{% get_field_name destination_obj 'published_date' %}</strong> {{ destination.published_date }}</p>
+        <p><strong>{% get_field_name destination_obj 'register_at' %}</strong> {{ destination.register_at }}</p>
          <hr>
         <p>
             {% url 'transports-type-services-index-admin' as type_url %}

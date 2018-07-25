@@ -1,7 +1,7 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-    <a href="{% url 'events-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
+<a href="{% url 'events-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
     <i class="fa fa-arrow-circle-left"></i></a> Agregando Evento
 {% endblock %}
 
@@ -20,8 +20,8 @@
 </div>
 {% endblock %}
 {% block code_js %}
-    {% include 'partials/_url_gmaps.html' %}
-    <script type="text/javascript">
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
         var map;
         var markers = [];
         function initialize() {
@@ -63,6 +63,9 @@
         };
 
 
+        $( ".datepicker" ).datepicker({
+          startDate: '-3d',
+        });
 
-    </script>
+</script>
 {% endblock %}

@@ -16,7 +16,7 @@
         <tr>
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name destination_obj 'title' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name destination_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name destination_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -26,7 +26,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ destination.title }}</td>
-            <td>{{ destination.published_date }}</td>
+            <td>{{ destination.register_at }}</td>
             <td class="text-center">
                 {% url 'tourism_routes-destination-show-admin' destination.id as view_url %}
                 {% include 'partials/actions/view.html' with url=view_url %}

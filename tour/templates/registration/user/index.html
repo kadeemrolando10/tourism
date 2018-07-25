@@ -1,0 +1,19 @@
+{% extends 'admin.html' %}
+{% load utils %}
+
+{% block content %}
+<a class="btn btn-info float-right" href="{% url 'user-new'%}">Registrar usuario</a>
+<nav aria-label="breadcrumb" class="alert-warning">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <h6 class="page">Usuarios</h6>
+    </li>
+  </ol>
+</nav>
+
+<div class="container">
+    <div class="employees-content">
+        {% include 'registration/user/users.html' %}
+    </div>
+</div>
+{% endblock %}

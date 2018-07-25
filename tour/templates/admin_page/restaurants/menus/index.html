@@ -22,7 +22,7 @@
             <th data-field="image" data-sortable="true">{% get_field_name menu_obj 'image' %}</th>
             <th data-field="description" data-sortable="true">{% get_field_name menu_obj 'description' %}</th>
             <th data-field="price" data-sortable="true">{% get_field_name menu_obj 'price' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name menu_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name menu_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -35,7 +35,7 @@
             <td><img src="{{ menu.image.url }}" width="400px"></td>
             <td>{{ menu.description }}</td>
             <td>{{ menu.price }}</td>
-            <td>{{ menu.published_date }}</td>
+            <td>{{ menu.register_at }}</td>
             <td class="text-center">
 
                 {% url 'restaurants-menus-edit-admin' menu.id as edit_url %}

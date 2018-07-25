@@ -16,7 +16,7 @@
         <tr>
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name type_obj 'title' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name type_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name type_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -26,7 +26,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ type.title }}</td>
-            <td>{{ type.published_date }}</td>
+            <td>{{ type.register_at }}</td>
             <td class="text-center">
                 {% url 'tourism_sites-types-edit-admin' type.id as edit_url %}
                 {% include 'partials/actions/edit.html' with url=edit_url %}

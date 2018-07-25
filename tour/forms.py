@@ -1,11 +1,12 @@
 from django import forms
-from django.forms import CheckboxSelectMultiple
+from django.forms import CheckboxSelectMultiple, CheckboxInput
 
 from tour_site.services import BaseForm
 from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, TourismRoute, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantSchedule, RestaurantMenu, TransportDestination, TransportService, \
     TransportTypeService, TransportSchedule, TourismSiteMenu, TourismSiteSchedule, TourismSiteDestiny, TourismSiteType, \
-    TourismSiteService, TourismRouteMenu, TourismRouteDestiny, LodgingRoom, LodgingSchedule, LodgingType, LodgingService
+    TourismSiteService, TourismRouteMenu, TourismRouteDestiny, LodgingRoom, LodgingSchedule, LodgingType, \
+    LodgingService, Client
 
 
 class AgencyForm(BaseForm):
@@ -13,10 +14,13 @@ class AgencyForm(BaseForm):
         super(AgencyForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
+        self.fields["service"].widget = CheckboxSelectMultiple()
+        self.fields["service"].queryset = AgencyService.objects.all()
 
     class Meta:
         model = Agency
         fields = '__all__'
+        exclude = ['is_active']
 
 
 class AgencyServiceForm(BaseForm):
@@ -48,24 +52,27 @@ class EventForm(BaseForm):
         super(EventForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
+        self.fields["event_date"].widget.attrs['class'] = 'datepicker'
 
     class Meta:
         model = Event
         fields = '__all__'
+        exclude = ['is_active']
 
 
 class LodgingForm(BaseForm):
+
     def __init__(self, *args, **kwargs):
         super(LodgingForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
-
         self.fields["service"].widget = CheckboxSelectMultiple()
         self.fields["service"].queryset = LodgingService.objects.all()
 
     class Meta:
         model = Lodging
         fields = '__all__'
+        exclude = ['is_active']
 
 
 class LodgingRoomForm(BaseForm):
@@ -109,10 +116,13 @@ class RestaurantForm(BaseForm):
         super(RestaurantForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
+        self.fields["service"].widget = CheckboxSelectMultiple()
+        self.fields["service"].queryset = RestaurantService.objects.all()
 
     class Meta:
         model = Restaurant
         fields = '__all__'
+        exclude = ['is_active']
 
 
 class RestaurantMenuForm(BaseForm):
@@ -156,6 +166,7 @@ class TourismRouteForm(BaseForm):
     class Meta:
         model = TourismRoute
         fields = '__all__'
+        exclude = ['is_active']
         labels = {
             'destination': '',
         }
@@ -187,10 +198,13 @@ class TourismSiteForm(BaseForm):
         super(TourismSiteForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
+        self.fields["service"].widget = CheckboxSelectMultiple()
+        self.fields["service"].queryset = TourismSiteService.objects.all()
 
     class Meta:
         model = TourismSite
         fields = '__all__'
+        exclude = ['is_active']
         labels = {
             'destination': '',
         }
@@ -250,6 +264,7 @@ class TransportForm(BaseForm):
     class Meta:
         model = Transport
         fields = '__all__'
+        exclude = ['is_active']
 
 
 class TransportDestinationForm(BaseForm):
@@ -263,6 +278,7 @@ class TransportDestinationForm(BaseForm):
             'transport': forms.HiddenInput(),
         }
 
+
 class TransportServiceForm(BaseForm):
     class Meta:
         model = TransportService
@@ -270,6 +286,11 @@ class TransportServiceForm(BaseForm):
 
 
 class TransportTypeServiceForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(TransportTypeServiceForm, self).__init__(*args, **kwargs)
+        self.fields["service"].widget = CheckboxSelectMultiple()
+        self.fields["service"].queryset = TransportService.objects.all()
+
     class Meta:
         model = TransportTypeService
         fields = '__all__'
@@ -291,3 +312,29 @@ class TransportScheduleForm(BaseForm):
         widgets = {
             'transport': forms.HiddenInput(),
         }
+
+
+class ClientForm(BaseForm):
+    class Meta:
+        model = Client
+        exclude = ['user']
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        if first_name:
+            if not first_name.replace(' ', '').isalpha():
+                raise forms.ValidationError('Los Nombres no puede contener números')
+            return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+        if last_name:
+            if not last_name.replace(' ', '').isalpha():
+                raise forms.ValidationError('Los apellidos no puede contener números')
+            return last_name
+
+
+class ClientFormEdit(BaseForm):
+    class Meta:
+        model = Client
+        exclude = ['user', 'rol']

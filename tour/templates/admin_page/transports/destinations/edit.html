@@ -1,10 +1,23 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-<a href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Modificando Destinos de Transportes
-<br>
-<h6 class="title_main">{{transport_title}}</h6>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Transportes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip" data-placement="right"
+               title="{{transport_title}}">{{transport_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Destinos">Destinos</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

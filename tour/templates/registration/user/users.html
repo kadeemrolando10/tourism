@@ -1,0 +1,40 @@
+{% load utils %}
+<table id="users-table" class="table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th data-field="name" data-sortable="true">Nombres y Apellidos</th>
+        <th data-field="ci" data-sortable="true">CI</th>
+        <th data-field="rol" data-sortable="true">Rol</th>
+        <th class="text-center">Opciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+            {% if user.user.is_active %}
+            <span class="fa fa-circle text-success m-r-10" data-tooltip="tooltip"
+                  title="Cuenta Activa"></span>
+            {% else %}
+            <span class="fa fa-circle text-warning m-r-10" data-tooltip="tooltip"
+                  title="Cuenta Desactivada"></span>
+            {% endif %}
+            {{ user }}
+        </td>
+        <td>{{ user.ci }}</td>
+        <td>
+            {% get_role_user user.rol %}
+        </td>
+        <td class="text-center">
+            {% url 'user-edit' user.id as edit_url %}
+            {% include 'partials/actions/edit.html' with url=edit_url %}
+            {% url 'user-delete' user.id as delete_url %}
+            {% include 'partials/actions/delete.html' with url=delete_url %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

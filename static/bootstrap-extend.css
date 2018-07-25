@@ -13877,3 +13877,7 @@ label
 		font-size: 12px !important;
 	}
 }
+.last-page{
+    font-weight:bold;
+    color:orange;
+}

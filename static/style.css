@@ -937,7 +937,7 @@ li {
 }
 
 .date-map-area > a:last-child {
-    background-color: #1E90FF;
+    background-color: #7643ea;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -971,7 +971,7 @@ li {
 .feature-events-details-btn > a {
     width: 65px;
     height: 50px;
-    background-color: #2F4F4F;
+    background-color: #ffc107;
     display: block;
     font-size: 24px;
     color: #fff;
@@ -1280,7 +1280,7 @@ li {
 
 .opening-hours-widget {
     padding: 50px 30px;
-    background-color: #007bff;
+    background-color: #ffa500;
     position: relative;
     z-index: 1;
 }
@@ -1371,7 +1371,7 @@ li {
 }
 
 .single-listing-nav li a {
-    background-color: #007bff;
+    background-color: #663aca;
     padding: 10px 10px;
     font-size: 14px;
     display: radius;
@@ -1670,7 +1670,6 @@ li {
 
 .img_transport{
 	width:300px;
-	height:150px;
 }
 
 .center1{
@@ -1796,9 +1795,83 @@ body {
 
 .organigrama > ul > li > ul > li > a {
   width: 8em;
-}}
+}
 
-.imgsites{
-width:;
-height:;
+.img-lodging {
+    max-width: 400px;
+}
+
+.border-map{
+    border-radius: 16px 16px 16px 16px;
+    -moz-border-radius: 16px 16px 16px 16px;
+    -webkit-border-radius: 16px 16px 16px 16px;
+    border: 11px groove #663aca;
+}
+
+.underline{
+    color: #663aca;
+    background-color: transparent;
+    font-weight: bolder;
+    text-shadow: -1px 0 #000, 1px 0 #000, 0 1px #000, 0 -1px #000;
+    animation: blinker 1s linear infinite;
+}
+
+.underline-star{
+    color: #ffa500;
+    background-color: transparent;
+    font-weight: bolder;
+    text-shadow: -1px 0 #000, 1px 0 #000, 0 1px #000, 0 -1px #000;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    color: #ececec;
+  }
+}
+
+.les{
+    padding-bottom:5px;
+}
+
+.link{
+    font-size:11px;
+}
+.yellow{
+    background-color: #ffc107;
+}
+@media (min-width: 992px) {
+.img-lodging{
+    max-width:360px;
+}
+.img_transport {
+    width: 315px;
+}
+}
+
+@media (max-width: 992px) {
+.img-lodging{
+    max-width:300px;
+}
+.img_transport {
+    width: 295px;
+}
+}
+
+@media (max-width: 768px) {
+.img-lodging{
+    max-width:265px;
+}
+.img_transport {
+    width: 205px;
+}
+}
+
+@media (max-width: 576px) {
+.img-lodging{
+    max-width:210px;
+}
+.img_transport {
+    width: 110px;
+}
 }

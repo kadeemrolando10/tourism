@@ -4,11 +4,25 @@
 {% load static %}
 
 {% block content-header %}
-<a href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Destinos de Transporte
-    <h6 class="title_main">{{transport_title}}</h6>
-    {% url 'transports-destination-new-admin' as view_url %}
-    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+<div class="float-right">
+    <span>
+        {% url 'transports-destination-new-admin' as view_url %}
+        {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Hospedajes">Transportes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">{{transport_title}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Destinos</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -19,7 +33,7 @@
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name destination_obj 'title' %}</th>
             <th data-field="departures" data-sortable="true">{% get_field_name destination_obj 'schedules_out' %}</th>
-            <th data-field="published_date" data-sortable="true">{% get_field_name destination_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name destination_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -30,7 +44,7 @@
             <td>{{ forloop.counter }}</td>
             <td>{{ destination.title }}</td>
             <td>{{ destination.schedules_out }}</td>
-            <td>{{ destination.published_date }}</td>
+            <td>{{ destination.register_at }}</td>
             <td class="text-center">
                 {% url 'transports-destination-show-admin' destination.id as view_url %}
                 {% include 'partials/actions/view.html' with url=view_url %}

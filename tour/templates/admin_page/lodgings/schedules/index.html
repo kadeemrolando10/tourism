@@ -1,15 +1,27 @@
 {% extends 'admin.html' %}
-
 {% load utils %}
 {% load static %}
 
-
 {% block content-header %}
-<a href="{% url 'lodgings-show-admin' lodging_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Horarios de Atencion de Hospedaje
-    <h6 class="title_main">{{lodging_title}}</h6>
-    {% url 'lodgings-schedules-new-admin' as view_url %}
-    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+<div class="float-right">
+    <span>
+        {% url 'lodgings-schedules-new-admin' as view_url %}
+        {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'lodgings-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Hospedajes">Hospedajes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'lodgings-show-admin' lodging_id %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">{{lodging_title}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Horarios</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -20,7 +32,7 @@
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name schedule_obj 'day' %}</th>
             <th data-field="address" data-sortable="true">{% get_field_name schedule_obj 'schedule' %}</th>
-            <th data-field="phone" data-sortable="true">{% get_field_name schedule_obj 'published_date' %}</th>
+            <th data-field="register_at" data-sortable="true">{% get_field_name schedule_obj 'register_at' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -31,7 +43,7 @@
             <td>{{ forloop.counter }}</td>
             <td>{% get_days schedule.day %}</td>
             <td>{{ schedule.schedule }}</td>
-            <td>{{ schedule.published_date }}</td>
+            <td>{{ schedule.register_at }}</td>
 
             <td class="text-center">
                 {% url 'lodgings-schedules-edit-admin' schedule.id as edit_url %}

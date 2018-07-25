@@ -1,8 +1,14 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-<a href="{% url 'lodgings-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Modificando Hospedaje
+<nav aria-label="breadcrumb" class="alert-warning">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a class="page" href="{% url 'lodgings-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">Hospedajes</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+  </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
