@@ -1,8 +1,15 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-    <a href="{% url 'tourism_routes-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
-    <i class="fa fa-arrow-circle-left"></i></a> Agregando Localizacion de Rutas Turisticos
+ <nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'tourism_routes-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Localizacion de Rutas Turisticos</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Agregando</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

@@ -388,7 +388,6 @@
             </div>
             <!-- sidebar menu -->
             <ul class="sidebar-menu" data-widget="tree">
-                <div>text</div>
                 <li class="header nav-small-cap oldclass" id="mydiv">ADMINISTRACION</li>
                 <li class="active">
                     <a href="{% url 'user-index' %}">
@@ -483,7 +482,12 @@
                     <ul class="treeview-menu">
                         <li class="active">
                             <a href="{% url 'tourism_sites-destination-index-admin'%}"><i
-                                    class="glyphicon glyphicon-cutlery"></i>Localizacion</a></li>
+                                    class="glyphicon glyphicon-map-marker"></i>Localizacion</a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url 'tourism_sites-index-admin'%}"><i
+                                    class="glyphicon glyphicon-camera"></i>Sitios Turisticos</a>
+                        </li>
                         <li class="active">
                             <a href="{% url 'tourism_sites-types-index-admin'%}"><i class="fa fa-hand-paper-o"></i>Tipos</a>
                         </li>
@@ -501,8 +505,13 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active">
+                            <a href="{% url 'tourism_routes-index-admin'%}"><i
+                                    class="glyphicon glyphicon-road"></i>Rutas Turisticas</a>
+                        </li>
+                        <li class="active">
                             <a href="{% url 'tourism_routes-destination-index-admin'%}"><i
-                                    class="glyphicon glyphicon-cutlery"></i>Localizacion</a></li>
+                                    class="glyphicon glyphicon-map-marker"></i>Localizaciones</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

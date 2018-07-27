@@ -3,13 +3,26 @@
 {% load utils %}
 {% load static %}
 
-
 {% block content-header %}
-<a href="{% url 'agencies-show-admin' agency_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Horarios de Atencion de Agencia
-    <h6 class="title_main">{{agency_title}}</h6>
-    {% url 'agencies-schedules-new-admin' as view_url %}
-    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+<div class="float-right">
+    <span>
+        {% url 'agencies-schedules-new-admin' as view_url %}
+        {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Agencias">Agencias</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'agencies-show-admin' agency_id %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">{{agency_title}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Horarios</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

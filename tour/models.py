@@ -14,16 +14,27 @@ DAYS = (
 )
 
 
+MENU = (
+    ('EN', 'ENTRADAS'),
+    ('PO', u'POSTRES'),
+    ('DE', u'DESAYUNO'),
+    ('SE', u'SEGUNDOS'),
+    ('BE', u'BEBIDAS'),
+    ('CV', u'CARTA DE VINOS'),
+    ('SO', u'SOPAS'),
+)
+
+
 class Agency(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Titulo')
     address = models.CharField(max_length=150, default=' ', verbose_name='Direccion')
-    score = models.DecimalField(decimal_places=1, max_digits=2, verbose_name='Calificacion', blank=True)
-    phone = models.CharField(max_length=20, verbose_name='Telefono')
-    web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
+    phone = models.CharField(max_length=20, verbose_name='Telefono')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
+    web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
+    score = models.DecimalField(decimal_places=1, max_digits=2, verbose_name='Calificacion', blank=True)
     is_active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -38,11 +49,12 @@ class Agency(models.Model):
 class AgencyService(models.Model):
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name='Agencia')
     title = models.CharField(max_length=150, verbose_name='Titulo')
-    duration = models.CharField(max_length=150, default='S/N', verbose_name='Duracion', blank=True)
-    departures = models.CharField(max_length=150, default='S/N', verbose_name='Dias de expedicion')
-    schedule = models.CharField(max_length=150, default='S/N', verbose_name='Horas de Expedicion', blank=True)
-    place_start = models.CharField(max_length=150, default='S/N', verbose_name='Lugar de Inicio')
-    places_to_known = models.CharField(max_length=500, default='S/N', verbose_name='Lugares a conocer')
+    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
+    duration = models.IntegerField(default=1, verbose_name='Duracion', blank=True)
+    departures = models.CharField(max_length=350, default=' ', verbose_name='Dias de expedicion')
+    schedule = models.CharField(max_length=350, default='8:00', verbose_name='Horas de partida', blank=True)
+    place_start = models.CharField(max_length=350, default=' ', verbose_name='Ubicacion')
+    places_to_known = models.TextField(default=' ', verbose_name='Descripcion')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -142,9 +154,10 @@ class RestaurantSchedule(models.Model):
 class RestaurantMenu(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, verbose_name='Restaurant')
     title = models.CharField(max_length=150, default='NA', verbose_name='Titulo')
+    category = models.CharField(max_length=2, choices=MENU, default='1', verbose_name='Categoria')
     image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
-    description = models.TextField(verbose_name='Descripcion', blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=5.1, verbose_name='Precio')
+    description = models.TextField(verbose_name='Descripcion', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):

@@ -1,19 +1,25 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-<a href="{% url 'tourism_routes-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Modificando Ruta Turistica
-<h6 class="title_main">{{destiny_title}}</h6>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'tourism_routes-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Rutas Turisticas</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
-            <div class="white-box">
-                {% include 'partials/_partial_form_horizontal.html' %}
-            </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
         </div>
-        <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
                 <div class="white-box">
@@ -24,18 +30,18 @@
             <br>
             <div class="col-md-12">
                 <div class="white-box">
-                     <h6>Ubicacion Destino</h6>
+                    <h6>Ubicacion Destino</h6>
                     <div id="gmaplocation2" class="map"></div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
 {% endblock %}
 
 {% block code_js %}
-    {% include 'partials/_url_gmaps.html' %}
-    <script type="text/javascript">
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
         var map;
         var map2;
         var markers = [];
@@ -120,5 +126,6 @@
         window.onload = function () {
             initialize()
         };
-    </script>
+
+</script>
 {% endblock %}

@@ -1,10 +1,23 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-    <a href="{% url 'agencies-services-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
-    <i class="fa fa-arrow-circle-left"></i></a> Agregando Servicio de Agencia
-<br>
-<h6 class="title_main">{{agency_title}}</h6>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Agencias">Agencias</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'agencies-show-admin' agency_id %}" data-tooltip="tooltip" data-placement="right"
+               title="Agencias">{{agency_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'agencies-services-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Paqietes">Paquetes turisticos</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Agregando</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

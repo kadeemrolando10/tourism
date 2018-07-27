@@ -22,34 +22,38 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-             {% for d in destiny %}
+        <div class="row justify-content-between">
+            {% for d in destiny %}
             {% get_tourism_route d.id as des %}
-             {% if des %}
+            {% if des %}
             <div class="col-12 text-center section-heading">
                 <h4>{{d.title}}</h4>
             </div>
             {% endif %}
             {% for s in des %}
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-features-area mb-50">
-                    <img class="imgstyle" src="{{ s.image.url }}" alt="">
-                    <!-- Price -->
-                    <div class="price-start">
-                        <p>{{ s.score }}</p>
-                    </div>
-                    <div class="feature-content d-flex align-items-center justify-content-between">
-                        <div class="feature-title">
-
-                            <h5>{{ s.title }}</h5>
-                            <p><i class="fa fa-phone" aria-hidden="true"></i>.
-                                {{ s.date }}
-                            </p>
+            <div class="col-12 col-md-6 col-lg-4 mb-3 d-flex justify-content-center">
+                <div class="blog-card spring-fever "
+                     style="background: url({{ s.image.url }}); background-repeat: no-repeat; background-size: 100% 100%;">
+                    <div class="title-content">
+                        <h5>{{ s.title }}</h5>
+                        <hr/>
+                        <div class="intro">
+                            <h6>
+                                {% get_rounded s.score as score %}
+                                {% for i in score|times %}
+                                <i class="fa fa-star underline-star"></i>
+                                {% endfor %}
+                            </h6>
                         </div>
-                        <div class="feature-favourite">
-                            <a href="{% url 'tourism_routes-show' s.id %}"><i class="fa fa-plus"></i></a>
-                        </div>
+                    </div><!-- /.title-content -->
+                    <div class="card-info">
+                        <div class="intro">Es visitado muy frecuentemente en fecha: {{ s.date }}</div>
+                        <br>
+                        <a class="btn btn-warning" href="{% url 'tourism_routes-show' s.id %}">Mas detalles
+                        </a>
                     </div>
+                    <div class="gradient-overlay"></div>
+                    <div class="color-overlay"></div>
                 </div>
             </div>
             {% endfor %}

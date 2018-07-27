@@ -1,8 +1,14 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-<a href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Modificando Agencia
+<nav aria-label="breadcrumb" class="alert-warning">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">Agencias</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+  </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

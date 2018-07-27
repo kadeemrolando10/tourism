@@ -1,10 +1,23 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-    <a href="{% url 'restaurants-schedules-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
-    <i class="fa fa-arrow-circle-left"></i></a> Agregando Horario a Restaurante
-<br>
-<h6 class="title_main">{{restaurant_title}}</h6>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'restaurants-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Hospedajes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip" data-placement="right"
+               title="Hospedajes">{{restaurant_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'restaurants-schedules-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Habitaciones">Horario</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Agregando</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

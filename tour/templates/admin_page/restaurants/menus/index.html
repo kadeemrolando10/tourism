@@ -5,11 +5,25 @@
 
 
 {% block content-header %}
-<a href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Menu de Restaurante
-    <h6 class="title_main">{{restaurant_title}}</h6>
-    {% url 'restaurants-menus-new-admin' as view_url %}
-    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+<div class="float-right">
+    <span>
+        {% url 'restaurants-menus-new-admin' as view_url %}
+        {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'restaurants-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Hospedajes">Hospedajes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">{{restaurant_title}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Menu</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -20,6 +34,7 @@
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name menu_obj 'title' %}</th>
             <th data-field="image" data-sortable="true">{% get_field_name menu_obj 'image' %}</th>
+            <th data-field="category" data-sortable="true">{% get_field_name menu_obj 'category' %}</th>
             <th data-field="description" data-sortable="true">{% get_field_name menu_obj 'description' %}</th>
             <th data-field="price" data-sortable="true">{% get_field_name menu_obj 'price' %}</th>
             <th data-field="register_at" data-sortable="true">{% get_field_name menu_obj 'register_at' %}</th>
@@ -32,7 +47,8 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ menu.title }}</td>
-            <td><img src="{{ menu.image.url }}" width="400px"></td>
+            <td class="text-center"><img src="{{ menu.image.url }}" height="100px" max-width="150px"></td>
+            <td>{% get_category menu.category %}</td>
             <td>{{ menu.description }}</td>
             <td>{{ menu.price }}</td>
             <td>{{ menu.register_at }}</td>

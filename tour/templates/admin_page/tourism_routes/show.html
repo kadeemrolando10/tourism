@@ -4,9 +4,21 @@
 {% load static %}
 
 {% block content-header %}
-<a href="{% url 'tourism_routes-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Mostrando Rutas Turisticas
- <h6 class="title_main">{{destiny_title}}</h6>
+<div class="float-right">
+    <span>
+        {% url 'tourism_routes-menus-index-admin' as view_url %}
+        {% include 'partials/actions/menu.html' with type='button' url=view_url title='Ir a Menu' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'tourism_routes-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Rutas Turisticas</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -21,27 +33,23 @@
         <p><strong>{% get_field_name route_obj 'lat_destination' %}</strong> {{ route.lat_destination }}</p>
         <p><strong>{% get_field_name route_obj 'lng_destination' %}</strong> {{ route.lng_destination }}</p>
         <p><strong>{% get_field_name route_obj 'register_at' %}</strong> {{ route.register_at }}</p>
-        <hr>
-        <p>
-            {% url 'tourism_routes-menus-index-admin' as view_url %}
-            {% include 'partials/actions/menu.html' with type='button' url=view_url title='Ir a Menu' %}
-        </p>
     </div>
     <div class="col-md-8 box box-body" onload="initialize()">
         <div class="white-box">
-             <p><strong>Ubicacion</strong></p>
+            <p><strong>Ubicacion</strong></p>
             <div id="gmap" class="map"></div>
-        </div><br>
+        </div>
+        <br>
         <div class="white-box">
-             <p><strong>{% get_field_name route_obj 'image' %}</strong></p>
-             <img src="{{ route.image.url }}">
+            <p><strong>{% get_field_name route_obj 'image' %}</strong></p>
+            <img src="{{ route.image.url }}">
         </div>
     </div>
 </div>
 {% endblock %}
 {% block code_js %}
-    {% include 'partials/_url_gmaps.html' %}
-    <script src="{% static 'assets/vendor_components/gmaps/gmaps.min.js' %}"></script>
+{% include 'partials/_url_gmaps.html' %}
+<script src="{% static 'assets/vendor_components/gmaps/gmaps.min.js' %}"></script>
 <script type="text/javascript">
         var map;
         var lat_or = '{{ route.lat_origin }}';
@@ -53,7 +61,7 @@
                 el: '#gmap',
                 lat: lat_or,
                 lng: lng_or,
-                zoom : 10,
+                gestureHandling: 'greedy'
               });
             map.addMarker({
                 lat: lat_or,
@@ -75,10 +83,11 @@
                 origin: [lat_or, lng_or ],
                 destination: [lat_des, lng_des],
                 travelMode: 'walking',
-                strokeColor: '#000',
+                strokeColor: '#lime',
                 strokeOpacity: 0.6,
-                strokeWeight: 6
+                strokeWeight: 6,
               });
+            map.fitZoom();
         }
 
         window.onload = function () {
@@ -87,6 +96,7 @@
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         })
+
 
 </script>
 {% endblock %}

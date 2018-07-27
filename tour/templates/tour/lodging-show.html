@@ -141,9 +141,10 @@
         function initialize() {
             var myLatlng = new google.maps.LatLng(lat, lng);
             var myOptions = {
-                zoom: 17,
+                zoom: 18,
                 center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                gestureHandling: 'greedy'
             };
 
             map = new google.maps.Map(document.getElementById("gmap"), myOptions);

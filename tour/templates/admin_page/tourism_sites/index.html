@@ -4,11 +4,15 @@
 {% load static %}
 
 {% block content-header %}
-<a href="{% url 'tourism_sites-destination-show-admin' destiny_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Sitios Turisticos
-<h6 class="title_main">{{destiny_title}}</h6>
+<div class="float-right">
     {% url 'tourism_sites-new-admin' as view_url %}
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active page" aria-current="page" >Sitios Turisticos</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

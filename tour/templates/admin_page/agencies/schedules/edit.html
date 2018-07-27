@@ -1,6 +1,24 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Agencias">Agencias</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'agencies-show-admin' agency_id %}" data-tooltip="tooltip" data-placement="right"
+               title="{{agency_title}}">{{agency_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'agencies-schedules-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Horarios">Horarios</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+    </ol>
+</nav>
+
 <a href="{% url 'agencies-schedules-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
         class="fa fa-arrow-circle-left"></i></a> Modificando Horario de  Atencion a Agencia
 <br>

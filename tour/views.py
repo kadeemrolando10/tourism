@@ -145,11 +145,13 @@ def agency_show(request, id):
     agency = Agency.objects.get(id=id)
     services = AgencyService.objects.filter(agency=id)
     schedule = AgencySchedule.objects.filter(agency=id)
+    score = round(agency.score/2);
     return render(request, 'tour/agencies-show.html', {
         'agency': agency,
         'agency_obj': Agency,
         'services': services,
-        'schedule': schedule
+        'schedule': schedule,
+        'score': score
     })
 
 
@@ -228,12 +230,11 @@ def agency_service_index_admin(request):
     agency = request.session['agency']
     services = AgencyService.objects.filter(agency=agency)
     agency_title = Agency.objects.get(id=agency)
-    agency_id = agency
     return render(request, 'admin_page/agencies/services/index.html', {
         'services': services,
         'service_obj': AgencyService,
         'agency_title': agency_title,
-        'agency_id': agency_id
+        'agency_id': agency
     })
 
 
@@ -244,7 +245,8 @@ def agency_service_show_admin(request, id):
     return render(request, 'admin_page/agencies/services/show.html', {
         'service': service,
         'service_obj': AgencyService,
-        'agency_title': agency_title
+        'agency_title': agency_title,
+        'agency_id': agency
     })
 
 
@@ -267,7 +269,8 @@ def agency_service_new_admin(request):
         form = AgencyServiceForm(initial={'agency': agency})
     return render(request, 'admin_page/agencies/services/new.html', {
         'form': form,
-        'agency_title': agency_title
+        'agency_title': agency_title,
+        'agency_id': agency
     })
 
 
@@ -289,7 +292,8 @@ def agency_service_edit_admin(request, id):
         'service': service,
         'form': form,
         'service_obj': AgencyService,
-        'agency_title': agency_title
+        'agency_title': agency_title,
+        'agency_id': agency
     })
 
 
@@ -310,12 +314,11 @@ def agency_schedule_index_admin(request):
     agency = request.session['agency']
     schedules = AgencySchedule.objects.filter(agency=agency)
     agency_title = Agency.objects.get(id=agency)
-    agency_id = agency
     return render(request, 'admin_page/agencies/schedules/index.html', {
         'schedules': schedules,
         'schedule_obj': AgencySchedule,
         'agency_title': agency_title,
-        'agency_id': agency_id
+        'agency_id': agency
     })
 
 
@@ -326,7 +329,8 @@ def agency_schedule_show_admin(request, id):
     return render(request, 'admin_page/agencies/schedules/show.html', {
         'schedule': schedule,
         'schedule_obj': AgencySchedule,
-        'agency_title': agency_title
+        'agency_title': agency_title,
+        'agency_id': agency
     })
 
 
@@ -349,7 +353,8 @@ def agency_schedule_new_admin(request):
         form = AgencyScheduleForm(initial={'agency': agency})
     return render(request, 'admin_page/agencies/schedules/new.html', {
         'form': form,
-        'agency_title': agency_title
+        'agency_title': agency_title,
+        'agency_id': agency
     })
 
 
@@ -371,7 +376,8 @@ def agency_schedule_edit_admin(request, id):
         'schedule': schedule,
         'form': form,
         'schedule_obj': AgencySchedule,
-        'agency_title': agency_title
+        'agency_title': agency_title,
+        'agency_id': agency
     })
 
 
@@ -478,15 +484,33 @@ def restaurant_show(request, id):
     restaurant = Restaurant.objects.get(id=id)
     menu = RestaurantMenu.objects.filter(restaurant=id).order_by('price')
     schedule = RestaurantSchedule.objects.filter(restaurant=id).order_by('register_at')
+    score = round(restaurant.score / 2);
+
+    soups = RestaurantMenu.objects.filter(restaurant=id, category='SO').order_by('price')
+    entrances = RestaurantMenu.objects.filter(restaurant=id, category='EN').order_by('price')
+    seconds = RestaurantMenu.objects.filter(restaurant=id, category='SE').order_by('price')
+    sweets = RestaurantMenu.objects.filter(restaurant=id, category='PO').order_by('price')
+    wines = RestaurantMenu.objects.filter(restaurant=id, category='CV').order_by('price')
+    breakfast = RestaurantMenu.objects.filter(restaurant=id, category='DE').order_by('price')
+    drinks = RestaurantMenu.objects.filter(restaurant=id, category='BE').order_by('price')
+
     return render(request, 'tour/restaurants-show.html', {
         'restaurant': restaurant,
         'restaurant_obj': Restaurant,
         'schedule': schedule,
         'menu': menu,
+        'score': score,
+        'soups': soups,
+        'entrances': entrances,
+        'seconds': seconds,
+        'sweets': sweets,
+        'wines': wines,
+        'breakfast': breakfast,
+        'drinks': drinks
     })
 
+    # RESTAURANTS ADMINISTRADOR
 
-# RESTAURANTS ADMINISTRADOR
 
 def restaurant_index_admin(request):
     restaurants = Restaurant.objects.all
@@ -509,7 +533,7 @@ def restaurant_new_admin(request):
     if request.method == 'POST':
         form = RestaurantForm(request.POST, request.FILES)
         if form.is_valid():
-            restaurant = form.save(commit=False)
+            restaurant = form.save(commit=True)
             restaurant.save()
 
             message = 'Registrado correctamente!'
@@ -559,12 +583,11 @@ def restaurant_menu_index_admin(request):
     restaurant = request.session['restaurants']
     menus = RestaurantMenu.objects.filter(restaurant=restaurant)
     restaurant_title = Restaurant.objects.get(id=restaurant)
-    restaurant_id = restaurant
     return render(request, 'admin_page/restaurants/menus/index.html', {
         'menus': menus,
         'menu_obj': RestaurantMenu,
         'restaurant_title': restaurant_title,
-        'restaurant_id': restaurant_id
+        'restaurant_id': restaurant
     })
 
 
@@ -575,7 +598,8 @@ def restaurant_menu_show_admin(request, id):
     return render(request, 'admin_page/restaurants/menus/show.html', {
         'menu': menu,
         'menu_obj': RestaurantMenu,
-        'restaurant_title': restaurant_title
+        'restaurant_title': restaurant_title,
+        'restaurant_id': restaurant
     })
 
 
@@ -598,7 +622,8 @@ def restaurant_menu_new_admin(request):
         form = RestaurantMenuForm(initial={'restaurant': restaurant})
     return render(request, 'admin_page/restaurants/menus/new.html', {
         'form': form,
-        'restaurant_title': restaurant_title
+        'restaurant_title': restaurant_title,
+        'restaurant_id': restaurant
     })
 
 
@@ -620,7 +645,8 @@ def restaurant_menu_edit_admin(request, id):
         'menu': menu,
         'form': form,
         'menu_obj': RestaurantMenu,
-        'restaurant_title': restaurant_title
+        'restaurant_title': restaurant_title,
+        'restaurant_id': restaurant
     })
 
 
@@ -641,12 +667,11 @@ def restaurant_schedule_index_admin(request):
     restaurant = request.session['restaurants']
     schedules = RestaurantSchedule.objects.filter(restaurant=restaurant)
     restaurant_title = Restaurant.objects.get(id=restaurant)
-    restaurant_id = restaurant
     return render(request, 'admin_page/restaurants/schedules/index.html', {
         'schedules': schedules,
         'schedule_obj': RestaurantSchedule,
         'restaurant_title': restaurant_title,
-        'restaurant_id': restaurant_id
+        'restaurant_id': restaurant
     })
 
 
@@ -657,7 +682,8 @@ def restaurant_schedule_show_admin(request, id):
     return render(request, 'admin_page/restaurants/schedules/show.html', {
         'schedule': schedule,
         'schedule_obj': RestaurantSchedule,
-        'restaurant_title': restaurant_title
+        'restaurant_title': restaurant_title,
+        'restaurant_id': restaurant
     })
 
 
@@ -680,7 +706,8 @@ def restaurant_schedule_new_admin(request):
         form = RestaurantScheduleForm(initial={'restaurant': restaurant})
     return render(request, 'admin_page/restaurants/schedules/new.html', {
         'form': form,
-        'restaurant_title': restaurant_title
+        'restaurant_title': restaurant_title,
+        'restaurant_id': restaurant
     })
 
 
@@ -702,7 +729,8 @@ def restaurant_schedule_edit_admin(request, id):
         'schedule': schedule,
         'form': form,
         'schedule_obj': RestaurantSchedule,
-        'restaurant_title': restaurant_title
+        'restaurant_title': restaurant_title,
+        'restaurant_id': restaurant
     })
 
 
@@ -1220,9 +1248,11 @@ def tourism_site_index(request):
 def tourism_site_show(request, id):
     site = TourismSite.objects.get(id=id)
     schedule = TourismSiteSchedule.objects.filter(site=id).order_by('register_at')
+    score = round(site.score/2)
     return render(request, 'tour/tourism_site-show.html', {
         'site': site,
         'schedule': schedule,
+        'score': score
     })
 
 
@@ -1238,7 +1268,6 @@ def tourism_site_destination_index_admin(request):
 
 def tourism_site_destination_show_admin(request, id):
     destination = TourismSiteDestiny.objects.get(id=id)
-    request.session['destiny_tourism_site'] = id
     return render(request, 'admin_page/tourism_sites/destinations/show.html', {
         'destination': destination,
         'destination_obj': TourismSiteDestiny,
@@ -1297,33 +1326,23 @@ def tourism_site_destination_delete_admin(request, id):
 # SITIOS TURISTICOS ADMINISTRADOR
 
 def tourism_site_index_admin(request):
-    destiny = request.session['destiny_tourism_site']
-    sites = TourismSite.objects.filter(destination=destiny)
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
-    destiny_id = destiny
+    sites = TourismSite.objects.all
     return render(request, 'admin_page/tourism_sites/index.html', {
         'sites': sites,
-        'site_obj': TourismSite,
-        'destiny_title': destiny_title,
-        'destiny_id': destiny_id,
+        'site_obj': TourismSite
     })
 
 
 def tourism_site_show_admin(request, id):
-    destiny = request.session['destiny_tourism_site']
-    site = TourismSite.objects.filter(destination=destiny).get(id=id)
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
+    site = TourismSite.objects.get(id=id)
     request.session['tourism_site'] = id
     return render(request, 'admin_page/tourism_sites/show.html', {
         'site': site,
         'site_obj': TourismSite,
-        'destiny_title': destiny_title,
     })
 
 
 def tourism_site_new_admin(request):
-    destiny = request.session['destiny_tourism_site']
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismSiteForm(request.POST, request.FILES)
         if form.is_valid():
@@ -1337,17 +1356,14 @@ def tourism_site_new_admin(request):
             message = 'Existen errores por favor verifica!.'
             messages.add_message(request, messages.ERROR, message)
     else:
-        form = TourismSiteForm(initial={'destination': destiny})
+        form = TourismSiteForm()
     return render(request, 'admin_page/tourism_sites/new.html', {
-        'form': form,
-        'destiny_title': destiny_title,
+        'form': form
     })
 
 
 def tourism_site_edit_admin(request, id):
-    destiny = request.session['destiny_tourism_site']
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
-    tourism_site = TourismSite.objects.filter(destination=destiny).get(id=id)
+    tourism_site = TourismSite.objects.get(id=id)
 
     if request.method == 'POST':
         form = TourismSiteForm(request.POST, request.FILES, instance=tourism_site)
@@ -1362,8 +1378,7 @@ def tourism_site_edit_admin(request, id):
     return render(request, 'admin_page/tourism_sites/edit.html', {
         'tourism_site': tourism_site,
         'form': form,
-        'tourism_site_obj': TourismSite,
-        'destiny_title': destiny_title,
+        'tourism_site_obj': TourismSite
     })
 
 
@@ -1379,18 +1394,14 @@ def tourism_site_delete_admin(request, id):
 # MENU DE SITIOS TURISTICOS
 
 def tourism_site_menu_index_admin(request):
-    destiny = request.session['destiny_tourism_site']
     tourism_site = request.session['tourism_site']
     menus = TourismSiteMenu.objects.filter(site=tourism_site)
     site_title = TourismSite.objects.get(id=tourism_site)
-    site_id = tourism_site
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
     return render(request, 'admin_page/tourism_sites/menus/index.html', {
         'menus': menus,
         'menu_obj': TourismSiteMenu,
         'site_title': site_title,
-        'site_id': site_id,
-        'destiny_title': destiny_title,
+        'site_id': tourism_site
     })
 
 
@@ -1401,15 +1412,14 @@ def tourism_site_menu_show_admin(request, id):
     return render(request, 'admin_page/tourism_sites/menus/show.html', {
         'menu': menu,
         'menu_obj': TourismSiteMenu,
-        'tourism_site_title': tourism_site_title
+        'tourism_site_title': tourism_site_title,
+        'site_id': tourism_site
     })
 
 
 def tourism_site_menu_new_admin(request):
     tourism_site = request.session['tourism_site']
-    destiny = request.session['destiny_tourism_site']
     site_title = TourismSite.objects.get(id=tourism_site)
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismSiteMenuForm(request.POST, request.FILES)
         if form.is_valid():
@@ -1427,7 +1437,7 @@ def tourism_site_menu_new_admin(request):
     return render(request, 'admin_page/tourism_sites/menus/new.html', {
         'form': form,
         'site_title': site_title,
-        'destiny_title': destiny_title,
+        'site_id': tourism_site
     })
 
 
@@ -1435,8 +1445,6 @@ def tourism_site_menu_edit_admin(request, id):
     tourism_site = request.session['tourism_site']
     menu = TourismSiteMenu.objects.filter(site=tourism_site).get(id=id)
     site_title = TourismSite.objects.get(id=tourism_site)
-    destiny = request.session['destiny_tourism_site']
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismSiteMenuForm(request.POST, request.FILES, instance=menu)
         if form.is_valid():
@@ -1452,7 +1460,7 @@ def tourism_site_menu_edit_admin(request, id):
         'form': form,
         'menu_obj': TourismSiteMenu,
         'site_title': site_title,
-        'destiny_title': destiny_title,
+        'site_id': tourism_site
     })
 
 
@@ -1473,13 +1481,11 @@ def tourism_site_schedule_index_admin(request):
     tourism_site = request.session['tourism_site']
     schedules = TourismSiteSchedule.objects.filter(site=tourism_site)
     site_title = TourismSite.objects.get(id=tourism_site)
-    destiny = request.session['destiny_tourism_site']
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
     return render(request, 'admin_page/tourism_sites/schedules/index.html', {
         'schedules': schedules,
         'schedule_obj': TourismSiteSchedule,
         'site_title': site_title,
-        'destiny_title': destiny_title,
+        'site_id': tourism_site
     })
 
 
@@ -1490,15 +1496,14 @@ def tourism_site_schedule_show_admin(request, id):
     return render(request, 'admin_page/tourism_sites/schedules/show.html', {
         'schedule': schedule,
         'schedule_obj': TourismSiteSchedule,
-        'tourism_site_title': tourism_site_title
+        'tourism_site_title': tourism_site_title,
+        'site_id': tourism_site
     })
 
 
 def tourism_site_schedule_new_admin(request):
     tourism_site = request.session['tourism_site']
     site_title = TourismSite.objects.get(id=tourism_site)
-    destiny = request.session['destiny_tourism_site']
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismSiteScheduleForm(request.POST, request.FILES)
         if form.is_valid():
@@ -1516,7 +1521,7 @@ def tourism_site_schedule_new_admin(request):
     return render(request, 'admin_page/tourism_sites/schedules/new.html', {
         'form': form,
         'site_title': site_title,
-        'destiny_title': destiny_title,
+        'site_id': tourism_site
     })
 
 
@@ -1524,8 +1529,6 @@ def tourism_site_schedule_edit_admin(request, id):
     tourism_site = request.session['tourism_site']
     schedule = TourismSiteSchedule.objects.filter(site=tourism_site).get(id=id)
     site_title = TourismSite.objects.get(id=tourism_site)
-    destiny = request.session['destiny_tourism_site']
-    destiny_title = TourismSiteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismSiteScheduleForm(request.POST, request.FILES, instance=schedule)
         if form.is_valid():
@@ -1541,7 +1544,7 @@ def tourism_site_schedule_edit_admin(request, id):
         'form': form,
         'schedule_obj': TourismSiteSchedule,
         'site_title': site_title,
-        'destiny_title': destiny_title,
+        'site_id': tourism_site
     })
 
 
@@ -1702,9 +1705,10 @@ def tourism_route_index(request):
 
 def tourism_route_show(request, id):
     route = TourismRoute.objects.get(id=id)
+    score = round(route.score/2)
     return render(request, 'tour/tourism_route-show.html', {
         'route': route,
-
+        'score': score
     })
 
 
@@ -1720,7 +1724,6 @@ def tourism_route_destination_index_admin(request):
 
 def tourism_route_destination_show_admin(request, id):
     destination = TourismRouteDestiny.objects.get(id=id)
-    request.session['destiny_tourism_route'] = id
     return render(request, 'admin_page/tourism_routes/destinations/show.html', {
         'destination': destination,
         'destination_obj': TourismRouteDestiny,
@@ -1780,33 +1783,23 @@ def tourism_route_destination_delete_admin(request, id):
 # RUTAS TURISTICAS ADMINISTRADOR
 
 def tourism_route_index_admin(request):
-    destiny = request.session['destiny_tourism_route']
-    routes = TourismRoute.objects.filter(destination=destiny)
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
-    destiny_id = destiny
+    routes = TourismRoute.objects.all
     return render(request, 'admin_page/tourism_routes/index.html', {
         'routes': routes,
-        'route_obj': TourismRoute,
-        'destiny_title': destiny_title,
-        'destiny_id': destiny_id,
+        'route_obj': TourismRoute
     })
 
 
 def tourism_route_show_admin(request, id):
     request.session['tourism_route'] = id
-    destiny = request.session['destiny_tourism_route']
-    route = TourismRoute.objects.filter(destination=destiny).get(id=id)
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
+    route = TourismRoute.objects.get(id=id)
     return render(request, 'admin_page/tourism_routes/show.html', {
         'route': route,
-        'route_obj': TourismRoute,
-        'destiny_title': destiny_title,
+        'route_obj': TourismRoute
     })
 
 
 def tourism_route_new_admin(request):
-    destiny = request.session['destiny_tourism_route']
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismRouteForm(request.POST, request.FILES)
         if form.is_valid():
@@ -1820,17 +1813,14 @@ def tourism_route_new_admin(request):
             message = 'Existen errores por favor verifica!.'
             messages.add_message(request, messages.ERROR, message)
     else:
-        form = TourismRouteForm(initial={'destination': destiny})
+        form = TourismRouteForm()
     return render(request, 'admin_page/tourism_routes/new.html', {
         'form': form,
-        'destiny_title': destiny_title,
     })
 
 
 def tourism_route_edit_admin(request, id):
-    destiny = request.session['destiny_tourism_route']
-    route = TourismRoute.objects.filter(destination=destiny).get(id=id)
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
+    route = TourismRoute.objects.get(id=id)
     if request.method == 'POST':
         form = TourismRouteForm(request.POST, request.FILES, instance=route)
         if form.is_valid():
@@ -1838,20 +1828,18 @@ def tourism_route_edit_admin(request, id):
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(reverse('tourism_routes-show-admin', kwargs={'id': route.id}))
+            return HttpResponseRedirect(reverse('tourism_routes-index-admin'))
     else:
         form = TourismRouteForm(instance=route)
     return render(request, 'admin_page/tourism_routes/edit.html', {
         'route': route,
         'form': form,
-        'tourism_route_obj': TourismRoute,
-        'destiny_title': destiny_title,
+        'tourism_route_obj': TourismRoute
     })
 
 
 def tourism_route_delete_admin(request, id):
-    destiny = request.session['destiny_tourism_route']
-    route = TourismRoute.objects.filter(destination=destiny).get(id=id)
+    route = TourismRoute.objects.get(id=id)
     route.delete()
     message = 'Eliminado!'
     messages.add_message(request, messages.SUCCESS, message)
@@ -1864,15 +1852,11 @@ def tourism_route_menu_index_admin(request):
     route = request.session['tourism_route']
     menus = TourismRouteMenu.objects.filter(route=route)
     route_title = TourismRoute.objects.get(id=route)
-    route_id = route
-    destiny = request.session['destiny_tourism_route']
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
     return render(request, 'admin_page/tourism_routes/menus/index.html', {
         'menus': menus,
         'menu_obj': TourismRouteMenu,
         'route_title': route_title,
-        'destiny_title': destiny_title,
-        'route_id': route_id,
+        'route_id': route,
     })
 
 
@@ -1880,21 +1864,17 @@ def tourism_route_menu_show_admin(request, id):
     route = request.session['tourism_route']
     menu = TourismRouteMenu.objects.filter(route=route).get(id=id)
     route_title = TourismRoute.objects.get(id=route)
-    destiny = request.session['destiny_tourism_route']
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
     return render(request, 'admin_page/tourism_routes/menus/show.html', {
         'menu': menu,
         'menu_obj': TourismRouteMenu,
         'route_title': route_title,
-        'destiny_title': destiny_title,
+        'route_id': route,
     })
 
 
 def tourism_route_menu_new_admin(request):
     route = request.session['tourism_route']
     route_title = TourismRoute.objects.get(id=route)
-    destiny = request.session['destiny_tourism_route']
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismRouteMenuForm(request.POST, request.FILES)
         if form.is_valid():
@@ -1912,7 +1892,7 @@ def tourism_route_menu_new_admin(request):
     return render(request, 'admin_page/tourism_routes/menus/new.html', {
         'form': form,
         'route_title': route_title,
-        'destiny_title': destiny_title,
+        'route_id': route,
     })
 
 
@@ -1920,8 +1900,6 @@ def tourism_route_menu_edit_admin(request, id):
     route = request.session['tourism_route']
     menu = TourismRouteMenu.objects.filter(route=route).get(id=id)
     route_title = TourismRoute.objects.get(id=route)
-    destiny = request.session['destiny_tourism_route']
-    destiny_title = TourismRouteDestiny.objects.get(id=destiny)
     if request.method == 'POST':
         form = TourismRouteMenuForm(request.POST, request.FILES, instance=menu)
         if form.is_valid():
@@ -1937,7 +1915,7 @@ def tourism_route_menu_edit_admin(request, id):
         'form': form,
         'menu_obj': TourismRouteMenu,
         'route_title': route_title,
-        'destiny_title': destiny_title,
+        'route_id': route,
     })
 
 

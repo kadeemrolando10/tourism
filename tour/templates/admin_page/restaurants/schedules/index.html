@@ -5,11 +5,25 @@
 
 
 {% block content-header %}
-<a href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Horarios de Restaurante
-    <h6 class="title_main">{{restaurant_title}}</h6>
+<div class="float-right">
+    <span>
     {% url 'restaurants-schedules-new-admin' as view_url %}
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'restaurants-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Hospedajes">Hospedajes</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">{{restaurant_title}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Menu</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

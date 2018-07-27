@@ -3,8 +3,25 @@
 {% load utils %}
 
 {% block content-header %}
-<a href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Mostrando Agencias
+<div class="float-right">
+    <span>
+        {% url 'agencies-services-index-admin' as view_url %}
+        {% include 'partials/actions/service.html' with type='button' url=view_url title='Ir a Servicios' %}
+    </span>
+    <span>
+        {% url 'agencies-schedules-index-admin' as view_url %}
+        {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Agencias</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -18,17 +35,6 @@
         <p><strong>{% get_field_name agency_obj 'lat' %}</strong> {{ agency.lat }}</p>
         <p><strong>{% get_field_name agency_obj 'lng' %}</strong> {{ agency.lng }}</p>
         <p><strong>{% get_field_name agency_obj 'register_at' %}</strong> {{ agency.register_at }}</p>
-        <hr>
-        <p>
-            {% url 'agencies-services-index-admin' as view_url %}
-            {% include 'partials/actions/service.html' with type='button' url=view_url title='Ir a Servicios' %}
-        </p>
-        <p>
-            {% url 'agencies-schedules-index-admin' as view_url %}
-            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
-        </p>
-
-
     </div>
     <div class="col-md-8 box box-body" onload="initialize()">
         <div class="white-box">
@@ -55,7 +61,8 @@
             var myOptions = {
                 zoom: 16,
                 center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                gestureHandling: 'greedy'
             };
 
             map = new google.maps.Map(document.getElementById("gmap"), myOptions);
@@ -70,6 +77,7 @@
         window.onload = function () {
             initialize()
         };
+
 
 
 </script>

@@ -1,11 +1,23 @@
 {% extends 'admin.html' %}
 
 {% block content-header %}
-    <a href="{% url 'tourism_sites-menus-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
-    <i class="fa fa-arrow-circle-left"></i></a> Agregando Menu a Sitio Turistico
-<br>
-    <h6 class="title_main">{{site_title}}</h6>
-    <h6 class="title_main">{{destiny_title}}</h6>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'tourism_sites-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Sitios Turisticos">Sitios Turisticos</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'tourism_sites-show-admin' site_id %}" data-tooltip="tooltip" data-placement="right"
+               title="{{site_title}}">{{site_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'tourism_sites-menus-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atractivos">Atractivos</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Agregando</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

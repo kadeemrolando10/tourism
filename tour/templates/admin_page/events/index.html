@@ -4,9 +4,15 @@
 {% load static %}
 
 {% block content-header %}
-    <h6>Eventos</h6>
+<div class="float-right">
     {% url 'events-new-admin' as view_url %}
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active page" aria-current="page">Eventos</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

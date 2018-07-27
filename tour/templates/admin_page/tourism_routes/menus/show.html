@@ -3,10 +3,23 @@
 {% load utils %}
 
 {% block content-header %}
-<a href="{% url 'agencies-services-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
-    <i class="fa fa-arrow-circle-left"></i></a> Mostrando Servicios de Agencias
-<br>
-<h6 class="title_main">{{agency_title}}</h6>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'tourism_routes-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Rutas Turisticas">Rutas Turisticas</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'tourism_routes-show-admin' route_id %}" data-tooltip="tooltip" data-placement="right"
+               title="{{route_title}}">{{route_title}}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_third" href="{% url 'tourism_routes-menus-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atractivos">Atractivos</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}

@@ -3,8 +3,25 @@
 {% load utils %}
 
 {% block content-header %}
-<a href="{% url 'restaurants-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Mostrando Restaurantes
+<div class="float-right">
+    <span>
+        {% url 'restaurants-menus-index-admin' as view_url %}
+            {% include 'partials/actions/menu.html' with type='button' url=view_url title='Ir a Menu' %}
+    </span>
+    <span>
+        {% url 'restaurants-schedules-index-admin' as view_url %}
+            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'restaurants-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Restaurantes</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -17,17 +34,12 @@
         <p><strong>{% get_field_name restaurant_obj 'web' %}</strong> {{ restaurant.web }}</p>
         <p><strong>{% get_field_name restaurant_obj 'lat' %}</strong> {{ restaurant.lat }}</p>
         <p><strong>{% get_field_name restaurant_obj 'lng' %}</strong> {{ restaurant.lng }}</p>
+        <p><strong>{% get_field_name restaurant_obj 'service' %}</strong><br>
+            {% for s in restaurant.service.all %}
+            {{s.title}}<br>
+            {% endfor %}
+        </p>
         <p><strong>{% get_field_name restaurant_obj 'register_at' %}</strong> {{ restaurant.register_at }}</p>
-        <hr>
-        <p>
-            {% url 'restaurants-menus-index-admin' as view_url %}
-            {% include 'partials/actions/menu.html' with type='button' url=view_url title='Ir a Menu' %}
-        </p>
-        <p>
-            {% url 'restaurants-schedules-index-admin' as view_url %}
-            {% include 'partials/actions/schedule.html' with type='button' url=view_url title='Ir a Horarios' %}
-        </p>
-
     </div>
     <div class="col-md-8 box box-body" onload="initialize()">
         <div class="white-box">
@@ -54,7 +66,8 @@
             var myOptions = {
                 zoom: 16,
                 center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                gestureHandling: 'greedy'
             };
 
             map = new google.maps.Map(document.getElementById("gmap"), myOptions);
@@ -69,6 +82,8 @@
         window.onload = function () {
             initialize()
         };
+
+
 
 
 

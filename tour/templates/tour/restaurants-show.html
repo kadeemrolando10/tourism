@@ -19,6 +19,11 @@
 
                     <div class="listing-title">
                         <h4>{{restaurant.title}}</h4>
+                        <h6>
+                            {% for i in score|times %}
+                            <i class="fa fa-star underline-star"></i>
+                            {% endfor %}
+                        </h6>
                         <h6>{{restaurant.address}}</h6>
                     </div>
 
@@ -34,42 +39,184 @@
 
                     <div class=" listing-menu-area overview-content mt-50" id="overview">
                         <h4>SERVICIOS</h4>
-
-                        {% for s in restaurant.service.all %}
-                        <table class="table table-light table-hover">
+                        <table class="table table-striped">
                             <tbody>
-                            <tr class="ser">
-                                <td width="20%" align="center" class="alert-info">
-                                    <img src="{{s.image.url}}" width="40px" height="40px">
+                            {% for s in restaurant.service.all %}
+                            <tr>
+                                <td width="20%" align="center" class="bg-warning">
+                                    <img src="{{s.image.url}}" width="50px" height="50px">
                                 </td>
                                 <td>{{ s.title }}</td>
                             </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
-                        {% endfor %}
                     </div>
+
+                    <!-- MENU DE RESTAURANTE-->
                     <div class="listing-menu-area mt-100" id="menu">
                         <h4>MENU</h4>
-                        {% for m in menu %}
-                        <div class="single-listing-menu d-flex justify-content-between">
-                            <!-- Listing Menu Title -->
-                            <div class="listing-menu-title">
-                                <h6>{{m.title}}</h6>
-                                <p>{{m.description}}</p>
-                                <span class="badge badge-primary">{{m.price}}Bs.</span>
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active brn" id="pills-breakfast-tab" data-toggle="pill"
+                                   href="#pills-breakfast"
+                                   role="tab" aria-controls="pills-breakfast" aria-selected="true">Desayunos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link brn" id="pills-entrance-tab" data-toggle="pill" href="#pills-entrance"
+                                   role="tab" aria-controls="pills-entrance" aria-selected="false">Entradas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link brn" id="pills-soup-tab" data-toggle="pill" href="#pills-soup"
+                                   role="tab" aria-controls="pills-soup" aria-selected="false">Sopas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link brn" id="pills-second-tab" data-toggle="pill" href="#pills-second"
+                                   role="tab" aria-controls="pills-second" aria-selected="false">Segundos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link brn" id="pills-sweet-tab" data-toggle="pill" href="#pills-sweet"
+                                   role="tab" aria-controls="pills-sweet" aria-selected="false">Postres</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link brn" id="pills-drink-tab" data-toggle="pill" href="#pills-drink"
+                                   role="tab" aria-controls="pills-drink" aria-selected="false">Bebidas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link brn" id="pills-wine-tab" data-toggle="pill" href="#pills-wine"
+                                   role="tab" aria-controls="pills-wine" aria-selected="false">Carta de vinos</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-breakfast" role="tabpanel"
+                                 aria-labelledby="pills-breakfast-tab">
+                                {% for m in breakfast %}
+                                <div class="single-listing-menu">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <h6>{{m.title}}</h6>
+                                            <p>{{m.description}}</p>
+                                            <span class="badge badge-primary">{{m.price}}Bs.</span>
+                                        </div>
+                                        <div class=" col-12 col-md-6 col-lg-6 text-center">
+                                            <img src="{{m.image.url}}" class="img-restaurant text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor%}
                             </div>
-                            <div class="listing-menu-title">
-                                <img src="{{m.image.url}}" width="300px" height="150px">
+                            <div class="tab-pane fade" id="pills-entrance" role="tabpanel"
+                                 aria-labelledby="pills-entrance-tab">
+                                {% for m in entrances %}
+                                <div class="single-listing-menu">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <h6>{{m.title}}</h6>
+                                            <p>{{m.description}}</p>
+                                            <span class="badge badge-primary">{{m.price}}Bs.</span>
+                                        </div>
+                                        <div class=" col-12 col-md-6 col-lg-6 text-center">
+                                            <img src="{{m.image.url}}" class="img-restaurant text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor%}
+                            </div>
+                            <div class="tab-pane fade" id="pills-soup" role="tabpanel"
+                                 aria-labelledby="pills-soup-tab">
+                                {% for m in soups %}
+                                <div class="single-listing-menu">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <h6>{{m.title}}</h6>
+                                            <p>{{m.description}}</p>
+                                            <span class="badge badge-primary">{{m.price}}Bs.</span>
+                                        </div>
+                                        <div class=" col-12 col-md-6 col-lg-6 text-center">
+                                            <img src="{{m.image.url}}" class="img-restaurant text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor%}
+                            </div>
+                            <div class="tab-pane fade" id="pills-second" role="tabpanel"
+                                 aria-labelledby="pills-second-tab">
+                                {% for m in seconds %}
+                                <div class="single-listing-menu">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <h6>{{m.title}}</h6>
+                                            <p>{{m.description}}</p>
+                                            <span class="badge badge-primary">{{m.price}}Bs.</span>
+                                        </div>
+                                        <div class=" col-12 col-md-6 col-lg-6 text-center">
+                                            <img src="{{m.image.url}}" class="img-restaurant text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor%}
+                            </div>
+                            <div class="tab-pane fade" id="pills-sweet" role="tabpanel"
+                                 aria-labelledby="pills-sweet-tab">
+                                {% for m in sweets %}
+                                <div class="single-listing-menu">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <h6>{{m.title}}</h6>
+                                            <p>{{m.description}}</p>
+                                            <span class="badge badge-primary">{{m.price}}Bs.</span>
+                                        </div>
+                                        <div class=" col-12 col-md-6 col-lg-6 text-center">
+                                            <img src="{{m.image.url}}" class="img-restaurant text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor%}
+                            </div>
+                            <div class="tab-pane fade" id="pills-drink" role="tabpanel"
+                                 aria-labelledby="pills-drink-tab">
+                                {% for m in drinks %}
+                                <div class="single-listing-menu">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <h6>{{m.title}}</h6>
+                                            <p>{{m.description}}</p>
+                                            <span class="badge badge-primary">{{m.price}}Bs.</span>
+                                        </div>
+                                        <div class=" col-12 col-md-6 col-lg-6 text-center">
+                                            <img src="{{m.image.url}}" class="img-restaurant text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor%}
+                            </div>
+                            <div class="tab-pane fade" id="pills-wine" role="tabpanel"
+                                 aria-labelledby="pills-wine-tab">
+                                {% for m in wines %}
+                                <div class="single-listing-menu">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <h6>{{m.title}}</h6>
+                                            <p>{{m.description}}</p>
+                                            <span class="badge badge-primary">{{m.price}}Bs.</span>
+                                        </div>
+                                        <div class=" col-12 col-md-6 col-lg-6 text-center">
+                                            <img src="{{m.image.url}}" class="img-restaurant text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor%}
                             </div>
                         </div>
-                        {% endfor%}
+
+
                     </div>
 
                     <div id="lomap">
                         <h4>Ubicacion en mapa</h4>
                         <div class="location-map" onload="initialize()">
                             <div class="white-box">
-                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                                <div id="gmap" style="width: 100%; height: 450px" class="border-map"></div>
                             </div>
                         </div>
                     </div>
@@ -81,22 +228,31 @@
 
                 <div class="listing-sidebar">
                     <div class="opening-hours-widget mt-50">
-                        <h6>Informacion</h6>
-                        <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ restaurant.score }}</p></li>
-                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ restaurant.phone }}</p></li>
-                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ restaurant.web }}</p></li>
-                        </ul>
+                        <h6 class="underline">Informacion</h6>
+                        <div class="opening-hours">
+                            <p>
+                                <i class="fa fa-phone" aria-hidden="true"></i><label class="les">Telefono</label><br>
+                                <span class="alert alert-light">{{ restaurant.phone }}</span>
+                            </p>
+                            {% if restaurant.web is None %}
+                            <p>
+                                <i class="fa fa-chrome" aria-hidden="true"></i><label class="les">Sitio Web</label><br>
+                                <span class="alert alert-light link"><a href="{{ restaurant.web }}" target="_blank">{{ restaurant.web }}</a></span>
+                            </p>
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
-                        <ul class="opening-hours">
+                        <h6 class="underline"><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <ul class="opening-hours" role="alert">
                             {% for q in schedule %}
-                            <li>
-                                <p>{% get_days q.day%}</p>
-                                <p>{{q.schedule}}</p>
-                            </li>
+                            <table class="table table-light table-striped">
+                                <tr>
+                                    <td class="align-right">{% get_days q.day%}</td>
+                                    <td class="float-right">{{q.schedule}}</td>
+                                </tr>
+                            </table>
                             {% endfor %}
                         </ul>
                     </div>
@@ -119,9 +275,10 @@
         function initialize() {
             var myLatlng = new google.maps.LatLng(lat, lng);
             var myOptions = {
-                zoom: 14,
+                zoom: 18,
                 center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                gestureHandling: 'greedy'
             };
 
             map = new google.maps.Map(document.getElementById("gmap"), myOptions);
@@ -136,6 +293,14 @@
         window.onload = function () {
             initialize()
         };
+
+
+
+
+
+
+
+
 
 
 </script>

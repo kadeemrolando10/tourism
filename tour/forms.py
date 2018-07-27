@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import CheckboxSelectMultiple, CheckboxInput
+from django.forms import CheckboxSelectMultiple
 
 from tour_site.services import BaseForm
 from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, TourismRoute, AgencyService, \
@@ -14,8 +14,6 @@ class AgencyForm(BaseForm):
         super(AgencyForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
-        self.fields["service"].widget = CheckboxSelectMultiple()
-        self.fields["service"].queryset = AgencyService.objects.all()
 
     class Meta:
         model = Agency
@@ -167,12 +165,6 @@ class TourismRouteForm(BaseForm):
         model = TourismRoute
         fields = '__all__'
         exclude = ['is_active']
-        labels = {
-            'destination': '',
-        }
-        widgets = {
-            'destination': forms.HiddenInput(),
-        }
 
 
 class TourismRouteMenuForm(BaseForm):
@@ -205,12 +197,6 @@ class TourismSiteForm(BaseForm):
         model = TourismSite
         fields = '__all__'
         exclude = ['is_active']
-        labels = {
-            'destination': '',
-        }
-        widgets = {
-            'destination': forms.HiddenInput(),
-        }
 
 
 class TourismSiteMenuForm(BaseForm):

@@ -4,11 +4,26 @@
 {% load static %}
 
 {% block content-header %}
-<a href="{% url 'agencies-show-admin' agency_id %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-        class="fa fa-arrow-circle-left"></i></a> Servicios de Agencia
-    <h6 class="title_main">{{agency_title}}</h6>
-    {% url 'agencies-services-new-admin' as view_url %}
-    {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+<div class="float-right">
+    <span>
+        {% url 'agencies-services-new-admin' as view_url %}
+        {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+    </span>
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Agencias">Agencias</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="page_second" href="{% url 'agencies-show-admin' agency_id %}" data-tooltip="tooltip"
+               data-placement="right"
+               title="Atrás">{{agency_title}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Paquetes Turisticos</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -18,10 +33,11 @@
         <tr>
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name service_obj 'title' %}</th>
-            <th data-field="departures" data-sortable="true">{% get_field_name service_obj 'departures' %}</th>
+            <th data-field="images" data-sortable="true">{% get_field_name service_obj 'image' %}</th>
             <th data-field="place_start" data-sortable="true">{% get_field_name service_obj 'place_start' %}</th>
-            <th data-field="places_to known" data-sortable="true">{% get_field_name service_obj 'places_to_known' %}</th>
-            <th data-field="register_at" data-sortable="true">{% get_field_name service_obj 'register_at' %}</th>
+            <th data-field="places_to known" data-sortable="true">{% get_field_name service_obj 'places_to_known' %}
+            </th>
+
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -31,10 +47,10 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ service.title }}</td>
-            <td>{{ service.departures }}</td>
+            <td class="text-center"><img src="{{ service.image.url }}" width="300px"></td>
             <td>{{ service.place_start }}</td>
             <td>{{ service.places_to_known }}</td>
-            <td>{{ service.register_at }}</td>
+
             <td class="text-center">
                 {% url 'agencies-services-show-admin' service.id as view_url %}
                 {% include 'partials/actions/view.html' with url=view_url %}
@@ -68,6 +84,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 </script>
 {% endblock %}

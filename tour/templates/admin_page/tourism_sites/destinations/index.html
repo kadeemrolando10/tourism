@@ -4,9 +4,15 @@
 {% load static %}
 
 {% block content-header %}
-  <h6>Localizacion de Sitios Turisticos</h6>
+<div class="float-right">
     {% url 'tourism_sites-destination-new-admin' as view_url %}
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+</div>
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active page" aria-current="page">Localizacion</li>
+    </ol>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -28,8 +34,6 @@
             <td>{{ destination.title }}</td>
             <td>{{ destination.register_at }}</td>
             <td class="text-center">
-                {% url 'tourism_sites-destination-show-admin' destination.id as view_url %}
-                {% include 'partials/actions/view.html' with url=view_url %}
                 {% url 'tourism_sites-destination-edit-admin' destination.id as edit_url %}
                 {% include 'partials/actions/edit.html' with url=edit_url %}
                 {% url 'tourism_sites-destination-delete-admin' destination.id as delete_url %}
@@ -60,6 +64,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 </script>
 {% endblock %}

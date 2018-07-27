@@ -18,43 +18,53 @@
                 <div class="single-listing-content">
                     <div class="listing-title">
                         <h4>{{agency.title}}</h4>
+                        <h6>
+                            {% for i in score|times %}
+                            <i class="fa fa-star underline-star"></i>
+                            {% endfor %}
+                        </h6>
                         <h6>{{agency.address}}</h6>
                     </div>
 
                     <div class="single-listing-nav">
                         <nav>
                             <ul id="listingNav">
-                                <li><a href="#menu">Servicios</a></li>
+                                <li><a href="#menu">Paquetes</a></li>
                                 <li><a href="#lomap">Ubicacion en mapa</a></li>
                             </ul>
                         </nav>
                     </div>
                     <div class="listing-menu-area mt-100" id="menu">
-                        <h4>Servicios</h4>
-                        <div class="location-map">
-
-                            <table class="table table-light table-responsive-sm">
-                                <tbody>
-                                {% for s in services %}
-                                <tr style="text-align:center;">
-                                    <td>{{ s.title }}</td>
-                                    <td>{{ s.duration }}</td>
-                                    <td> {{ s.departures }}</td>
-                                    <td>{{ s.schedule }}</td>
-                                    <td>{{ s.place_start }}</td>
-                                    <td>{{ s.places_to_known }}</td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-
+                        <h4>Paquetes Turisticos</h4>
+                        {% for s in services %}
+                        <div class="movie_card" id="tomb">
+                            <div class="info_section">
+                                <div class="movie_header">
+                                    <h4>{{ s.title }}</h4>
+                                    <h6>{{ s.place_start }}</h6>
+                                </div>
+                                <div class="movie_desc">
+                                    <p class="text">{{ s.places_to_known }}</p>
+                                </div>
+                                <div class="movie_social">
+                                    <ul>
+                                        <li><i class="material-icons"><strong>Salidas: </strong> {{ s.schedule }}</i>
+                                        </li>
+                                        <li><i class="material-icons">{{ s.departures }}</i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="blur_back"
+                                 style="background:url({{s.image.url}}); background-repeat: no-repeat; background-size: 100% 100%;">
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                     <div class="listing-menu-area mt-100" id="lomap">
                         <h4>Ubicacion en mapa</h4>
                         <div class="location-map" onload="initialize()">
                             <div class="white-box">
-                                <div id="gmap" style="width: 100%; height: 450px"></div>
+                                <div id="gmap" style="width: 100%; height: 450px" class="border-map"></div>
                             </div>
                         </div>
                     </div>
@@ -65,22 +75,29 @@
 
                 <div class="listing-sidebar">
                     <div class="opening-hours-widget mt-50 ">
-                        <h6>Informacion</h6>
-                        <ul class="opening-hours">
-                            <li><p><i class="fa fa-star" aria-hidden="true"></i>. {{ agency.score }}</p></li>
-                            <li><p><i class="fa fa-phone" aria-hidden="true"></i>. {{ agency.phone }}</p></li>
-                            <li><p><i class="fa fa-chrome" aria-hidden="true"></i>. {{ agency.web }}</p></li>
-                        </ul>
+                        <h6 class="underline">Informacion</h6>
+                        <div class="opening-hours">
+                            <p>
+                                <i class="fa fa-phone" aria-hidden="true"></i><label class="les">Telefono</label><br>
+                                <span class="alert alert-light">{{ agency.phone }}</span>
+                            </p>
+                            <p>
+                                <i class="fa fa-chrome" aria-hidden="true"></i><label class="les">Sitio Web</label><br>
+                                <span class="alert alert-light link text-left"><a href="{{ agency.web }}" target="_blank">{{ agency.web }}</a></span>
+                            </p>
+                        </div>
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <h6 class="underline"><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours" role="alert">
                             {% for q in schedule %}
-                            <li>
-                                <p>{% get_days q.day%}</p>
-                                <p>{{q.schedule}}</p>
-                            </li>
+                            <table class="table table-light table-striped">
+                                <tr>
+                                    <td class="align-right">{% get_days q.day%}</td>
+                                    <td class="float-right">{{q.schedule}}</td>
+                                </tr>
+                            </table>
                             {% endfor %}
                         </ul>
                     </div>
@@ -101,9 +118,11 @@
         function initialize() {
             var myLatlng = new google.maps.LatLng(lat, lng);
             var myOptions = {
-                zoom: 14,
+                zoom: 18,
                 center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                gestureHandling: 'greedy',
+                gestureHandling: 'greedy'
             };
 
             map = new google.maps.Map(document.getElementById("gmap"), myOptions);
@@ -122,6 +141,10 @@
         $(function () {
         $('[data-toggle="tooltip"]').tooltip()
         })
+
+
+
+
 
 </script>
 {% endblock %}
