@@ -38,3 +38,20 @@
     {% endfor %}
     </tbody>
 </table>
+<div class="pagination">
+    <span class="step-links">
+        {% if users.has_previous %}
+            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info" href="?page={{ users.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+        {% endif %}
+
+        <span class="current btn btn-success">
+            Pagina {{ users.number }} de {{ users.paginator.num_pages }}.
+        </span>
+
+        {% if users.has_next %}
+            <a class="btn btn-primary" href="?page={{ users.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary" href="?page={{ users.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+        {% endif %}
+    </span>
+</div>

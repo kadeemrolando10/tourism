@@ -13,6 +13,12 @@
         <li class="breadcrumb-item active page" aria-current="page">Restaurantes</li>
     </ol>
 </nav>
+<form method="GET" action="" accept-charset="utf-8" class="input-group mb-3 col-4">
+    <input type="text" class="form-control" placeholder="Buscar" name="q" value="{{request.GET.q}}">
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</form>
 {% endblock %}
 
 {% block content %}
@@ -49,6 +55,23 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if restaurants.has_previous %}
+            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info" href="?page={{ restaurants.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+        {% endif %}
+
+        <span class="current btn btn-success">
+            Pagina {{ restaurants.number }} de {{ restaurants.paginator.num_pages }}.
+        </span>
+
+        {% if restaurants.has_next %}
+            <a class="btn btn-primary" href="?page={{ restaurants.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary" href="?page={{ restaurants.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+        {% endif %}
+    </span>
 </div>
 {% endblock %}
 

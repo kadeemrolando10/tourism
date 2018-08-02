@@ -4,8 +4,8 @@ from django.forms import CheckboxSelectMultiple
 from tour_site.services import BaseForm
 from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, TourismRoute, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantSchedule, RestaurantMenu, TransportDestination, TransportService, \
-    TransportTypeService, TransportSchedule, TourismSiteMenu, TourismSiteSchedule, TourismSiteDestiny, TourismSiteType, \
-    TourismSiteService, TourismRouteMenu, TourismRouteDestiny, LodgingRoom, LodgingSchedule, LodgingType, \
+    TransportTypeService, TransportSchedule, TourismSiteMenu, TourismSiteSchedule, Location, TourismSiteType, \
+    TourismSiteService, TourismRouteMenu, LodgingRoom, LodgingSchedule, LodgingType, \
     LodgingService, Client
 
 
@@ -179,9 +179,9 @@ class TourismRouteMenuForm(BaseForm):
         }
 
 
-class TourismRouteDestinyForm(BaseForm):
+class LocationForm(BaseForm):
     class Meta:
-        model = TourismRouteDestiny
+        model = Location
         fields = '__all__'
 
 
@@ -221,12 +221,6 @@ class TourismSiteScheduleForm(BaseForm):
         widgets = {
             'site': forms.HiddenInput(),
         }
-
-
-class TourismSiteDestinyForm(BaseForm):
-    class Meta:
-        model = TourismSiteDestiny
-        fields = '__all__'
 
 
 class TourismSiteTypeForm(BaseForm):

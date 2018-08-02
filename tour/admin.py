@@ -1,16 +1,16 @@
 from django.contrib import admin
 
-from tour.models import LodgingSchedule, TourismRoute, TourismRouteDestiny, TourismRouteMenu, Event, Transport, Agency,\
+from tour.models import LodgingSchedule, TourismRoute, Location, TourismRouteMenu, Event, Transport, Agency, \
     TourismSite, Restaurant, Lodging, LodgingType, \
     TransportService, LodgingService, AgencyService, RestaurantService, Function, Objective, \
     RestaurantMenu, TransportDestination, TransportTypeService, \
-    LodgingRoom, TourismSiteDestiny, TourismSiteService, TourismSiteType, TourismSiteMenu, AgencySchedule, \
+    LodgingRoom, TourismSiteService, TourismSiteType, TourismSiteMenu, AgencySchedule, \
     TransportSchedule, TourismSiteSchedule, RestaurantSchedule
 
 admin.site.register(TourismSiteType)
 admin.site.register(TourismSiteMenu)
 admin.site.register(TourismSiteService)
-admin.site.register(TourismSiteDestiny)
+admin.site.register(Location)
 admin.site.register(Objective)
 admin.site.register(Function)
 admin.site.register(Event)
@@ -35,4 +35,3 @@ admin.site.register(LodgingSchedule)
 admin.site.register(RestaurantSchedule)
 admin.site.register(TourismRoute)
 admin.site.register(TourismRouteMenu)
-admin.site.register(TourismRouteDestiny)

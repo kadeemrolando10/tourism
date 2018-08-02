@@ -2,15 +2,20 @@
 {% load utils %}
 
 {% block content %}
-<a class="btn btn-info float-right" href="{% url 'user-new'%}">Registrar usuario</a>
+<a class="btn btn-primary float-right margin-5" href="{% url 'user-new'%}">Registrar usuario</a>
 <nav aria-label="breadcrumb" class="alert-warning">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <h6 class="page">Usuarios</h6>
-    </li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <h6 class="page">Usuarios</h6>
+        </li>
+    </ol>
 </nav>
-
+<form method="GET" action="" accept-charset="utf-8" class="input-group mb-3 col-4">
+    <input type="text" class="form-control" placeholder="Buscar" name="q" value="{{request.GET.q}}">
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</form>
 <div class="container">
     <div class="employees-content">
         {% include 'registration/user/users.html' %}

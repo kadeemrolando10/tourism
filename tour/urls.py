@@ -8,14 +8,24 @@ urlpatterns = [
     url(r'^$', views.index, name='base'),
     path('index_admin/', views.index_admin, name='index_admin'),
     url(r'^logout/$', logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+
     path('users/', include([
-            path('', views.user_index, name='user-index'),
-            path('new/', views.user_new, name='user-new'),
-            path('<int:id>/edit/', views.user_edit, name='user-edit'),
-            path('<int:id>/delete/', views.user_delete, name='user-delete'),
+        path('', views.user_index, name='user-index'),
+        path('new/', views.user_new, name='user-new'),
+        path('<int:id>/edit/', views.user_edit, name='user-edit'),
+        path('<int:id>/delete/', views.user_delete, name='user-delete'),
 
     ])),
-    path('secretaria/', views.secretary, name='secretary'),
+
+    path('secretary/', views.secretary, name='secretary'),
+
+    path('location/', include([
+        path('', views.location_index_admin, name='location-index-admin'),
+        path('<int:id>/', views.location_show_admin, name='location-show-admin'),
+        path('new/', views.location_new_admin, name='location-new-admin'),
+        path('<int:id>/edit/', views.location_edit_admin, name='location-edit-admin'),
+        path('<int:id>/delete/', views.location_delete_admin, name='location-delete-admin'),
+    ])),
 
     path('agencies/', include([
         path('', views.agency_index, name='agencies-index'),
@@ -42,8 +52,8 @@ urlpatterns = [
                 path('<int:id>/delete/', views.agency_schedule_delete_admin, name='agencies-schedules-delete-admin'),
             ])),
         ])),
-
     ])),
+
     path('events/', include([
         path('', views.event_index, name='events-index'),
         path('events-admin/', include([
@@ -53,8 +63,8 @@ urlpatterns = [
             path('<int:id>/edit/', views.event_edit_admin, name='events-edit-admin'),
             path('<int:id>/delete/', views.event_delete_admin, name='events-delete-admin'),
         ])),
-
     ])),
+
     path('restaurants/', include([
         path('', views.restaurant_index, name='restaurants-index'),
         path('<int:id>/', views.restaurant_show, name='restaurants-show'),
@@ -88,8 +98,8 @@ urlpatterns = [
             path('<int:id>/delete/', views.restaurant_schedule_delete_admin,
                  name='restaurants-schedules-delete-admin'),
         ])),
-
     ])),
+
     path('transports/', include([
         path('', views.transport_index, name='transports-index'),
         path('<int:id>/', views.transport_show, name='transports-show'),
@@ -134,8 +144,8 @@ urlpatterns = [
                      name='transports-schedules-delete-admin'),
             ])),
         ])),
-
     ])),
+
     path('tourism_sites/', include([
         path('', views.tourism_site_index, name='tourism_sites-index'),
         path('<int:id>/', views.tourism_site_show, name='tourism_sites-show'),
@@ -146,16 +156,6 @@ urlpatterns = [
             path('<int:id>/edit/', views.tourism_site_edit_admin, name='tourism_sites-edit-admin'),
             path('<int:id>/delete/', views.tourism_site_delete_admin, name='tourism_sites-delete-admin'),
 
-            path('destination-admin/', include([
-                path('', views.tourism_site_destination_index_admin, name='tourism_sites-destination-index-admin'),
-                path('<int:id>/', views.tourism_site_destination_show_admin,
-                     name='tourism_sites-destination-show-admin'),
-                path('new/', views.tourism_site_destination_new_admin, name='tourism_sites-destination-new-admin'),
-                path('<int:id>/edit/', views.tourism_site_destination_edit_admin,
-                     name='tourism_sites-destination-edit-admin'),
-                path('<int:id>/delete/', views.tourism_site_destination_delete_admin,
-                     name='tourism_sites-destination-delete-admin'),
-            ])),
             path('type-admin/', include([
                 path('', views.tourism_site_type_index_admin, name='tourism_sites-types-index-admin'),
                 path('<int:id>/', views.tourism_site_type_show_admin, name='tourism_sites-types-show-admin'),
@@ -188,8 +188,8 @@ urlpatterns = [
                      name='tourism_sites-schedules-delete-admin'),
             ])),
         ])),
-
     ])),
+
     path('tourism_routes/', include([
         path('', views.tourism_route_index, name='tourism_routes-index'),
         path('<int:id>/', views.tourism_route_show, name='tourism_routes-show'),
@@ -200,16 +200,6 @@ urlpatterns = [
             path('<int:id>/edit/', views.tourism_route_edit_admin, name='tourism_routes-edit-admin'),
             path('<int:id>/delete/', views.tourism_route_delete_admin, name='tourism_routes-delete-admin'),
 
-            path('destination-admin/', include([
-                path('', views.tourism_route_destination_index_admin, name='tourism_routes-destination-index-admin'),
-                path('<int:id>/', views.tourism_route_destination_show_admin,
-                     name='tourism_routes-destination-show-admin'),
-                path('new/', views.tourism_route_destination_new_admin, name='tourism_routes-destination-new-admin'),
-                path('<int:id>/edit/', views.tourism_route_destination_edit_admin,
-                     name='tourism_routes-destination-edit-admin'),
-                path('<int:id>/delete/', views.tourism_route_destination_delete_admin,
-                     name='tourism_routes-destination-delete-admin'),
-            ])),
             path('menu-admin/', include([
                 path('', views.tourism_route_menu_index_admin, name='tourism_routes-menus-index-admin'),
                 path('<int:id>/', views.tourism_route_menu_show_admin, name='tourism_routes-menus-show-admin'),
@@ -219,8 +209,8 @@ urlpatterns = [
                      name='tourism_routes-menus-delete-admin'),
             ])),
         ])),
-
     ])),
+
     path('lodgings/', include([
         path('', views.lodging_index, name='lodging-index'),
         path('<int:id>/', views.lodging_show, name='lodging-show'),
@@ -260,7 +250,6 @@ urlpatterns = [
                 path('<int:id>/delete/', views.lodging_schedule_delete_admin, name='lodgings-schedules-delete-admin'),
             ])),
         ])),
-
 
     ])),
 ]

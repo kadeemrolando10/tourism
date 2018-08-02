@@ -4,22 +4,23 @@
 <nav aria-label="breadcrumb" class="alert-warning">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a class="page" href="{% url 'tourism_sites-destination-index-admin' %}" data-tooltip="tooltip"
-               data-placement="right" title="Atrás">Sitios Turisticos</a>
+            <a class="page" href="{% url 'location-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Servicio de Hospedajes</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Agregando</li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
     </ol>
 </nav>
 {% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
         <div class="white-box">
             {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
 </div>
 {% endblock %}
+
 {% block code_js %}
 {% endblock %}

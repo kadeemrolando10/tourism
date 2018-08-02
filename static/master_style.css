@@ -14830,3 +14830,12 @@ label [type="checkbox"] {
     width:50px;
     height:50px;
 }
+
+.step-links > a {
+    color: black;
+    text-decoration: none;
+}
+
+.margin-5{
+    margin-top:5px;
+}

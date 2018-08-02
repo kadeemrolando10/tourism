@@ -1,27 +1,41 @@
+from functools import reduce
+
 from django.contrib.auth.models import User, Group
-from django.shortcuts import render, render_to_response
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from django.db.models import Q
 
 from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agency, Objective, Function, \
-    TransportDestination, LodgingRoom, LodgingType, TourismSiteDestiny, LodgingSchedule, TourismRouteDestiny, \
-    TourismRoute, TourismSiteSchedule, TransportSchedule, RestaurantSchedule, LodgingService, AgencyService, \
+    TransportDestination, LodgingRoom, LodgingType, Location, LodgingSchedule, TourismRoute, TourismSiteSchedule, \
+    TransportSchedule, RestaurantSchedule, LodgingService, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantMenu, TransportService, TransportTypeService, TourismSiteMenu, \
     TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS
 
 from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, TourismSiteForm, TourismRouteForm, \
     LodgingForm, AgencyServiceForm, AgencyScheduleForm, RestaurantMenuForm, RestaurantScheduleForm, \
     RestaurantServiceForm, TransportDestinationForm, TransportServiceForm, TransportTypeServiceForm, \
-    TransportScheduleForm, TourismSiteMenuForm, TourismSiteScheduleForm, TourismSiteDestinyForm, TourismSiteTypeForm, \
-    TourismSiteServiceForm, TourismRouteMenuForm, TourismRouteDestinyForm, LodgingRoomForm, LodgingScheduleForm, \
+    TransportScheduleForm, TourismSiteMenuForm, TourismSiteScheduleForm, LocationForm, TourismSiteTypeForm, \
+    TourismSiteServiceForm, TourismRouteMenuForm, LodgingRoomForm, LodgingScheduleForm, \
     LodgingTypeForm, LodgingServiceForm, ClientForm, ClientFormEdit
 
 
 def user_index(request):
-    users = Client.objects.all
+    users_list = Client.objects.all()
+    query = request.GET.get('q')
+    if query:
+        users_list = users_list.filter(
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query)
+        ).distinct()
+    paginator = Paginator(users_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    users = paginator.get_page(page)
+
     template = 'registration/user/index.html'
     params = {'users': users, 'role_users': ROLE_USERS}
 
@@ -145,7 +159,7 @@ def agency_show(request, id):
     agency = Agency.objects.get(id=id)
     services = AgencyService.objects.filter(agency=id)
     schedule = AgencySchedule.objects.filter(agency=id)
-    score = round(agency.score/2);
+    score = round(agency.score / 2);
     return render(request, 'tour/agencies-show.html', {
         'agency': agency,
         'agency_obj': Agency,
@@ -159,7 +173,16 @@ def agency_show(request, id):
 
 
 def agency_index_admin(request):
-    agencies = Agency.objects.all
+    agencies_list = Agency.objects.all()
+    query = request.GET.get('q')
+    if query:
+        agencies_list = agencies_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(agencies_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    agencies = paginator.get_page(page)
+
     return render(request, 'admin_page/agencies/index.html', {
         'agencies': agencies,
         'agency_obj': Agency,
@@ -228,7 +251,15 @@ def agency_delete_admin(request, id):
 
 def agency_service_index_admin(request):
     agency = request.session['agency']
-    services = AgencyService.objects.filter(agency=agency)
+    services_list = AgencyService.objects.filter(agency=agency)
+    query = request.GET.get('q')
+    if query:
+        services_list = services_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    services = paginator.get_page(page)
     agency_title = Agency.objects.get(id=agency)
     return render(request, 'admin_page/agencies/services/index.html', {
         'services': services,
@@ -312,7 +343,15 @@ def agency_service_delete_admin(request, id):
 
 def agency_schedule_index_admin(request):
     agency = request.session['agency']
-    schedules = AgencySchedule.objects.filter(agency=agency)
+    schedules_list = AgencySchedule.objects.filter(agency=agency)
+    query = request.GET.get('q')
+    if query:
+        schedules_list = schedules_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    schedules = paginator.get_page(page)
     agency_title = Agency.objects.get(id=agency)
     return render(request, 'admin_page/agencies/schedules/index.html', {
         'schedules': schedules,
@@ -405,7 +444,15 @@ def event_index(request):
 # EVENTOS ADMINISTRADOR
 
 def event_index_admin(request):
-    events = Event.objects.all
+    events_list = Event.objects.all()
+    query = request.GET.get('q')
+    if query:
+        events_list = events_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(events_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    events = paginator.get_page(page)
     return render(request, 'admin_page/events/index.html', {
         'events': events,
         'event_obj': Event
@@ -513,7 +560,15 @@ def restaurant_show(request, id):
 
 
 def restaurant_index_admin(request):
-    restaurants = Restaurant.objects.all
+    restaurants_list = Restaurant.objects.all()
+    query = request.GET.get('q')
+    if query:
+        restaurants_list = restaurants_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(restaurants_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    restaurants = paginator.get_page(page)
     return render(request, 'admin_page/restaurants/index.html', {
         'restaurants': restaurants,
         'restaurant_obj': Restaurant
@@ -581,7 +636,15 @@ def restaurant_delete_admin(request, id):
 # MENU DE RESTAURANTES
 def restaurant_menu_index_admin(request):
     restaurant = request.session['restaurants']
-    menus = RestaurantMenu.objects.filter(restaurant=restaurant)
+    menus_list = RestaurantMenu.objects.filter(restaurant=restaurant)
+    query = request.GET.get('q')
+    if query:
+        menus_list = menus_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(menus_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    menus = paginator.get_page(page)
     restaurant_title = Restaurant.objects.get(id=restaurant)
     return render(request, 'admin_page/restaurants/menus/index.html', {
         'menus': menus,
@@ -665,7 +728,15 @@ def restaurant_menu_delete_admin(request, id):
 
 def restaurant_schedule_index_admin(request):
     restaurant = request.session['restaurants']
-    schedules = RestaurantSchedule.objects.filter(restaurant=restaurant)
+    schedules_list = RestaurantSchedule.objects.filter(restaurant=restaurant)
+    query = request.GET.get('q')
+    if query:
+        schedules_list = schedules_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    schedules = paginator.get_page(page)
     restaurant_title = Restaurant.objects.get(id=restaurant)
     return render(request, 'admin_page/restaurants/schedules/index.html', {
         'schedules': schedules,
@@ -748,7 +819,15 @@ def restaurant_schedule_delete_admin(request, id):
 # SERVICIOS DE RESTAURANTES
 
 def restaurant_service_index_admin(request):
-    services = RestaurantService.objects.all
+    services_list = RestaurantService.objects.all
+    query = request.GET.get('q')
+    if query:
+        services_list = services_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    services = paginator.get_page(page)
     return render(request, 'admin_page/restaurants/services/index.html', {
         'services': services,
         'service_obj': RestaurantService,
@@ -839,7 +918,15 @@ def transport_show(request, id):
 # TRANSPORTES ADMINISTRADOR
 
 def transport_index_admin(request):
-    transports = Transport.objects.all
+    transports_list = Transport.objects.all()
+    query = request.GET.get('q')
+    if query:
+        transports_list = transports_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(transports_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    transports = paginator.get_page(page)
     return render(request, 'admin_page/transports/index.html', {
         'transports': transports,
         'transport_obj': Transport
@@ -909,7 +996,16 @@ def transport_delete_admin(request, id):
 # DESTINOS DE TRANSPORTES
 def transport_destination_index_admin(request):
     transport = request.session['transports']
-    destinations = TransportDestination.objects.filter(transport=transport)
+    destinations_list = TransportDestination.objects.filter(transport=transport)
+    query = request.GET.get('q')
+    if query:
+        destinations_list = destinations_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(destinations_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    destinations = paginator.get_page(page)
+
     transport_title = Transport.objects.get(id=transport)
     transport_id = transport
 
@@ -987,7 +1083,15 @@ def transport_destination_delete_admin(request, id):
 
 # SERVICIO DE TRANSPORTES
 def transport_service_index_admin(request):
-    services = TransportService.objects.all
+    services_list = TransportService.objects.all()
+    query = request.GET.get('q')
+    if query:
+        services_list = services_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    services = paginator.get_page(page)
     return render(request, 'admin_page/transports/services/index.html', {
         'services': services,
         'service_obj': TransportService,
@@ -1059,7 +1163,15 @@ def transport_type_service_index_admin(request):
     destination_id = request.session['destination']
     destination_title = TransportDestination.objects.get(id=destination_id)
     destination = TransportDestination.objects.filter(transport=transport).get(id=destination_id)
-    type_services = TransportTypeService.objects.filter(destination=destination_id)
+    type_services_list = TransportTypeService.objects.filter(destination=destination_id)
+    query = request.GET.get('q')
+    if query:
+        type_services_list = type_services_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(type_services_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    type_services = paginator.get_page(page)
 
     return render(request, 'admin_page/transports/type_services/index.html', {
         'type_services': type_services,
@@ -1157,7 +1269,16 @@ def transport_type_service_delete_admin(request, id):
 
 def transport_schedule_index_admin(request):
     transport = request.session['transports']
-    schedules = TransportSchedule.objects.filter(transport=transport)
+    schedules_list = TransportSchedule.objects.filter(transport=transport)
+    query = request.GET.get('q')
+    if query:
+        schedules_list = schedules_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    schedules = paginator.get_page(page)
+
     transport_title = Transport.objects.get(id=transport)
     transport_id = transport
     return render(request, 'admin_page/transports/schedules/index.html', {
@@ -1238,7 +1359,7 @@ def transport_schedule_delete_admin(request, id):
 # SITIOS TURISTICOS CLIENTE
 
 def tourism_site_index(request):
-    destiny = TourismSiteDestiny.objects.all
+    destiny = Location.objects.all
     return render(request, 'tour/tourism_sites-index.html', {
         'destiny': destiny,
         'tourism_site_obj': TourismSite
@@ -1248,7 +1369,7 @@ def tourism_site_index(request):
 def tourism_site_show(request, id):
     site = TourismSite.objects.get(id=id)
     schedule = TourismSiteSchedule.objects.filter(site=id).order_by('register_at')
-    score = round(site.score/2)
+    score = round(site.score / 2)
     return render(request, 'tour/tourism_site-show.html', {
         'site': site,
         'schedule': schedule,
@@ -1256,77 +1377,18 @@ def tourism_site_show(request, id):
     })
 
 
-# DESTINOS DE SITIOS TURISTICOS
-
-def tourism_site_destination_index_admin(request):
-    destinations = TourismSiteDestiny.objects.all
-    return render(request, 'admin_page/tourism_sites/destinations/index.html', {
-        'destinations': destinations,
-        'destination_obj': TourismSiteDestiny,
-    })
-
-
-def tourism_site_destination_show_admin(request, id):
-    destination = TourismSiteDestiny.objects.get(id=id)
-    return render(request, 'admin_page/tourism_sites/destinations/show.html', {
-        'destination': destination,
-        'destination_obj': TourismSiteDestiny,
-    })
-
-
-def tourism_site_destination_new_admin(request):
-    if request.method == 'POST':
-        form = TourismSiteDestinyForm(request.POST, request.FILES)
-        if form.is_valid():
-            destination = form.save(commit=False)
-            destination.save()
-
-            message = 'Registrado correctamente!'
-            messages.add_message(request, messages.SUCCESS, message)
-            return HttpResponseRedirect(reverse('tourism_sites-destination-index-admin'))
-        else:
-            message = 'Existen errores por favor verifica!.'
-            messages.add_message(request, messages.ERROR, message)
-    else:
-        form = TourismSiteDestinyForm()
-    return render(request, 'admin_page/tourism_sites/destinations/new.html', {
-        'form': form,
-    })
-
-
-def tourism_site_destination_edit_admin(request, id):
-    destination = TourismSiteDestiny.objects.get(id=id)
-    if request.method == 'POST':
-        form = TourismSiteDestinyForm(request.POST, request.FILES, instance=destination)
-        if form.is_valid():
-            save = form.save()
-
-            message = "actualizado Correctamente"
-            messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(reverse('tourism_sites-destination-index-admin'))
-    else:
-        form = TourismSiteDestinyForm(instance=destination)
-    return render(request, 'admin_page/tourism_sites/destinations/edit.html', {
-        'destination': destination,
-        'form': form,
-        'destination_obj': TourismSiteDestiny
-    })
-
-
-def tourism_site_destination_delete_admin(request, id):
-    destination = TourismSiteDestiny.objects.get(id=id)
-    destination.delete()
-
-    message = 'Eliminado!'
-    messages.add_message(request, messages.SUCCESS, message)
-
-    return HttpResponseRedirect(reverse('tourism_sites-destination-index-admin'))
-
-
 # SITIOS TURISTICOS ADMINISTRADOR
 
 def tourism_site_index_admin(request):
-    sites = TourismSite.objects.all
+    sites_list = TourismSite.objects.all()
+    query = request.GET.get('q')
+    if query:
+        sites_list = sites_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(sites_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    sites = paginator.get_page(page)
     return render(request, 'admin_page/tourism_sites/index.html', {
         'sites': sites,
         'site_obj': TourismSite
@@ -1395,7 +1457,16 @@ def tourism_site_delete_admin(request, id):
 
 def tourism_site_menu_index_admin(request):
     tourism_site = request.session['tourism_site']
-    menus = TourismSiteMenu.objects.filter(site=tourism_site)
+    menus_list = TourismSiteMenu.objects.filter(site=tourism_site)
+    query = request.GET.get('q')
+    if query:
+        menus_list = menus_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(menus_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    menus = paginator.get_page(page)
+
     site_title = TourismSite.objects.get(id=tourism_site)
     return render(request, 'admin_page/tourism_sites/menus/index.html', {
         'menus': menus,
@@ -1479,7 +1550,15 @@ def tourism_site_menu_delete_admin(request, id):
 
 def tourism_site_schedule_index_admin(request):
     tourism_site = request.session['tourism_site']
-    schedules = TourismSiteSchedule.objects.filter(site=tourism_site)
+    schedules_list = TourismSiteSchedule.objects.filter(site=tourism_site)
+    query = request.GET.get('q')
+    if query:
+        schedules_list = schedules_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    schedules = paginator.get_page(page)
     site_title = TourismSite.objects.get(id=tourism_site)
     return render(request, 'admin_page/tourism_sites/schedules/index.html', {
         'schedules': schedules,
@@ -1562,7 +1641,15 @@ def tourism_site_schedule_delete_admin(request, id):
 # TIPOS DE SITIOS TURISTICOS
 
 def tourism_site_type_index_admin(request):
-    types = TourismSiteType.objects.all
+    types_list = TourismSiteType.objects.all()
+    query = request.GET.get('q')
+    if query:
+        types_list = types_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(types_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    types = paginator.get_page(page)
     return render(request, 'admin_page/tourism_sites/types/index.html', {
         'types': types,
         'type_obj': TourismSiteType,
@@ -1629,7 +1716,15 @@ def tourism_site_type_delete_admin(request, id):
 # SERVICIOS DE SITIOS TURISTICOS
 
 def tourism_site_service_index_admin(request):
-    services = TourismSiteService.objects.all
+    services_list = TourismSiteService.objects.all()
+    query = request.GET.get('q')
+    if query:
+        services_list = services_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    services = paginator.get_page(page)
     return render(request, 'admin_page/tourism_sites/services/index.html', {
         'services': services,
         'service_obj': TourismSiteService,
@@ -1696,7 +1791,7 @@ def tourism_site_service_delete_admin(request, id):
 # RUTAS TURISTICAS CLIENTE
 
 def tourism_route_index(request):
-    destiny = TourismRouteDestiny.objects.all
+    destiny = Location.objects.all
     return render(request, 'tour/tourism_route-index.html', {
         'destiny': destiny,
         'tourism_route_obj': TourismRoute
@@ -1705,85 +1800,25 @@ def tourism_route_index(request):
 
 def tourism_route_show(request, id):
     route = TourismRoute.objects.get(id=id)
-    score = round(route.score/2)
+    score = round(route.score / 2)
     return render(request, 'tour/tourism_route-show.html', {
         'route': route,
         'score': score
     })
 
 
-# DESTINOS DE RUTAS TURISTICAS
-
-def tourism_route_destination_index_admin(request):
-    destinations = TourismRouteDestiny.objects.all
-    return render(request, 'admin_page/tourism_routes/destinations/index.html', {
-        'destinations': destinations,
-        'destination_obj': TourismRouteDestiny,
-    })
-
-
-def tourism_route_destination_show_admin(request, id):
-    destination = TourismRouteDestiny.objects.get(id=id)
-    return render(request, 'admin_page/tourism_routes/destinations/show.html', {
-        'destination': destination,
-        'destination_obj': TourismRouteDestiny,
-    })
-
-
-def tourism_route_destination_new_admin(request):
-    if request.method == 'POST':
-        form = TourismRouteDestinyForm(request.POST, request.FILES)
-        if form.is_valid():
-            destination = form.save(commit=False)
-            destination.save()
-
-            message = 'Registrado correctamente!'
-            messages.add_message(request, messages.SUCCESS, message)
-            return HttpResponseRedirect(reverse('tourism_routes-destination-index-admin'))
-        else:
-            message = 'Existen errores por favor verifica!.'
-            messages.add_message(request, messages.ERROR, message)
-    else:
-        form = TourismRouteDestinyForm()
-    return render(request, 'admin_page/tourism_routes/destinations/new.html', {
-        'form': form,
-    })
-
-
-def tourism_route_destination_edit_admin(request, id):
-    destination = TourismRouteDestiny.objects.get(id=id)
-    if request.method == 'POST':
-        form = TourismRouteDestinyForm(request.POST, request.FILES, instance=destination)
-        if form.is_valid():
-            save = form.save()
-
-            message = "actualizado Correctamente"
-            messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(
-                reverse('tourism_routes-destination-index-admin'))
-    else:
-        form = TourismRouteDestinyForm(instance=destination)
-    return render(request, 'admin_page/tourism_routes/destinations/edit.html', {
-        'destination': destination,
-        'form': form,
-        'destination_obj': TourismRouteDestiny
-    })
-
-
-def tourism_route_destination_delete_admin(request, id):
-    destination = TourismRouteDestiny.objects.get(id=id)
-    destination.delete()
-
-    message = 'Eliminado!'
-    messages.add_message(request, messages.SUCCESS, message)
-
-    return HttpResponseRedirect(reverse('tourism_routes-destination-index-admin'))
-
-
 # RUTAS TURISTICAS ADMINISTRADOR
 
 def tourism_route_index_admin(request):
-    routes = TourismRoute.objects.all
+    routes_list = TourismRoute.objects.all()
+    query = request.GET.get('q')
+    if query:
+        routes_list = routes_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(routes_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    routes = paginator.get_page(page)
     return render(request, 'admin_page/tourism_routes/index.html', {
         'routes': routes,
         'route_obj': TourismRoute
@@ -1850,7 +1885,16 @@ def tourism_route_delete_admin(request, id):
 # MENU DE RUTAS TURISTICAS
 def tourism_route_menu_index_admin(request):
     route = request.session['tourism_route']
-    menus = TourismRouteMenu.objects.filter(route=route)
+    menus_list = TourismRouteMenu.objects.filter(route=route)
+    query = request.GET.get('q')
+    if query:
+        menus_list = menus_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(menus_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    menus = paginator.get_page(page)
+
     route_title = TourismRoute.objects.get(id=route)
     return render(request, 'admin_page/tourism_routes/menus/index.html', {
         'menus': menus,
@@ -1957,7 +2001,15 @@ def lodging_show(request, id):
 # HOSPEDAJES ADMINISTRADOR
 
 def lodging_index_admin(request):
-    lodgings = Lodging.objects.all
+    lodgings_list = Lodging.objects.all()
+    query = request.GET.get('q')
+    if query:
+        lodgings_list = lodgings_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(lodgings_list, 10)  # Show 10  per page
+    page = request.GET.get('page')
+    lodgings = paginator.get_page(page)
     return render(request, 'admin_page/lodgings/index.html', {
         'lodgings': lodgings,
         'lodging_obj': Lodging
@@ -2029,7 +2081,15 @@ def lodging_delete_admin(request, id):
 # CUARTOS DE HOSPEDAJES
 def lodging_room_index_admin(request):
     lodging = request.session['lodgings']
-    rooms = LodgingRoom.objects.filter(lodging=lodging)
+    rooms_list = LodgingRoom.objects.filter(lodging=lodging)
+    query = request.GET.get('q')
+    if query:
+        rooms_list = rooms_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(rooms_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    rooms = paginator.get_page(page)
     lodging_title = Lodging.objects.get(id=lodging)
     return render(request, 'admin_page/lodgings/rooms/index.html', {
         'rooms': rooms,
@@ -2113,7 +2173,15 @@ def lodging_room_delete_admin(request, id):
 
 def lodging_schedule_index_admin(request):
     lodging = request.session['lodgings']
-    schedules = LodgingSchedule.objects.filter(lodging=lodging)
+    schedules_list = LodgingSchedule.objects.filter(lodging=lodging)
+    query = request.GET.get('q')
+    if query:
+        schedules_list = schedules_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    schedules = paginator.get_page(page)
     lodging_title = Lodging.objects.get(id=lodging)
     lodging_id = lodging
     return render(request, 'admin_page/lodgings/schedules/index.html', {
@@ -2196,7 +2264,15 @@ def lodging_schedule_delete_admin(request, id):
 # TIPOS DE HOSPEDAJES
 
 def lodging_type_index_admin(request):
-    types = LodgingType.objects.all
+    types_list = LodgingType.objects.all()
+    query = request.GET.get('q')
+    if query:
+        types_list = types_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(types_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    types = paginator.get_page(page)
     return render(request, 'admin_page/lodgings/types/index.html', {
         'types': types,
         'type_obj': LodgingType,
@@ -2263,7 +2339,15 @@ def lodging_type_delete_admin(request, id):
 # SERVICIOS DE HOSPEDAJES
 
 def lodging_service_index_admin(request):
-    services = LodgingService.objects.all
+    services_list = LodgingService.objects.all()
+    query = request.GET.get('q')
+    if query:
+        services_list = services_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(services_list, 10)  # Show 10  per page
+    page = request.GET.get('page')
+    services = paginator.get_page(page)
     return render(request, 'admin_page/lodgings/services/index.html', {
         'services': services,
         'service_obj': LodgingService,
@@ -2325,3 +2409,78 @@ def lodging_service_delete_admin(request, id):
     messages.add_message(request, messages.SUCCESS, message)
 
     return HttpResponseRedirect(reverse('lodgings-services-index-admin'))
+
+
+# LOCALIZACIONES
+
+def location_index_admin(request):
+    destinations_list = Location.objects.all()
+    query = request.GET.get('q')
+    if query:
+        destinations_list = destinations_list.filter(
+            Q(title__icontains=query)
+        ).distinct()
+    paginator = Paginator(destinations_list, 10)  # Show 15 contacts per page
+    page = request.GET.get('page')
+    destinations = paginator.get_page(page)
+    return render(request, 'admin_page/locations/index.html', {
+        'destinations': destinations,
+        'destination_obj': Location,
+    })
+
+
+def location_show_admin(request, id):
+    destination = Location.objects.get(id=id)
+    return render(request, 'admin_page/locations/show.html', {
+        'destination': destination,
+        'destination_obj': Location,
+    })
+
+
+def location_new_admin(request):
+    if request.method == 'POST':
+        form = LocationForm(request.POST, request.FILES)
+        if form.is_valid():
+            destination = form.save(commit=False)
+            destination.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('location-index-admin'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = LocationForm()
+    return render(request, 'admin_page/locations/new.html', {
+        'form': form,
+    })
+
+
+def location_edit_admin(request, id):
+    destination = Location.objects.get(id=id)
+    if request.method == 'POST':
+        form = LocationForm(request.POST, request.FILES, instance=destination)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('location-index-admin'))
+    else:
+        form = LocationForm(instance=destination)
+    return render(request, 'admin_page/locations/edit.html', {
+        'destination': destination,
+        'form': form,
+        'destination_obj': Location
+    })
+
+
+def location_delete_admin(request, id):
+    destination = Location.objects.get(id=id)
+    destination.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('location-index-admin'))

@@ -397,6 +397,14 @@
                         </span>
                     </a>
                 </li>
+                <li class="active">
+                    <a href="{% url 'location-index-admin' %}">
+                        <i class="fa fa-share"></i> <span>Localizaciones</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                </li>
                 <li class="nav-devider"></li>
                 <li class="header nav-small-cap">TURISMO</li>
 
@@ -481,12 +489,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active">
-                            <a href="{% url 'tourism_sites-destination-index-admin'%}"><i
-                                    class="glyphicon glyphicon-map-marker"></i>Localizacion</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'tourism_sites-index-admin'%}"><i
-                                    class="glyphicon glyphicon-camera"></i>Sitios Turisticos</a>
+                            <a href="{% url 'tourism_sites-index-admin'%}"><i class="glyphicon glyphicon-camera"></i>Sitios
+                                Turisticos</a>
                         </li>
                         <li class="active">
                             <a href="{% url 'tourism_sites-types-index-admin'%}"><i class="fa fa-hand-paper-o"></i>Tipos</a>
@@ -507,10 +511,6 @@
                         <li class="active">
                             <a href="{% url 'tourism_routes-index-admin'%}"><i
                                     class="glyphicon glyphicon-road"></i>Rutas Turisticas</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'tourism_routes-destination-index-admin'%}"><i
-                                    class="glyphicon glyphicon-map-marker"></i>Localizaciones</a>
                         </li>
                     </ul>
                 </li>
@@ -755,6 +755,9 @@
 	  $.widget.bridge('uibutton', $.ui.button);
 
 
+
+
+
 </script>
 
 <!-- popper -->
@@ -967,6 +970,9 @@
 
         });
 
+
+
+
 </script>
 <script type="text/javascript">
 
@@ -991,6 +997,9 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
+
+
 
 </script>
 {% block code_js %}

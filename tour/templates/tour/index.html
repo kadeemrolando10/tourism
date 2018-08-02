@@ -5,7 +5,6 @@
 {% block content %}
 
 
-
 <section class="dorne-welcome-area bg-img bg-overlay"
          style="background-image: url({% static 'img/bg-img/hero-11.jpg' %});">
     <div class="container h-100">
@@ -25,10 +24,13 @@
             <span></span>
         </div>
         <div class="social-btns">
-            <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ"><i class="fa fa-youtube-square"
+                                                                                  aria-hidden="true"></i></a>
             <a href="https://twitter.com/carlosdmesag"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-            <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
-            <a href="https://www.facebook.com/secretariadepartamentaldeturismo/?ref=br_rs"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
+            <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/"><i
+                    class="fa fa-instagram" aria-haspopup="true"></i></a>
+            <a href="https://www.facebook.com/secretariadepartamentaldeturismo/?ref=br_rs"><i class="fa fa-facebook"
+                                                                                              aria-haspopup="true"></i></a>
             <a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
         </div>
     </div>
@@ -38,13 +40,13 @@
 <!-- ***** Welcome Area End ***** -->
 <!-- ***** Catagory Area Start ***** -->
 <section class="dorne-catagory-area tab-pane active" name="tourism" id="tourism">
-    <div class="container" >
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="all-catagories">
                     <div class="row">
                         <!-- Single Catagory Area -->
-                        <div class=" col-12 col-sm-6 col-md " >
+                        <div class=" col-12 col-sm-6 col-md ">
                             <a href="{% url 'lodging-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
                                     <div class="catagory-content">
@@ -83,7 +85,6 @@
                                     <div class="catagory-content">
                                         <img src="{% static 'img/core-img/agencia.png'%}" alt="">
                                         <h6>Agencias de Turismo</h6>
-
                                     </div>
                                 </div>
                             </a>
@@ -128,8 +129,7 @@
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>Sitios Turisticos</h4>
-                    <p>Que lugares conocer ?</p><br>
+                    <h4>Sitios Turisticos</h4><br>
                 </div>
             </div>
         </div>
@@ -187,8 +187,7 @@
             <div class="col-12">
                 <div class="section-heading dark text-center">
                     <span></span>
-                    <h4>HOSPEDAJES</h4>
-                    <p>Donde descansar ?</p>
+                    <h4>HOSPEDAJES</h4><br>
                 </div>
             </div>
         </div>
@@ -230,7 +229,6 @@
                 <div class="section-heading text-center">
                     <span></span>
                     <h4>Restaurantes</h4>
-                    <p>Donde comer ?</p>
                 </div>
             </div>
         </div>
@@ -244,7 +242,7 @@
                             <img class="imgstyle" src="{{ l.image.url }}" alt="">
                             <!-- Rating & Map Area -->
                             <div class="ratings-map-area d-flex">
-                                <span class="alert alert-dark">{{l.score}}</span>
+                                <span class="btn btn-primary-varianty">{{l.score}}</span>
                             </div>
                             <div class="feature-content d-flex align-items-center justify-content-between">
                                 <div class="feature-title">
@@ -269,13 +267,12 @@
 <!-- ***** Features Events Area Start ***** -->
 <section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-100-50"
          style="background-image: url({% static 'img/bg-img/maxresdefault.jpg' %})">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>TRANSPORTES</h4>
-                    <p>En que viajar ?</p><br>
+                    <h4>TRANSPORTES</h4><br>
                 </div>
             </div>
         </div>
@@ -284,25 +281,30 @@
             <div class="col-12">
                 <div class="features-slides owl-carousel">
                     {% for t in transports %}
-                    <div class="single-features-area">
-                        <a href="{% url 'transports-show' t.id %}">
-                            <div class="feature-title">
-                                <h5>{{t.title}}</h5>
-                            </div>
-                            <img class="imgstyle" src="{{ t.image.url }}" alt="">
-                            <div class="feature-content d-flex align-items-center justify-content-between">
-                                <div class="feature-title">
-                                    {% get_destiny_transport t.id as destiny %}
-                                    <p><i class="fa fa-car" aria-hidden="true"></i>.
+                    <a class='follow' href="{% url 'transports-show' t.id %}">
+                        <main class='profile' ontouchstart>
+                            <div class='background'></div>
+                            <aside class='avatar'
+                                   style="background: url({{ t.image.url }}) no-repeat top center/cover;"></aside>
+                            <section class='info'>
+                                <h1>{{t.title}}</h1>
+                                <h2>{% get_destiny_transport t.id as destiny %}
+                                    <p>
                                         {% for a in destiny %}
                                         {{ a.title }},
                                         {% endfor %}
                                     </p>
-                                </div>
-
-                            </div>
-                        </a>
-                    </div>
+                                </h2>
+                                <ul>
+                                    <li>
+                                        <span class='link codepen'>
+                                            {{t.score}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </section>
+                        </main>
+                    </a>
                     {% endfor %}
                 </div>
             </div>
@@ -327,5 +329,6 @@
 {% endblock %}
 
 {% block js_scripts%}
-<!-- end feedwind code -->
+
+
 {% endblock %}

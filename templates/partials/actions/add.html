@@ -1,11 +1,11 @@
 {% if type == 'button' %}
-    <div class="{% if align %} }}text-{{ align }}{% else %}text-right{% endif %}">
-        <a href="{{ url }}" class="glyphicon glyphicon-plus-sign btn btn-success waves-effect waves-light">
-            {% if title is not None %}
-                {{ title }}
-            {% else %}
-                Agregar
-            {% endif %}
-        </a>
-    </div>
+<div class="{% if align %} }}text-{{ align }}{% else %}text-right{% endif %}">
+    <a href="{{ url }}" class="glyphicon glyphicon-plus-sign btn btn-primary waves-effect waves-light margin-5">
+        {% if title is not None %}
+        {{ title }}
+        {% else %}
+        Agregar
+        {% endif %}
+    </a>
+</div>
 {% endif %}
