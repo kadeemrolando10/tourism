@@ -535,7 +535,7 @@ li {
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-item.active .nav-link {
-    color: #000;
+    color: #ff6600;
 }
 
 .se {
@@ -548,6 +548,9 @@ li {
     display: inline-block;
     margin-right: 40px;
     font-size: 14px;
+}
+.dorne-signin-btn > a:hover {
+    color: #7643ea;
 }
 
 .dorne-search-btn > a i {
@@ -576,7 +579,7 @@ li {
 
 .dorne-welcome-area {
     width: 100%;
-    height: 945px;
+    height: 675px;
     position: relative;
     z-index: 1;
 }
@@ -669,20 +672,20 @@ li {
 
 .hero-social-btn .social-title h6 {
     margin-bottom: 0;
-    color: #fff;
+    color: #ff6600;
     line-height: 1;
     margin-right: 30px;
 }
 
 .hero-social-btn .social-title span {
-    background-color: #fff;
+    background-color: #ff6600;
     width: 80px;
     height: 1px;
     display: block;
 }
 
 .hero-social-btn .social-btns {
-    margin-top: 170px;
+    margin-top: 150px;
 }
 
 .hero-social-btn .social-btns > a {
@@ -690,6 +693,11 @@ li {
     color: #fff;
     display: block;
     margin-top: 30px;
+}
+
+.hero-social-btn .social-btns i {
+    font-size: 30px;
+    color: #ff6600;
 }
 
 /* Catagory Area CSS */
@@ -795,7 +803,7 @@ li {
 
 .dorne-features-destinations-area,
 .dorne-features-restaurant-area {
-    padding: 100px 35px;
+    padding: 20px 35px;
     position: relative;
     z-index: 1;
 }
@@ -1682,6 +1690,7 @@ background-color:#ffa500;
 
 .th_violet{
 background-color:#7643ea;
+color:white;
 }
 
 @media only screen and (max-width:320px){
@@ -1832,11 +1841,15 @@ body {
 
 .les{
     padding-bottom:5px;
+        background-color: red;
+    position: absolute;
+    z-index: 200;
+    padding: 5px;
+    left: 35px;
+    border-radius: 5px 0;
+    border-bottom: 5px solid #7643ea;
 }
 
-.link{
-    font-size:11px;
-}
 .yellow{
     background-color: #ffc107;
 }
@@ -1911,9 +1924,19 @@ body {
 .link {
   display: block;
   text-align: center;
-  color: #777;
+  color: white;
   text-decoration: none;
-  padding: 10px;
+  padding:15px 2px 5px 2px!important;
+  font-weight:bold;
+  overflow:hidden;
+  font-size:13px;
+}
+.link a{
+    color: white;
+    -webkit-cursor: url;
+}
+.loser{
+    padding: 2px 10px !important;
 }
 
 .movie_card {
@@ -2067,8 +2090,8 @@ body {
   position: sticky;
   top: 50%;
   overflow: hidden;
-  box-shadow: 3px 3px 20px 14px #7643ea;
   text-align: center;
+  border: 6px double #fff;
 }
 
 .blog-card .color-overlay {
@@ -2114,10 +2137,11 @@ body {
 }
 
 .title-content > h5{
-    color: #7643ea;
+    color: lime;
     background-color: #ffc107;
-    border-color: #white;
-    text-shadow: -0.5px 0 #fff, 0.5px 0 #fff, 0 0.5px #fff, 0 -0.5px #fff;
+    border-color: white;
+    text-shadow: -0.5px 0 black, 0.5px 0 green, 0 0.5px black, 0 -0.5px red;
+    text-transform: uppercase;
 }
 
 hr {
@@ -2341,6 +2365,9 @@ svg #base {
   justify-content: center;
   position: relative;
   text-align: center;
+}
+.info:hover {
+ background-color: #ff6600;
 }
 .info h1 {
   padding: 12px 12px 0;
@@ -3036,4 +3063,120 @@ a.link.github:active {
     -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
             transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
   }
+}
+
+.reviewer-meta h4, h6{
+    text-transform: uppercase;
+    color:blue;
+}
+
+.ribbon {
+ font-size: 16px !important;
+ width: 100%;
+ position: relative;
+ background: #ff6600;
+ color: #fff;
+ text-align: center;
+ padding: 1em 2em;
+ margin: 2em auto 3em;
+ }
+.ribbon:before, .ribbon:after {
+ content: "";
+ position: absolute;
+ display: block;
+ bottom: -1em;
+ border: 1.5em solid #ff6677;
+ z-index: -1;
+}
+.ribbon:before {
+ left: -2em;
+ border-right-width: 1.5em;
+ border-left-color: transparent;
+}
+.ribbon:after {
+ right: -2em;
+ border-left-width: 1.5em;
+ border-right-color: transparent;
+}
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+ content: "";
+ position: absolute;
+ display: block;
+ border-style: solid;
+ border-color: #804f7c transparent transparent transparent;
+ bottom: -1em;
+}
+.ribbon .ribbon-content:before {
+ left: 0;
+ border-width: 1em 0 0 1em;
+}
+.ribbon .ribbon-content:after {
+ right: 0;
+ border-width: 1em 1em 0 0;
+}
+
+.fixed-position{
+    position: fixed;
+    top: 120px;
+    right: 5px;
+    background-color: white;
+    border-radius:100%;
+    padding:0;
+}
+.fixed-position:hover{
+    background-color: black;
+}
+.fixed-position i{
+    font-size:20px;
+    align:center;
+}
+#locat-icon{
+    font-size:15px;
+    color:#ff6600;
+}
+.fixed-position >a{
+    padding:1px !important;
+    border-radius: 100%;
+    height:50px;
+}
+.position-right{
+    left:-120px;
+}
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 1s linear infinite;
+  -moz-animation: rotating 1s linear infinite;
+  -ms-animation: rotating 1s linear infinite;
+  -o-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
+.change-color{
+    background-color:green;
 }

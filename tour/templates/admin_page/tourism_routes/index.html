@@ -13,7 +13,7 @@
         <li class="breadcrumb-item active page" aria-current="page">Rutas Turisticas</li>
     </ol>
 </nav>
-<form method="GET" action="" accept-charset="utf-8" class="input-group mb-3 col-4">
+<form method="GET" action="" accept-charset="utf-8" class="input-group mb-3 col-10 col-md-8 col-lg-4">
     <input type="text" class="form-control" placeholder="Buscar" name="q" value="{{request.GET.q}}">
     <div class="input-group-append">
         <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
@@ -28,9 +28,9 @@
         <tr>
             <th>#</th>
             <th data-field="title" data-sortable="true">{% get_field_name route_obj 'title' %}</th>
+            <th data-field="destination" data-sortable="true">{% get_field_name route_obj 'destination' %}</th>
             <th data-field="address" data-sortable="true">{% get_field_name route_obj 'description' %}</th>
             <th data-field="phone" data-sortable="true">{% get_field_name route_obj 'date' %}</th>
-            <th data-field="description" data-sortable="true">{% get_field_name route_obj 'score' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -40,6 +40,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ route.title }}</td>
+            <td>{{ route.destination }}</td>
             <td>{{ route.description }}</td>
             <td>{{ route.date }}</td>
             <td>{{ route.score }}</td>

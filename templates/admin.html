@@ -49,16 +49,12 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index.html" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <b class="logo-mini">
-                <span>SISTOUR - POTOSI</span>
-            </b>
+        <a href="{% url 'index_admin' %}" class="logo">
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg">
-		  <img src="{% static 'images/turismo.png' %}" alt="logo" class="light-logo">
-	  	  <img src="{% static 'images/turismo.png' %}" alt="logo" class="dark-logo">
-	  </span>
+		    <img src="{% static 'images/turismo.png' %}" height="40px" alt="logo" class="light-logo">
+	  	    <img src="{% static 'images/turismo.png' %}" height="40px" alt="logo" class="dark-logo">
+	        </span>
         </a>
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top">
@@ -174,6 +170,7 @@
                             <li class="footer"><a href="#">See all e-Mails</a></li>
                         </ul>
                     </li>
+
                     <!-- Notifications -->
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -230,121 +227,24 @@
                         </ul>
                     </li>
                     <!-- Tasks -->
-                    <li class="dropdown tasks-menu">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="mdi mdi-message"></i>
+                            <i class="mdi mdi-account-card-details"></i>
                         </a>
                         <ul class="dropdown-menu scale-up">
-                            <li class="header">You have 6 tasks</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu inner-content-div">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Lorem ipsum dolor sit amet
-                                                <small class="pull-right">30%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 30%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">30% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Vestibulum nec ligula
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-danger" style="width: 20%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Donec id leo ut ipsum
-                                                <small class="pull-right">70%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-light-blue" style="width: 70%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Praesent vitae tellus
-                                                <small class="pull-right">40%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-yellow" style="width: 40%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Nam varius sapien
-                                                <small class="pull-right">80%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-red" style="width: 80%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">80% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Nunc fringilla
-                                                <small class="pull-right">90%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-primary" style="width: 90%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">90% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
+                            <li class="header">
+                                <div class="info">
+                                    {% if request.user.is_authenticated %}
+                                    <p>Hola {{request.user.username}} <span
+                                            class="badge-info badge-pill"> ADMINISTRADOR</span></p>
+                                    <a href="{% url 'logout' %}"><i class="ion ion-power"></i> Cerrar Sesion</a>
+                                    {% else %}
+                                    <p>Hola Amigo</p>
+                                    <a href="{% url 'login' %}"><i class="ion ion-power"></i> Iniciar Sesion</a>
+                                    {% endif %}
+                                </div>
                             </li>
                         </ul>
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-cog fa-spin"></i></a>
                     </li>
                 </ul>
             </div>
@@ -356,74 +256,60 @@
         <!-- sidebar -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="ulogo">
-                    <a href="index.html">
-                        <!-- logo for regular state and mobile devices -->
-                        <span><b>SISTOUR</b></span>
-                    </a>
-                </div>
-                <div class="image">
-                    <img src="{% static 'images/user2-160x160.jpg' %}" class="rounded-circle" alt="User Image">
-                </div>
-                <div class="info">
-                    {% if request.user.is_authenticated %}
-                    <p>Hola {{request.user.username}}</p>
-                    {% else %}
-                    <p>Hola Amigo</p>
-                    {% endif %}
-                    <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i
-                            class="ion ion-gear-b"></i></a>
-                    <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i
-                            class="ion ion-android-mail"></i></a>
-                    {% if request.user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="link" data-toggle="tooltip" title=""
-                       data-original-title="Logout"><i
-                            class="ion ion-power"></i></a>
-                    {% else %}
-                    <a href="{% url 'login' %}" class="link" data-toggle="tooltip" title="" data-original-title="Login"><i
-                            class="ion ion-power"></i></a>
-                    {% endif %}
-                </div>
+            <div class="user-panel text-center">
+                <a href="{% url 'index_admin' %}" class="d-block d-sm-none">SISTOUR</a>
+                <a href="{% url 'index_admin' %}" class="d-none d-sm-block">ST</a>
             </div>
             <!-- sidebar menu -->
+
             <ul class="sidebar-menu" data-widget="tree">
+                <li class="nav-devider"></li>
                 <li class="header nav-small-cap oldclass" id="mydiv">ADMINISTRACION</li>
-                <li class="active">
+                <li>
                     <a href="{% url 'user-index' %}">
-                        <i class="fa fa-share"></i> <span>Usuarios</span>
+                        <i class="fa fa-address-book-o"></i> <span>Usuarios</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
                         </span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{% url 'location-index-admin' %}">
-                        <i class="fa fa-share"></i> <span>Localizaciones</span>
+                        <i class="fa fa-map-o"></i> <span>Localizaciones</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{% url 'configurations-index' %}">
+                        <i class="fa fa-gears"></i> <span>Configuraciones</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+
+
                 <li class="nav-devider"></li>
                 <li class="header nav-small-cap">TURISMO</li>
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-share"></i> <span>Area Hospedajes</span>
+                        <i class="fa fa-building-o"></i> <span>Area Hospedajes</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
                         <li class="active">
-                            <a href="{% url 'lodgings-types-index-admin'%}"><i class="fa fa-hand-paper-o"></i>Tipos</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'lodgings-services-index-admin'%}"><i class="fa fa-server"></i>Servicios</a>
-                        </li>
-                        <li class="active">
                             <a href="{% url 'lodgings-index-admin'%}"><i class="fa fa-building-o"></i>Hospedajes</a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url 'lodgings-types-index-admin'%}"><i class="fa fa-signal"></i>Tipos</a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url 'lodgings-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
                         </li>
                     </ul>
                 </li>
@@ -439,7 +325,7 @@
                             <a href="{% url 'transports-index-admin'%}"><i class="fa fa-bus"></i>Transportes</a></li>
                         <li class="active">
                             <a href="{% url 'transports-services-index-admin'%}"><i
-                                    class="fa fa-server"></i>Servicios</a></li>
+                                    class="fa fa-thumb-tack"></i>Servicios</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -454,12 +340,12 @@
                             <a href="{% url 'restaurants-index-admin'%}"><i class="glyphicon glyphicon-cutlery"></i>Restaurantes</a>
                         </li>
                         <li class="active">
-                            <a href="{% url 'restaurants-services-index-admin'%}"><i class="fa fa-server"></i>Servicios</a>
+                            <a href="{% url 'restaurants-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
                         </li>
                     </ul>
 
                 </li>
-                <li class="active">
+                <li>
                     <a href="{% url 'agencies-index-admin'%}">
                         <i class="glyphicon glyphicon-queen"></i> <span>Agencias de Turismo</span>
                         <span class="pull-right-container">
@@ -472,9 +358,9 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="nav-devider"></li>
                 <li class="header nav-small-cap">CULTURA</li>
-                <li class="active">
+                <li>
                     <a href="{% url 'events-index-admin'%}">
-                        <i class="fa fa-building-o"></i> <span>Eventos</span>
+                        <i class="fa fa-bullhorn"></i> <span>Eventos</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
                         </span>
@@ -482,7 +368,7 @@
                 </li>
                 <li class="treeview">
                     <a href="{% url 'tourism_sites-index-admin'%}">
-                        <i class="fa fa-bus"></i> <span>Area Sitios Turisticos</span>
+                        <i class="fa fa-podcast"></i> <span>Area Sitios Turisticos</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
                         </span>
@@ -493,26 +379,20 @@
                                 Turisticos</a>
                         </li>
                         <li class="active">
-                            <a href="{% url 'tourism_sites-types-index-admin'%}"><i class="fa fa-hand-paper-o"></i>Tipos</a>
+                            <a href="{% url 'tourism_sites-types-index-admin'%}"><i class="fa fa-signal"></i>Tipos</a>
                         </li>
                         <li class="active">
-                            <a href="{% url 'tourism_sites-services-index-admin'%}"><i class="fa fa-server"></i>Servicios</a>
+                            <a href="{% url 'tourism_sites-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
                         </li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li>
                     <a href="{% url 'tourism_routes-index-admin'%}">
-                        <i class="glyphicon glyphicon-cutlery"></i> <span>Area Rutas Turisticas</span>
+                        <i class="fa fa-map-signs"></i> <span>Rutas Turisticas</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
                         </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li class="active">
-                            <a href="{% url 'tourism_routes-index-admin'%}"><i
-                                    class="glyphicon glyphicon-road"></i>Rutas Turisticas</a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </section>
@@ -758,6 +638,10 @@
 
 
 
+
+
+
+
 </script>
 
 <!-- popper -->
@@ -973,6 +857,10 @@
 
 
 
+
+
+
+
 </script>
 <script type="text/javascript">
 
@@ -997,6 +885,10 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
+
+
+
 
 
 

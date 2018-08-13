@@ -14,14 +14,14 @@ from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agen
     TransportDestination, LodgingRoom, LodgingType, Location, LodgingSchedule, TourismRoute, TourismSiteSchedule, \
     TransportSchedule, RestaurantSchedule, LodgingService, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantMenu, TransportService, TransportTypeService, TourismSiteMenu, \
-    TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS
+    TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS, Secretary
 
 from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, TourismSiteForm, TourismRouteForm, \
     LodgingForm, AgencyServiceForm, AgencyScheduleForm, RestaurantMenuForm, RestaurantScheduleForm, \
     RestaurantServiceForm, TransportDestinationForm, TransportServiceForm, TransportTypeServiceForm, \
     TransportScheduleForm, TourismSiteMenuForm, TourismSiteScheduleForm, LocationForm, TourismSiteTypeForm, \
     TourismSiteServiceForm, TourismRouteMenuForm, LodgingRoomForm, LodgingScheduleForm, \
-    LodgingTypeForm, LodgingServiceForm, ClientForm, ClientFormEdit
+    LodgingTypeForm, LodgingServiceForm, ClientForm, ClientFormEdit, ObjectiveForm, FunctionForm, LawForm, SecretaryForm
 
 
 def user_index(request):
@@ -116,31 +116,38 @@ def index_admin(request):
     return render(request, 'admin_page/index.html', {})
 
 
+def change_main(request, id):
+    request.session['id_main'] = id
+    return HttpResponseRedirect(reverse(index))
+
+
 def index(request):
     events = Event.objects.all
     restaurants = Restaurant.objects.all
     transports = Transport.objects.all
     tourism_sites = Restaurant.objects.all
-    agencys = Agency.objects.all
+    agencies = Agency.objects.all
     lodgings = Lodging.objects.all
     return render(request, 'tour/index.html', {
         'events': events,
         'restaurants': restaurants,
         'transports': transports,
         'tourism_sites': tourism_sites,
-        'agencys': agencys,
-        'lodgings': lodgings,
+        'agencys': agencies,
+        'lodgings': lodgings
     })
 
 
 def secretary(request):
-    obj = Objective.objects.all
-    func = Function.objects.all
-    doc = Law.objects.all
+    objectives = Objective.objects.all
+    secretaries = Secretary.objects.all
+    laws = Law.objects.all
+    functions = Function.objects.all
     return render(request, 'tour/secretary.html', {
-        'objetivos': obj,
-        'funciones': func,
-        'documento': doc
+        'objectives': objectives,
+        'secretaries': secretaries,
+        'laws': laws,
+        'functions': functions
     })
 
 
@@ -148,7 +155,11 @@ def secretary(request):
 
 
 def agency_index(request):
-    agencies = Agency.objects.all
+    ids = request.session['id_main']
+    if ids is None:
+        agencies = Agency.objects.all
+    else:
+        agencies = Agency.objects.filter(destination=ids)
     return render(request, 'tour/agencies-index.html', {
         'agencies': agencies,
         'agency_obj': Agency,
@@ -434,7 +445,11 @@ def agency_schedule_delete_admin(request, id):
 # EVENTOS CLIENTE
 
 def event_index(request):
-    events = Event.objects.all
+    id = request.session['id_main']
+    if id is None:
+        events = Event.objects.all
+    else:
+        events = Event.objects.filter(destination=id)
     return render(request, 'tour/events-index.html', {
         'events': events,
         'event_obj': Event
@@ -520,7 +535,12 @@ def event_delete_admin(request, id):
 # RESTAURANTS CLIENTE
 
 def restaurant_index(request):
-    restaurants = Restaurant.objects.all
+    id = request.session['id_main']
+    if id is None:
+        restaurants = Restaurant.objects.all
+    else:
+        restaurants = Restaurant.objects.filter(destination=id)
+
     return render(request, 'tour/restaurants-index.html', {
         'restaurants': restaurants,
         'restaurant_obj': Restaurant
@@ -894,7 +914,12 @@ def restaurant_service_delete_admin(request, id):
 # TRANSPORTES CLIENTE
 
 def transport_index(request):
-    transports = Transport.objects.all
+    id = request.session['id_main']
+    if id is None:
+        transports = Transport.objects.all
+    else:
+        transports = Transport.objects.filter(destination=id)
+
     return render(request, 'tour/transports-index.html', {
         'transports': transports,
         'transport_obj': Transport
@@ -1359,9 +1384,13 @@ def transport_schedule_delete_admin(request, id):
 # SITIOS TURISTICOS CLIENTE
 
 def tourism_site_index(request):
-    destiny = Location.objects.all
+    id = request.session['id_main']
+    if id is None:
+        sites = TourismSite.objects.all
+    else:
+        sites = TourismSite.objects.filter(destination=id)
     return render(request, 'tour/tourism_sites-index.html', {
-        'destiny': destiny,
+        'sites': sites,
         'tourism_site_obj': TourismSite
     })
 
@@ -1408,7 +1437,7 @@ def tourism_site_new_admin(request):
     if request.method == 'POST':
         form = TourismSiteForm(request.POST, request.FILES)
         if form.is_valid():
-            tourism_site = form.save(commit=False)
+            tourism_site = form.save(commit=True)
             tourism_site.save()
 
             message = 'Registrado correctamente!'
@@ -1791,9 +1820,13 @@ def tourism_site_service_delete_admin(request, id):
 # RUTAS TURISTICAS CLIENTE
 
 def tourism_route_index(request):
-    destiny = Location.objects.all
+    id = request.session['id_main']
+    if id is None:
+        routes = TourismRoute.objects.all
+    else:
+        routes = TourismRoute.objects.filter(destination=id)
     return render(request, 'tour/tourism_route-index.html', {
-        'destiny': destiny,
+        'routes': routes,
         'tourism_route_obj': TourismRoute
     })
 
@@ -1977,9 +2010,13 @@ def tourism_route_menu_delete_admin(request, id):
 # HOSPEDAJES CLIENTE
 
 def lodging_index(request):
-    typeslod = LodgingType.objects.all
+    id = request.session['id_main']
+    if id is None:
+        lodgings = Lodging.objects.all
+    else:
+        lodgings = Lodging.objects.filter(destination=id)
     return render(request, 'tour/lodging-index.html', {
-        'typeslod': typeslod,
+        'lodgings': lodgings,
         'lodging_obj': Lodging
     })
 
@@ -2484,3 +2521,222 @@ def location_delete_admin(request, id):
     messages.add_message(request, messages.SUCCESS, message)
 
     return HttpResponseRedirect(reverse('location-index-admin'))
+
+
+# CONFIGURACIONES
+
+def configuration_index(request):
+    objectives = Objective.objects.all
+    secretaries = Secretary.objects.all
+    laws = Law.objects.all
+    functions = Function.objects.all
+    return render(request, 'admin_page/configurations/index.html', {
+        'objectives': objectives,
+        'secretaries': secretaries,
+        'laws': laws,
+        'functions': functions
+    })
+
+
+# OBJETIVOS
+
+def objective_new(request):
+    if request.method == 'POST':
+        form = ObjectiveForm(request.POST, request.FILES)
+        if form.is_valid():
+            objective = form.save(commit=False)
+            objective.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = ObjectiveForm()
+    return render(request, 'admin_page/configurations/objectives/new.html', {
+        'form': form,
+    })
+
+
+def objective_edit(request, id):
+    objective = Objective.objects.get(id=id)
+    if request.method == 'POST':
+        form = LocationForm(request.POST, request.FILES, instance=objective)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+    else:
+        form = LocationForm(instance=objective)
+    return render(request, 'admin_page/configurations/objectives/edit.html', {
+        'objective': objective,
+        'form': form,
+        'objective_obj': Objective
+    })
+
+
+def objective_delete(request, id):
+    objective = Objective.objects.get(id=id)
+    objective.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+# FUNCIONES
+
+def function_new(request):
+    if request.method == 'POST':
+        form = FunctionForm(request.POST, request.FILES)
+        if form.is_valid():
+            function = form.save(commit=False)
+            function.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = FunctionForm()
+    return render(request, 'admin_page/configurations/functions/new.html', {
+        'form': form,
+    })
+
+
+def function_edit(request, id):
+    function = Function.objects.get(id=id)
+    if request.method == 'POST':
+        form = FunctionForm(request.POST, request.FILES, instance=function)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+    else:
+        form = FunctionForm(instance=function)
+    return render(request, 'admin_page/configurations/functions/edit.html', {
+        'function': function,
+        'form': form,
+        'function_obj': Function
+    })
+
+
+def function_delete(request, id):
+    function = Function.objects.get(id=id)
+    function.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+# LEYES
+
+def law_new(request):
+    if request.method == 'POST':
+        form = LawForm(request.POST, request.FILES)
+        if form.is_valid():
+            law = form.save(commit=False)
+            law.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = LawForm()
+    return render(request, 'admin_page/configurations/laws/new.html', {
+        'form': form,
+    })
+
+
+def law_edit(request, id):
+    law = Law.objects.get(id=id)
+    if request.method == 'POST':
+        form = LawForm(request.POST, request.FILES, instance=law)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+    else:
+        form = LawForm(instance=law)
+    return render(request, 'admin_page/configurations/laws/edit.html', {
+        'law': law,
+        'form': form,
+        'law_obj': Law
+    })
+
+
+def law_delete(request, id):
+    law = Law.objects.get(id=id)
+    law.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+# SECRETARIO
+
+def secretary_new(request):
+    if request.method == 'POST':
+        form = SecretaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            secretary = form.save(commit=False)
+            secretary.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = SecretaryForm()
+    return render(request, 'admin_page/configurations/secretary/new.html', {
+        'form': form,
+    })
+
+
+def secretary_edit(request, id):
+    secretary = Secretary.objects.get(id=id)
+    if request.method == 'POST':
+        form = SecretaryForm(request.POST, request.FILES, instance=secretary)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+    else:
+        form = SecretaryForm(instance=secretary)
+    return render(request, 'admin_page/configurations/secretary/edit.html', {
+        'secretary': secretary,
+        'form': form,
+        'secretary_obj': Secretary
+    })
+
+
+def secretary_delete(request, id):
+    secretary = Secretary.objects.get(id=id)
+    secretary.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('configurations-index'))

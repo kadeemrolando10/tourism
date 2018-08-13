@@ -156,7 +156,7 @@ class Restaurant(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
-    service = models.ManyToManyField(RestaurantService, verbose_name='Servicios', null=True, blank=True)
+    service = models.ManyToManyField(RestaurantService, verbose_name='Servicios', blank=True)
     address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
@@ -287,7 +287,7 @@ class TransportTypeService(models.Model):
     destination = models.ForeignKey(TransportDestination, on_delete=models.CASCADE, verbose_name='Destino')
     title = models.CharField(max_length=150, default='NA', verbose_name='Tipo de Servicio')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=5.1, verbose_name='Precio')
-    service = models.ManyToManyField(TransportService, verbose_name='Servicios', null=True, blank=True)
+    service = models.ManyToManyField(TransportService, verbose_name='Servicios', blank=True)
     image_bus = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Bus')
     image_seat = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Butacas')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
@@ -364,7 +364,7 @@ class Lodging(models.Model):
     type = models.ForeignKey(LodgingType, on_delete=models.CASCADE, verbose_name='Tipo')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
-    service = models.ManyToManyField(LodgingService, verbose_name='Servicio', null=True, blank=True)
+    service = models.ManyToManyField(LodgingService, verbose_name='Servicio', blank=True)
     address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
@@ -465,9 +465,9 @@ class TourismSiteService(models.Model):
 class TourismSite(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     type = models.ForeignKey(TourismSiteType, on_delete=models.CASCADE, verbose_name='Tipo')
-    service = models.ManyToManyField(TourismSiteService, verbose_name='Servicios', null=True, blank=True)
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    service = models.ManyToManyField(TourismSiteService, verbose_name='Servicios', blank=True)
     description = models.TextField(verbose_name='Descripcion', blank=True)
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
@@ -531,7 +531,7 @@ class TourismSiteSchedule(models.Model):
 
 
 class TourismRoute(models.Model):
-    destination = models.ForeignKey(Location, on_delete=models.CASCADE,verbose_name='Localizacion')
+    destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     lat_origin = models.CharField(max_length=50, verbose_name='Latitud de Origen')
     lng_origin = models.CharField(max_length=50, verbose_name='Longitud de Origen')
@@ -578,16 +578,16 @@ class TourismRouteMenu(models.Model):
 
 
 class Objective(models.Model):
-    description = models.TextField(verbose_name='Descripcion', unique=True)
+    title = models.TextField(verbose_name='Descripcion', unique=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
-        return self.description
+        return self.title
 
     class Meta:
         verbose_name = 'Objetivo'
         verbose_name_plural = 'Objetivos'
-        ordering = ['description']
+        ordering = ['title']
         permissions = (
             ('show_objective', 'Can Details Objective'),
             ('index_objective', 'Can List Objective'),
@@ -595,16 +595,16 @@ class Objective(models.Model):
 
 
 class Function(models.Model):
-    description = models.TextField(verbose_name='Descripcion', unique=True)
+    title = models.TextField(verbose_name='Descripcion', unique=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
-        return self.description
+        return self.title
 
     class Meta:
         verbose_name = 'Funcion'
         verbose_name_plural = 'Funciones'
-        ordering = ['description']
+        ordering = ['title']
         permissions = (
             ('show_fucntion', 'Can Details Function'),
             ('index_function', 'Can List Function'),
@@ -612,13 +612,12 @@ class Function(models.Model):
 
 
 class Law(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Nombre')
-    description = models.TextField(verbose_name='Descripcion', unique=True, blank=True, )
+    title = models.TextField(verbose_name='Descripcion', unique=True, blank=True, )
     file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, verbose_name='Archivo pdf')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
-        return self.description
+        return self.title
 
     class Meta:
         verbose_name = 'Documento'
@@ -627,6 +626,24 @@ class Law(models.Model):
         permissions = (
             ('show_law', 'Can Details Law'),
             ('index_law', 'Can List Law'),
+        )
+
+
+class Secretary(models.Model):
+    full_name = models.CharField(max_length=100, verbose_name='Nombre Completo')
+    rol = models.CharField(max_length=100, verbose_name='Rol')
+    image = models.ImageField(upload_to='media/', verbose_name='Imagen', null=True)
+    register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return self.full_name
+
+    class Meta:
+        verbose_name = 'Secretario'
+        verbose_name_plural = 'Secretario'
+        permissions = (
+            ('show_secretary', 'Can Details Secretary'),
+            ('index_secretary', 'Can List Secretary'),
         )
 
 

@@ -6,7 +6,7 @@ from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agen
     AgencySchedule, RestaurantService, RestaurantSchedule, RestaurantMenu, TransportDestination, TransportService, \
     TransportTypeService, TransportSchedule, TourismSiteMenu, TourismSiteSchedule, Location, TourismSiteType, \
     TourismSiteService, TourismRouteMenu, LodgingRoom, LodgingSchedule, LodgingType, \
-    LodgingService, Client
+    LodgingService, Client, Objective, Function, Secretary, Law
 
 
 class AgencyForm(BaseForm):
@@ -318,3 +318,27 @@ class ClientFormEdit(BaseForm):
     class Meta:
         model = Client
         exclude = ['user', 'rol']
+
+
+class ObjectiveForm(BaseForm):
+    class Meta:
+        model = Objective
+        fields = '__all__'
+
+
+class FunctionForm(BaseForm):
+    class Meta:
+        model = Function
+        fields = '__all__'
+
+
+class SecretaryForm(BaseForm):
+    class Meta:
+        model = Secretary
+        fields = '__all__'
+
+
+class LawForm(BaseForm):
+    class Meta:
+        model = Law
+        fields = '__all__'

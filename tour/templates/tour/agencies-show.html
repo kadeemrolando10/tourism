@@ -23,6 +23,7 @@
                             <i class="fa fa-star underline-star"></i>
                             {% endfor %}
                         </h6>
+                        <h6>{{agency.destination}}</h6>
                         <h6>{{agency.address}}</h6>
                     </div>
 
@@ -72,33 +73,34 @@
             </div>
             <!-- Listing Sidebar -->
             <div class="col-12 col-md-8 col-lg-4">
-
                 <div class="listing-sidebar">
-                    <div class="opening-hours-widget mt-50 ">
-                        <h6 class="underline">Informacion</h6>
+                    <div class="opening-hours-widget mt-50">
+                        <h6 class="underline"><i class="fa fa-info text-light"></i> Informacion</h6>
                         <div class="opening-hours">
                             <p>
-                                <i class="fa fa-phone" aria-hidden="true"></i><label class="les">Telefono</label><br>
-                                <span class="alert alert-light">{{ agency.phone }}</span>
+                                <label class="les"><i class="fa fa-phone" aria-hidden="true"></i> Telefono</label><br>
+                                <span class="alert bg-success link">{{ agency.phone }}</span>
                             </p>
+                            {% if agency.web is None %}
                             <p>
-                                <i class="fa fa-chrome" aria-hidden="true"></i><label class="les">Sitio Web</label><br>
-                                <span class="alert alert-light link text-left"><a href="{{ agency.web }}" target="_blank">{{ agency.web }}</a></span>
+                                <label class="les"><i class="fa fa-chrome" aria-hidden="true"></i> Sitio Web</label><br>
+                                <span class="alert bg-success link"><a href="{{ agency.web }}" target="_blank">{{ agency.web }}</a></span>
                             </p>
+                            {% endif %}
                         </div>
                     </div>
 
                     <div class="opening-hours-widget mt-50">
-                        <h6 class="underline"><i class="fa fa-calendar"></i> Horarios de Atencion</h6>
+                        <h6 class="underline"><i class="fa fa-calendar text-light"></i> Horarios de Atencion</h6>
                         <ul class="opening-hours" role="alert">
-                            {% for q in schedule %}
-                            <table class="table table-light table-striped">
+                            <table class="table table-dark table-striped">
+                                {% for q in schedule %}
                                 <tr>
                                     <td class="align-right">{% get_days q.day%}</td>
                                     <td class="float-right">{{q.schedule}}</td>
                                 </tr>
+                                {% endfor %}
                             </table>
-                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -141,6 +143,7 @@
         $(function () {
         $('[data-toggle="tooltip"]').tooltip()
         })
+
 
 
 

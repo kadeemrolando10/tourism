@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load static %}
+{% load utils %}
 <html lang="en">
 
 <head>
@@ -102,16 +103,27 @@
                                     <i class="fa fa-institution " aria-hidden="true"></i> <br>Secretaria</a>
                             </li>
                         </ul>
-                        <!-- Search btn -->
-                        <div class="dorne-search-btn">
-                            <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> <br>Buscar</a>
-                        </div>
                         <!-- Signin btn -->
-                        <div class="dorne-signin-btn">
-                            <a href="{% url 'login' %}" target="_blank"><i class="fa fa-user-circle-o"></i><br>Login</a>
+                        <div class="dorne-signin-btn nav-item">
+                            <a class="nav-link" href="{% url 'login' %}" target="_blank">
+                                <i class="fa fa-user-circle-o"></i><br>Login</a>
                         </div>
                     </div>
                 </nav>
+                <li class="nav-item dropdown fixed-position">
+                    <a class="nav-link dropdown-toggle rotating" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="/static/img/core-img/loading_small.png" width="40px">
+                    </a>
+                    <div class="dropdown-menu position-right" aria-labelledby="navbarDropdown">
+                        {% get_locations as locations %}
+                        {% for location in locations %}
+                        <a class="dropdown-item" href="{% url 'change-id-main' location.id %}">
+                            <i id="locat-icon" class="fa fa-map-marker" aria-hidden="true"></i> {{location.title}}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </li>
             </div>
         </div>
     </div>
@@ -135,11 +147,14 @@
 
                 <div class="footer-social-btns">
 
-                    <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
-                    <a href="https://twitter.com/carlosdmesag"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-                    <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
-                    <a href="https://www.facebook.com/secretariadepartamentaldeturismo/?ref=br_rs"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
-                    <a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                    <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ" target="_blank"><i class="fa fa-youtube-square"
+                                                                                          aria-hidden="true"></i></a>
+                    <a href="https://twitter.com/carlosdmesag" target="_blank"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
+                    <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/" target="_blank"><i
+                            class="fa fa-instagram" aria-haspopup="true"></i></a>
+                    <a href="https://www.facebook.com/secretariadepartamentaldeturismo/?ref=br_rs" target="_blank"><i
+                            class="fa fa-facebook" aria-haspopup="true"></i></a>
+                    <a href="#" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -161,9 +176,13 @@
 <script src="{% static 'js/others/plugins.js' %}"></script>
 <!-- Active JS -->
 <script src="{% static 'js/active.js' %}"></script>
-
-
+<script>
+$("#idd").click(function(){
+    $(this).hide();
+});
+</script>
 {% block js_code %}
+
 {% endblock %}
 </body>
 

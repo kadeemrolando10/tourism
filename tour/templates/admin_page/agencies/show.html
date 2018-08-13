@@ -28,13 +28,19 @@
 <div class="row">
     <div class="col-md-4 box box-body">
         <p><strong>{% get_field_name agency_obj 'title' %}</strong> {{ agency.title }}</p>
+        <p><strong>{% get_field_name agency_obj 'destination' %}</strong> {{ agency.destination }}</p>
         <p><strong>{% get_field_name agency_obj 'address' %}</strong> {{ agency.address }}</p>
         <p><strong>{% get_field_name agency_obj 'phone' %}</strong> {{ agency.phone }}</p>
         <p><strong>{% get_field_name agency_obj 'score' %}</strong> {{ agency.score }}</p>
         <p><strong>{% get_field_name agency_obj 'web' %}</strong> {{ agency.web }}</p>
         <p><strong>{% get_field_name agency_obj 'lat' %}</strong> {{ agency.lat }}</p>
         <p><strong>{% get_field_name agency_obj 'lng' %}</strong> {{ agency.lng }}</p>
+        <p><strong>{% get_field_name agency_obj 'service' %}</strong><br>
+            {% for s in agency.service.all %}
+            {{s.title}}<br>
+            {% endfor %}</p>
         <p><strong>{% get_field_name agency_obj 'register_at' %}</strong> {{ agency.register_at }}</p>
+
     </div>
     <div class="col-md-8 box box-body" onload="initialize()">
         <div class="white-box">
@@ -77,6 +83,7 @@
         window.onload = function () {
             initialize()
         };
+
 
 
 

@@ -144,9 +144,7 @@ img {
     box-shadow: 0 0 8px rgba(0, 0, 0, .5);
     position: relative;
 }
-.layout-boxed {
-    background: url(../../images/boxed-bg.png) fixed;
-}
+
 .content-wrapper, .main-footer {
     -webkit-transition: -webkit-transform .3s ease-in-out, margin .3s ease-in-out;
     -moz-transition: -moz-transform .3s ease-in-out, margin .3s ease-in-out;
@@ -593,7 +591,7 @@ a:active, a:focus, a:hover {
     height: 1px;
     background: rgba(120, 130, 140, 0.13);
     display: block;
-    margin: 15px 0;
+    margin: 5px 0;
 }
 
 .sidebar-menu>li>a {
@@ -764,6 +762,22 @@ a:active, a:focus, a:hover {
     white-space: nowrap;
     overflow: hidden;
 }
+.main-sidebar .sidebar .user-panel a{
+    text-align:center;
+    color: #ffa500;
+    background-color: transparent;
+    font-weight: 1000;
+    font-size:20px;
+    text-shadow: -1px 0 #fff, 1px 0 #fff, 0 1px #fff, 0 -1px #fff;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    color: #ececec;
+  }
+}
+
 .sidebar-collapse .sidebar-menu.tree {
     padding: 0;
 }
@@ -14838,4 +14852,8 @@ label [type="checkbox"] {
 
 .margin-5{
     margin-top:5px;
+}
+
+.header .info{
+    padding:5px;
 }

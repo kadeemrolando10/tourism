@@ -17,20 +17,12 @@
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>Rutas Turisticas</h4>
-                    <p>Lugares a conocer ?</p><br>
+                    <h4>Rutas Turisticas</h4><hr>
                 </div>
             </div>
         </div>
         <div class="row justify-content-between">
-            {% for d in destiny %}
-            {% get_tourism_route d.id as des %}
-            {% if des %}
-            <div class="col-12 text-center section-heading">
-                <h4>{{d.title}}</h4>
-            </div>
-            {% endif %}
-            {% for s in des %}
+            {% for s in routes %}
             <div class="col-12 col-md-6 col-lg-4 mb-3 d-flex justify-content-center">
                 <div class="blog-card spring-fever "
                      style="background: url({{ s.image.url }}); background-repeat: no-repeat; background-size: 100% 100%;">
@@ -56,7 +48,6 @@
                     <div class="color-overlay"></div>
                 </div>
             </div>
-            {% endfor %}
             {% endfor %}
         </div>
     </div>

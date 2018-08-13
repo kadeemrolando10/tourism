@@ -17,20 +17,13 @@
                 <div class="section-heading text-center">
                     <span></span>
                     <h4>Hospedajes</h4>
-                    <p>Donde descansar ?</p>
                     <hr>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            {% for types in typeslod %}
-            {% get_lodging types.id as lod %}
-            {% if lod %}
-            <div class="col-12 text-center section-heading">
-                <h4>{{types.title}}</h4>
-            </div>
-            {% for t in lod %}
+            {% for t in lodgings %}
             <div class="col-12 col-lg-6">
                 <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig"
                      data-wow-delay="0.2s">
@@ -42,7 +35,7 @@
                     </div>
                     <div class="feature-events-content">
                         <h5>{{t.title}}</h5>
-                        <h6>Potosi</h6>
+                        <h6>{{t.destination}}</h6>
                         <p><i class="fa fa-envelope" aria-hidden="true"></i>. {{ t.address }}<br>
                             <i class="fa fa-phone" aria-hidden="true"></i>. {{ t.phone }}</p>
                     </div>
@@ -51,8 +44,6 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
-            {% endif %}
             {% endfor %}
         </div>
     </div>

@@ -1,10 +1,9 @@
 # encoding:utf-8
 import logging
 from django import template
-from django.apps import apps
-from django.core.mail.backends import console
+from requests import request
 
-from tour.models import TransportService, DAYS, TourismRoute, TourismRouteMenu, ROLE_USERS, GENDER, MENU
+from tour.models import DAYS, TourismRoute, TourismRouteMenu, ROLE_USERS, GENDER, MENU, Location
 from tour.models import TransportTypeService
 from tour.models import TransportDestination
 from tour.models import TourismSiteType
@@ -82,6 +81,16 @@ def get_type_tourism_site(id):
 
 
 @register.simple_tag
+def get_locations():
+    return Location.objects.all
+
+
+@register.simple_tag
+def get_location(id):
+    return Location.objects.get(id=id)
+
+
+@register.simple_tag
 def get_tourism_route(id):
     id = int(id)
     return TourismRoute.objects.filter(destination=id)
@@ -108,7 +117,7 @@ def get_tourism_route_menu(id):
 @register.simple_tag
 def get_rounded(score):
     logging.info(score)
-    return round(score/2)
+    return round(score / 2)
 
 
 @register.simple_tag
@@ -126,9 +135,11 @@ def get_role_user(rol):
             return status[1]
     return None
 
+
 @register.filter(name='times')
 def times(number):
     return range(number)
+
 
 @register.simple_tag
 def get_response_value(diagnose, formdiagnose, q):

@@ -17,19 +17,13 @@
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>Sitios Turisticos</h4>
-                    <p>Que lugares conocer ?</p><br>
+                    <h4>Sitios Turisticos</h4><hr>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            {% for d in destiny %}
-            {% get_tourism_site d.id as sites %}
-            {% if sites %}
-            <div class="col-12 text-center section-heading">
-                <h4>{{d.title}}</h4>
-            </div>
+
             {% for s in sites %}
             <div class="col-12 col-lg-6">
                 <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig"
@@ -52,8 +46,6 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
-            {% endif %}
             {% endfor %}
         </div>
     </div>

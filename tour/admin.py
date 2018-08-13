@@ -5,14 +5,12 @@ from tour.models import LodgingSchedule, TourismRoute, Location, TourismRouteMen
     TransportService, LodgingService, AgencyService, RestaurantService, Function, Objective, \
     RestaurantMenu, TransportDestination, TransportTypeService, \
     LodgingRoom, TourismSiteService, TourismSiteType, TourismSiteMenu, AgencySchedule, \
-    TransportSchedule, TourismSiteSchedule, RestaurantSchedule
+    TransportSchedule, TourismSiteSchedule, RestaurantSchedule, Secretary, Law
 
 admin.site.register(TourismSiteType)
 admin.site.register(TourismSiteMenu)
 admin.site.register(TourismSiteService)
 admin.site.register(Location)
-admin.site.register(Objective)
-admin.site.register(Function)
 admin.site.register(Event)
 admin.site.register(Transport)
 admin.site.register(TourismSite)
@@ -35,3 +33,7 @@ admin.site.register(LodgingSchedule)
 admin.site.register(RestaurantSchedule)
 admin.site.register(TourismRoute)
 admin.site.register(TourismRouteMenu)
+admin.site.register(Objective)
+admin.site.register(Function)
+admin.site.register(Secretary)
+admin.site.register(Law)

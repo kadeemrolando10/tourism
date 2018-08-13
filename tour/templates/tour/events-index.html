@@ -15,8 +15,7 @@
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>Eventos</h4>
-                    <p>Nuestros eventos</p>
+                    <h4>Eventos</h4><hr>
                 </div>
             </div>
         </div>
@@ -26,7 +25,7 @@
             {% for event in events %}
             <div class="nav nav-tabs" id="heroTab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-places-tab" data-toggle="tab" href="#nav-places"
-                   role="tab" aria-controls="nav-places" aria-selected="true">Potosi
+                   role="tab" aria-controls="nav-places" aria-selected="true">{{event.destination}}
                 </a>
             </div>
             <div class="tab-content" id="nav-tabContent">

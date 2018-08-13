@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='base'),
     path('index_admin/', views.index_admin, name='index_admin'),
+    path('<int:id>/change', views.change_main, name='change-id-main'),
     url(r'^logout/$', logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
     path('users/', include([
@@ -16,7 +17,29 @@ urlpatterns = [
         path('<int:id>/delete/', views.user_delete, name='user-delete'),
 
     ])),
-
+    path('configurations/', include([
+        path('', views.configuration_index, name='configurations-index'),
+        path('objectives/', include([
+            path('new/', views.objective_new, name='objectives-new'),
+            path('<int:id>/edit/', views.objective_edit, name='objectives-edit'),
+            path('<int:id>/delete/', views.objective_delete, name='objectives-delete'),
+        ])),
+        path('secretary/', include([
+            path('new/', views.secretary_new, name='secretaries-new'),
+            path('<int:id>/edit/', views.secretary_edit, name='secretaries-edit'),
+            path('<int:id>/delete/', views.secretary_delete, name='secretaries-delete'),
+        ])),
+        path('functions/', include([
+            path('new/', views.function_new, name='functions-new'),
+            path('<int:id>/edit/', views.function_edit, name='functions-edit'),
+            path('<int:id>/delete/', views.function_delete, name='functions-delete'),
+        ])),
+        path('laws/', include([
+            path('new/', views.law_new, name='laws-new'),
+            path('<int:id>/edit/', views.law_edit, name='laws-edit'),
+            path('<int:id>/delete/', views.law_delete, name='laws-delete'),
+        ])),
+    ])),
     path('secretary/', views.secretary, name='secretary'),
 
     path('location/', include([

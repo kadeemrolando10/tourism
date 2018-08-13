@@ -1,0 +1,180 @@
+{% extends 'admin.html' %}
+{% load utils %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <h6 class="page">Configuraciones</h6>
+        </li>
+    </ol>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <h5 class="text-center blink">OBJETIVO</h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th data-field="name" data-sortable="true">Descripcion</th>
+                    <th class="text-center">
+                        {% if not objectives %}
+                        <span>
+                            {% url 'objectives-new' as view_url %}
+                            {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+                        </span>
+                        {% else %}
+                        <span> Opciones</span>
+                        {% endif %}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for objective in objectives %}
+                <tr>
+                    <td>{{ objective.title }}</td>
+                    <td class="text-center">
+                        {% url 'objectives-edit' objective.id as edit_url %}
+                        {% include 'partials/actions/edit.html' with url=edit_url %}
+                        {% url 'objectives-delete' objective.id as delete_url %}
+                        {% include 'partials/actions/delete.html' with url=delete_url %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h5 class="text-center">SECRETARIO</h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th data-field="content" data-sortable="true">Datos</th>
+                    <th class="text-center">
+                        {% if not secretaries %}
+                        <span>
+                            {% url 'secretaries-new' as view_url %}
+                            {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+                        </span>
+                        {% else %}
+                        <span> Opciones</span>
+                        {% endif %}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for secretary in secretaries %}
+                <tr>
+                    <td class="text-center">
+                        <img src="{{secretary.image.url}}" width="200px"><br>
+                        {{ secretary.full_name }}<br>
+                        {{ secretary.rol }}
+                    </td>
+                    <td class="text-center">
+                        {% url 'secretaries-edit' secretary.id as edit_url %}
+                        {% include 'partials/actions/edit.html' with url=edit_url %}
+                        {% url 'secretaries-delete' secretary.id as delete_url %}
+                        {% include 'partials/actions/delete.html' with url=delete_url %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <HR>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <span class="float-right">
+                {% url 'functions-new' as view_url %}
+                {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+            </span>
+            <h5 class="text-center">FUNCIONES</h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th data-field="name" data-sortable="true">Descripcion</th>
+                    <th class="text-center">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for function in functions %}
+                <tr>
+                    <td  width="5%">{{ forloop.counter }}</td>
+                    <td>{{ function.title }}</td>
+                    <td class="text-center" width="20%">
+                        {% url 'functions-edit' function.id as edit_url %}
+                        {% include 'partials/actions/edit.html' with url=edit_url %}
+                        {% url 'functions-delete' function.id as delete_url %}
+                        {% include 'partials/actions/delete.html' with url=delete_url %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <BR><HR>
+        <div class="col-12">
+            <span class="float-right">
+                {% url 'laws-new' as view_url %}
+                {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+            </span>
+            <h5 class="text-center">LEYES</h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="5%">#</th>
+                    <th data-field="name" data-sortable="true">Descripcion</th>
+                    <th data-field="content" data-sortable="true" width="10%">Contenido</th>
+                    <th class="text-center" width="20%">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for law in laws %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ law.title }}</td>
+                    <td class="text-center">
+                        <a href="{{law.file.url}}" target="_blank">
+                            <i class="glyphicon glyphicon-save" style="font-size:20px;"></i>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        {% url 'laws-edit' law.id as edit_url %}
+                        {% include 'partials/actions/edit.html' with url=edit_url %}
+                        {% url 'laws-delete' law.id as delete_url %}
+                        {% include 'partials/actions/delete.html' with url=delete_url %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <hr>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block code_js %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-tooltip="tooltip"]').tooltip();
+            $('[title]').tooltip();
+
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+
+                var title = $(e.relatedTarget).data('title');
+                var message = $(e.relatedTarget).data('message');
+
+                if (title !== undefined)
+                    $(this).find('.modal-header').html(title);
+                if (message !== undefined)
+                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+        })
+</script>
+{% endblock %}
