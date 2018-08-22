@@ -1,9 +1,9 @@
 # encoding:utf-8
 import logging
 from django import template
-from requests import request
 
-from tour.models import DAYS, TourismRoute, TourismRouteMenu, ROLE_USERS, GENDER, MENU, Location
+from tour.models import DAYS, TourismRoute, TourismRouteMenu, ROLE_USERS, GENDER, MENU, Location, Transport, Restaurant, \
+    Agency
 from tour.models import TransportTypeService
 from tour.models import TransportDestination
 from tour.models import TourismSiteType
@@ -17,6 +17,52 @@ register = template.Library()
 @register.filter()
 def to_int(value):
     return int(value)
+
+
+@register.simple_tag()
+def get_user_groups(r):
+    return r.user.groups.all()
+
+
+@register.simple_tag()
+def get_quantity_notify():
+    s = TourismSite.objects.filter(is_active=False)
+    t = Transport.objects.filter(is_active=False)
+    r = Restaurant.objects.filter(is_active=False)
+    a = Agency.objects.filter(is_active=False)
+    l = Lodging.objects.filter(is_active=False)
+    cont = s.count() + r.count() + t.count() + a.count() + l.count()
+    return cont
+
+
+@register.simple_tag
+def get_notify_sites():
+    sites = TourismSite.objects.filter(is_active=False)
+    return sites
+
+
+@register.simple_tag
+def get_notify_transports():
+    transports = Transport.objects.filter(is_active=False)
+    return transports
+
+
+@register.simple_tag
+def get_notify_restaurants():
+    restaurants = Restaurant.objects.filter(is_active=False)
+    return restaurants
+
+
+@register.simple_tag
+def get_notify_agencies():
+    agencies = Agency.objects.filter(is_active=False)
+    return agencies
+
+
+@register.simple_tag
+def get_notify_lodgings():
+    lodgings = Lodging.objects.filter(is_active=False)
+    return lodgings
 
 
 @register.simple_tag

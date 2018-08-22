@@ -1,0 +1,208 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+{% load static %}
+
+{% block content-header %}
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active page" aria-current="page">Notificaciones</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="table-responsive">
+    {% if transports or lodgings or restaurants or agencies or sites %}
+        {% if transports %}
+        <table class="table table-bordered table-striped table-dark  text-white">
+            <thead>
+            <tr>
+                <th colspan="4"><h6 class="text-center text-blue font-weight-bold">Transportes</h6></th>
+            </tr>
+            <tr>
+                <th width="8%">#</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th class="text-center" width="15%">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transport in transports %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ transport.title }}</td>
+                <td class="text-center" width="8%">
+                    {% if transport.is_active %}<span class="badge badge-pill badge-success">ACTIVO</span>
+                    {% else%}<span class="badge badge-pill badge-danger">INACTIVO</span>
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    {% url 'transports-show-admin' transport.id as view_url %}
+                    {% include 'partials/actions/view.html' with url=view_url %}
+                    {% url 'transports-active-admin' transport.id as view_url %}
+                    {% include 'partials/actions/_active.html' with url=view_url %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if lodgings %}
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th colspan="4"><h6 class="text-center text-green font-weight-bold">Hospedajes</h6></th>
+            </tr>
+            <tr>
+                <th width="8%">#</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th class="text-center" width="15%">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for lodging in lodgings %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ lodging.title }}</td>
+                <td class="text-center" width="8%">
+                    {% if lodging.is_active %}<span class="badge badge-pill badge-success">ACTIVO</span>
+                    {% else%}<span class="badge badge-pill badge-danger">INACTIVO</span>
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    {% url 'lodgings-show-admin' lodging.id as view_url %}
+                    {% include 'partials/actions/view.html' with url=view_url %}
+                    {% url 'lodgings-active-admin' lodging.id as view_url %}
+                    {% include 'partials/actions/_active.html' with url=view_url %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if restaurants %}
+        <table class="table table-bordered table-striped  table-dark  text-white">
+            <thead>
+            <tr>
+                <th colspan="4"><h6 class="text-center text-red font-weight-bold">Restaurantes</h6></th>
+            </tr>
+            <tr>
+                <th width="8%">#</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th class="text-center" width="15%">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for restaurant in restaurants %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ restaurant.title }}</td>
+                <td class="text-center" width="8%">
+                    {% if restaurant.is_active %}<span class="badge badge-pill badge-success">ACTIVO</span>
+                    {% else%}<span class="badge badge-pill badge-danger">INACTIVO</span>
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    {% url 'restaurants-show-admin' restaurant.id as view_url %}
+                    {% include 'partials/actions/view.html' with url=view_url %}
+                    {% url 'restaurants-active-admin' restaurant.id as view_url %}
+                    {% include 'partials/actions/_active.html' with url=view_url %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if agencies %}
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th colspan="4"><h6 class="text-center text-yellow font-weight-bold">Agencias de Turismo</h6></th>
+            </tr>
+            <tr>
+                <th width="8%">#</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th class="text-center" width="15%">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for agency in agencies %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ agency.title }}</td>
+                <td class="text-center" width="15%">
+                    {% if agency.is_active %}
+                    <span class="badge badge-pill badge-success">ACTIVO</span>
+                    {% else %}
+                    <span class="badge badge-pill badge-danger">INACTIVO</span>
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    {% url 'agencies-show-admin' agency.id as view_url %}
+                    {% include 'partials/actions/view.html' with url=view_url %}
+                    {% url 'agencies-active-admin' agency.id as view_url %}
+                    {% include 'partials/actions/_active.html' with url=view_url %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if sites %}
+        <table class="table table-bordered table-striped  table-dark text-white">
+            <thead>
+            <tr>
+                <th colspan="4"><h6 class="text-center text-white font-weight-bold">Sitios Turisticos</h6></th>
+            </tr>
+            <tr>
+                <th width="8%">#</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th class="text-center" width="15%">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for site in sites %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ site.title }}</td>
+                <td class="text-center" width="8%">
+                    {% if site.is_active %}<span class="badge badge-pill badge-success">ACTIVO</span>
+                    {% else%}<span class="badge badge-pill badge-danger">INACTIVO</span>
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    {% url 'tourism_sites-show-admin' site.id as view_url %}
+                    {% include 'partials/actions/view.html' with url=view_url %}
+                    {% url 'tourism_sites-active-admin' site.id as view_url %}
+                    {% include 'partials/actions/_active.html' with url=view_url %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    {% else %}
+    <h5> NO HAY NOTIFICACIONES EN ESTE MOMENTO</h5>
+    {% endif %}
+
+</div>
+{% endblock %}
+{% block code_js %}
+<script>
+$('[data-tooltip="tooltip"]').tooltip();
+$('[title]').tooltip();
+
+
+
+
+
+
+
+</script>
+
+{% endblock %}

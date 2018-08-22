@@ -29,6 +29,12 @@
 {% block code_js %}
     {% include 'partials/_url_gmaps.html' %}
     <script type="text/javascript">
+        $('#id_event_date').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+        $('#id_event_date').datepicker({
+              format: 'dd/mm/yyyy',
+              autoclose: true
+            });
+
         var map;
         var markers = [];
 

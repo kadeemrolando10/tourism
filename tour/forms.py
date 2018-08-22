@@ -6,14 +6,38 @@ from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agen
     AgencySchedule, RestaurantService, RestaurantSchedule, RestaurantMenu, TransportDestination, TransportService, \
     TransportTypeService, TransportSchedule, TourismSiteMenu, TourismSiteSchedule, Location, TourismSiteType, \
     TourismSiteService, TourismRouteMenu, LodgingRoom, LodgingSchedule, LodgingType, \
-    LodgingService, Client, Objective, Function, Secretary, Law
+    LodgingService, Client, Objective, Function, Secretary, Law, Social
+
+from django.core.validators import URLValidator
+
+
+class SocialForm(BaseForm):
+    facebook = forms.URLField(validators=[URLValidator()])
+    instagram = forms.URLField(validators=[URLValidator()])
+    youtube = forms.URLField(validators=[URLValidator()])
+    twitter = forms.URLField(validators=[URLValidator()])
+    whatsapp = forms.URLField(validators=[URLValidator()])
+
+    def __init__(self, *args, **kwargs):
+        super(SocialForm, self).__init__(*args, **kwargs)
+        self.fields['lat'].widget.attrs['readonly'] = True
+        self.fields['lng'].widget.attrs['readonly'] = True
+
+    class Meta:
+        model = Social
+        fields = '__all__'
 
 
 class AgencyForm(BaseForm):
+    web = forms.URLField(validators=[URLValidator()])
+
     def __init__(self, *args, **kwargs):
         super(AgencyForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+        self.fields["phone"].widget.attrs['data-inputmask'] = "'mask':[ '+(999) 999-99999']"
+        self.fields["phone"].widget.attrs['data-mask'] = True
 
     class Meta:
         model = Agency
@@ -22,6 +46,10 @@ class AgencyForm(BaseForm):
 
 
 class AgencyServiceForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(AgencyServiceForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = AgencyService
         fields = '__all__'
@@ -50,7 +78,8 @@ class EventForm(BaseForm):
         super(EventForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
-        self.fields["event_date"].widget.attrs['class'] = 'datepicker'
+        self.fields["event_date"].widget.attrs['class'] = 'date pull-right datepicker'
+        self.fields["file"].widget.attrs['class'] = 'inputfile'
 
     class Meta:
         model = Event
@@ -59,6 +88,7 @@ class EventForm(BaseForm):
 
 
 class LodgingForm(BaseForm):
+    web = forms.URLField(validators=[URLValidator()])
 
     def __init__(self, *args, **kwargs):
         super(LodgingForm, self).__init__(*args, **kwargs)
@@ -66,6 +96,9 @@ class LodgingForm(BaseForm):
         self.fields['lng'].widget.attrs['readonly'] = True
         self.fields["service"].widget = CheckboxSelectMultiple()
         self.fields["service"].queryset = LodgingService.objects.all()
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+        self.fields["phone"].widget.attrs['data-inputmask'] = "'mask':[ '+(999) 999-99999']"
+        self.fields["phone"].widget.attrs['data-mask'] = True
 
     class Meta:
         model = Lodging
@@ -74,6 +107,10 @@ class LodgingForm(BaseForm):
 
 
 class LodgingRoomForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(LodgingRoomForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = LodgingRoom
         fields = '__all__'
@@ -86,6 +123,11 @@ class LodgingRoomForm(BaseForm):
 
 
 class LodgingScheduleForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(LodgingScheduleForm, self).__init__(*args, **kwargs)
+        self.fields["schedule"].widget.attrs['data-inputmask'] = "'mask':[ 'h:s - h:s']"
+        self.fields["schedule"].widget.attrs['data-mask'] = True
+
     class Meta:
         model = LodgingSchedule
         fields = '__all__'
@@ -104,18 +146,27 @@ class LodgingTypeForm(BaseForm):
 
 
 class LodgingServiceForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(LodgingServiceForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = LodgingService
         fields = '__all__'
 
 
 class RestaurantForm(BaseForm):
+    web = forms.URLField(validators=[URLValidator()])
+
     def __init__(self, *args, **kwargs):
         super(RestaurantForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
         self.fields["service"].widget = CheckboxSelectMultiple()
         self.fields["service"].queryset = RestaurantService.objects.all()
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+        self.fields["phone"].widget.attrs['data-inputmask'] = "'mask':[ '+(999) 999-99999']"
+        self.fields["phone"].widget.attrs['data-mask'] = True
 
     class Meta:
         model = Restaurant
@@ -124,6 +175,10 @@ class RestaurantForm(BaseForm):
 
 
 class RestaurantMenuForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(RestaurantMenuForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = RestaurantMenu
         fields = '__all__'
@@ -148,6 +203,10 @@ class RestaurantScheduleForm(BaseForm):
 
 
 class RestaurantServiceForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(RestaurantServiceForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = RestaurantService
         fields = '__all__'
@@ -160,6 +219,8 @@ class TourismRouteForm(BaseForm):
         self.fields['lng_origin'].widget.attrs['readonly'] = True
         self.fields['lat_destination'].widget.attrs['readonly'] = True
         self.fields['lng_destination'].widget.attrs['readonly'] = True
+        self.fields["date"].widget.attrs['class'] = 'date pull-right datepicker'
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
 
     class Meta:
         model = TourismRoute
@@ -168,6 +229,10 @@ class TourismRouteForm(BaseForm):
 
 
 class TourismRouteMenuForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(TourismSiteMenuForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = TourismRouteMenu
         fields = '__all__'
@@ -186,12 +251,17 @@ class LocationForm(BaseForm):
 
 
 class TourismSiteForm(BaseForm):
+    web = forms.URLField(validators=[URLValidator()])
+
     def __init__(self, *args, **kwargs):
         super(TourismSiteForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
         self.fields["service"].widget = CheckboxSelectMultiple()
         self.fields["service"].queryset = TourismSiteService.objects.all()
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+        self.fields["phone"].widget.attrs['data-inputmask'] = "'mask':[ '+(999) 999-99999']"
+        self.fields["phone"].widget.attrs['data-mask'] = True
 
     class Meta:
         model = TourismSite
@@ -200,6 +270,10 @@ class TourismSiteForm(BaseForm):
 
 
 class TourismSiteMenuForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(TourismSiteMenuForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = TourismSiteMenu
         fields = '__all__'
@@ -230,16 +304,25 @@ class TourismSiteTypeForm(BaseForm):
 
 
 class TourismSiteServiceForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(TourismSiteServiceForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = TourismSiteService
         fields = '__all__'
 
 
 class TransportForm(BaseForm):
+    web = forms.URLField(validators=[URLValidator()])
+
     def __init__(self, *args, **kwargs):
         super(TransportForm, self).__init__(*args, **kwargs)
         self.fields['lat'].widget.attrs['readonly'] = True
         self.fields['lng'].widget.attrs['readonly'] = True
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+        self.fields["phone"].widget.attrs['data-inputmask'] = "'mask':[ '+(999) 999-99999']"
+        self.fields["phone"].widget.attrs['data-mask'] = True
 
     class Meta:
         model = Transport
@@ -260,6 +343,10 @@ class TransportDestinationForm(BaseForm):
 
 
 class TransportServiceForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(TransportServiceForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = TransportService
         fields = '__all__'
@@ -270,6 +357,8 @@ class TransportTypeServiceForm(BaseForm):
         super(TransportTypeServiceForm, self).__init__(*args, **kwargs)
         self.fields["service"].widget = CheckboxSelectMultiple()
         self.fields["service"].queryset = TransportService.objects.all()
+        self.fields["image_bus"].widget.attrs['class'] = 'inputfile'
+        self.fields["image_seat"].widget.attrs['class'] = 'inputfile'
 
     class Meta:
         model = TransportTypeService
@@ -330,15 +419,25 @@ class FunctionForm(BaseForm):
     class Meta:
         model = Function
         fields = '__all__'
+        exclude = ['is_active']
 
 
 class SecretaryForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(SecretaryForm, self).__init__(*args, **kwargs)
+        self.fields["image"].widget.attrs['class'] = 'inputfile'
+
     class Meta:
         model = Secretary
         fields = '__all__'
 
 
 class LawForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(LawForm, self).__init__(*args, **kwargs)
+        self.fields["file"].widget.attrs['class'] = 'class="inputfile'
+
     class Meta:
         model = Law
         fields = '__all__'
+        exclude = ['is_active']

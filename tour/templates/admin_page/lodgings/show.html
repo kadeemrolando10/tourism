@@ -27,6 +27,17 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name lodging_obj 'is_active' %}</strong>
+            {% if lodging.is_active %}
+            <span class="badge badge-success">ACTIVO</span>
+            {% url 'lodgings-inactive-admin' lodging.id as view_url %}
+            {% include 'partials/actions/inactive.html' with url=view_url %}
+            {% else %}
+            <span class="badge badge-danger">INACTIVO</span>
+            {% url 'lodgings-active-admin' lodging.id as view_url %}
+            {% include 'partials/actions/active.html' with url=view_url %}
+            {% endif %}
+        </p>
         <p><strong>{% get_field_name lodging_obj 'title' %}</strong> {{ lodging.title }}</p>
         <p><strong>{% get_field_name lodging_obj 'destination' %}</strong> {{ lodging.destination }}</p>
         <p><strong>{% get_field_name lodging_obj 'address' %}</strong> {{ lodging.address }}</p>

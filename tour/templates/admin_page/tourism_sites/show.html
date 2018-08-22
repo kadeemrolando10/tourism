@@ -27,6 +27,13 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name site_obj 'is_active' %}</strong>
+            {% if site.is_active %}
+            <span class="badge badge-success">ACTIVO</span>
+            {% else %}
+            <span class="badge badge-danger">INACTIVO</span>
+            {% endif %}
+        </p>
         <p><strong>{% get_field_name site_obj 'title' %}</strong> {{ site.title }}</p>
         <p><strong>{% get_field_name site_obj 'destination' %}</strong> {{ site.destination }}</p>
         <p><strong>{% get_field_name site_obj 'address' %}</strong> {{ site.address }}</p>
@@ -82,6 +89,7 @@
         window.onload = function () {
             initialize()
         };
+
 
 
 

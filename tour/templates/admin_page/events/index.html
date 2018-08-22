@@ -30,7 +30,7 @@
             <th data-field="title" data-sortable="true">{% get_field_name event_obj 'title' %}</th>
             <th data-field="destination" data-sortable="true">{% get_field_name event_obj 'destination' %}</th>
             <th data-field="phone" data-sortable="true">{% get_field_name event_obj 'description' %}</th>
-            <th data-field="description" data-sortable="true">{% get_field_name event_obj 'event_date' %}</th>
+            <th data-field="is_active" data-sortable="true">{% get_field_name event_obj 'is_active' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -41,8 +41,15 @@
             <td>{{ forloop.counter }}</td>
             <td>{{ event.title }}</td>
             <td>{{ event.destination }}</td>
-            <td>{{ event.description }}</td>
             <td>{{ event.event_date }}</td>
+            <td class="text-center" width="8%">
+                {% if event.is_active %}
+                <a href="{% url 'events-inactive-admin' event.id %}"
+                      class="badge badge-pill badge-success text-white">ACTIVO</a>
+                {% else%}
+                <a href="{% url 'events-active-admin' event.id %}" class="badge badge-pill badge-danger text-white">INACTIVO</a>
+                {% endif %}
+            </td>
             <td class="text-center">
                 {% url 'events-show-admin' event.id as view_url %}
                 {% include 'partials/actions/view.html' with url=view_url %}
@@ -59,8 +66,10 @@
 <div class="pagination">
     <span class="step-links">
         {% if events.has_previous %}
-            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
-            <a class="btn btn-info" href="?page={{ events.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+            <a class="btn btn-info"
+               href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info"
+               href="?page={{ events.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
         {% endif %}
 
         <span class="current btn btn-success">
@@ -68,8 +77,10 @@
         </span>
 
         {% if events.has_next %}
-            <a class="btn btn-primary" href="?page={{ events.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
-            <a class="btn btn-primary" href="?page={{ events.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+            <a class="btn btn-primary"
+               href="?page={{ events.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary"
+               href="?page={{ events.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
         {% endif %}
     </span>
 </div>
@@ -93,6 +104,8 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
+
 
 </script>
 {% endblock %}

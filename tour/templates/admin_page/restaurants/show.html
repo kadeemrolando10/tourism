@@ -27,6 +27,13 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name restaurant_obj 'is_active' %}</strong>
+            {% if restaurant.is_active %}
+            <span class="badge badge-success">ACTIVO</span>
+            {% else %}
+            <span class="badge badge-danger">INACTIVO</span>
+            {% endif %}
+        </p>
         <p><strong>{% get_field_name restaurant_obj 'title' %}</strong> {{ restaurant.title }}</p>
         <p><strong>{% get_field_name restaurant_obj 'destination' %}</strong> {{ restaurant.destination }}</p>
         <p><strong>{% get_field_name restaurant_obj 'address' %}</strong> {{ restaurant.address }}</p>
@@ -83,6 +90,7 @@
         window.onload = function () {
             initialize()
         };
+
 
 
 

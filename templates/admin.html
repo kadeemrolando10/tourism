@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load static %}
+{% load utils %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -32,7 +33,12 @@
 
     <!-- Lion_admin skins -->
     <link rel="stylesheet" href="{% static 'skins/_all-skins.css' %}">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet"
+          href="{% static 'assets/vendor_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
 
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{% static 'assets/vendor_plugins/iCheck/all.css' %}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -177,53 +183,57 @@
                             <i class="mdi mdi-bell"></i>
                         </a>
                         <ul class="dropdown-menu scale-up">
-                            <li class="header">You have 7 notifications</li>
+                            <li class="header">Tienes {% get_quantity_notify %} Notificaciones</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu inner-content-div">
+                                    {% get_notify_transports as notifications %}
+                                    {% for notification in notifications %}
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> Curabitur id eros quis nunc suscipit
-                                            blandit.
+                                        <a href="{% url 'notifications' %}">
+                                            <i class="fa fa-bus text-blue"></i> Actualizacion: {{notification.title}}
                                         </a>
                                     </li>
+                                    {% endfor %}
+                                    {% get_notify_lodgings as notifications %}
+                                    {% for notification in notifications %}
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Duis malesuada justo eu sapien
-                                            elementum, in semper diam posuere.
+                                        <a href="{% url 'notifications' %}">
+                                            <i class="fa fa-building-o text-green"></i>Actualizacion:
+                                            {{notification.title}}
                                         </a>
                                     </li>
+                                    {% endfor %}
+                                    {% get_notify_restaurants as notifications %}
+                                    {% for notification in notifications %}
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-red"></i> Donec at nisi sit amet tortor commodo
-                                            porttitor pretium a erat.
+                                        <a href="{% url 'notifications' %}">
+                                            <i class="glyphicon glyphicon-cutlery text-red"></i>Actualizacion:
+                                            {{notification.title}}
                                         </a>
                                     </li>
+                                    {% endfor %}
+                                    {% get_notify_agencies as notifications %}
+                                    {% for notification in notifications %}
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-shopping-cart text-green"></i> In gravida mauris et nisi
+                                        <a href="{% url 'notifications' %}">
+                                            <i class="glyphicon glyphicon-queen text-yellow"></i>Actualizacion:
+                                            {{notification.title}}
                                         </a>
                                     </li>
+                                    {% endfor %}
+                                    {% get_notify_sites as notifications %}
+                                    {% for notification in notifications %}
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-red"></i> Praesent eu lacus in libero dictum
-                                            fermentum.
+                                        <a href="{% url 'notifications' %}">
+                                            <i class="fa fa-podcast text-black"></i>Actualizacion:
+                                            {{notification.title}}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-red"></i> Nunc fringilla lorem
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-red"></i> Nullam euismod dolor ut quam interdum,
-                                            at scelerisque ipsum imperdiet.
-                                        </a>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">View all</a></li>
+                            <li class="footer"><a href="{% url 'notifications' %}">View all</a></li>
                         </ul>
                     </li>
                     <!-- Tasks -->
@@ -232,18 +242,38 @@
                             <i class="mdi mdi-account-card-details"></i>
                         </a>
                         <ul class="dropdown-menu scale-up">
-                            <li class="header">
-                                <div class="info">
+                            <!-- Widget: user widget style 1 -->
+                            <div class="box box-widget widget-user-2">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header bg-purple">
                                     {% if request.user.is_authenticated %}
-                                    <p>Hola {{request.user.username}} <span
-                                            class="badge-info badge-pill"> ADMINISTRADOR</span></p>
-                                    <a href="{% url 'logout' %}"><i class="ion ion-power"></i> Cerrar Sesion</a>
-                                    {% else %}
-                                    <p>Hola Amigo</p>
-                                    <a href="{% url 'login' %}"><i class="ion ion-power"></i> Iniciar Sesion</a>
+                                    <div class="widget-user-image">
+                                        <img class="rounded-circle" src="{% static 'images/user7-128x128.jpg' %}"
+                                             alt="User Avatar">
+                                    </div>
+                                    <h3 class="widget-user-username uppercase"> {{request.user.username}}</h3>
+                                    {% get_user_groups request as group_user%}
+                                    <h6 class="widget-user-desc">{{group_user.first}}</h6>
                                     {% endif %}
                                 </div>
-                            </li>
+                                <div class="box-footer p-1">
+                                    <ul class="nav d-block nav-stacked  badge bg-red">
+                                        {% if request.user.is_authenticated %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'logout' %}" class="icon-profile nav-link text-blue">Cerrar
+                                                Sesion
+                                                <i class="pull-left fa fa-power-off"></i></a>
+                                        </li>
+                                        {% else %}
+                                        <li class="nav-item  badge bg-yellow">
+                                            <a href="{% url 'login' %}" class="icon-profile nav-link text-orange">Iniciar
+                                                Sesion
+                                                <i class="pull-left fa fa-power-off"></i></a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
                         </ul>
                     </li>
                 </ul>
@@ -631,19 +661,22 @@
 <script src="{% static 'assets/vendor_components/jquery-ui/jquery-ui.js' %}"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-	  $.widget.bridge('uibutton', $.ui.button);
+<script src="{% static 'assets/vendor_plugins/input-mask/jquery.inputmask.js' %}"></script>
+<script src="{% static 'assets/vendor_plugins/input-mask/jquery.inputmask.date.extensions.js' %}"></script>
+<script src="{% static 'assets/vendor_plugins/input-mask/jquery.inputmask.extensions.js' %}"></script>
 
+<!-- date-range-picker -->
+<script src="{% static 'assets/vendor_components/moment/min/moment.min.js' %}"></script>
+<script src="{% static 'assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
 
+<!-- bootstrap datepicker -->
+<script src="{% static 'assets/vendor_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
 
+<!-- bootstrap color picker -->
+<script src="{% static 'assets/vendor_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js' %}"></script>
 
-
-
-
-
-
-</script>
-
+<!-- bootstrap time picker -->
+<script src="{% static 'assets/vendor_plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
 <!-- popper -->
 <script src="{% static 'assets/vendor_components/popper/dist/popper.min.js' %}"></script>
 
@@ -854,24 +887,10 @@
 
         });
 
-
-
-
-
-
-
-
 </script>
 <script type="text/javascript">
 
         $(document).ready(function () {
-            //$('input:checkbox').bootstrapSwitch();
-            $('.js-select').attr('data-live-search', true).selectpicker({
-                size: 10
-            }).parent().removeClass('form-control');
-            $('[data-tooltip="tooltip"]').tooltip();
-            $('[title]').tooltip();
-
             $('#confirm-delete').on('show.bs.modal', function (e) {
 
                 var title = $(e.relatedTarget).data('title');
@@ -886,17 +905,11 @@
             });
         })
 
-
-
-
-
-
-
-
 </script>
 {% block code_js %}
 {% endblock %}
 {% include 'partials/_modal_delete.html' %}
-{% include 'layout/_messages.html' %}
+
 </body>
+{% include 'layout/_messages.html' %}
 </html>

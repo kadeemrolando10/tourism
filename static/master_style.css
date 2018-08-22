@@ -48,8 +48,6 @@ import icon and fonts Styles
 @import 'assets/vendor_components/flag-icon/css/flag-icon.css';
 @import 'assets/vendor_components/material-design-iconic-font/css/materialdesignicons.css';
 @import 'assets/vendor_components/simple-line-icons-master/css/simple-line-icons.css';
-@import 'assets/vendor_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
 /*------------------------------------------------------------------
@@ -14856,4 +14854,33 @@ label [type="checkbox"] {
 
 .header .info{
     padding:5px;
+}
+.blink{
+    padding-top:10px;
+    color: blue;
+}
+.btn-small{
+    padding: 0 10px !important;
+}
+.uppercase{
+    text-transform:uppercase;
+}
+.icon-profile i{
+    font-size:20px !important;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
 }

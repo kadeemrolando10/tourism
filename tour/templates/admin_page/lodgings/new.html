@@ -28,6 +28,8 @@
 {% block code_js %}
 {% include 'partials/_url_gmaps.html' %}
 <script type="text/javascript">
+        $('[data-mask]').inputmask();
+
         var map;
         var markers = [];
         function initialize() {

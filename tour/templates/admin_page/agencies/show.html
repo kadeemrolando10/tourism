@@ -27,6 +27,17 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name agency_obj 'is_active' %}</strong>
+            {% if agency.is_active %}
+            <span class="badge badge-success">ACTIVO</span>
+            {% url 'agencies-inactive-admin' agency.id as view_url %}
+            {% include 'partials/actions/inactive.html' with url=view_url %}
+            {% else %}
+            <span class="badge badge-danger">INACTIVO</span>
+            {% url 'agencies-active-admin' agency.id as view_url %}
+            {% include 'partials/actions/active.html' with url=view_url %}
+            {% endif %}
+        </p>
         <p><strong>{% get_field_name agency_obj 'title' %}</strong> {{ agency.title }}</p>
         <p><strong>{% get_field_name agency_obj 'destination' %}</strong> {{ agency.destination }}</p>
         <p><strong>{% get_field_name agency_obj 'address' %}</strong> {{ agency.address }}</p>
@@ -35,10 +46,6 @@
         <p><strong>{% get_field_name agency_obj 'web' %}</strong> {{ agency.web }}</p>
         <p><strong>{% get_field_name agency_obj 'lat' %}</strong> {{ agency.lat }}</p>
         <p><strong>{% get_field_name agency_obj 'lng' %}</strong> {{ agency.lng }}</p>
-        <p><strong>{% get_field_name agency_obj 'service' %}</strong><br>
-            {% for s in agency.service.all %}
-            {{s.title}}<br>
-            {% endfor %}</p>
         <p><strong>{% get_field_name agency_obj 'register_at' %}</strong> {{ agency.register_at }}</p>
 
     </div>
@@ -83,6 +90,7 @@
         window.onload = function () {
             initialize()
         };
+
 
 
 

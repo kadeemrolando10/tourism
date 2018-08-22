@@ -24,6 +24,23 @@ MENU = (
 )
 
 
+class Social(models.Model):
+    facebook = models.CharField(max_length=350, verbose_name='Facebook', blank=True)
+    whatsapp = models.CharField(max_length=350, verbose_name='Whatsapp', blank=True)
+    instagram = models.CharField(max_length=350, verbose_name='Instagram', blank=True)
+    twitter = models.CharField(max_length=350, verbose_name='Twitter', blank=True)
+    youtube = models.CharField(max_length=350, verbose_name='Youtube', blank=True)
+    register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
+
+    class Meta:
+        verbose_name = 'Red Social'
+        verbose_name_plural = 'Redes Sociales'
+        permissions = (
+            ('show_social', 'Can Details Social'),
+            ('index_social', 'Can List Social'),
+        )
+
+
 class Location(models.Model):
     title = models.CharField(max_length=150, verbose_name='Nombre')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
@@ -52,7 +69,7 @@ class Agency(models.Model):
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
     score = models.DecimalField(decimal_places=1, max_digits=2, verbose_name='Calificacion', blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
         return self.title
@@ -101,8 +118,8 @@ class AgencySchedule(models.Model):
         return self.day
 
     class Meta:
-        verbose_name = 'Horario de Atencion'
-        verbose_name_plural = 'Horarios de Atencion'
+        verbose_name = 'Horario de Atencion de Agencia'
+        verbose_name_plural = 'Horarios de Atencion de Agencias'
         ordering = ['register_at']
         permissions = (
             ('show_agencyschedule', 'Can Details Schedule Agency'),
@@ -119,7 +136,7 @@ class Event(models.Model):
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     event_date = models.DateField(verbose_name='Fecha de Evento')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
         return self.title
@@ -164,7 +181,7 @@ class Restaurant(models.Model):
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
         return self.title
@@ -231,7 +248,7 @@ class Transport(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
         return self.title
@@ -372,7 +389,7 @@ class Lodging(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
         return self.title
@@ -476,7 +493,7 @@ class TourismSite(models.Model):
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     address = models.CharField(max_length=150, verbose_name='Direccion', default=' ')
     web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
         return self.title
@@ -542,7 +559,7 @@ class TourismRoute(models.Model):
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     date = models.DateField(verbose_name='Fecha de Evento', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
         return self.title
@@ -596,6 +613,7 @@ class Objective(models.Model):
 
 class Function(models.Model):
     title = models.TextField(verbose_name='Descripcion', unique=True)
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -606,7 +624,7 @@ class Function(models.Model):
         verbose_name_plural = 'Funciones'
         ordering = ['title']
         permissions = (
-            ('show_fucntion', 'Can Details Function'),
+            ('show_function', 'Can Details Function'),
             ('index_function', 'Can List Function'),
         )
 
@@ -614,6 +632,7 @@ class Function(models.Model):
 class Law(models.Model):
     title = models.TextField(verbose_name='Descripcion', unique=True, blank=True, )
     file = models.FileField(upload_to='documents/%Y/%m/%d', null=True, verbose_name='Archivo pdf')
+    is_active = models.BooleanField(default=False, verbose_name='Estado')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -651,7 +670,11 @@ GENDER = (('F', 'FEMENINO'), ('M', 'MASCULINO'))
 
 ROLE_USERS = (
     ('AD', 'ADMINISTRADOR'),
-    ('US', 'USUARIO'),
+    ('US-L', 'USUARIO-HOSPEDAJE'),
+    ('US-T', 'USUARIO-TRANSPORTE'),
+    ('US-R', 'USUARIO-RESTAURANT'),
+    ('US-AT', 'USUARIO-AGENCIA-TURISTICA'),
+    ('US-ST', 'USUARIO-SITIO-TURISTICO')
 )
 
 
@@ -661,7 +684,7 @@ class Client(models.Model):
     first_name = models.CharField(max_length=100, default='', verbose_name='Nombres')
     last_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='Apellidos')
     gender = models.CharField(max_length=2, choices=GENDER, verbose_name=u'Género')
-    rol = models.CharField(max_length=2, choices=ROLE_USERS, default='R', verbose_name='Rol')
+    rol = models.CharField(max_length=10, choices=ROLE_USERS, default='R', verbose_name='Rol')
     register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
 
     def __unicode__(self):

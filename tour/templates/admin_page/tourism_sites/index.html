@@ -10,7 +10,7 @@
 </div>
 <nav aria-label="breadcrumb" class="alert-warning">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active page" aria-current="page" >Sitios Turisticos</li>
+        <li class="breadcrumb-item active page" aria-current="page">Sitios Turisticos</li>
     </ol>
 </nav>
 <form method="GET" action="" accept-charset="utf-8" class="input-group mb-3 col-10 col-md-8 col-lg-4">
@@ -31,6 +31,7 @@
             <th data-field="destination" data-sortable="true">{% get_field_name site_obj 'destination' %}</th>
             <th data-field="address" data-sortable="true">{% get_field_name site_obj 'address' %}</th>
             <th data-field="phone" data-sortable="true">{% get_field_name site_obj 'phone' %}</th>
+            <th data-field="is_active" data-sortable="true">{% get_field_name site_obj 'is_active' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -43,7 +44,13 @@
             <td>{{ site.destination }}</td>
             <td>{{ site.address }}</td>
             <td>{{ site.phone }}</td>
-            <td>{{ site.score }}</td>
+            <td class="text-center" width="8%">
+                {% if site.is_active %}
+                <a  href="{% url 'tourism_sites-inactive-admin' site.id %}" class="badge badge-pill badge-success text-white">ACTIVO</a>
+                {% else%}
+                <a  href="{% url 'tourism_sites-active-admin' site.id %}" class="badge badge-pill badge-danger text-white">INACTIVO</a>
+                {% endif %}
+            </td>
             <td class="text-center">
                 {% url 'tourism_sites-show-admin' site.id as view_url %}
                 {% include 'partials/actions/view.html' with url=view_url %}
@@ -60,8 +67,10 @@
 <div class="pagination">
     <span class="step-links">
         {% if sites.has_previous %}
-            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
-            <a class="btn btn-info" href="?page={{ sites.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+            <a class="btn btn-info"
+               href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info"
+               href="?page={{ sites.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
         {% endif %}
 
         <span class="current btn btn-success">
@@ -69,8 +78,10 @@
         </span>
 
         {% if sites.has_next %}
-            <a class="btn btn-primary" href="?page={{ sites.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
-            <a class="btn btn-primary" href="?page={{ sites.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+            <a class="btn btn-primary"
+               href="?page={{ sites.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary"
+               href="?page={{ sites.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
         {% endif %}
     </span>
 </div>
@@ -94,6 +105,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 </script>
 {% endblock %}

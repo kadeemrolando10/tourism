@@ -3180,3 +3180,42 @@ a.link.github:active {
 .change-color{
     background-color:green;
 }
+@media (max-width: 576px) {
+    .fixed-position-message{
+        position: fixed;
+        top: 415px;
+        right: 0;
+        background-color: green;
+        border-radius:100%;
+        padding:0;
+        z-index:800;
+        height:45px;
+        width:45px;
+        border:2px double white;
+    }
+}
+@media (min-width: 576px) {
+    .fixed-position-message{
+        position: fixed;
+        top: 500px;
+        right: 45px;
+        background-color: green;
+        border-radius:100%;
+        padding:0;
+        z-index:800;
+        height:45px;
+        width:45px;
+        border:2px double white;
+    }
+}
+.fixed-position-message i{
+    font-size: 30px;
+    padding: 6px;
+    color: white;
+    align: center;
+    z-index: 900;
+}
+.align-social-btn{
+    left: 5px !important;
+    top: 60px !important;
+}

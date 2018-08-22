@@ -31,6 +31,7 @@
             <th data-field="destination" data-sortable="true">{% get_field_name transport_obj 'destination' %}</th>
             <th data-field="address" data-sortable="true">{% get_field_name transport_obj 'address' %}</th>
             <th data-field="phone" data-sortable="true">{% get_field_name transport_obj 'phone' %}</th>
+            <th data-field="is_active" data-sortable="true">{% get_field_name transport_obj 'is_active' %}</th>
             <th class="text-center">Opciones</th>
         </tr>
         </thead>
@@ -43,7 +44,13 @@
             <td>{{ transport.destination }}</td>
             <td>{{ transport.address }}</td>
             <td>{{ transport.phone }}</td>
-            <td>{{ transport.score }}</td>
+            <td class="text-center" width="8%">
+                {% if transport.is_active %}
+                <a  href="{% url 'transports-inactive-admin' transport.id %}" class="badge badge-pill badge-success text-white">ACTIVO</a>
+                {% else%}
+                <a  href="{% url 'transports-active-admin' transport.id %}" class="badge badge-pill badge-danger text-white">INACTIVO</a>
+                {% endif %}
+            </td>
             <td class="text-center">
                 {% url 'transports-show-admin' transport.id as view_url %}
                 {% include 'partials/actions/view.html' with url=view_url %}
@@ -60,8 +67,10 @@
 <div class="pagination">
     <span class="step-links">
         {% if transports.has_previous %}
-            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
-            <a class="btn btn-info" href="?page={{ transports.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+            <a class="btn btn-info"
+               href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info"
+               href="?page={{ transports.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
         {% endif %}
 
         <span class="current btn btn-success">
@@ -69,8 +78,10 @@
         </span>
 
         {% if services.has_next %}
-            <a class="btn btn-primary" href="?page={{ transports.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
-            <a class="btn btn-primary" href="?page={{ transports.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+            <a class="btn btn-primary"
+               href="?page={{ transports.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary"
+               href="?page={{ transports.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
         {% endif %}
     </span>
 </div>
@@ -94,6 +105,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 
 </script>

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
+from django.contrib.messages import constants as message_constants
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,8 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition
+MESSAGE_LEVEL = message_constants.DEBUG
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -65,11 +66,12 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.media',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 'django.template.context_processors.static',
+
             ],
         },
     },

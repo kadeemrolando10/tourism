@@ -147,10 +147,13 @@
 
                 <div class="footer-social-btns">
 
-                    <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ" target="_blank"><i class="fa fa-youtube-square"
-                                                                                          aria-hidden="true"></i></a>
-                    <a href="https://twitter.com/carlosdmesag" target="_blank"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-                    <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/" target="_blank"><i
+                    <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ" target="_blank"><i
+                            class="fa fa-youtube-square"
+                            aria-hidden="true"></i></a>
+                    <a href="https://twitter.com/carlosdmesag" target="_blank"><i class="fa fa-twitter"
+                                                                                  aria-haspopup="true"></i></a>
+                    <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/"
+                       target="_blank"><i
                             class="fa fa-instagram" aria-haspopup="true"></i></a>
                     <a href="https://www.facebook.com/secretariadepartamentaldeturismo/?ref=br_rs" target="_blank"><i
                             class="fa fa-facebook" aria-haspopup="true"></i></a>
@@ -162,7 +165,22 @@
 </footer>
 
 
+<div class="dropdown fixed-position-message">
+    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false"><i class="fa fa-comment"></i>
+    </a>
+    <div class="dropdown-menu bg-transparent align-social-btn" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item bg-transparent" href="">
+            <img src="{% static 'img/core-img/007-whatsapp.png' %}" alt="" width="40px">
+        </a>
+        <a class="dropdown-item bg-transparent" href="">
+            <img src="{% static 'img/core-img/044-messenger.png' %}" alt="" width="40px">
+        </a>
+    </div>
+</div>
+
 <div class="floating-wpp"></div>
+
 
 <!-- ****** Footer Area End ****** -->
 
@@ -180,6 +198,9 @@
 $("#idd").click(function(){
     $(this).hide();
 });
+
+
+
 </script>
 {% block js_code %}
 

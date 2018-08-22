@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='base'),
     path('index_admin/', views.index_admin, name='index_admin'),
+    path('notifications/', views.notification, name='notifications'),
     path('<int:id>/change', views.change_main, name='change-id-main'),
     url(r'^logout/$', logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
@@ -33,11 +34,20 @@ urlpatterns = [
             path('new/', views.function_new, name='functions-new'),
             path('<int:id>/edit/', views.function_edit, name='functions-edit'),
             path('<int:id>/delete/', views.function_delete, name='functions-delete'),
+            path('<int:id>/active/', views.function_active_admin, name='functions-active-admin'),
+            path('<int:id>/inactive/', views.function_inactive_admin, name='functions-inactive-admin'),
         ])),
         path('laws/', include([
             path('new/', views.law_new, name='laws-new'),
             path('<int:id>/edit/', views.law_edit, name='laws-edit'),
             path('<int:id>/delete/', views.law_delete, name='laws-delete'),
+            path('<int:id>/active/', views.law_active_admin, name='laws-active-admin'),
+            path('<int:id>/inactive/', views.law_inactive_admin, name='laws-inactive-admin'),
+        ])),
+        path('socials/', include([
+            path('new/', views.social_new, name='socials-new'),
+            path('<int:id>/edit/', views.social_edit, name='socials-edit'),
+            path('<int:id>/delete/', views.social_delete, name='socials-delete'),
         ])),
     ])),
     path('secretary/', views.secretary, name='secretary'),
@@ -59,6 +69,8 @@ urlpatterns = [
             path('new/', views.agency_new_admin, name='agencies-new-admin'),
             path('<int:id>/edit/', views.agency_edit_admin, name='agencies-edit-admin'),
             path('<int:id>/delete/', views.agency_delete_admin, name='agencies-delete-admin'),
+            path('<int:id>/active/', views.agency_active_admin, name='agencies-active-admin'),
+            path('<int:id>/inactive/', views.agency_inactive_admin, name='agencies-inactive-admin'),
 
             path('service-admin/', include([
                 path('', views.agency_service_index_admin, name='agencies-services-index-admin'),
@@ -85,6 +97,8 @@ urlpatterns = [
             path('new/', views.event_new_admin, name='events-new-admin'),
             path('<int:id>/edit/', views.event_edit_admin, name='events-edit-admin'),
             path('<int:id>/delete/', views.event_delete_admin, name='events-delete-admin'),
+            path('<int:id>/active/', views.event_active_admin, name='events-active-admin'),
+            path('<int:id>/inactive/', views.event_inactive_admin, name='events-inactive-admin'),
         ])),
     ])),
 
@@ -98,28 +112,32 @@ urlpatterns = [
             path('new/', views.restaurant_new_admin, name='restaurants-new-admin'),
             path('<int:id>/edit/', views.restaurant_edit_admin, name='restaurants-edit-admin'),
             path('<int:id>/delete/', views.restaurant_delete_admin, name='restaurants-delete-admin'),
-        ])),
-        path('service-admin/', include([
-            path('', views.restaurant_service_index_admin, name='restaurants-services-index-admin'),
-            path('<int:id>/', views.restaurant_service_show_admin, name='restaurants-services-show-admin'),
-            path('new/', views.restaurant_service_new_admin, name='restaurants-services-new-admin'),
-            path('<int:id>/edit/', views.restaurant_service_edit_admin, name='restaurants-services-edit-admin'),
-            path('<int:id>/delete/', views.restaurant_service_delete_admin, name='restaurants-services-delete-admin'),
-        ])),
-        path('menu-admin/', include([
-            path('', views.restaurant_menu_index_admin, name='restaurants-menus-index-admin'),
-            path('<int:id>/', views.restaurant_menu_show_admin, name='restaurants-menus-show-admin'),
-            path('new/', views.restaurant_menu_new_admin, name='restaurants-menus-new-admin'),
-            path('<int:id>/edit/', views.restaurant_menu_edit_admin, name='restaurants-menus-edit-admin'),
-            path('<int:id>/delete/', views.restaurant_menu_delete_admin, name='restaurants-menus-delete-admin'),
-        ])),
-        path('schedule-admin/', include([
-            path('', views.restaurant_schedule_index_admin, name='restaurants-schedules-index-admin'),
-            path('<int:id>/', views.restaurant_schedule_show_admin, name='restaurants-schedules-show-admin'),
-            path('new/', views.restaurant_schedule_new_admin, name='restaurants-schedules-new-admin'),
-            path('<int:id>/edit/', views.restaurant_schedule_edit_admin, name='restaurants-schedules-edit-admin'),
-            path('<int:id>/delete/', views.restaurant_schedule_delete_admin,
-                 name='restaurants-schedules-delete-admin'),
+            path('<int:id>/active/', views.restaurant_active_admin, name='restaurants-active-admin'),
+            path('<int:id>/inactive/', views.restaurant_inactive_admin, name='restaurants-inactive-admin'),
+
+            path('service-admin/', include([
+                path('', views.restaurant_service_index_admin, name='restaurants-services-index-admin'),
+                path('<int:id>/', views.restaurant_service_show_admin, name='restaurants-services-show-admin'),
+                path('new/', views.restaurant_service_new_admin, name='restaurants-services-new-admin'),
+                path('<int:id>/edit/', views.restaurant_service_edit_admin, name='restaurants-services-edit-admin'),
+                path('<int:id>/delete/', views.restaurant_service_delete_admin,
+                     name='restaurants-services-delete-admin'),
+            ])),
+            path('menu-admin/', include([
+                path('', views.restaurant_menu_index_admin, name='restaurants-menus-index-admin'),
+                path('<int:id>/', views.restaurant_menu_show_admin, name='restaurants-menus-show-admin'),
+                path('new/', views.restaurant_menu_new_admin, name='restaurants-menus-new-admin'),
+                path('<int:id>/edit/', views.restaurant_menu_edit_admin, name='restaurants-menus-edit-admin'),
+                path('<int:id>/delete/', views.restaurant_menu_delete_admin, name='restaurants-menus-delete-admin'),
+            ])),
+            path('schedule-admin/', include([
+                path('', views.restaurant_schedule_index_admin, name='restaurants-schedules-index-admin'),
+                path('<int:id>/', views.restaurant_schedule_show_admin, name='restaurants-schedules-show-admin'),
+                path('new/', views.restaurant_schedule_new_admin, name='restaurants-schedules-new-admin'),
+                path('<int:id>/edit/', views.restaurant_schedule_edit_admin, name='restaurants-schedules-edit-admin'),
+                path('<int:id>/delete/', views.restaurant_schedule_delete_admin,
+                     name='restaurants-schedules-delete-admin'),
+            ])),
         ])),
     ])),
 
@@ -132,6 +150,8 @@ urlpatterns = [
             path('new/', views.transport_new_admin, name='transports-new-admin'),
             path('<int:id>/edit/', views.transport_edit_admin, name='transports-edit-admin'),
             path('<int:id>/delete/', views.transport_delete_admin, name='transports-delete-admin'),
+            path('<int:id>/active/', views.transport_active_admin, name='transports-active-admin'),
+            path('<int:id>/inactive/', views.transport_inactive_admin, name='transports-inactive-admin'),
 
             path('destination-admin/', include([
                 path('', views.transport_destination_index_admin, name='transports-destination-index-admin'),
@@ -178,6 +198,8 @@ urlpatterns = [
             path('new/', views.tourism_site_new_admin, name='tourism_sites-new-admin'),
             path('<int:id>/edit/', views.tourism_site_edit_admin, name='tourism_sites-edit-admin'),
             path('<int:id>/delete/', views.tourism_site_delete_admin, name='tourism_sites-delete-admin'),
+            path('<int:id>/active/', views.tourism_site_active_admin, name='tourism_sites-active-admin'),
+            path('<int:id>/inactive/', views.tourism_site_inactive_admin, name='tourism_sites-inactive-admin'),
 
             path('type-admin/', include([
                 path('', views.tourism_site_type_index_admin, name='tourism_sites-types-index-admin'),
@@ -222,6 +244,8 @@ urlpatterns = [
             path('new/', views.tourism_route_new_admin, name='tourism_routes-new-admin'),
             path('<int:id>/edit/', views.tourism_route_edit_admin, name='tourism_routes-edit-admin'),
             path('<int:id>/delete/', views.tourism_route_delete_admin, name='tourism_routes-delete-admin'),
+            path('<int:id>/active/', views.tourism_route_active_admin, name='tourism_routes-active-admin'),
+            path('<int:id>/inactive/', views.tourism_route_inactive_admin, name='tourism_routes-inactive-admin'),
 
             path('menu-admin/', include([
                 path('', views.tourism_route_menu_index_admin, name='tourism_routes-menus-index-admin'),
@@ -243,6 +267,8 @@ urlpatterns = [
             path('new/', views.lodging_new_admin, name='lodgings-new-admin'),
             path('<int:id>/edit/', views.lodging_edit_admin, name='lodgings-edit-admin'),
             path('<int:id>/delete/', views.lodging_delete_admin, name='lodgings-delete-admin'),
+            path('<int:id>/active/', views.lodging_active_admin, name='lodgings-active-admin'),
+            path('<int:id>/inactive/', views.lodging_inactive_admin, name='lodgings-inactive-admin'),
 
             path('service-admin/', include([
                 path('', views.lodging_service_index_admin, name='lodgings-services-index-admin'),

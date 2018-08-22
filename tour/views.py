@@ -1,5 +1,4 @@
-from functools import reduce
-
+from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.urls import reverse
@@ -14,16 +13,36 @@ from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agen
     TransportDestination, LodgingRoom, LodgingType, Location, LodgingSchedule, TourismRoute, TourismSiteSchedule, \
     TransportSchedule, RestaurantSchedule, LodgingService, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantMenu, TransportService, TransportTypeService, TourismSiteMenu, \
-    TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS, Secretary
+    TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS, Secretary, Social
 
 from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, TourismSiteForm, TourismRouteForm, \
     LodgingForm, AgencyServiceForm, AgencyScheduleForm, RestaurantMenuForm, RestaurantScheduleForm, \
     RestaurantServiceForm, TransportDestinationForm, TransportServiceForm, TransportTypeServiceForm, \
     TransportScheduleForm, TourismSiteMenuForm, TourismSiteScheduleForm, LocationForm, TourismSiteTypeForm, \
     TourismSiteServiceForm, TourismRouteMenuForm, LodgingRoomForm, LodgingScheduleForm, \
-    LodgingTypeForm, LodgingServiceForm, ClientForm, ClientFormEdit, ObjectiveForm, FunctionForm, LawForm, SecretaryForm
+    LodgingTypeForm, LodgingServiceForm, ClientForm, ClientFormEdit, ObjectiveForm, FunctionForm, LawForm, \
+    SecretaryForm, SocialForm
 
 
+# PAGINA NOTICACIONES ADMINISTRADOR
+@login_required
+def notification(request):
+    restaurants = Restaurant.objects.filter(is_active=False)
+    transports = Transport.objects.filter(is_active=False)
+    tourism_sites = TourismSite.objects.filter(is_active=False)
+    agencies = Agency.objects.filter(is_active=False)
+    lodgings = Lodging.objects.filter(is_active=False)
+    return render(request, 'admin_page/notifications.html', {
+        'restaurants': restaurants,
+        'transports': transports,
+        'sites': tourism_sites,
+        'agencies': agencies,
+        'lodgings': lodgings,
+    })
+
+
+# USUARIOS ADMINISTRADOR
+@permission_required('tour.index_client', login_url='/accounts/login/')
 def user_index(request):
     users_list = Client.objects.all()
     query = request.GET.get('q')
@@ -46,6 +65,7 @@ def user_index(request):
     return render(request, template, params)
 
 
+@permission_required('tour.add_client', login_url='/accounts/login/')
 def user_new(request):
     if request.method == 'POST':
         formUser = UserCreationForm(request.POST)
@@ -59,8 +79,20 @@ def user_new(request):
             if client.rol == 'AD':  # ADMINISTRADOR
                 g = Group.objects.get(id=1)
                 g.user_set.add(user.id)
-            elif client.rol == 'US':  # USUARIO
+            elif client.rol == 'US-L':  # USUARIO HOSPEDAJE
                 g = Group.objects.get(id=2)
+                g.user_set.add(user.id)
+            elif client.rol == 'US-T':  # USUARIO TRANSPORTE
+                g = Group.objects.get(id=3)
+                g.user_set.add(user.id)
+            elif client.rol == 'US-R':  # USUARIO RESTAURANT
+                g = Group.objects.get(id=4)
+                g.user_set.add(user.id)
+            elif client.rol == 'US-AT':  # USUARIO AGENCIA TURISTICA
+                g = Group.objects.get(id=5)
+                g.user_set.add(user.id)
+            elif client.rol == 'US-ST':  # USUARIO SITIO TURISTICO
+                g = Group.objects.get(id=6)
                 g.user_set.add(user.id)
 
             message = 'Registrado correctamente!'
@@ -78,6 +110,7 @@ def user_new(request):
     })
 
 
+@permission_required('tour.change_client', login_url='/accounts/login/')
 def user_edit(request, id):
     client = Client.objects.get(id=id)
 
@@ -97,6 +130,7 @@ def user_edit(request, id):
     })
 
 
+@permission_required('tour.delete_client', login_url='/accounts/login/')
 def user_delete(request, id):
     client = Client.objects.get(id=id)
     client.delete()
@@ -112,15 +146,19 @@ def user_delete(request, id):
     return HttpResponseRedirect(reverse(user_index))
 
 
+# PAGINA INICIO ADMINISTRADOR
+@login_required
 def index_admin(request):
     return render(request, 'admin_page/index.html', {})
 
 
+# CAMBIO DE LOCALIZACION EN TODA LA PLANTILLA CLIENTE
 def change_main(request, id):
     request.session['id_main'] = id
     return HttpResponseRedirect(reverse(index))
 
 
+# PAGINA INICIO CLIENTE
 def index(request):
     events = Event.objects.all
     restaurants = Restaurant.objects.all
@@ -128,16 +166,19 @@ def index(request):
     tourism_sites = Restaurant.objects.all
     agencies = Agency.objects.all
     lodgings = Lodging.objects.all
+    socials = Social.objects.all
     return render(request, 'tour/index.html', {
         'events': events,
         'restaurants': restaurants,
         'transports': transports,
         'tourism_sites': tourism_sites,
         'agencys': agencies,
-        'lodgings': lodgings
+        'lodgings': lodgings,
+        'socials': socials,
     })
 
 
+# SECRETARIA CLIENTE
 def secretary(request):
     objectives = Objective.objects.all
     secretaries = Secretary.objects.all
@@ -152,8 +193,6 @@ def secretary(request):
 
 
 # AGENCIAS DE TURISMO CLIENTE
-
-
 def agency_index(request):
     ids = request.session['id_main']
     if ids is None:
@@ -181,8 +220,7 @@ def agency_show(request, id):
 
 
 # AGENCIAS DE TURISMO ADMINISTRADOR
-
-
+@permission_required('tour.index_agency', login_url='/accounts/login/')
 def agency_index_admin(request):
     agencies_list = Agency.objects.all()
     query = request.GET.get('q')
@@ -200,6 +238,7 @@ def agency_index_admin(request):
     })
 
 
+@permission_required('tour.show_agency', login_url='/accounts/login/')
 def agency_show_admin(request, id):
     agency = Agency.objects.get(id=id)
     request.session['agency'] = id
@@ -209,6 +248,7 @@ def agency_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_agency', login_url='/accounts/login/')
 def agency_new_admin(request):
     if request.method == 'POST':
         form = AgencyForm(request.POST, request.FILES)
@@ -229,6 +269,29 @@ def agency_new_admin(request):
     })
 
 
+@permission_required('tour.change_agency', login_url='/accounts/login/')
+def agency_active_admin(request, id):
+    agency = Agency.objects.get(id=id)
+    agency.is_active = True
+    save = agency.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('agencies-index-admin'))
+
+
+@permission_required('tour.change_agency', login_url='/accounts/login/')
+def agency_inactive_admin(request, id):
+    agency = Agency.objects.get(id=id)
+    agency.is_active = False
+    save = agency.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('agencies-index-admin'))
+
+
+@permission_required('tour.change_agency', login_url='/accounts/login/')
 def agency_edit_admin(request, id):
     agency = Agency.objects.get(id=id)
     if request.method == 'POST':
@@ -238,7 +301,7 @@ def agency_edit_admin(request, id):
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(reverse('agencies-show-admin', kwargs={'id': agency.id}))
+            return HttpResponseRedirect(reverse('agencies-index-admin', kwargs={'id': agency.id}))
     else:
         form = AgencyForm(instance=agency)
     return render(request, 'admin_page/agencies/edit.html', {
@@ -248,6 +311,7 @@ def agency_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_agency', login_url='/accounts/login/')
 def agency_delete_admin(request, id):
     agency = Agency.objects.get(id=id)
     agency.delete()
@@ -258,8 +322,8 @@ def agency_delete_admin(request, id):
     return HttpResponseRedirect(reverse(agency_index_admin))
 
 
-# SERVICIOS DE AGENCIAS
-
+# SERVICIOS DE AGENCIAS ADMIN
+@permission_required('tour.index_agencyservice', login_url='/accounts/login/')
 def agency_service_index_admin(request):
     agency = request.session['agency']
     services_list = AgencyService.objects.filter(agency=agency)
@@ -280,6 +344,7 @@ def agency_service_index_admin(request):
     })
 
 
+@permission_required('tour.show_agencyservice', login_url='/accounts/login/')
 def agency_service_show_admin(request, id):
     agency = request.session['agency']
     service = AgencyService.objects.filter(agency=agency).get(id=id)
@@ -292,6 +357,7 @@ def agency_service_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_agencyservice', login_url='/accounts/login/')
 def agency_service_new_admin(request):
     agency = request.session['agency']
     agency_title = Agency.objects.get(id=agency)
@@ -316,6 +382,7 @@ def agency_service_new_admin(request):
     })
 
 
+@permission_required('tour.change_agencyservice', login_url='/accounts/login/')
 def agency_service_edit_admin(request, id):
     agency = request.session['agency']
     service = AgencyService.objects.filter(agency=agency).get(id=id)
@@ -339,6 +406,7 @@ def agency_service_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_agencyservice', login_url='/accounts/login/')
 def agency_service_delete_admin(request, id):
     agency = request.session['agency']
     service = AgencyService.objects.filter(agency=agency).get(id=id)
@@ -350,8 +418,8 @@ def agency_service_delete_admin(request, id):
     return HttpResponseRedirect(reverse('agencies-services-index-admin'))
 
 
-# HORARIOS DE AGENCIA
-
+# HORARIOS DE AGENCIA ADMIN
+@permission_required('tour.index_agencyschedule', login_url='/accounts/login/')
 def agency_schedule_index_admin(request):
     agency = request.session['agency']
     schedules_list = AgencySchedule.objects.filter(agency=agency)
@@ -372,6 +440,7 @@ def agency_schedule_index_admin(request):
     })
 
 
+@permission_required('tour.show_agencyschedule', login_url='/accounts/login/')
 def agency_schedule_show_admin(request, id):
     agency = request.session['agency']
     schedule = AgencySchedule.objects.filter(agency=agency).get(id=id)
@@ -384,6 +453,7 @@ def agency_schedule_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_agencyschedule', login_url='/accounts/login/')
 def agency_schedule_new_admin(request):
     agency = request.session['agency']
     agency_title = Agency.objects.get(id=agency)
@@ -408,6 +478,7 @@ def agency_schedule_new_admin(request):
     })
 
 
+@permission_required('tour.change_agencyschedule', login_url='/accounts/login/')
 def agency_schedule_edit_admin(request, id):
     agency = request.session['agency']
     schedule = AgencySchedule.objects.filter(agency=agency).get(id=id)
@@ -419,7 +490,7 @@ def agency_schedule_edit_admin(request, id):
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(reverse('agencies-schedules-show-admin', kwargs={'id': schedule.id}))
+            return HttpResponseRedirect(reverse('agencies-schedules-index-admin'))
     else:
         form = AgencyScheduleForm(instance=schedule)
     return render(request, 'admin_page/agencies/schedules/edit.html', {
@@ -431,6 +502,7 @@ def agency_schedule_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_agencyschedule', login_url='/accounts/login/')
 def agency_schedule_delete_admin(request, id):
     agency = request.session['agency']
     schedule = AgencySchedule.objects.filter(agency=agency).get(id=id)
@@ -457,7 +529,7 @@ def event_index(request):
 
 
 # EVENTOS ADMINISTRADOR
-
+@permission_required('tour.index_event', login_url='/accounts/login/')
 def event_index_admin(request):
     events_list = Event.objects.all()
     query = request.GET.get('q')
@@ -474,6 +546,7 @@ def event_index_admin(request):
     })
 
 
+@permission_required('tour.show_event', login_url='/accounts/login/')
 def event_show_admin(request, id):
     event = Event.objects.get(id=id)
     return render(request, 'admin_page/events/show.html', {
@@ -482,6 +555,7 @@ def event_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_event', login_url='/accounts/login/')
 def event_new_admin(request):
     if request.method == 'POST':
         form = EventForm(request.POST, request.FILES)
@@ -502,6 +576,29 @@ def event_new_admin(request):
     })
 
 
+@permission_required('tour.change_event', login_url='/accounts/login/')
+def event_active_admin(request, id):
+    event = Event.objects.get(id=id)
+    event.is_active = True
+    save = event.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('events-index-admin'))
+
+
+@permission_required('tour.change_event', login_url='/accounts/login/')
+def event_inactive_admin(request, id):
+    event = Event.objects.get(id=id)
+    event.is_active = False
+    save = event.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('events-index-admin'))
+
+
+@permission_required('tour.change_event', login_url='/accounts/login/')
 def event_edit_admin(request, id):
     event = Event.objects.get(id=id)
 
@@ -522,6 +619,7 @@ def event_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_event', login_url='/accounts/login/')
 def event_delete_admin(request, id):
     event = Event.objects.get(id=id)
     event.delete()
@@ -533,7 +631,6 @@ def event_delete_admin(request, id):
 
 
 # RESTAURANTS CLIENTE
-
 def restaurant_index(request):
     id = request.session['id_main']
     if id is None:
@@ -579,6 +676,8 @@ def restaurant_show(request, id):
     # RESTAURANTS ADMINISTRADOR
 
 
+# RESTAURANTS ADMIN
+@permission_required('tour.index_restaurant', login_url='/accounts/login/')
 def restaurant_index_admin(request):
     restaurants_list = Restaurant.objects.all()
     query = request.GET.get('q')
@@ -595,6 +694,7 @@ def restaurant_index_admin(request):
     })
 
 
+@permission_required('tour.show_restaurant', login_url='/accounts/login/')
 def restaurant_show_admin(request, id):
     request.session['restaurants'] = id
     restaurant = Restaurant.objects.get(id=id)
@@ -604,6 +704,7 @@ def restaurant_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_restaurant', login_url='/accounts/login/')
 def restaurant_new_admin(request):
     if request.method == 'POST':
         form = RestaurantForm(request.POST, request.FILES)
@@ -624,6 +725,29 @@ def restaurant_new_admin(request):
     })
 
 
+@permission_required('tour.change_restaurant', login_url='/accounts/login/')
+def restaurant_active_admin(request, id):
+    restaurant = Restaurant.objects.get(id=id)
+    restaurant.is_active = True
+    save = restaurant.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('restaurants-index-admin'))
+
+
+@permission_required('tour.change_restaurant', login_url='/accounts/login/')
+def restaurant_inactive_admin(request, id):
+    restaurant = Restaurant.objects.get(id=id)
+    restaurant.is_active = False
+    save = restaurant.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('restaurants-index-admin'))
+
+
+@permission_required('tour.change_restaurant', login_url='/accounts/login/')
 def restaurant_edit_admin(request, id):
     restaurant = Restaurant.objects.get(id=id)
 
@@ -644,6 +768,7 @@ def restaurant_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_restaurant', login_url='/accounts/login/')
 def restaurant_delete_admin(request, id):
     restaurant = Restaurant.objects.get(id=id)
     restaurant.delete()
@@ -653,7 +778,8 @@ def restaurant_delete_admin(request, id):
     return HttpResponseRedirect(reverse(restaurant_index_admin))
 
 
-# MENU DE RESTAURANTES
+# MENU DE RESTAURANTES ADMIN
+@permission_required('tour.index_restaurantmenu', login_url='/accounts/login/')
 def restaurant_menu_index_admin(request):
     restaurant = request.session['restaurants']
     menus_list = RestaurantMenu.objects.filter(restaurant=restaurant)
@@ -674,6 +800,7 @@ def restaurant_menu_index_admin(request):
     })
 
 
+@permission_required('tour.show_restaurantmenu', login_url='/accounts/login/')
 def restaurant_menu_show_admin(request, id):
     restaurant = request.session['restaurants']
     menu = RestaurantMenu.objects.filter(restaurant=restaurant).get(id=id)
@@ -686,6 +813,7 @@ def restaurant_menu_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_restaurantmenu', login_url='/accounts/login/')
 def restaurant_menu_new_admin(request):
     restaurant = request.session['restaurants']
     restaurant_title = Restaurant.objects.get(id=restaurant)
@@ -710,6 +838,7 @@ def restaurant_menu_new_admin(request):
     })
 
 
+@permission_required('tour.change_restaurantmenu', login_url='/accounts/login/')
 def restaurant_menu_edit_admin(request, id):
     restaurant = request.session['restaurants']
     menu = RestaurantMenu.objects.filter(restaurant=restaurant).get(id=id)
@@ -733,6 +862,7 @@ def restaurant_menu_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_restaurantmenu', login_url='/accounts/login/')
 def restaurant_menu_delete_admin(request, id):
     restaurant = request.session['restaurants']
     menu = RestaurantMenu.objects.filter(restaurant=restaurant).get(id=id)
@@ -744,8 +874,8 @@ def restaurant_menu_delete_admin(request, id):
     return HttpResponseRedirect(reverse('restaurants-menus-index-admin'))
 
 
-# HORARIOS DE RESTAURANTES
-
+# HORARIOS DE RESTAURANTES ADMIN
+@permission_required('tour.index_restaurantschedule', login_url='/accounts/login/')
 def restaurant_schedule_index_admin(request):
     restaurant = request.session['restaurants']
     schedules_list = RestaurantSchedule.objects.filter(restaurant=restaurant)
@@ -766,6 +896,7 @@ def restaurant_schedule_index_admin(request):
     })
 
 
+@permission_required('tour.show_restaurantschedule', login_url='/accounts/login/')
 def restaurant_schedule_show_admin(request, id):
     restaurant = request.session['restaurants']
     schedule = RestaurantSchedule.objects.filter(restaurant=restaurant).get(id=id)
@@ -778,6 +909,7 @@ def restaurant_schedule_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_restaurantschedule', login_url='/accounts/login/')
 def restaurant_schedule_new_admin(request):
     restaurant = request.session['restaurants']
     restaurant_title = Restaurant.objects.get(id=restaurant)
@@ -802,6 +934,7 @@ def restaurant_schedule_new_admin(request):
     })
 
 
+@permission_required('tour.change_restaurantschedule', login_url='/accounts/login/')
 def restaurant_schedule_edit_admin(request, id):
     restaurant = request.session['restaurants']
     schedule = RestaurantSchedule.objects.filter(restaurant=restaurant).get(id=id)
@@ -825,6 +958,7 @@ def restaurant_schedule_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_restaurantschedule', login_url='/accounts/login/')
 def restaurant_schedule_delete_admin(request, id):
     restaurant = request.session['restaurants']
     schedule = RestaurantSchedule.objects.filter(restaurant=restaurant).get(id=id)
@@ -837,7 +971,7 @@ def restaurant_schedule_delete_admin(request, id):
 
 
 # SERVICIOS DE RESTAURANTES
-
+@permission_required('tour.index_restaurantservice', login_url='/accounts/login/')
 def restaurant_service_index_admin(request):
     services_list = RestaurantService.objects.all
     query = request.GET.get('q')
@@ -854,6 +988,7 @@ def restaurant_service_index_admin(request):
     })
 
 
+@permission_required('tour.show_restaurantservice', login_url='/accounts/login/')
 def restaurant_service_show_admin(request, id):
     service = RestaurantService.objects.get(id=id)
     return render(request, 'admin_page/restaurants/services/show.html', {
@@ -862,6 +997,7 @@ def restaurant_service_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_restaurantservice', login_url='/accounts/login/')
 def restaurant_service_new_admin(request):
     if request.method == 'POST':
         form = RestaurantServiceForm(request.POST, request.FILES)
@@ -882,6 +1018,7 @@ def restaurant_service_new_admin(request):
     })
 
 
+@permission_required('tour.change_restaurantservice', login_url='/accounts/login/')
 def restaurant_service_edit_admin(request, id):
     service = RestaurantService.objects.get(id=id)
     if request.method == 'POST':
@@ -901,6 +1038,7 @@ def restaurant_service_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_restaurantservice', login_url='/accounts/login/')
 def restaurant_service_delete_admin(request, id):
     service = RestaurantService.objects.get(id=id)
     service.delete()
@@ -912,7 +1050,6 @@ def restaurant_service_delete_admin(request, id):
 
 
 # TRANSPORTES CLIENTE
-
 def transport_index(request):
     id = request.session['id_main']
     if id is None:
@@ -941,7 +1078,7 @@ def transport_show(request, id):
 
 
 # TRANSPORTES ADMINISTRADOR
-
+@permission_required('tour.index_transport', login_url='/accounts/login/')
 def transport_index_admin(request):
     transports_list = Transport.objects.all()
     query = request.GET.get('q')
@@ -958,6 +1095,7 @@ def transport_index_admin(request):
     })
 
 
+@permission_required('tour.show_transport', login_url='/accounts/login/')
 def transport_show_admin(request, id):
     transport = Transport.objects.get(id=id)
     request.session['transports'] = id
@@ -969,6 +1107,7 @@ def transport_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_transport', login_url='/accounts/login/')
 def transport_new_admin(request):
     if request.method == 'POST':
         form = TransportForm(request.POST, request.FILES)
@@ -989,6 +1128,29 @@ def transport_new_admin(request):
     })
 
 
+@permission_required('tour.change_transport', login_url='/accounts/login/')
+def transport_active_admin(request, id):
+    transport = Transport.objects.get(id=id)
+    transport.is_active = True
+    save = transport.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('transports-index-admin'))
+
+
+@permission_required('tour.change_transport', login_url='/accounts/login/')
+def transport_inactive_admin(request, id):
+    transport = Transport.objects.get(id=id)
+    transport.is_active = False
+    save = transport.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('transports-index-admin'))
+
+
+@permission_required('tour.change_transport', login_url='/accounts/login/')
 def transport_edit_admin(request, id):
     transport = Transport.objects.get(id=id)
 
@@ -1009,6 +1171,7 @@ def transport_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_transport', login_url='/accounts/login/')
 def transport_delete_admin(request, id):
     transport = Transport.objects.get(id=id)
     transport.delete()
@@ -1019,6 +1182,7 @@ def transport_delete_admin(request, id):
 
 
 # DESTINOS DE TRANSPORTES
+@permission_required('tour.index_transportdestination', login_url='/accounts/login/')
 def transport_destination_index_admin(request):
     transport = request.session['transports']
     destinations_list = TransportDestination.objects.filter(transport=transport)
@@ -1042,12 +1206,14 @@ def transport_destination_index_admin(request):
     })
 
 
+@permission_required('tour.show_transportdestination', login_url='/accounts/login/')
 def transport_destination_show_admin(request, id):
     transport = request.session['transports']
     request.session['destination'] = id
     return HttpResponseRedirect(reverse(transport_type_service_index_admin))
 
 
+@permission_required('tour.add_transportdestination', login_url='/accounts/login/')
 def transport_destination_new_admin(request):
     transport = request.session['transports']
     transport_title = Transport.objects.get(id=transport)
@@ -1072,6 +1238,7 @@ def transport_destination_new_admin(request):
     })
 
 
+@permission_required('tour.change_transportdestination', login_url='/accounts/login/')
 def transport_destination_edit_admin(request, id):
     transport = request.session['transports']
     destination = TransportDestination.objects.filter(transport=transport).get(id=id)
@@ -1095,6 +1262,7 @@ def transport_destination_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_transportdestination', login_url='/accounts/login/')
 def transport_destination_delete_admin(request, id):
     transport = request.session['transports']
     destination = TransportDestination.objects.filter(transport=transport).get(id=id)
@@ -1107,6 +1275,7 @@ def transport_destination_delete_admin(request, id):
 
 
 # SERVICIO DE TRANSPORTES
+@permission_required('tour.index_transportservice', login_url='/accounts/login/')
 def transport_service_index_admin(request):
     services_list = TransportService.objects.all()
     query = request.GET.get('q')
@@ -1123,6 +1292,7 @@ def transport_service_index_admin(request):
     })
 
 
+@permission_required('tour.show_transportservice', login_url='/accounts/login/')
 def transport_service_show_admin(request, id):
     service = TransportService.objects.get(id=id)
     return render(request, 'admin_page/transports/services/show.html', {
@@ -1131,6 +1301,7 @@ def transport_service_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_transportservice', login_url='/accounts/login/')
 def transport_service_new_admin(request):
     if request.method == 'POST':
         form = TransportServiceForm(request.POST, request.FILES)
@@ -1151,6 +1322,7 @@ def transport_service_new_admin(request):
     })
 
 
+@permission_required('tour.change_transportservice', login_url='/accounts/login/')
 def transport_service_edit_admin(request, id):
     service = TransportService.objects.get(id=id)
     if request.method == 'POST':
@@ -1170,6 +1342,7 @@ def transport_service_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_transportservice', login_url='/accounts/login/')
 def transport_service_delete_admin(request, id):
     service = TransportService.objects.get(id=id)
     service.delete()
@@ -1181,7 +1354,7 @@ def transport_service_delete_admin(request, id):
 
 
 # TIPO DE SERVICIO DE TRANSPORTES
-
+@permission_required('tour.index_transporttypeservice', login_url='/accounts/login/')
 def transport_type_service_index_admin(request):
     transport = request.session['transports']
     transport_title = Transport.objects.get(id=transport)
@@ -1211,6 +1384,7 @@ def transport_type_service_index_admin(request):
     })
 
 
+@permission_required('tour.show_transporttypeservice', login_url='/accounts/login/')
 def transport_type_service_show_admin(request, id):
     transport = request.session['transports']
     destination = request.session['destination']
@@ -1226,6 +1400,7 @@ def transport_type_service_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_transporttypeservice', login_url='/accounts/login/')
 def transport_type_service_new_admin(request):
     transport = request.session['transports']
     destination = request.session['destination']
@@ -1253,6 +1428,7 @@ def transport_type_service_new_admin(request):
     })
 
 
+@permission_required('tour.change_transporttypeservice', login_url='/accounts/login/')
 def transport_type_service_edit_admin(request, id):
     transport = request.session['transports']
     destination = request.session['destination']
@@ -1279,6 +1455,7 @@ def transport_type_service_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_transporttypeservice', login_url='/accounts/login/')
 def transport_type_service_delete_admin(request, id):
     destination = request.session['destination']
     type_service = TransportTypeService.objects.filter(destination=destination)
@@ -1291,7 +1468,7 @@ def transport_type_service_delete_admin(request, id):
 
 
 # HORARIOS DE TRANSPORTES
-
+@permission_required('tour.index_transportschedule', login_url='/accounts/login/')
 def transport_schedule_index_admin(request):
     transport = request.session['transports']
     schedules_list = TransportSchedule.objects.filter(transport=transport)
@@ -1314,6 +1491,7 @@ def transport_schedule_index_admin(request):
     })
 
 
+@permission_required('tour.show_transportschedule', login_url='/accounts/login/')
 def transport_schedule_show_admin(request, id):
     transport = request.session['transports']
     schedule = TransportSchedule.objects.filter(transport=transport).get(id=id)
@@ -1325,6 +1503,7 @@ def transport_schedule_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_transportschedule', login_url='/accounts/login/')
 def transport_schedule_new_admin(request):
     transport = request.session['transports']
     transport_title = Transport.objects.get(id=transport)
@@ -1348,6 +1527,7 @@ def transport_schedule_new_admin(request):
     })
 
 
+@permission_required('tour.change_transportschedule', login_url='/accounts/login/')
 def transport_schedule_edit_admin(request, id):
     transport = request.session['transports']
     schedule = TransportSchedule.objects.filter(transport=transport).get(id=id)
@@ -1370,6 +1550,7 @@ def transport_schedule_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_transportschedule', login_url='/accounts/login/')
 def transport_schedule_delete_admin(request, id):
     transport = request.session['transports']
     schedule = TransportSchedule.objects.filter(transport=transport).get(id=id)
@@ -1407,7 +1588,7 @@ def tourism_site_show(request, id):
 
 
 # SITIOS TURISTICOS ADMINISTRADOR
-
+@permission_required('tour.index_tourismsite', login_url='/accounts/login/')
 def tourism_site_index_admin(request):
     sites_list = TourismSite.objects.all()
     query = request.GET.get('q')
@@ -1424,6 +1605,7 @@ def tourism_site_index_admin(request):
     })
 
 
+@permission_required('tour.show_tourismsite', login_url='/accounts/login/')
 def tourism_site_show_admin(request, id):
     site = TourismSite.objects.get(id=id)
     request.session['tourism_site'] = id
@@ -1433,6 +1615,7 @@ def tourism_site_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_tourismsite', login_url='/accounts/login/')
 def tourism_site_new_admin(request):
     if request.method == 'POST':
         form = TourismSiteForm(request.POST, request.FILES)
@@ -1453,6 +1636,29 @@ def tourism_site_new_admin(request):
     })
 
 
+@permission_required('tour.change_restaurant', login_url='/accounts/login/')
+def tourism_site_active_admin(request, id):
+    tourism_site = TourismSite.objects.get(id=id)
+    tourism_site.is_active = True
+    save = tourism_site.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('tourism_sites-index-admin'))
+
+
+@permission_required('tour.change_restaurant', login_url='/accounts/login/')
+def tourism_site_inactive_admin(request, id):
+    tourism_site = TourismSite.objects.get(id=id)
+    tourism_site.is_active = False
+    save = tourism_site.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('tourism_sites-index-admin'))
+
+
+@permission_required('tour.change_tourismsite', login_url='/accounts/login/')
 def tourism_site_edit_admin(request, id):
     tourism_site = TourismSite.objects.get(id=id)
 
@@ -1473,6 +1679,7 @@ def tourism_site_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_tourismsite', login_url='/accounts/login/')
 def tourism_site_delete_admin(request, id):
     tourism_site = TourismSite.objects.get(id=id)
     tourism_site.delete()
@@ -1483,7 +1690,7 @@ def tourism_site_delete_admin(request, id):
 
 
 # MENU DE SITIOS TURISTICOS
-
+@permission_required('tour.index_tourismsitemenu', login_url='/accounts/login/')
 def tourism_site_menu_index_admin(request):
     tourism_site = request.session['tourism_site']
     menus_list = TourismSiteMenu.objects.filter(site=tourism_site)
@@ -1505,6 +1712,7 @@ def tourism_site_menu_index_admin(request):
     })
 
 
+@permission_required('tour.show_tourismsitemenu', login_url='/accounts/login/')
 def tourism_site_menu_show_admin(request, id):
     tourism_site = request.session['tourism_site']
     menu = TourismSiteMenu.objects.filter(site=tourism_site).get(id=id)
@@ -1517,6 +1725,7 @@ def tourism_site_menu_show_admin(request, id):
     })
 
 
+@permission_required('tour.new_tourismsitemenu', login_url='/accounts/login/')
 def tourism_site_menu_new_admin(request):
     tourism_site = request.session['tourism_site']
     site_title = TourismSite.objects.get(id=tourism_site)
@@ -1541,6 +1750,7 @@ def tourism_site_menu_new_admin(request):
     })
 
 
+@permission_required('tour.edit_tourismsitemenu', login_url='/accounts/login/')
 def tourism_site_menu_edit_admin(request, id):
     tourism_site = request.session['tourism_site']
     menu = TourismSiteMenu.objects.filter(site=tourism_site).get(id=id)
@@ -1564,6 +1774,7 @@ def tourism_site_menu_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_tourismsitemenu', login_url='/accounts/login/')
 def tourism_site_menu_delete_admin(request, id):
     tourism_site = request.session['tourism_site']
     menu = TourismSiteMenu.objects.filter(site=tourism_site).get(id=id)
@@ -1576,7 +1787,7 @@ def tourism_site_menu_delete_admin(request, id):
 
 
 # HORARIOS DE SITIOS TURISTICOS
-
+@permission_required('tour.index_tourismsiteschedule', login_url='/accounts/login/')
 def tourism_site_schedule_index_admin(request):
     tourism_site = request.session['tourism_site']
     schedules_list = TourismSiteSchedule.objects.filter(site=tourism_site)
@@ -1597,6 +1808,7 @@ def tourism_site_schedule_index_admin(request):
     })
 
 
+@permission_required('tour.show_tourismsiteschedule', login_url='/accounts/login/')
 def tourism_site_schedule_show_admin(request, id):
     tourism_site = request.session['tourism_site']
     schedule = TourismSiteSchedule.objects.filter(tourism_site=tourism_site).get(id=id)
@@ -1609,6 +1821,7 @@ def tourism_site_schedule_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_tourismsiteschedule', login_url='/accounts/login/')
 def tourism_site_schedule_new_admin(request):
     tourism_site = request.session['tourism_site']
     site_title = TourismSite.objects.get(id=tourism_site)
@@ -1633,6 +1846,7 @@ def tourism_site_schedule_new_admin(request):
     })
 
 
+@permission_required('tour.change_tourismsiteschedule', login_url='/accounts/login/')
 def tourism_site_schedule_edit_admin(request, id):
     tourism_site = request.session['tourism_site']
     schedule = TourismSiteSchedule.objects.filter(site=tourism_site).get(id=id)
@@ -1656,6 +1870,7 @@ def tourism_site_schedule_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_tourismsiteschedule', login_url='/accounts/login/')
 def tourism_site_schedule_delete_admin(request, id):
     tourism_site = request.session['tourism_site']
     schedule = TourismSiteSchedule.objects.filter(site=tourism_site).get(id=id)
@@ -1668,7 +1883,7 @@ def tourism_site_schedule_delete_admin(request, id):
 
 
 # TIPOS DE SITIOS TURISTICOS
-
+@permission_required('tour.index_tourismsitetype', login_url='/accounts/login/')
 def tourism_site_type_index_admin(request):
     types_list = TourismSiteType.objects.all()
     query = request.GET.get('q')
@@ -1685,6 +1900,7 @@ def tourism_site_type_index_admin(request):
     })
 
 
+@permission_required('tour.show_tourismsitetype', login_url='/accounts/login/')
 def tourism_site_type_show_admin(request, id):
     type = TourismSiteType.objects.get(id=id)
     return render(request, 'admin_page/tourism_sites/types/show.html', {
@@ -1693,6 +1909,7 @@ def tourism_site_type_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_tourismsitetype', login_url='/accounts/login/')
 def tourism_site_type_new_admin(request):
     if request.method == 'POST':
         form = TourismSiteTypeForm(request.POST, request.FILES)
@@ -1713,6 +1930,7 @@ def tourism_site_type_new_admin(request):
     })
 
 
+@permission_required('tour.change_tourismsitetype', login_url='/accounts/login/')
 def tourism_site_type_edit_admin(request, id):
     type = TourismSiteType.objects.get(id=id)
     if request.method == 'POST':
@@ -1732,6 +1950,7 @@ def tourism_site_type_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_tourismsitetype', login_url='/accounts/login/')
 def tourism_site_type_delete_admin(request, id):
     type = TourismSiteType.objects.get(id=id)
     type.delete()
@@ -1743,7 +1962,7 @@ def tourism_site_type_delete_admin(request, id):
 
 
 # SERVICIOS DE SITIOS TURISTICOS
-
+@permission_required('tour.index_tourismsiteservice', login_url='/accounts/login/')
 def tourism_site_service_index_admin(request):
     services_list = TourismSiteService.objects.all()
     query = request.GET.get('q')
@@ -1760,6 +1979,7 @@ def tourism_site_service_index_admin(request):
     })
 
 
+@permission_required('tour.show_tourismsiteservice', login_url='/accounts/login/')
 def tourism_site_service_show_admin(request, id):
     service = TourismSiteService.objects.get(id=id)
     return render(request, 'admin_page/tourism_sites/services/show.html', {
@@ -1768,6 +1988,7 @@ def tourism_site_service_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_tourismsiteservice', login_url='/accounts/login/')
 def tourism_site_service_new_admin(request):
     if request.method == 'POST':
         form = TourismSiteServiceForm(request.POST, request.FILES)
@@ -1788,6 +2009,7 @@ def tourism_site_service_new_admin(request):
     })
 
 
+@permission_required('tour.change_tourismsiteservice', login_url='/accounts/login/')
 def tourism_site_service_edit_admin(request, id):
     service = TourismSiteService.objects.get(id=id)
     if request.method == 'POST':
@@ -1807,6 +2029,7 @@ def tourism_site_service_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_tourismsiteservice', login_url='/accounts/login/')
 def tourism_site_service_delete_admin(request, id):
     service = TourismSiteService.objects.get(id=id)
     service.delete()
@@ -1841,7 +2064,7 @@ def tourism_route_show(request, id):
 
 
 # RUTAS TURISTICAS ADMINISTRADOR
-
+@permission_required('tour.index_tourismroute', login_url='/accounts/login/')
 def tourism_route_index_admin(request):
     routes_list = TourismRoute.objects.all()
     query = request.GET.get('q')
@@ -1858,6 +2081,7 @@ def tourism_route_index_admin(request):
     })
 
 
+@permission_required('tour.show_tourismroute', login_url='/accounts/login/')
 def tourism_route_show_admin(request, id):
     request.session['tourism_route'] = id
     route = TourismRoute.objects.get(id=id)
@@ -1867,6 +2091,7 @@ def tourism_route_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_tourismroute', login_url='/accounts/login/')
 def tourism_route_new_admin(request):
     if request.method == 'POST':
         form = TourismRouteForm(request.POST, request.FILES)
@@ -1887,6 +2112,29 @@ def tourism_route_new_admin(request):
     })
 
 
+@permission_required('tour.change_tourism_route', login_url='/accounts/login/')
+def tourism_route_active_admin(request, id):
+    route = TourismRoute.objects.get(id=id)
+    route.is_active = True
+    save = route.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('tourism_routes-index-admin'))
+
+
+@permission_required('tour.change_tourism_route', login_url='/accounts/login/')
+def tourism_route_inactive_admin(request, id):
+    route = TourismRoute.objects.get(id=id)
+    route.is_active = False
+    save = route.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('tourism_routes-index-admin'))
+
+
+@permission_required('tour.change_tourismroute', login_url='/accounts/login/')
 def tourism_route_edit_admin(request, id):
     route = TourismRoute.objects.get(id=id)
     if request.method == 'POST':
@@ -1906,6 +2154,7 @@ def tourism_route_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_tourismroute', login_url='/accounts/login/')
 def tourism_route_delete_admin(request, id):
     route = TourismRoute.objects.get(id=id)
     route.delete()
@@ -1916,6 +2165,7 @@ def tourism_route_delete_admin(request, id):
 
 
 # MENU DE RUTAS TURISTICAS
+@permission_required('tour.index_tourismroutemenu', login_url='/accounts/login/')
 def tourism_route_menu_index_admin(request):
     route = request.session['tourism_route']
     menus_list = TourismRouteMenu.objects.filter(route=route)
@@ -1937,6 +2187,7 @@ def tourism_route_menu_index_admin(request):
     })
 
 
+@permission_required('tour.show_tourismroutemenu', login_url='/accounts/login/')
 def tourism_route_menu_show_admin(request, id):
     route = request.session['tourism_route']
     menu = TourismRouteMenu.objects.filter(route=route).get(id=id)
@@ -1949,6 +2200,7 @@ def tourism_route_menu_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_tourismroutemenu', login_url='/accounts/login/')
 def tourism_route_menu_new_admin(request):
     route = request.session['tourism_route']
     route_title = TourismRoute.objects.get(id=route)
@@ -1973,6 +2225,7 @@ def tourism_route_menu_new_admin(request):
     })
 
 
+@permission_required('tour.change_tourismroutemenu', login_url='/accounts/login/')
 def tourism_route_menu_edit_admin(request, id):
     route = request.session['tourism_route']
     menu = TourismRouteMenu.objects.filter(route=route).get(id=id)
@@ -1996,6 +2249,7 @@ def tourism_route_menu_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_tourismroutemenu', login_url='/accounts/login/')
 def tourism_route_menu_delete_admin(request, id):
     route = request.session['tourism_route']
     menu = TourismRouteMenu.objects.filter(route=route).get(id=id)
@@ -2008,7 +2262,6 @@ def tourism_route_menu_delete_admin(request, id):
 
 
 # HOSPEDAJES CLIENTE
-
 def lodging_index(request):
     id = request.session['id_main']
     if id is None:
@@ -2036,7 +2289,7 @@ def lodging_show(request, id):
 
 
 # HOSPEDAJES ADMINISTRADOR
-
+@permission_required('tour.index_lodging', login_url='/accounts/login/')
 def lodging_index_admin(request):
     lodgings_list = Lodging.objects.all()
     query = request.GET.get('q')
@@ -2053,6 +2306,7 @@ def lodging_index_admin(request):
     })
 
 
+@permission_required('tour.show_lodging', login_url='/accounts/login/')
 def lodging_show_admin(request, id):
     lodging = Lodging.objects.get(id=id)
     room = LodgingRoom.objects.filter(lodging=id).order_by('price')
@@ -2066,6 +2320,7 @@ def lodging_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_lodging', login_url='/accounts/login/')
 def lodging_new_admin(request):
     if request.method == 'POST':
         form = LodgingForm(request.POST, request.FILES)
@@ -2086,6 +2341,29 @@ def lodging_new_admin(request):
     })
 
 
+@permission_required('tour.change_lodging', login_url='/accounts/login/')
+def lodging_active_admin(request, id):
+    lodging = Lodging.objects.get(id=id)
+    lodging.is_active = True
+    save = lodging.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('lodgings-index-admin'))
+
+
+@permission_required('tour.change_lodging', login_url='/accounts/login/')
+def lodging_inactive_admin(request, id):
+    lodging = Lodging.objects.get(id=id)
+    lodging.is_active = False
+    save = lodging.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('lodgings-index-admin'))
+
+
+@permission_required('tour.change_lodging', login_url='/accounts/login/')
 def lodging_edit_admin(request, id):
     lodging = Lodging.objects.get(id=id)
 
@@ -2106,6 +2384,7 @@ def lodging_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_lodging', login_url='/accounts/login/')
 def lodging_delete_admin(request, id):
     lodging = Lodging.objects.get(id=id)
     lodging.delete()
@@ -2116,6 +2395,7 @@ def lodging_delete_admin(request, id):
 
 
 # CUARTOS DE HOSPEDAJES
+@permission_required('tour.index_lodgingroom', login_url='/accounts/login/')
 def lodging_room_index_admin(request):
     lodging = request.session['lodgings']
     rooms_list = LodgingRoom.objects.filter(lodging=lodging)
@@ -2136,6 +2416,7 @@ def lodging_room_index_admin(request):
     })
 
 
+@permission_required('tour.show_lodgingroom', login_url='/accounts/login/')
 def lodging_room_show_admin(request, id):
     lodging = request.session['lodgings']
     room = LodgingRoom.objects.filter(lodging=lodging).get(id=id)
@@ -2148,6 +2429,7 @@ def lodging_room_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_lodgingroom', login_url='/accounts/login/')
 def lodging_room_new_admin(request):
     lodging = request.session['lodgings']
     lodging_title = Lodging.objects.get(id=lodging)
@@ -2172,6 +2454,7 @@ def lodging_room_new_admin(request):
     })
 
 
+@permission_required('tour.change_lodgingroom', login_url='/accounts/login/')
 def lodging_room_edit_admin(request, id):
     lodging = request.session['lodgings']
     room = LodgingRoom.objects.filter(lodging=lodging).get(id=id)
@@ -2195,6 +2478,7 @@ def lodging_room_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_lodgingroom', login_url='/accounts/login/')
 def lodging_room_delete_admin(request, id):
     lodging = request.session['lodgings']
     room = LodgingRoom.objects.filter(lodging=lodging).get(id=id)
@@ -2207,7 +2491,7 @@ def lodging_room_delete_admin(request, id):
 
 
 # HORARIOS DE HOSPEDAJES
-
+@permission_required('tour.index_lodgingschedule', login_url='/accounts/login/')
 def lodging_schedule_index_admin(request):
     lodging = request.session['lodgings']
     schedules_list = LodgingSchedule.objects.filter(lodging=lodging)
@@ -2229,6 +2513,7 @@ def lodging_schedule_index_admin(request):
     })
 
 
+@permission_required('tour.show_lodgingschedule', login_url='/accounts/login/')
 def lodging_schedule_show_admin(request, id):
     lodging = request.session['lodgings']
     schedule = LodgingSchedule.objects.filter(lodging=lodging).get(id=id)
@@ -2240,6 +2525,7 @@ def lodging_schedule_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_lodgingschedule', login_url='/accounts/login/')
 def lodging_schedule_new_admin(request):
     lodging = request.session['lodgings']
     lodging_title = Lodging.objects.get(id=lodging)
@@ -2264,6 +2550,7 @@ def lodging_schedule_new_admin(request):
     })
 
 
+@permission_required('tour.change_lodgingschedule', login_url='/accounts/login/')
 def lodging_schedule_edit_admin(request, id):
     lodging = request.session['lodgings']
     schedule = LodgingSchedule.objects.filter(lodging=lodging).get(id=id)
@@ -2275,7 +2562,7 @@ def lodging_schedule_edit_admin(request, id):
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(reverse('lodgings-schedules-show-admin', kwargs={'id': schedule.id}))
+            return HttpResponseRedirect(reverse('lodgings-schedules-index-admin'))
     else:
         form = LodgingScheduleForm(instance=schedule)
     return render(request, 'admin_page/lodgings/schedules/edit.html', {
@@ -2287,6 +2574,7 @@ def lodging_schedule_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_lodgingschedule', login_url='/accounts/login/')
 def lodging_schedule_delete_admin(request, id):
     lodging = request.session['lodgings']
     schedule = LodgingSchedule.objects.filter(lodging=lodging).get(id=id)
@@ -2299,7 +2587,7 @@ def lodging_schedule_delete_admin(request, id):
 
 
 # TIPOS DE HOSPEDAJES
-
+@permission_required('tour.index_lodgingtype', login_url='/accounts/login/')
 def lodging_type_index_admin(request):
     types_list = LodgingType.objects.all()
     query = request.GET.get('q')
@@ -2316,6 +2604,7 @@ def lodging_type_index_admin(request):
     })
 
 
+@permission_required('tour.show_lodgingtype', login_url='/accounts/login/')
 def lodging_type_show_admin(request, id):
     type = LodgingType.objects.get(id=id)
     return render(request, 'admin_page/lodgings/types/show.html', {
@@ -2324,6 +2613,7 @@ def lodging_type_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_lodgingtype', login_url='/accounts/login/')
 def lodging_type_new_admin(request):
     if request.method == 'POST':
         form = LodgingTypeForm(request.POST, request.FILES)
@@ -2344,6 +2634,7 @@ def lodging_type_new_admin(request):
     })
 
 
+@permission_required('tour.change_lodgingtype', login_url='/accounts/login/')
 def lodging_type_edit_admin(request, id):
     type = LodgingType.objects.get(id=id)
     if request.method == 'POST':
@@ -2363,6 +2654,7 @@ def lodging_type_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_lodgingtype', login_url='/accounts/login/')
 def lodging_type_delete_admin(request, id):
     type = LodgingType.objects.get(id=id)
     type.delete()
@@ -2374,7 +2666,7 @@ def lodging_type_delete_admin(request, id):
 
 
 # SERVICIOS DE HOSPEDAJES
-
+@permission_required('tour.index_lodgingservice', login_url='/accounts/login/')
 def lodging_service_index_admin(request):
     services_list = LodgingService.objects.all()
     query = request.GET.get('q')
@@ -2391,6 +2683,7 @@ def lodging_service_index_admin(request):
     })
 
 
+@permission_required('tour.show_lodgingservice', login_url='/accounts/login/')
 def lodging_service_show_admin(request, id):
     service = LodgingService.objects.get(id=id)
     return render(request, 'admin_page/lodgings/services/show.html', {
@@ -2399,6 +2692,7 @@ def lodging_service_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_lodgingservice', login_url='/accounts/login/')
 def lodging_service_new_admin(request):
     if request.method == 'POST':
         form = LodgingServiceForm(request.POST, request.FILES)
@@ -2419,6 +2713,7 @@ def lodging_service_new_admin(request):
     })
 
 
+@permission_required('tour.change_lodgingservice', login_url='/accounts/login/')
 def lodging_service_edit_admin(request, id):
     service = LodgingService.objects.get(id=id)
     if request.method == 'POST':
@@ -2438,6 +2733,7 @@ def lodging_service_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_lodgingservice', login_url='/accounts/login/')
 def lodging_service_delete_admin(request, id):
     service = LodgingService.objects.get(id=id)
     service.delete()
@@ -2449,7 +2745,7 @@ def lodging_service_delete_admin(request, id):
 
 
 # LOCALIZACIONES
-
+@permission_required('tour.index_location', login_url='/accounts/login/')
 def location_index_admin(request):
     destinations_list = Location.objects.all()
     query = request.GET.get('q')
@@ -2466,6 +2762,7 @@ def location_index_admin(request):
     })
 
 
+@permission_required('tour.show_location', login_url='/accounts/login/')
 def location_show_admin(request, id):
     destination = Location.objects.get(id=id)
     return render(request, 'admin_page/locations/show.html', {
@@ -2474,6 +2771,7 @@ def location_show_admin(request, id):
     })
 
 
+@permission_required('tour.add_location', login_url='/accounts/login/')
 def location_new_admin(request):
     if request.method == 'POST':
         form = LocationForm(request.POST, request.FILES)
@@ -2494,6 +2792,7 @@ def location_new_admin(request):
     })
 
 
+@permission_required('tour.change_location', login_url='/accounts/login/')
 def location_edit_admin(request, id):
     destination = Location.objects.get(id=id)
     if request.method == 'POST':
@@ -2513,6 +2812,7 @@ def location_edit_admin(request, id):
     })
 
 
+@permission_required('tour.delete_location', login_url='/accounts/login/')
 def location_delete_admin(request, id):
     destination = Location.objects.get(id=id)
     destination.delete()
@@ -2524,22 +2824,24 @@ def location_delete_admin(request, id):
 
 
 # CONFIGURACIONES
-
+@permission_required('tour.index_objective', login_url='/accounts/login/')
 def configuration_index(request):
     objectives = Objective.objects.all
     secretaries = Secretary.objects.all
     laws = Law.objects.all
     functions = Function.objects.all
+    socials = Social.objects.all
     return render(request, 'admin_page/configurations/index.html', {
         'objectives': objectives,
         'secretaries': secretaries,
         'laws': laws,
-        'functions': functions
+        'functions': functions,
+        'socials': socials,
     })
 
 
 # OBJETIVOS
-
+@permission_required('tour.add_objective', login_url='/accounts/login/')
 def objective_new(request):
     if request.method == 'POST':
         form = ObjectiveForm(request.POST, request.FILES)
@@ -2560,6 +2862,7 @@ def objective_new(request):
     })
 
 
+@permission_required('tour.change_objective', login_url='/accounts/login/')
 def objective_edit(request, id):
     objective = Objective.objects.get(id=id)
     if request.method == 'POST':
@@ -2579,6 +2882,7 @@ def objective_edit(request, id):
     })
 
 
+@permission_required('tour.delete_objective', login_url='/accounts/login/')
 def objective_delete(request, id):
     objective = Objective.objects.get(id=id)
     objective.delete()
@@ -2590,7 +2894,7 @@ def objective_delete(request, id):
 
 
 # FUNCIONES
-
+@permission_required('tour.add_function', login_url='/accounts/login/')
 def function_new(request):
     if request.method == 'POST':
         form = FunctionForm(request.POST, request.FILES)
@@ -2611,6 +2915,29 @@ def function_new(request):
     })
 
 
+@permission_required('tour.change_function', login_url='/accounts/login/')
+def function_active_admin(request, id):
+    function = Function.objects.get(id=id)
+    function.is_active = True
+    save = function.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+@permission_required('tour.change_function', login_url='/accounts/login/')
+def function_inactive_admin(request, id):
+    function = Function.objects.get(id=id)
+    function.is_active = False
+    save = function.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+@permission_required('tour.change_function', login_url='/accounts/login/')
 def function_edit(request, id):
     function = Function.objects.get(id=id)
     if request.method == 'POST':
@@ -2630,6 +2957,7 @@ def function_edit(request, id):
     })
 
 
+@permission_required('tour.delete_function', login_url='/accounts/login/')
 def function_delete(request, id):
     function = Function.objects.get(id=id)
     function.delete()
@@ -2641,7 +2969,7 @@ def function_delete(request, id):
 
 
 # LEYES
-
+@permission_required('tour.add_law', login_url='/accounts/login/')
 def law_new(request):
     if request.method == 'POST':
         form = LawForm(request.POST, request.FILES)
@@ -2662,6 +2990,29 @@ def law_new(request):
     })
 
 
+@permission_required('tour.change_law', login_url='/accounts/login/')
+def law_active_admin(request, id):
+    law = Law.objects.get(id=id)
+    law.is_active = True
+    save = law.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+@permission_required('tour.change_law', login_url='/accounts/login/')
+def law_inactive_admin(request, id):
+    law = Law.objects.get(id=id)
+    law.is_active = False
+    save = law.save()
+
+    message = "actualizado Correctamente"
+    messages.add_message(request, messages.INFO, message)
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+@permission_required('tour.change_law', login_url='/accounts/login/')
 def law_edit(request, id):
     law = Law.objects.get(id=id)
     if request.method == 'POST':
@@ -2681,6 +3032,7 @@ def law_edit(request, id):
     })
 
 
+@permission_required('tour.delete_law', login_url='/accounts/login/')
 def law_delete(request, id):
     law = Law.objects.get(id=id)
     law.delete()
@@ -2692,7 +3044,7 @@ def law_delete(request, id):
 
 
 # SECRETARIO
-
+@permission_required('tour.add_secretary', login_url='/accounts/login/')
 def secretary_new(request):
     if request.method == 'POST':
         form = SecretaryForm(request.POST, request.FILES)
@@ -2713,6 +3065,7 @@ def secretary_new(request):
     })
 
 
+@permission_required('tour.change_secretary', login_url='/accounts/login/')
 def secretary_edit(request, id):
     secretary = Secretary.objects.get(id=id)
     if request.method == 'POST':
@@ -2732,9 +3085,63 @@ def secretary_edit(request, id):
     })
 
 
+@permission_required('tour.delete_secretary', login_url='/accounts/login/')
 def secretary_delete(request, id):
     secretary = Secretary.objects.get(id=id)
     secretary.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('configurations-index'))
+
+
+# REDES SOCIALES
+@permission_required('tour.add_social', login_url='/accounts/login/')
+def social_new(request):
+    if request.method == 'POST':
+        form = SocialForm(request.POST, request.FILES)
+        if form.is_valid():
+            social = form.save(commit=False)
+            social.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = SocialForm()
+    return render(request, 'admin_page/configurations/socials/new.html', {
+        'form': form,
+    })
+
+
+@permission_required('tour.change_social', login_url='/accounts/login/')
+def social_edit(request, id):
+    social = Social.objects.get(id=id)
+    if request.method == 'POST':
+        form = SocialForm(request.POST, request.FILES, instance=social)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('configurations-index'))
+    else:
+        form = SocialForm(instance=social)
+    return render(request, 'admin_page/configurations/socials/edit.html', {
+        'social': social,
+        'form': form,
+        'social_obj': Social
+    })
+
+
+@permission_required('tour.delete_social', login_url='/accounts/login/')
+def social_delete(request, id):
+    social = Social.objects.get(id=id)
+    social.delete()
 
     message = 'Eliminado!'
     messages.add_message(request, messages.SUCCESS, message)
