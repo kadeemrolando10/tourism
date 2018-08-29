@@ -109,21 +109,25 @@
                                 <i class="fa fa-user-circle-o"></i><br>Login</a>
                         </div>
                     </div>
+
                 </nav>
-                <li class="nav-item dropdown fixed-position">
-                    <a class="nav-link dropdown-toggle rotating" href="#" role="button"
+
+                <div class="btn-group float-right fixed-right">
+                    <a class="btn btn-warning">{% get_location request.session.id_main %}</a>
+                    <a class="btn btn-warning dropdown-toggle dropdown-toggle-split"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/static/img/core-img/loading_small.png" width="40px">
+                        <i class="fa fa-caret-down inline-block"></i>
                     </a>
-                    <div class="dropdown-menu position-right" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-right bg-warning">
                         {% get_locations as locations %}
                         {% for location in locations %}
                         <a class="dropdown-item" href="{% url 'change-id-main' location.id %}">
-                            <i id="locat-icon" class="fa fa-map-marker" aria-hidden="true"></i> {{location.title}}
+                            <i id="locat-icon" class="fa fa-map-marker" aria-hidden="true"></i>
+                            {{location.title}}
                         </a>
                         {% endfor %}
                     </div>
-                </li>
+                </div>
             </div>
         </div>
     </div>
@@ -137,27 +141,21 @@
     <div class="container-fluid">
         <div class="contact-text">
             <p align="center">NUMERO DE VISITANTES</p>
-            <div id="sfcsen2cy3y4ay1nccclpz5shgxxjyaxfzz" align="center"></div>
         </div>
         <div class="row">
             <div class="col-12 d-md-flex align-items-center justify-content-between">
                 <div class="footer-text ">
                     <p class="underline">GOBIERNO AUTONOMO DEPARTAMENTAL DE POTOSI</p>
                 </div>
-
-                <div class="footer-social-btns">
-
-                    <a href="https://www.youtube.com/channel/UCFfiBukq0Dv7xku_VfvLarQ" target="_blank"><i
-                            class="fa fa-youtube-square"
-                            aria-hidden="true"></i></a>
-                    <a href="https://twitter.com/carlosdmesag" target="_blank"><i class="fa fa-twitter"
-                                                                                  aria-haspopup="true"></i></a>
-                    <a href="https://www.instagram.com/explore/locations/756301301098790/secretaria-departamental-de-turismo-y-cultura-potosi/"
-                       target="_blank"><i
-                            class="fa fa-instagram" aria-haspopup="true"></i></a>
-                    <a href="https://www.facebook.com/secretariadepartamentaldeturismo/?ref=br_rs" target="_blank"><i
-                            class="fa fa-facebook" aria-haspopup="true"></i></a>
-                    <a href="#" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                <div class="footer-social-btns mb-3">
+                    {% get_socials as socials %}
+                    {% for social in socials %}
+                        <a href="{{social.youtube}}" target="_blank"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+                        <a href="{{social.twitter}}" target="_blank"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
+                        <a href="{{social.instagram}}" target="_blank"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
+                        <a href="{{social.facebook}}" target="_blank"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
+                        <a href="{{social.whatsapp}}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -166,16 +164,20 @@
 
 
 <div class="dropdown fixed-position-message">
-    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+    <a id="navbarDropdown_" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
        aria-expanded="false"><i class="fa fa-comment"></i>
     </a>
-    <div class="dropdown-menu bg-transparent align-social-btn" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item bg-transparent" href="">
+    <div class="dropdown-menu bg-transparent align-social-btn" aria-labelledby="navbarDropdown_">
+
+        <a id="uLabel" class="dropdown-toggle dropdown-item bg-transparent" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false" href="https://wa.me/+59172434117" target="_blank">
             <img src="{% static 'img/core-img/007-whatsapp.png' %}" alt="" width="40px">
         </a>
-        <a class="dropdown-item bg-transparent" href="">
+        <a id="dLabel" class="dropdown-toggle dropdown-item bg-transparent" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false" href="#">
             <img src="{% static 'img/core-img/044-messenger.png' %}" alt="" width="40px">
         </a>
+
     </div>
 </div>
 
@@ -198,6 +200,21 @@
 $("#idd").click(function(){
     $(this).hide();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

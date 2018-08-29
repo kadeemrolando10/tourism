@@ -24,6 +24,13 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name route_obj 'is_active' %}</strong>
+            {% if route.is_active %}
+            <span class="badge badge-success">ACTIVO</span>
+            {% else %}
+            <span class="badge badge-danger">INACTIVO</span>
+            {% endif %}
+        </p>
         <p><strong>{% get_field_name route_obj 'title' %}</strong> {{ route.title }}</p>
         <p><strong>{% get_field_name route_obj 'destination' %}</strong> {{ route.destination }}</p>
         <p><strong>{% get_field_name route_obj 'description' %}</strong> {{ route.description }}</p>

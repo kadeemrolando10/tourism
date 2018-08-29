@@ -30,12 +30,8 @@
         <p><strong>{% get_field_name transport_obj 'is_active' %}</strong>
             {% if transport.is_active %}
             <span class="badge badge-success">ACTIVO</span>
-            {% url 'transports-inactive-admin' transport.id as view_url %}
-            {% include 'partials/actions/inactive.html' with url=view_url %}
             {% else %}
             <span class="badge badge-danger">INACTIVO</span>
-            {% url 'transports-active-admin' transport.id as view_url %}
-            {% include 'partials/actions/active.html' with url=view_url %}
             {% endif %}
         </p>
         <p><strong>{% get_field_name transport_obj 'title' %}</strong> {{ transport.title }}</p>

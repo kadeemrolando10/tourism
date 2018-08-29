@@ -41,55 +41,77 @@
                 <div class="all-catagories">
                     <div class="row">
                         <!-- Single Catagory Area -->
-                        <div class=" col-12 col-sm-6 col-md ">
+                        <div class=" col-12 col-sm-6 col-md mb-2">
                             <a href="{% url 'lodging-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
                                     <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/hotel.png' %}" alt="">
+                                        <img src="{% static 'img/core-img/edificio-3d.png' %}" alt="">
                                         <h6>Hospedajes</h6>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md">
+                        <div class="col-12 col-sm-6 col-md"mb-2>
                             <a href="{% url 'restaurants-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.4s">
                                     <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/restaurant.png' %}" alt="">
+                                        <img src="{% static 'img/core-img/pub.png' %}" alt="">
                                         <h6>Restaurantes</h6>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md ">
+                        <div class="col-12 col-sm-6 col-md mb-2">
                             <a href="{% url 'transports-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.6s">
                                     <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/transporte.png' %}" alt="">
+                                        <img src="{% static 'img/core-img/autobus.png' %}" alt="">
                                         <h6>Transportes</h6>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md ">
-                            <a href="{% url 'agencies-index' %}">
-                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.8s">
+                          <!-- Single Catagory Area -->
+                        <div class="col-12 col-sm-6 col-md mb-2">
+                            <a href="{% url 'events-index' %}">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
                                     <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/agencia.png'%}" alt="">
-                                        <h6>Agencias de Turismo</h6>
+                                        <img src="{% static 'img/core-img/calendario.png' %}" alt="">
+                                        <h6>Eventos</h6>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md ">
+                        <div class="col-12 col-sm-6 col-md mb-2">
+                            <a href="{% url 'agencies-index' %}">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.8s">
+                                    <div class="catagory-content">
+                                        <img src="{% static 'img/core-img/icons8-nueva-york-filled-50.png'%}" alt="">
+                                        <h6>Agencias Turisticas</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Single Catagory Area -->
+                        <div class="col-12 col-sm-6 col-md mb-2">
                             <a href="{% url 'tourism_sites-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
                                     <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/sitios.png' %}" alt="">
+                                        <img src="{% static 'img/core-img/icons8-arriba-de-una-colina-filled-50.png' %}" alt="">
+                                        <h6>Rutas Turisticas</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Single Catagory Area -->
+                        <div class="col-12 col-sm-6 col-md mb-2">
+                            <a href="{% url 'tourism_routes-index' %}">
+                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
+                                    <div class="catagory-content">
+                                        <img src="{% static 'img/core-img/icons8-estatua-de-la-libertad-filled-50.png' %}" alt="">
                                         <h6>Sitios Turisticos</h6>
                                     </div>
                                 </div>
@@ -109,7 +131,7 @@
             <div class="col-12">
                 <div class="about-content text-center">
                     <h2>POTOSI UN LUGAR LLENO DE <br><span>HISTORIA</span></h2>
-                    <p>Conoce los lugares turisticos de Potosi </p>
+                    <p class="text-black">Conoce los lugares turisticos de Potosi </p>
                 </div>
             </div>
         </div>
@@ -186,7 +208,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="features-slides owl-carousel">
@@ -202,9 +223,10 @@
                                 <div class="feature-title">
                                     <h5>{{r.title}}</h5>
                                     <p>{{r.address}}</p>
+                                    <p><strong>{{r.destination}}</strong></p>
                                 </div>
                                 <div class="feature-favourite">
-                                    <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-hotel" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </a>
@@ -223,11 +245,10 @@
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>Restaurantes</h4>
+                    <h4>RESTAURANTES</h4>
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="features-slides owl-carousel">
@@ -237,15 +258,16 @@
                             <img class="imgstyle" src="{{ l.image.url }}" alt="">
                             <!-- Rating & Map Area -->
                             <div class="ratings-map-area d-flex">
-                                <span class="alert bg-danger underline">{{l.score}}</span>
+                                <span class="alert bg-violet text-white">{{l.score}}</span>
                             </div>
                             <div class="feature-content d-flex align-items-center justify-content-between">
                                 <div class="feature-title">
                                     <h5>{{l.title}}</h5>
                                     <p>{{l.address}}</p>
+                                    <p><strong>{{l.destination}}</strong></p>
                                 </div>
                                 <div class="feature-favourite">
-                                    <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </a>
@@ -258,48 +280,81 @@
 
     </div>
 </section>
-<!-- ***** Features Restaurant Area End ***** -->
-<!-- ***** Features Events Area Start ***** -->
-<section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-100-50"
-         style="background-image: url({% static 'img/bg-img/maxresdefault.jpg' %})">
+
+<!-- ***** Features Transports Area Start ***** -->
+<section class="dorne-features-destinations-area">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="section-heading text-center">
+                <div class="section-heading dark text-center">
                     <span></span>
                     <h4>TRANSPORTES</h4><br>
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="features-slides owl-carousel">
-                    {% for t in transports %}
-                    <a class='follow' href="{% url 'transports-show' t.id %}">
-                        <main class='profile' ontouchstart>
-                            <div class='background'></div>
-                            <aside class='avatar'
-                                   style="background: url({{ t.image.url }}) no-repeat top center/cover;"></aside>
-                            <section class='info'>
-                                <h1>{{t.title}}</h1>
-                                <h2>{% get_destiny_transport t.id as destiny %}
-                                    <p>
-                                        {% for a in destiny %}
-                                        {{ a.title }},
-                                        {% endfor %}
-                                    </p>
-                                </h2>
-                                <ul>
-                                    <li>
-                                        <span class='link codepen'>
-                                            {{t.score}}
-                                        </span>
-                                    </li>
-                                </ul>
-                            </section>
-                        </main>
-                    </a>
+                    {% for r in transports %}
+                    <div class=" single-features-area">
+                        <a href="{% url 'transports-show' r.id %}">
+                            <img class="imgstyle" src="{{ r.image.url }}" alt="">
+                            <!-- Price -->
+                            <div class="price-start">
+                                <p>{{r.score}}</p>
+                            </div>
+                            <div class="feature-content d-flex align-items-center justify-content-between">
+                                <div class="feature-title">
+                                    <h5>{{r.title}}</h5>
+                                    <p>{{r.address}}</p>
+                                    <p><strong>{{r.destination}}</strong></p>
+                                </div>
+                                <div class="feature-favourite">
+                                    <a href="#"><i class="fa fa-bus" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Features Tourism Agencies Area Start ***** -->
+<section class="dorne-features-restaurant-area bg-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <span></span>
+                    <h4>AGENCIAS TURISTICAS</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="features-slides owl-carousel">
+                    {% for l in agencies %}
+                    <div class="single-features-area">
+                        <a href="{% url 'agencies-show' l.id %}">
+                            <img class="imgstyle" src="{{ l.image.url }}" alt="">
+                            <!-- Rating & Map Area -->
+                            <div class="ratings-map-area d-flex">
+                                <span class="alert bg-violet text-white">{{l.score}}</span>
+                            </div>
+                            <div class="feature-content d-flex align-items-center justify-content-between">
+                                <div class="feature-title">
+                                    <h5>{{l.title}}</h5>
+                                    <p>{{l.address}}</p>
+                                    <p><strong>{{l.destination}}</strong></p>
+                                </div>
+                                <div class="feature-favourite">
+                                    <a href="#"><i class="fa fa-street-view" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
@@ -307,23 +362,7 @@
     </div>
 </section>
 
-
-<div class="dorne-clients-area section-padding-100">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="clients-logo d-md-flex align-items-center justify-content-around">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 {% endblock %}
 
 {% block js_scripts %}
-
-
 {% endblock %}

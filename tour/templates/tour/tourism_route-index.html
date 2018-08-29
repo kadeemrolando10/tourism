@@ -17,37 +17,32 @@
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>Rutas Turisticas</h4><hr>
+                    <h4>Rutas Turisticas</h4>
+                    <hr>
                 </div>
             </div>
         </div>
         <div class="row justify-content-between">
             {% for s in routes %}
-            <div class="col-12 col-md-6 col-lg-4 mb-3 d-flex justify-content-center">
-                <div class="blog-card spring-fever "
-                     style="background: url({{ s.image.url }}); background-repeat: no-repeat; background-size: 100% 100%;">
-                    <div class="title-content">
-                        <h5>{{ s.title }}</h5>
-                        <hr/>
-                        <div class="intro">
-                            <h6>
-                                {% get_rounded s.score as score %}
-                                {% for i in score|times %}
-                                <i class="fa fa-star underline-star"></i>
-                                {% endfor %}
-                            </h6>
-                        </div>
-                    </div><!-- /.title-content -->
-                    <div class="card-info">
-                        <div class="intro">Es visitado muy frecuentemente en fecha: {{ s.date }}</div>
-                        <br>
-                        <a class="btn btn-warning" href="{% url 'tourism_routes-show' s.id %}">Mas detalles
-                        </a>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card mb-3">
+                    <div class="ratings-area">
+                        <img class="card-img-top" src="{{ s.image.url }}" height="215px" alt="Card image cap">
+                        <a href="#">{{s.score}}</a>
                     </div>
-                    <div class="gradient-overlay"></div>
-                    <div class="color-overlay"></div>
+
+                    <div class="card-body height-50">
+                        <div class="card-title-z">
+                            <h5 class="card-title">{{ s.title }}</h5>
+                            <a class="btn bg-info text-white" href="{% url 'tourism_routes-show' s.id %}">Mas detalles</a>
+                            <p class="card-text">
+                                <small class="text-muted">Fecha de Evento: {{ s.date }}</small>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             {% endfor %}
         </div>
     </div>

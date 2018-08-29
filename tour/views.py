@@ -160,21 +160,18 @@ def change_main(request, id):
 
 # PAGINA INICIO CLIENTE
 def index(request):
-    events = Event.objects.all
     restaurants = Restaurant.objects.all
     transports = Transport.objects.all
-    tourism_sites = Restaurant.objects.all
     agencies = Agency.objects.all
     lodgings = Lodging.objects.all
     socials = Social.objects.all
+
     return render(request, 'tour/index.html', {
-        'events': events,
         'restaurants': restaurants,
         'transports': transports,
-        'tourism_sites': tourism_sites,
-        'agencys': agencies,
+        'agencies': agencies,
         'lodgings': lodgings,
-        'socials': socials,
+        'socials': socials
     })
 
 
@@ -209,7 +206,7 @@ def agency_show(request, id):
     agency = Agency.objects.get(id=id)
     services = AgencyService.objects.filter(agency=id)
     schedule = AgencySchedule.objects.filter(agency=id)
-    score = round(agency.score / 2);
+    score = round(agency.score / 2)
     return render(request, 'tour/agencies-show.html', {
         'agency': agency,
         'agency_obj': Agency,

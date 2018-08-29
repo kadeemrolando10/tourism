@@ -30,12 +30,8 @@
         <p><strong>{% get_field_name agency_obj 'is_active' %}</strong>
             {% if agency.is_active %}
             <span class="badge badge-success">ACTIVO</span>
-            {% url 'agencies-inactive-admin' agency.id as view_url %}
-            {% include 'partials/actions/inactive.html' with url=view_url %}
             {% else %}
             <span class="badge badge-danger">INACTIVO</span>
-            {% url 'agencies-active-admin' agency.id as view_url %}
-            {% include 'partials/actions/active.html' with url=view_url %}
             {% endif %}
         </p>
         <p><strong>{% get_field_name agency_obj 'title' %}</strong> {{ agency.title }}</p>

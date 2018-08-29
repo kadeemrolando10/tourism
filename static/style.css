@@ -3115,30 +3115,18 @@ a.link.github:active {
  border-width: 1em 1em 0 0;
 }
 
-.fixed-position{
-    position: fixed;
-    top: 120px;
-    right: 5px;
-    background-color: white;
-    border-radius:100%;
-    padding:0;
+
+.fixed-right{
+    position: fixed !important;
+    top: 100px !important;
+    right: 1px !important;
 }
-.fixed-position:hover{
-    background-color: black;
-}
-.fixed-position i{
-    font-size:20px;
-    align:center;
-}
+
 #locat-icon{
     font-size:15px;
     color:#ff6600;
 }
-.fixed-position >a{
-    padding:1px !important;
-    border-radius: 100%;
-    height:50px;
-}
+
 .position-right{
     left:-120px;
 }
@@ -3218,4 +3206,188 @@ a.link.github:active {
 .align-social-btn{
     left: 5px !important;
     top: 60px !important;
+}
+.card-title-z{
+    background-color: #f8f9fa;
+    position: relative;
+    left: 5px;
+    top: -130px;
+    z-index: 900;
+    width: 93%;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+.card-title-z:hover .card-title{
+    color:white !important;
+}
+.card-title-z:hover{
+    background-color: #ff6600;
+    color:white !important;
+}
+.card-body:hover{
+    background-color: #ff6600;
+}
+
+.card-title-z:hover .card-text small{
+    color:white !important;
+}
+
+.ratings-area > a {
+    position: relative;
+    top: -220px;
+    left: 12px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+    height: 30px;
+    line-height: 70px;
+    background-color: #ff6600;
+    border-radius: 15%;
+}
+.height-50{
+    height:50px;
+ }
+
+
+.module {
+  width: 300px;
+  margin: 20px auto;
+}
+
+.top-bar {
+  background: #666;
+  color: white;
+  padding: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.top-bar h1 {
+  display: inline;
+  font-size: 1.1rem;
+}
+.top-bar .typicons-message {
+  display: inline-block;
+  padding: 4px 5px 2px 5px;
+}
+.top-bar .typicons-minus {
+  position: relative;
+  top: 3px;
+}
+.top-bar .left {
+  float: left;
+}
+.top-bar .right {
+  float: right;
+  padding-top: 5px;
+}
+.top-bar > * {
+  position: relative;
+}
+.top-bar::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  bottom: -100%;
+  opacity: 0.25;
+  background: radial-gradient(#ffffff, #000000);
+  animation: pulse 1s ease alternate infinite;
+}
+
+.discussion {
+  list-style: none;
+  background: #e5e5e5;
+  margin: 0;
+  padding: 0 0 50px 0;
+}
+.discussion li {
+  padding: 0.5rem;
+  overflow: hidden;
+  display: flex;
+}
+.discussion .avatar {
+  width: 40px;
+  position: relative;
+}
+.discussion .avatar img {
+  display: block;
+  width: 100%;
+}
+
+.other .avatar:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.self {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.self .messages {
+  order: 1;
+  border-bottom-right-radius: 0;
+}
+.self .avatar {
+  order: 2;
+}
+.self .avatar:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.messages {
+  background: white;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.messages p {
+  font-size: 0.8rem;
+  margin: 0 0 0.2rem 0;
+}
+.messages time {
+  font-size: 0.7rem;
+  color: #ccc;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+.text-black{
+    color:black;
+}
+.text-white{
+    color:white;
+}
+.bg-lime{
+    background-color:lime;
+}
+.bg-orange{
+    background-color:ff6600;
+}
+.bg-violet{
+    background-color:#7643ea;
 }

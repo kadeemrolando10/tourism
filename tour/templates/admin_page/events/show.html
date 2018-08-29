@@ -16,6 +16,13 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4 box box-body">
+        <p><strong>{% get_field_name event_obj 'is_active' %}</strong>
+            {% if event.is_active %}
+            <span class="badge badge-success">ACTIVO</span>
+            {% else %}
+            <span class="badge badge-danger">INACTIVO</span>
+            {% endif %}
+        </p>
         <p><strong>{% get_field_name event_obj 'title' %}</strong> {{ event.title }}</p>
         <p><strong>{% get_field_name event_obj 'destination' %}</strong> {{ event.destination }}</p>
         <p><strong>{% get_field_name event_obj 'description' %}</strong> {{ event.description }}</p>

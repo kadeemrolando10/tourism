@@ -30,12 +30,8 @@
         <p><strong>{% get_field_name lodging_obj 'is_active' %}</strong>
             {% if lodging.is_active %}
             <span class="badge badge-success">ACTIVO</span>
-            {% url 'lodgings-inactive-admin' lodging.id as view_url %}
-            {% include 'partials/actions/inactive.html' with url=view_url %}
             {% else %}
             <span class="badge badge-danger">INACTIVO</span>
-            {% url 'lodgings-active-admin' lodging.id as view_url %}
-            {% include 'partials/actions/active.html' with url=view_url %}
             {% endif %}
         </p>
         <p><strong>{% get_field_name lodging_obj 'title' %}</strong> {{ lodging.title }}</p>

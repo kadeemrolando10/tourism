@@ -3,7 +3,7 @@ import logging
 from django import template
 
 from tour.models import DAYS, TourismRoute, TourismRouteMenu, ROLE_USERS, GENDER, MENU, Location, Transport, Restaurant, \
-    Agency
+    Agency, Social
 from tour.models import TransportTypeService
 from tour.models import TransportDestination
 from tour.models import TourismSiteType
@@ -132,7 +132,13 @@ def get_locations():
 
 
 @register.simple_tag
+def get_socials():
+    return Social.objects.all
+
+
+@register.simple_tag
 def get_location(id):
+    id = int(id)
     return Location.objects.get(id=id)
 
 
