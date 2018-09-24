@@ -6,7 +6,8 @@ from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agen
     AgencySchedule, RestaurantService, RestaurantSchedule, RestaurantMenu, TransportDestination, TransportService, \
     TransportTypeService, TransportSchedule, TourismSiteMenu, TourismSiteSchedule, Location, TourismSiteType, \
     TourismSiteService, TourismRouteMenu, LodgingRoom, LodgingSchedule, LodgingType, \
-    LodgingService, Client, Objective, Function, Secretary, Law, Social
+    LodgingService, Client, Objective, Function, Secretary, Law, Social, AssignmentSite, AssignmentRestaurant, \
+    AssignmentAgency, AssignmentTransport, AssignmentLodging
 
 from django.core.validators import URLValidator
 
@@ -441,3 +442,33 @@ class LawForm(BaseForm):
         model = Law
         fields = '__all__'
         exclude = ['is_active']
+
+
+class AssignmentSiteForm(BaseForm):
+    class Meta:
+        model = AssignmentSite
+        fields = '__all__'
+
+
+class AssignmentRestaurantForm(BaseForm):
+    class Meta:
+        model = AssignmentRestaurant
+        fields = '__all__'
+
+
+class AssignmentTransportForm(BaseForm):
+    class Meta:
+        model = AssignmentTransport
+        fields = '__all__'
+
+
+class AssignmentAgencyForm(BaseForm):
+    class Meta:
+        model = AssignmentAgency
+        fields = '__all__'
+
+
+class AssignmentLodgingForm(BaseForm):
+    class Meta:
+        model = AssignmentLodging
+        fields = '__all__'

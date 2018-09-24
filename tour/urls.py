@@ -14,9 +14,9 @@ urlpatterns = [
     path('users/', include([
         path('', views.user_index, name='user-index'),
         path('new/', views.user_new, name='user-new'),
+        path('<int:id>/', views.user_show, name='user-show'),
         path('<int:id>/edit/', views.user_edit, name='user-edit'),
         path('<int:id>/delete/', views.user_delete, name='user-delete'),
-
     ])),
     path('configurations/', include([
         path('', views.configuration_index, name='configurations-index'),
@@ -51,6 +51,36 @@ urlpatterns = [
         ])),
     ])),
     path('secretary/', views.secretary, name='secretary'),
+
+    path('assignments/', include([
+        path('', views.assignments_index, name='assignments-index'),
+        path('sites/', include([
+            path('new/', views.assignment_site_new, name='assignment_sites-new'),
+            path('<int:id>/edit/', views.assignment_site_edit, name='assignment_sites-edit'),
+            path('<int:id>/delete/', views.assignment_site_delete, name='assignment_sites-delete'),
+        ])),
+        path('transports/', include([
+            path('new/', views.assignment_transport_new, name='assignment_transports-new'),
+            path('<int:id>/edit/', views.assignment_transport_edit, name='assignment_transports-edit'),
+            path('<int:id>/delete/', views.assignment_transport_delete, name='assignment_transports-delete'),
+        ])),
+        path('agencies/', include([
+            path('new/', views.assignment_agency_new, name='assignment_agencies-new'),
+            path('<int:id>/edit/', views.assignment_agency_edit, name='assignment_agencies-edit'),
+            path('<int:id>/delete/', views.assignment_agency_delete, name='assignment_agencies-delete'),
+        ])),
+        path('restaurants/', include([
+            path('new/', views.assignment_restaurant_new, name='assignment_restaurants-new'),
+            path('<int:id>/edit/', views.assignment_restaurant_edit, name='assignment_restaurants-edit'),
+            path('<int:id>/delete/', views.assignment_restaurant_delete, name='assignment_restaurants-delete'),
+        ])),
+        path('lodgings/', include([
+            path('new/', views.assignment_lodging_new, name='assignment_lodgings-new'),
+            path('<int:id>/edit/', views.assignment_lodging_edit, name='assignment_lodgings-edit'),
+            path('<int:id>/delete/', views.assignment_lodging_delete, name='assignment_lodgings-delete'),
+
+        ])),
+    ])),
 
     path('location/', include([
         path('', views.location_index_admin, name='location-index-admin'),

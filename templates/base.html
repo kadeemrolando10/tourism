@@ -19,8 +19,6 @@
     <link href="{% static 'style.css' %}" rel="stylesheet">
     <link href="{% static 'css/responsive/responsive.css' %}" rel="stylesheet">
     <!-- Responsive CSS -->
-
-
 </head>
 
 
@@ -105,7 +103,7 @@
                         </ul>
                         <!-- Signin btn -->
                         <div class="dorne-signin-btn nav-item">
-                            <a class="nav-link" href="{% url 'login' %}" target="_blank">
+                            <a class="nav-link btn btn-info" href="{% url 'login' %}" target="_blank">
                                 <i class="fa fa-user-circle-o"></i><br>Login</a>
                         </div>
                     </div>
@@ -150,11 +148,12 @@
                 <div class="footer-social-btns mb-3">
                     {% get_socials as socials %}
                     {% for social in socials %}
-                        <a href="{{social.youtube}}" target="_blank"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
-                        <a href="{{social.twitter}}" target="_blank"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-                        <a href="{{social.instagram}}" target="_blank"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
-                        <a href="{{social.facebook}}" target="_blank"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
-                        <a href="{{social.whatsapp}}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                    <a href="{{social.youtube}}" target="_blank"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+                    <a href="{{social.twitter}}" target="_blank"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
+                    <a href="{{social.instagram}}" target="_blank"><i class="fa fa-instagram" aria-haspopup="true"></i></a>
+                    <a href="{{social.facebook}}" target="_blank"><i class="fa fa-facebook"
+                                                                     aria-haspopup="true"></i></a>
+                    <a href="{{social.whatsapp}}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                     {% endfor %}
                 </div>
             </div>
@@ -167,18 +166,20 @@
     <a id="navbarDropdown_" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
        aria-expanded="false"><i class="fa fa-comment"></i>
     </a>
-    <div class="dropdown-menu bg-transparent align-social-btn" aria-labelledby="navbarDropdown_">
-
-        <a id="uLabel" class="dropdown-toggle dropdown-item bg-transparent" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false" href="https://wa.me/+59172434117" target="_blank">
-            <img src="{% static 'img/core-img/007-whatsapp.png' %}" alt="" width="40px">
-        </a>
-        <a id="dLabel" class="dropdown-toggle dropdown-item bg-transparent" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false" href="#">
-            <img src="{% static 'img/core-img/044-messenger.png' %}" alt="" width="40px">
-        </a>
-
-    </div>
+    <ul class="dropdown-menu gres bg-transparent align-social-btn" aria-labelledby="navbarDropdown_">
+        <li class="dropdown-toggle dropdown-item bg-transparent" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <a href="https://api.whatsapp.com/send?phone=59172434117" target="_blank">
+                <img src="{% static 'img/core-img/007-whatsapp.png' %}" alt="" width="40px">
+            </a>
+        </li>
+        <li class="dropdown-toggle dropdown-item bg-transparent" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <a href="https://m.me/MessengerTaskBot">
+                <img src="{% static 'img/core-img/044-messenger.png' %}" alt="" width="40px">
+            </a>
+        </li>
+    </ul>
 </div>
 
 <div class="floating-wpp"></div>
@@ -197,25 +198,11 @@
 <!-- Active JS -->
 <script src="{% static 'js/active.js' %}"></script>
 <script>
-$("#idd").click(function(){
-    $(this).hide();
+
+$('ul.gres li').on("click", function(e) {
+  var go_to_url = $(this).find("a").prop("href").val();
+  window.open(go_to_url, '_blank');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

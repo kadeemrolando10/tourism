@@ -22,3 +22,12 @@
     </div>
 </div>
 {% endblock %}
+
+{% block code_js %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-tooltip="tooltip"]').tooltip();
+            $('[title]').tooltip();
+            });
+</script>
+{% endblock %}

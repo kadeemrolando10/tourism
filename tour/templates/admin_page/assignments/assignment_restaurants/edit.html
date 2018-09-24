@@ -1,0 +1,26 @@
+{% extends 'admin.html' %}
+
+{% block content-header %}
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'assignments-index' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Asignacion  de Restaurantes</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block code_js %}
+{% endblock %}

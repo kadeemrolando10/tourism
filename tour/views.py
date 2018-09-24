@@ -13,7 +13,8 @@ from tour.models import Event, Restaurant, TourismSite, Transport, Lodging, Agen
     TransportDestination, LodgingRoom, LodgingType, Location, LodgingSchedule, TourismRoute, TourismSiteSchedule, \
     TransportSchedule, RestaurantSchedule, LodgingService, AgencyService, \
     AgencySchedule, RestaurantService, RestaurantMenu, TransportService, TransportTypeService, TourismSiteMenu, \
-    TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS, Secretary, Social
+    TourismSiteType, TourismSiteService, TourismRouteMenu, Law, Client, ROLE_USERS, Secretary, Social, AssignmentSite, \
+    AssignmentTransport, AssignmentRestaurant, AssignmentAgency, AssignmentLodging
 
 from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, TourismSiteForm, TourismRouteForm, \
     LodgingForm, AgencyServiceForm, AgencyScheduleForm, RestaurantMenuForm, RestaurantScheduleForm, \
@@ -21,7 +22,8 @@ from tour.forms import RestaurantForm, AgencyForm, EventForm, TransportForm, Tou
     TransportScheduleForm, TourismSiteMenuForm, TourismSiteScheduleForm, LocationForm, TourismSiteTypeForm, \
     TourismSiteServiceForm, TourismRouteMenuForm, LodgingRoomForm, LodgingScheduleForm, \
     LodgingTypeForm, LodgingServiceForm, ClientForm, ClientFormEdit, ObjectiveForm, FunctionForm, LawForm, \
-    SecretaryForm, SocialForm
+    SecretaryForm, SocialForm, AssignmentSiteForm, AssignmentTransportForm, AssignmentRestaurantForm, \
+    AssignmentAgencyForm, AssignmentLodgingForm
 
 
 # PAGINA NOTICACIONES ADMINISTRADOR
@@ -42,6 +44,7 @@ def notification(request):
 
 
 # USUARIOS ADMINISTRADOR
+
 @permission_required('tour.index_client', login_url='/accounts/login/')
 def user_index(request):
     users_list = Client.objects.all()
@@ -130,6 +133,25 @@ def user_edit(request, id):
     })
 
 
+@permission_required('tour.show_client', login_url='/accounts/login/')
+def user_show(request, id):
+    client = Client.objects.get(id=id)
+    a_s = AssignmentSite.objects.filter(client=id)
+    a_t = AssignmentTransport.objects.filter(client=id)
+    a_a = AssignmentAgency.objects.filter(client=id)
+    a_r = AssignmentRestaurant.objects.filter(client=id)
+    a_l = AssignmentLodging.objects.filter(client=id)
+    return render(request, 'registration/user/show.html', {
+        'client': client,
+        'a_s': a_s,
+        'a_l': a_l,
+        'a_t': a_t,
+        'a_r': a_r,
+        'a_a': a_a,
+        'user_obj': Client
+    })
+
+
 @permission_required('tour.delete_client', login_url='/accounts/login/')
 def user_delete(request, id):
     client = Client.objects.get(id=id)
@@ -160,6 +182,7 @@ def change_main(request, id):
 
 # PAGINA INICIO CLIENTE
 def index(request):
+    request.session['id_main'] = 1
     restaurants = Restaurant.objects.all
     transports = Transport.objects.all
     agencies = Agency.objects.all
@@ -192,7 +215,7 @@ def secretary(request):
 # AGENCIAS DE TURISMO CLIENTE
 def agency_index(request):
     ids = request.session['id_main']
-    if ids is None:
+    if ids is None or '':
         agencies = Agency.objects.all
     else:
         agencies = Agency.objects.filter(destination=ids)
@@ -3144,3 +3167,285 @@ def social_delete(request, id):
     messages.add_message(request, messages.SUCCESS, message)
 
     return HttpResponseRedirect(reverse('configurations-index'))
+
+
+# ASIGNACIONES
+@permission_required('tour.index_assignment_site', login_url='/accounts/login/')
+def assignments_index(request):
+    lodgings = AssignmentLodging.objects.all
+    restaurants = AssignmentRestaurant.objects.all
+    agencies = AssignmentAgency.objects.all
+    transports = AssignmentTransport.objects.all
+    sites = AssignmentSite.objects.all
+    return render(request, 'admin_page/assignments/index.html', {
+        'lodgings': lodgings,
+        'restaurants': restaurants,
+        'agencies': agencies,
+        'transports': transports,
+        'sites': sites,
+    })
+
+
+# ASSIGNACION DE SITIOS TURISTICOS
+@permission_required('tour.add_assignment_site', login_url='/accounts/login/')
+def assignment_site_new(request):
+    if request.method == 'POST':
+        form = AssignmentSiteForm(request.POST, request.FILES)
+        if form.is_valid():
+            assignment_site = form.save(commit=False)
+            assignment_site.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = AssignmentSiteForm()
+    return render(request, 'admin_page/assignments/assignment_sites/new.html', {
+        'form': form,
+    })
+
+
+@permission_required('tour.change_assignment_site', login_url='/accounts/login/')
+def assignment_site_edit(request, id):
+    assignment_site = AssignmentSite.objects.get(id=id)
+    if request.method == 'POST':
+        form = AssignmentSiteForm(request.POST, request.FILES, instance=assignment_site)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+    else:
+        form = AssignmentSiteForm(instance=assignment_site)
+    return render(request, 'admin_page/assignments/assignment_sites/edit.html', {
+        'assignment_site': assignment_site,
+        'form': form,
+        'assignment_site_obj': AssignmentSite
+    })
+
+
+@permission_required('tour.delete_assignment_site', login_url='/accounts/login/')
+def assignment_site_delete(request, id):
+    assignment_site = AssignmentSite.objects.get(id=id)
+    assignment_site.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('assignments-index'))
+
+
+# ASSIGNACION DE TRANSPORTES
+@permission_required('tour.add_assignment_transport', login_url='/accounts/login/')
+def assignment_transport_new(request):
+    if request.method == 'POST':
+        form = AssignmentTransportForm(request.POST, request.FILES)
+        if form.is_valid():
+            assignment_transport = form.save(commit=False)
+            assignment_transport.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = AssignmentTransportForm()
+    return render(request, 'admin_page/assignments/assignment_transports/new.html', {
+        'form': form,
+    })
+
+
+@permission_required('tour.change_assignment_transport', login_url='/accounts/login/')
+def assignment_transport_edit(request, id):
+    assignment_transport = AssignmentTransport.objects.get(id=id)
+    if request.method == 'POST':
+        form = AssignmentTransportForm(request.POST, request.FILES, instance=assignment_transport)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+    else:
+        form = AssignmentTransportForm(instance=assignment_transport)
+    return render(request, 'admin_page/assignments/assignment_transports/edit.html', {
+        'assignment_transport': assignment_transport,
+        'form': form,
+        'assignment_transport_obj': AssignmentTransport
+    })
+
+
+@permission_required('tour.delete_assignment_transport', login_url='/accounts/login/')
+def assignment_transport_delete(request, id):
+    assignment_transport = AssignmentTransport.objects.get(id=id)
+    assignment_transport.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('assignments-index'))
+
+
+# ASSIGNACION DE RESTAURANTES
+@permission_required('tour.add_assignment_restaurant', login_url='/accounts/login/')
+def assignment_restaurant_new(request):
+    if request.method == 'POST':
+        form = AssignmentRestaurantForm(request.POST, request.FILES)
+        if form.is_valid():
+            assignment_restaurant = form.save(commit=False)
+            assignment_restaurant.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = AssignmentRestaurantForm()
+    return render(request, 'admin_page/assignments/assignment_restaurants/new.html', {
+        'form': form,
+    })
+
+
+@permission_required('tour.change_assignment_restaurant', login_url='/accounts/login/')
+def assignment_restaurant_edit(request, id):
+    assignment_restaurant = AssignmentRestaurant.objects.get(id=id)
+    if request.method == 'POST':
+        form = AssignmentRestaurantForm(request.POST, request.FILES, instance=assignment_restaurant)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+    else:
+        form = AssignmentRestaurantForm(instance=assignment_restaurant)
+    return render(request, 'admin_page/assignments/assignment_restaurants/edit.html', {
+        'assignment_restaurant': assignment_restaurant,
+        'form': form,
+        'assignment_restaurant_obj': AssignmentRestaurant
+    })
+
+
+@permission_required('tour.delete_assignment_restaurant', login_url='/accounts/login/')
+def assignment_restaurant_delete(request, id):
+    assignment_restaurant = AssignmentRestaurant.objects.get(id=id)
+    assignment_restaurant.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('assignments-index'))
+
+
+# ASSIGNACION DE AGENCIAS
+@permission_required('tour.add_assignment_agency', login_url='/accounts/login/')
+def assignment_agency_new(request):
+    if request.method == 'POST':
+        form = AssignmentAgencyForm(request.POST, request.FILES)
+        if form.is_valid():
+            assignment_agency = form.save(commit=False)
+            assignment_agency.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = AssignmentAgencyForm()
+    return render(request, 'admin_page/assignments/assignment_agencys/new.html', {
+        'form': form,
+    })
+
+
+@permission_required('tour.change_assignment_agency', login_url='/accounts/login/')
+def assignment_agency_edit(request, id):
+    assignment_agency = AssignmentAgency.objects.get(id=id)
+    if request.method == 'POST':
+        form = AssignmentAgencyForm(request.POST, request.FILES, instance=assignment_agency)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+    else:
+        form = AssignmentAgencyForm(instance=assignment_agency)
+    return render(request, 'admin_page/assignments/assignment_agencys/edit.html', {
+        'assignment_agency': assignment_agency,
+        'form': form,
+        'assignment_agency_obj': AssignmentAgency
+    })
+
+
+@permission_required('tour.delete_assignment_agency', login_url='/accounts/login/')
+def assignment_agency_delete(request, id):
+    assignment_agency = AssignmentAgency.objects.get(id=id)
+    assignment_agency.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('assignments-index'))
+
+
+# ASSIGNACION DE SITIOS TURISTICOS
+@permission_required('tour.add_assignment_lodging', login_url='/accounts/login/')
+def assignment_lodging_new(request):
+    if request.method == 'POST':
+        form = AssignmentLodgingForm(request.POST, request.FILES)
+        if form.is_valid():
+            assignment_lodging = form.save(commit=False)
+            assignment_lodging.save()
+
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = AssignmentLodgingForm()
+    return render(request, 'admin_page/assignments/assignment_lodgings/new.html', {
+        'form': form,
+    })
+
+
+@permission_required('tour.change_assignment_lodging', login_url='/accounts/login/')
+def assignment_lodging_edit(request, id):
+    assignment_lodging = AssignmentLodging.objects.get(id=id)
+    if request.method == 'POST':
+        form = AssignmentLodgingForm(request.POST, request.FILES, instance=assignment_lodging)
+        if form.is_valid():
+            save = form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse('assignments-index'))
+    else:
+        form = AssignmentLodgingForm(instance=assignment_lodging)
+    return render(request, 'admin_page/assignments/assignment_lodgings/edit.html', {
+        'assignment_lodging': assignment_lodging,
+        'form': form,
+        'assignment_lodging_obj': AssignmentLodging
+    })
+
+
+@permission_required('tour.delete_assignment_lodging', login_url='/accounts/login/')
+def assignment_lodging_delete(request, id):
+    assignment_lodging = AssignmentLodging.objects.get(id=id)
+    assignment_lodging.delete()
+
+    message = 'Eliminado!'
+    messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse('assignments-index'))

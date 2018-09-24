@@ -1,5 +1,5 @@
 {% extends 'admin.html' %}
-
+{% load static %}
 {% block content-header %}
 <nav aria-label="breadcrumb" class="alert-warning">
     <ol class="breadcrumb">
@@ -29,6 +29,18 @@
 {% block code_js %}
 {% include 'partials/_url_gmaps.html' %}
 <script type="text/javascript">
+        function mostrarImagen(input) {
+         if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+           $('#img_destino').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+         }
+        }
+        $("#id_file").change(function(){
+         mostrarImagen(this);
+        });
 
         $('#id_event_date').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
         $('#id_event_date').datepicker({
@@ -74,6 +86,10 @@
         window.onload = function () {
             initialize()
         };
+
+
+
+
 
 </script>
 {% endblock %}

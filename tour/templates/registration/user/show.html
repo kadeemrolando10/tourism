@@ -1,0 +1,67 @@
+{% extends 'admin.html' %}
+
+{% load utils %}
+{% block content-header %}
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'user-index' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Usuarios</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 box box-body">
+        <h3>Datos del Usuario</h3>
+        <p><strong>Estado</strong>
+            {% if client.user.is_active %}
+            <span class="badge badge-success">ACTIVO</span>
+            {% else %}
+            <span class="badge badge-danger">INACTIVO</span>
+            {% endif %}
+        </p>
+        <p><strong>Nombre de Usuario</strong> {{ client.user.username }}</p>
+        <p><strong>{% get_field_name user_obj 'first_name' %}</strong> {{ client.first_name }}</p>
+        <p><strong>{% get_field_name user_obj 'last_name' %}</strong> {{ client.last_name }}</p>
+        <p><strong>{% get_field_name user_obj 'ci' %}</strong> {{ client.ci }}</p>
+        <p><strong>{% get_field_name user_obj 'gender' %}</strong> {% get_gender_user client.gender %}</p>
+        <p><strong>{% get_field_name user_obj 'rol' %}</strong> {% get_role_user client.rol %}</p>
+        <p><strong>{% get_field_name user_obj 'register_at' %}</strong> {{ client.register_at }}</p>
+    </div>
+    <div class="col-md-6 box box-body">
+        <h3>Asignaciones</h3>
+        {% if a_t %}
+        {% for a in a_t %}
+        <p><strong>Transporte: </strong>{{ a.transport}}</p>
+        {% endfor %}
+        {% endif %}
+        {% if a_a %}
+        {% for a in a_a %}
+        <p><strong>Agencia Turistica: </strong>{{ a.agency}}</p>
+        {% endfor %}
+        {% endif %}
+        {% if a_l %}
+        {% for a in a_l %}
+        <p><strong>Hospedaje: </strong>{{ a.lodging}}</p>
+        {% endfor %}
+        {% endif %}
+        {% if a_s %}
+        {% for a in a_s %}
+        <p><strong>Sitio Turistico: </strong>{{ a.site}}</p>
+        {% endfor %}
+        {% endif %}
+        {% if a_r %}
+        {% for a in a_r %}
+        <p><strong>Restaurante: </strong>{{ a.restaurant}}</p>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block code_js %}
+
+{% endblock %}

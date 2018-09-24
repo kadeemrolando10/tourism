@@ -214,7 +214,7 @@
                     {% for r in lodgings %}
                     <div class=" single-features-area">
                         <a href="{% url 'lodging-show' r.id %}">
-                            <img class="imgstyle" src="{{ r.image.url }}" alt="">
+                            <img class="img-normal" src="{{ r.image.url }}" alt="">
                             <!-- Price -->
                             <div class="price-start">
                                 <p>{{r.score}}</p>
@@ -255,7 +255,7 @@
                     {% for l in restaurants %}
                     <div class="single-features-area">
                         <a href="{% url 'restaurants-show' l.id %}">
-                            <img class="imgstyle" src="{{ l.image.url }}" alt="">
+                            <img class="img-normal" src="{{ l.image.url }}" alt="">
                             <!-- Rating & Map Area -->
                             <div class="ratings-map-area d-flex">
                                 <span class="alert bg-violet text-white">{{l.score}}</span>
@@ -298,7 +298,7 @@
                     {% for r in transports %}
                     <div class=" single-features-area">
                         <a href="{% url 'transports-show' r.id %}">
-                            <img class="imgstyle" src="{{ r.image.url }}" alt="">
+                            <img class="img-normal" src="{{ r.image.url }}" alt="">
                             <!-- Price -->
                             <div class="price-start">
                                 <p>{{r.score}}</p>
@@ -338,7 +338,7 @@
                     {% for l in agencies %}
                     <div class="single-features-area">
                         <a href="{% url 'agencies-show' l.id %}">
-                            <img class="imgstyle" src="{{ l.image.url }}" alt="">
+                            <img class="img-normal" src="{{ l.image.url }}" alt="">
                             <!-- Rating & Map Area -->
                             <div class="ratings-map-area d-flex">
                                 <span class="alert bg-violet text-white">{{l.score}}</span>

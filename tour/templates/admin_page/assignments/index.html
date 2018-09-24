@@ -1,0 +1,235 @@
+{% extends 'admin.html' %}
+{% load utils %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="alert-warning">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <h6 class="page">Asignaciones</h6>
+        </li>
+    </ol>
+</nav>
+
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-secretary-tab" data-toggle="tab" href="#nav-secretary" role="tab"
+           aria-controls="nav-secretary" aria-selected="true">Hospedajes</a>
+        <a class="nav-item nav-link" id="nav-objective-tab" data-toggle="tab" href="#nav-objective" role="tab"
+           aria-controls="nav-objective" aria-selected="false">Transportes</a>
+        <a class="nav-item nav-link" id="nav-function-tab" data-toggle="tab" href="#nav-function" role="tab"
+           aria-controls="nav-function" aria-selected="false">Restaurantes</a>
+        <a class="nav-item nav-link" id="nav-law-tab" data-toggle="tab" href="#nav-law" role="tab"
+           aria-controls="nav-law" aria-selected="false">Sitios Turisticos</a>
+        <a class="nav-item nav-link" id="nav-social-tab" data-toggle="tab" href="#nav-social" role="tab"
+           aria-controls="nav-social" aria-selected="false">Agencias Turisticas</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-secretary" role="tabpanel" aria-labelledby="nav-secretary-tab">
+        <div class="row">
+            <div class="col-12">
+                <span class="float-right">
+                {% url 'assignment_lodgings-new' as view_url %}
+                {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+                </span>
+                <h5 class="text-center blink">HOSPEDAJES</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th data-field="user" data-sortable="true">Usuario</th>
+                        <th data-field="name" data-sortable="true">Hospedaje</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for lodging in lodgings %}
+                    <tr>
+                        <td width="5%">{{ forloop.counter }}</td>
+                        <td>{{ lodging.client }}</td>
+                        <td>{{ lodging.lodging }}</td>
+                        <td class="text-center" width="20%">
+                            {% url 'assignment_lodgings-edit' lodging.id as edit_url %}
+                            {% include 'partials/actions/edit.html' with url=edit_url %}
+                            {% url 'assignment_lodgings-delete' lodging.id as delete_url %}
+                            {% include 'partials/actions/delete.html' with url=delete_url %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-objective" role="tabpanel" aria-labelledby="nav-objective-tab">
+        <div class="row">
+            <div class="col-12">
+                <span class="float-right">
+                {% url 'assignment_transports-new' as view_url %}
+                {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+                </span>
+                <h5 class="text-center blink">TRANSPORTES</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th data-field="user" data-sortable="true">Usuario</th>
+                        <th data-field="name" data-sortable="true">Transporte</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for transport in transports %}
+                    <tr>
+                        <td width="5%">{{ forloop.counter }}</td>
+                        <td>{{ transport.client }}</td>
+                        <td>{{ transport.transport }}</td>
+                        <td class="text-center" width="20%">
+                            {% url 'assignment_transports-edit' transport.id as edit_url %}
+                            {% include 'partials/actions/edit.html' with url=edit_url %}
+                            {% url 'assignment_transports-delete' transport.id as delete_url %}
+                            {% include 'partials/actions/delete.html' with url=delete_url %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-function" role="tabpanel" aria-labelledby="nav-function-tab">
+        <div class="row">
+            <div class="col-12">
+                <span class="float-right">
+                {% url 'assignment_restaurants-new' as view_url %}
+                {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+                </span>
+                <h5 class="text-center blink">RESTAURANTES</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th data-field="user" data-sortable="true">Usuario</th>
+                        <th data-field="name" data-sortable="true">Restaurante</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for restaurant in restaurants %}
+                    <tr>
+                        <td width="5%">{{ forloop.counter }}</td>
+                        <td>{{ restaurant.client }}</td>
+                        <td>{{ restaurant.restaurant }}</td>
+                        <td class="text-center" width="20%">
+                            {% url 'assignment_restaurants-edit' restaurant.id as edit_url %}
+                            {% include 'partials/actions/edit.html' with url=edit_url %}
+                            {% url 'assignment_restaurants-delete' restaurant.id as delete_url %}
+                            {% include 'partials/actions/delete.html' with url=delete_url %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-law" role="tabpanel" aria-labelledby="nav-law-tab">
+        <div class="row">
+            <div class="col-12">
+                <span class="float-right">
+                {% url 'assignment_sites-new' as view_url %}
+                {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+                </span>
+                <h5 class="text-center blink">SITIOS TURISTICOS</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th data-field="user" data-sortable="true">Usuario</th>
+                        <th data-field="name" data-sortable="true">Sitio Turistico</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for site in sites %}
+                    <tr>
+                        <td width="5%">{{ forloop.counter }}</td>
+                        <td>{{ site.client }}</td>
+                        <td>{{ site.site }}</td>
+                        <td class="text-center" width="20%">
+                            {% url 'assignment_sites-edit' site.id as edit_url %}
+                            {% include 'partials/actions/edit.html' with url=edit_url %}
+                            {% url 'assignment_sites-delete' site.id as delete_url %}
+                            {% include 'partials/actions/delete.html' with url=delete_url %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-social" role="tabpanel" aria-labelledby="nav-social-tab">
+        <div class="row">
+            <div class="col-12">
+                <span class="float-right">
+                {% url 'assignment_agencies-new' as view_url %}
+                {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
+                </span>
+                <h5 class="text-center blink">AGENCIAS TURISTICAS</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th data-field="user" data-sortable="true">Usuario</th>
+                        <th data-field="name" data-sortable="true">Agencia Turistica</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for agency in agencies %}
+                    <tr>
+                        <td width="5%">{{ forloop.counter }}</td>
+                        <td>{{ agency.client }}</td>
+                        <td>{{ agency.agency }}</td>
+                        <td class="text-center" width="20%">
+                            {% url 'assignment_agencies-edit' agency.id as edit_url %}
+                            {% include 'partials/actions/edit.html' with url=edit_url %}
+                            {% url 'assignment_agencies-delete' agency.id as delete_url %}
+                            {% include 'partials/actions/delete.html' with url=delete_url %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block code_js %}
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-tooltip="tooltip"]').tooltip();
+            $('[title]').tooltip();
+
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+
+                var title = $(e.relatedTarget).data('title');
+                var message = $(e.relatedTarget).data('message');
+
+                if (title !== undefined)
+                    $(this).find('.modal-header').html(title);
+                if (message !== undefined)
+                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+        })
+
+
+</script>
+{% endblock %}

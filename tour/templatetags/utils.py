@@ -88,6 +88,12 @@ def get_destiny_transport(id):
 
 
 @register.simple_tag
+def get_data(id):
+    id = int(id)
+    return id
+
+
+@register.simple_tag
 def get_field_name(obj, field_name):
     return obj._meta.get_field(field_name).verbose_name.title()
 
@@ -138,8 +144,11 @@ def get_socials():
 
 @register.simple_tag
 def get_location(id):
-    id = int(id)
-    return Location.objects.get(id=id)
+    if id is None or id=='':
+        return Location.objects.get(id=1)
+    else:
+        id = int(id)
+        return Location.objects.get(id=id)
 
 
 @register.simple_tag

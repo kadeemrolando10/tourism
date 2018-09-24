@@ -62,7 +62,7 @@ class Agency(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     address = models.CharField(max_length=150, default=' ', verbose_name='Direccion')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/agencies/', verbose_name='Imagen')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
     phone = models.CharField(max_length=20, verbose_name='Telefono')
@@ -87,7 +87,7 @@ class Agency(models.Model):
 class AgencyService(models.Model):
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name='Agencia')
     title = models.CharField(max_length=150, verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/agencies/services/', null='true', verbose_name='Imagen')
     duration = models.IntegerField(default=1, verbose_name='Duracion', blank=True)
     departures = models.CharField(max_length=350, default=' ', verbose_name='Dias de expedicion')
     schedule = models.CharField(max_length=350, default='8:00', verbose_name='Horas de partida', blank=True)
@@ -130,7 +130,7 @@ class AgencySchedule(models.Model):
 class Event(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
-    file = models.FileField(upload_to='media/', null='true', verbose_name='Imagen o Video')
+    file = models.FileField(upload_to='media/events/', null='true', verbose_name='Imagen o Video')
     description = models.TextField(verbose_name='Descripcion')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
@@ -153,7 +153,7 @@ class Event(models.Model):
 
 class RestaurantService(models.Model):
     title = models.TextField(max_length=150, default='NA', verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/restaurants/services/', null='true', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -172,7 +172,7 @@ class RestaurantService(models.Model):
 class Restaurant(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/restaurants/', verbose_name='Imagen')
     service = models.ManyToManyField(RestaurantService, verbose_name='Servicios', blank=True)
     address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
@@ -219,7 +219,7 @@ class RestaurantMenu(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, verbose_name='Restaurant')
     title = models.CharField(max_length=150, default='NA', verbose_name='Nombre')
     category = models.CharField(max_length=2, choices=MENU, default='1', verbose_name='Categoria')
-    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/restaurants/menus/', null='true', verbose_name='Imagen')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=5.1, verbose_name='Precio')
     description = models.TextField(verbose_name='Descripcion', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
@@ -240,7 +240,7 @@ class RestaurantMenu(models.Model):
 class Transport(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     title = models.CharField(max_length=150, verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/transports/', verbose_name='Imagen')
     address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
     lng = models.CharField(max_length=50, verbose_name='Longitud')
@@ -284,7 +284,7 @@ class TransportDestination(models.Model):
 
 class TransportService(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Item de servicio')
-    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/transports/services/', null='true', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -305,8 +305,8 @@ class TransportTypeService(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Tipo de Servicio')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=5.1, verbose_name='Precio')
     service = models.ManyToManyField(TransportService, verbose_name='Servicios', blank=True)
-    image_bus = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Bus')
-    image_seat = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen de Butacas')
+    image_bus = models.ImageField(upload_to='media/transports/buses/', null='true', verbose_name='Imagen de Bus')
+    image_seat = models.ImageField(upload_to='media/transports/seats/', null='true', verbose_name='Imagen de Butacas')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -360,7 +360,7 @@ class LodgingType(models.Model):
 
 class LodgingService(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', null='true', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/lodgings/services/', null='true', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -380,7 +380,7 @@ class Lodging(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     type = models.ForeignKey(LodgingType, on_delete=models.CASCADE, verbose_name='Tipo')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/lodgings/', verbose_name='Imagen')
     service = models.ManyToManyField(LodgingService, verbose_name='Servicio', blank=True)
     address = models.CharField(max_length=150, unique=True, default='S/N', verbose_name='Direccion')
     lat = models.CharField(max_length=50, verbose_name='Latitud')
@@ -392,7 +392,7 @@ class Lodging(models.Model):
     is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
-        return self.title
+        return "%s ( %s)" % (self.title, self.destination)
 
     class Meta:
         verbose_name = 'Hospedaje'
@@ -407,7 +407,7 @@ class Lodging(models.Model):
 class LodgingRoom(models.Model):
     lodging = models.ForeignKey(Lodging, on_delete=models.CASCADE, verbose_name='Tipo')
     title = models.CharField(max_length=150, default='NA', verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/lodgings/rooms/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion', blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=100, verbose_name='Precio')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
@@ -463,7 +463,7 @@ class TourismSiteType(models.Model):
 
 class TourismSiteService(models.Model):
     title = models.CharField(max_length=150, default='NA', verbose_name='Item de servicio')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/t-sites/services/', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -483,7 +483,7 @@ class TourismSite(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     type = models.ForeignKey(TourismSiteType, on_delete=models.CASCADE, verbose_name='Tipo')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/t-sites/', verbose_name='Imagen')
     service = models.ManyToManyField(TourismSiteService, verbose_name='Servicios', blank=True)
     description = models.TextField(verbose_name='Descripcion', blank=True)
     lat = models.CharField(max_length=50, verbose_name='Latitud')
@@ -492,7 +492,7 @@ class TourismSite(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Telefono')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
     address = models.CharField(max_length=150, verbose_name='Direccion', default=' ')
-    web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True)
+    web = models.CharField(max_length=150, verbose_name='Pagina Web', blank=True, null=True)
     is_active = models.BooleanField(default=False, verbose_name='Estado')
 
     def __str__(self):
@@ -511,7 +511,7 @@ class TourismSite(models.Model):
 class TourismSiteMenu(models.Model):
     site = models.ForeignKey(TourismSite, on_delete=models.CASCADE, verbose_name='Sitio Turistico')
     title = models.CharField(max_length=150, default='NA', verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/t-sites/menus/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
@@ -554,7 +554,7 @@ class TourismRoute(models.Model):
     lng_origin = models.CharField(max_length=50, verbose_name='Longitud de Origen')
     lat_destination = models.CharField(max_length=50, verbose_name='Latitud de Destino')
     lng_destination = models.CharField(max_length=50, verbose_name='Longitud de Destino')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/t-routes/', verbose_name='Imagen')
     description = models.TextField(verbose_name='Descripcion', blank=True)
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     date = models.DateField(verbose_name='Fecha de Evento', blank=True)
@@ -577,7 +577,7 @@ class TourismRoute(models.Model):
 class TourismRouteMenu(models.Model):
     route = models.ForeignKey(TourismRoute, on_delete=models.CASCADE, verbose_name='Ruta Turistica')
     title = models.CharField(max_length=150, default='NA', verbose_name='Nombre')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen')
+    image = models.ImageField(upload_to='media/t-routes/menus/', verbose_name='Imagen')
     description = models.TextField(default='NA', verbose_name='Descripcion', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
@@ -651,7 +651,7 @@ class Law(models.Model):
 class Secretary(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='Nombre Completo')
     rol = models.CharField(max_length=100, verbose_name='Rol')
-    image = models.ImageField(upload_to='media/', verbose_name='Imagen', null=True)
+    image = models.ImageField(upload_to='media/secretaries/', verbose_name='Imagen', null=True)
     register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
 
     def __str__(self):
@@ -687,9 +687,6 @@ class Client(models.Model):
     rol = models.CharField(max_length=10, choices=ROLE_USERS, default='R', verbose_name='Rol')
     register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
 
-    def __unicode__(self):
-        return "%s %s" % (self.last_name, self.first_name)
-
     def __str__(self):
         return "%s %s" % (self.last_name, self.first_name)
 
@@ -700,4 +697,94 @@ class Client(models.Model):
         permissions = (
             ('show_client', 'Can Details Client'),
             ('index_client', 'Can List Client'),
+        )
+
+
+class AssignmentSite(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
+    site = models.ForeignKey(TourismSite, on_delete=models.CASCADE, verbose_name='Sitio Turistico')
+    register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return "%s %s" % (self.client, self.site)
+
+    class Meta:
+        verbose_name = 'Asignacion de Sitio Turistico'
+        verbose_name_plural = 'Asignaciones de Sitios Turisticos'
+        ordering = ['client', 'site']
+        permissions = (
+            ('show_assignment_site', 'Can Details AssignmentSite'),
+            ('index_assignment_site', 'Can List AssignmentSite'),
+        )
+
+
+class AssignmentTransport(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
+    transport = models.ForeignKey(Transport, on_delete=models.CASCADE, verbose_name='Transporte')
+    register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return "%s %s" % (self.client, self.transport)
+
+    class Meta:
+        verbose_name = 'Asignacion de Transporte'
+        verbose_name_plural = 'Asignaciones de Transportes'
+        ordering = ['client', 'transport']
+        permissions = (
+            ('show_assignment_transport', 'Can Details AssignmentTransport'),
+            ('index_assignment_transport', 'Can List AssignmentTransport'),
+        )
+
+
+class AssignmentRestaurant(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, verbose_name='Restaurante')
+    register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return "%s %s" % (self.client, self.restaurant)
+
+    class Meta:
+        verbose_name = 'Asignacion de Restaurant'
+        verbose_name_plural = 'Asignaciones de Restaurantes'
+        ordering = ['client', 'restaurant']
+        permissions = (
+            ('show_assignment_restaurant', 'Can Details AssignmentRestaurant'),
+            ('index_assignment_restaurant', 'Can List AssignmentRestaurant'),
+        )
+
+
+class AssignmentAgency(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name='Agency')
+    register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return "%s %s" % (self.client, self.agency)
+
+    class Meta:
+        verbose_name = 'Asignacion de Agencia Turistica'
+        verbose_name_plural = 'Asignaciones de Agencias Turisticas'
+        ordering = ['client', 'agency']
+        permissions = (
+            ('show_assignment_agency', 'Can Details AssignmentAgency'),
+            ('index_assignment_agency', 'Can List AssignmentAgency'),
+        )
+
+
+class AssignmentLodging(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
+    lodging = models.ForeignKey(Lodging, on_delete=models.CASCADE, verbose_name='Hospedaje')
+    register_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de registro')
+
+    def __str__(self):
+        return "%s %s" % (self.client, self.lodging)
+
+    class Meta:
+        verbose_name = 'Asignacion de Hospedaje'
+        verbose_name_plural = 'Asignaciones de Hospedajes'
+        ordering = ['client', 'lodging']
+        permissions = (
+            ('show_assignment_lodging', 'Can Details AssignmentLodging'),
+            ('index_assignment_lodging', 'Can List AssignmentLodging'),
         )

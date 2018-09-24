@@ -33,6 +33,8 @@
             {% include 'partials/actions/edit.html' with url=edit_url %}
             {% url 'user-delete' user.id as delete_url %}
             {% include 'partials/actions/delete.html' with url=delete_url %}
+            {% url 'user-show' user.id as detail_url %}
+            {% include 'partials/actions/view.html' with url=detail_url %}
         </td>
     </tr>
     {% endfor %}

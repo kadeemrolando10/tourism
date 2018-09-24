@@ -14884,3 +14884,11 @@ label [type="checkbox"] {
 .inputfile + label:hover {
     background-color: red;
 }
+
+#alert_d{
+    position: fixed !important;
+    top:10px !important;
+    right:40px;
+    border:0 !important;
+    z-index:1300;
+}
