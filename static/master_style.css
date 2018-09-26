@@ -502,7 +502,7 @@ a:active, a:focus, a:hover {
 }
 @media (max-width:767px) {
     .main-sidebar {
-    padding-top: 120px;
+    padding-top: 60px;
     -webkit-transform: translate(-230px, 0);
     -ms-transform: translate(-230px, 0);
     -o-transform: translate(-230px, 0);
@@ -593,7 +593,7 @@ a:active, a:focus, a:hover {
 }
 
 .sidebar-menu>li>a {
-    padding: 10px 5px 10px 10px;
+    padding: 5px 5px;
     display: block;
 }
 .sidebar-menu>li>a>.fa, .sidebar-menu>li>a>.glyphicon, .sidebar-menu>li>a>.ion {
@@ -659,6 +659,7 @@ a:active, a:focus, a:hover {
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
     transform: translate(0, 0);
+     margin-top: 60px;
     width: 60px;
     z-index: 850;
 }
@@ -800,8 +801,7 @@ a:active, a:focus, a:hover {
 .sidebar-menu li>a>.pull-right-container {
     position: absolute;
     right: 10px;
-    top: 50%;
-    margin-top: -7px;
+    top: 35%;
 }
 .control-sidebar-bg {
     position: fixed;
@@ -14891,4 +14891,9 @@ label [type="checkbox"] {
     right:40px;
     border:0 !important;
     z-index:1300;
+}
+.title_main{
+    color: cornsilk;
+    font-weight: bold;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 }

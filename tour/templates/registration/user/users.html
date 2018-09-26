@@ -1,50 +1,54 @@
 {% load utils %}
-<table id="users-table" class="table">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th data-field="name" data-sortable="true">Nombres y Apellidos</th>
-        <th data-field="ci" data-sortable="true">CI</th>
-        <th data-field="rol" data-sortable="true">Rol</th>
-        <th class="text-center">Opciones</th>
-    </tr>
-    </thead>
+<div class="table-responsive">
+    <table id="users-table" class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th data-field="name" data-sortable="true">Nombres y Apellidos</th>
+            <th data-field="ci" data-sortable="true">CI</th>
+            <th data-field="rol" data-sortable="true">Rol</th>
+            <th class="text-center">Opciones</th>
+        </tr>
+        </thead>
 
-    <tbody>
-    {% for user in users %}
-    <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>
-            {% if user.user.is_active %}
-            <span class="fa fa-circle text-success m-r-10" data-tooltip="tooltip"
-                  title="Cuenta Activa"></span>
-            {% else %}
-            <span class="fa fa-circle text-warning m-r-10" data-tooltip="tooltip"
-                  title="Cuenta Desactivada"></span>
-            {% endif %}
-            {{ user }}
-        </td>
-        <td>{{ user.ci }}</td>
-        <td>
-            {% get_role_user user.rol %}
-        </td>
-        <td class="text-center">
-            {% url 'user-edit' user.id as edit_url %}
-            {% include 'partials/actions/edit.html' with url=edit_url %}
-            {% url 'user-delete' user.id as delete_url %}
-            {% include 'partials/actions/delete.html' with url=delete_url %}
-            {% url 'user-show' user.id as detail_url %}
-            {% include 'partials/actions/view.html' with url=detail_url %}
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                {% if user.user.is_active %}
+                <span class="fa fa-circle text-success m-r-10" data-tooltip="tooltip"
+                      title="Cuenta Activa"></span>
+                {% else %}
+                <span class="fa fa-circle text-warning m-r-10" data-tooltip="tooltip"
+                      title="Cuenta Desactivada"></span>
+                {% endif %}
+                {{ user }}
+            </td>
+            <td>{{ user.ci }}</td>
+            <td>
+                {% get_role_user user.rol %}
+            </td>
+            <td class="text-center">
+                {% url 'user-edit' user.id as edit_url %}
+                {% include 'partials/actions/edit.html' with url=edit_url %}
+                {% url 'user-delete' user.id as delete_url %}
+                {% include 'partials/actions/delete.html' with url=delete_url %}
+                {% url 'user-show' user.id as detail_url %}
+                {% include 'partials/actions/view.html' with url=detail_url %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 <div class="pagination">
     <span class="step-links">
         {% if users.has_previous %}
-            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
-            <a class="btn btn-info" href="?page={{ users.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+            <a class="btn btn-info"
+               href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info"
+               href="?page={{ users.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
         {% endif %}
 
         <span class="current btn btn-success">
@@ -52,8 +56,10 @@
         </span>
 
         {% if users.has_next %}
-            <a class="btn btn-primary" href="?page={{ users.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
-            <a class="btn btn-primary" href="?page={{ users.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+            <a class="btn btn-primary"
+               href="?page={{ users.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary"
+               href="?page={{ users.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
         {% endif %}
     </span>
 </div>

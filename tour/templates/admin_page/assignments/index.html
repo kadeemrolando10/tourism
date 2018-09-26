@@ -33,31 +33,33 @@
                 {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                 </span>
                 <h5 class="text-center blink">HOSPEDAJES</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th data-field="user" data-sortable="true">Usuario</th>
-                        <th data-field="name" data-sortable="true">Hospedaje</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for lodging in lodgings %}
-                    <tr>
-                        <td width="5%">{{ forloop.counter }}</td>
-                        <td>{{ lodging.client }}</td>
-                        <td>{{ lodging.lodging }}</td>
-                        <td class="text-center" width="20%">
-                            {% url 'assignment_lodgings-edit' lodging.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'assignment_lodgings-delete' lodging.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th data-field="user" data-sortable="true">Usuario</th>
+                            <th data-field="name" data-sortable="true">Hospedaje</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for lodging in lodgings %}
+                        <tr>
+                            <td width="5%">{{ forloop.counter }}</td>
+                            <td>{{ lodging.client }}</td>
+                            <td>{{ lodging.lodging }}</td>
+                            <td class="text-center" width="20%">
+                                {% url 'assignment_lodgings-edit' lodging.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'assignment_lodgings-delete' lodging.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -69,31 +71,33 @@
                 {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                 </span>
                 <h5 class="text-center blink">TRANSPORTES</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th data-field="user" data-sortable="true">Usuario</th>
-                        <th data-field="name" data-sortable="true">Transporte</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for transport in transports %}
-                    <tr>
-                        <td width="5%">{{ forloop.counter }}</td>
-                        <td>{{ transport.client }}</td>
-                        <td>{{ transport.transport }}</td>
-                        <td class="text-center" width="20%">
-                            {% url 'assignment_transports-edit' transport.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'assignment_transports-delete' transport.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th data-field="user" data-sortable="true">Usuario</th>
+                            <th data-field="name" data-sortable="true">Transporte</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for transport in transports %}
+                        <tr>
+                            <td width="5%">{{ forloop.counter }}</td>
+                            <td>{{ transport.client }}</td>
+                            <td>{{ transport.transport }}</td>
+                            <td class="text-center" width="20%">
+                                {% url 'assignment_transports-edit' transport.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'assignment_transports-delete' transport.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -105,31 +109,33 @@
                 {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                 </span>
                 <h5 class="text-center blink">RESTAURANTES</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th data-field="user" data-sortable="true">Usuario</th>
-                        <th data-field="name" data-sortable="true">Restaurante</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for restaurant in restaurants %}
-                    <tr>
-                        <td width="5%">{{ forloop.counter }}</td>
-                        <td>{{ restaurant.client }}</td>
-                        <td>{{ restaurant.restaurant }}</td>
-                        <td class="text-center" width="20%">
-                            {% url 'assignment_restaurants-edit' restaurant.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'assignment_restaurants-delete' restaurant.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th data-field="user" data-sortable="true">Usuario</th>
+                            <th data-field="name" data-sortable="true">Restaurante</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for restaurant in restaurants %}
+                        <tr>
+                            <td width="5%">{{ forloop.counter }}</td>
+                            <td>{{ restaurant.client }}</td>
+                            <td>{{ restaurant.restaurant }}</td>
+                            <td class="text-center" width="20%">
+                                {% url 'assignment_restaurants-edit' restaurant.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'assignment_restaurants-delete' restaurant.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -141,32 +147,33 @@
                 {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                 </span>
                 <h5 class="text-center blink">SITIOS TURISTICOS</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th data-field="user" data-sortable="true">Usuario</th>
-                        <th data-field="name" data-sortable="true">Sitio Turistico</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for site in sites %}
-                    <tr>
-                        <td width="5%">{{ forloop.counter }}</td>
-                        <td>{{ site.client }}</td>
-                        <td>{{ site.site }}</td>
-                        <td class="text-center" width="20%">
-                            {% url 'assignment_sites-edit' site.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'assignment_sites-delete' site.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <hr>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th data-field="user" data-sortable="true">Usuario</th>
+                            <th data-field="name" data-sortable="true">Sitio Turistico</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for site in sites %}
+                        <tr>
+                            <td width="5%">{{ forloop.counter }}</td>
+                            <td>{{ site.client }}</td>
+                            <td>{{ site.site }}</td>
+                            <td class="text-center" width="20%">
+                                {% url 'assignment_sites-edit' site.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'assignment_sites-delete' site.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -178,31 +185,33 @@
                 {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                 </span>
                 <h5 class="text-center blink">AGENCIAS TURISTICAS</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th data-field="user" data-sortable="true">Usuario</th>
-                        <th data-field="name" data-sortable="true">Agencia Turistica</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for agency in agencies %}
-                    <tr>
-                        <td width="5%">{{ forloop.counter }}</td>
-                        <td>{{ agency.client }}</td>
-                        <td>{{ agency.agency }}</td>
-                        <td class="text-center" width="20%">
-                            {% url 'assignment_agencies-edit' agency.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'assignment_agencies-delete' agency.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th data-field="user" data-sortable="true">Usuario</th>
+                            <th data-field="name" data-sortable="true">Agencia Turistica</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for agency in agencies %}
+                        <tr>
+                            <td width="5%">{{ forloop.counter }}</td>
+                            <td>{{ agency.client }}</td>
+                            <td>{{ agency.agency }}</td>
+                            <td class="text-center" width="20%">
+                                {% url 'assignment_agencies-edit' agency.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'assignment_agencies-delete' agency.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -229,6 +238,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 
 </script>

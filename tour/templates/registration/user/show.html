@@ -15,7 +15,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-6 box box-body">
+    <div class="col-12 col-md-6 col-lg-6 box box-body">
         <h3>Datos del Usuario</h3>
         <p><strong>Estado</strong>
             {% if client.user.is_active %}
@@ -32,33 +32,23 @@
         <p><strong>{% get_field_name user_obj 'rol' %}</strong> {% get_role_user client.rol %}</p>
         <p><strong>{% get_field_name user_obj 'register_at' %}</strong> {{ client.register_at }}</p>
     </div>
-    <div class="col-md-6 box box-body">
+    <div class="col-12 col-md-6 col-lg-6 box box-body">
         <h3>Asignaciones</h3>
-        {% if a_t %}
-        {% for a in a_t %}
-        <p><strong>Transporte: </strong>{{ a.transport}}</p>
-        {% endfor %}
-        {% endif %}
-        {% if a_a %}
-        {% for a in a_a %}
-        <p><strong>Agencia Turistica: </strong>{{ a.agency}}</p>
-        {% endfor %}
-        {% endif %}
-        {% if a_l %}
-        {% for a in a_l %}
-        <p><strong>Hospedaje: </strong>{{ a.lodging}}</p>
-        {% endfor %}
-        {% endif %}
-        {% if a_s %}
-        {% for a in a_s %}
-        <p><strong>Sitio Turistico: </strong>{{ a.site}}</p>
-        {% endfor %}
-        {% endif %}
-        {% if a_r %}
-        {% for a in a_r %}
-        <p><strong>Restaurante: </strong>{{ a.restaurant}}</p>
-        {% endfor %}
-        {% endif %}
+        {% if a_t %} {% for a in a_t %}
+        <p class="alert alert-success"><strong>Transporte: </strong>{{ a.transport}}<br> {{a.register_at}}</p>
+        {% endfor %} {% endif %}
+        {% if a_a %} {% for a in a_a %}
+        <p class="alert alert-success"><strong>Agencia Turistica: </strong>{{ a.agency}}<br> {{a.register_at}}</p>
+        {% endfor %} {% endif %}
+        {% if a_l %} {% for a in a_l %}
+        <p class="alert alert-success"><strong>Hospedaje: </strong>{{ a.lodging}}<br> {{a.register_at}}</p>
+        {% endfor %} {% endif %}
+        {% if a_s %} {% for a in a_s %}
+        <p class="alert alert-success"><strong>Sitio Turistico: </strong>{{ a.site}}<br> {{a.register_at}}</p>
+        {% endfor %} {% endif %}
+        {% if a_r %} {% for a in a_r %}
+        <p class="alert alert-success"><strong>Restaurante: </strong>{{ a.restaurant}}<br> {{a.register_at}}</p>
+        {% endfor %} {% endif %}
     </div>
 </div>
 {% endblock %}

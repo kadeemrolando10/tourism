@@ -4,7 +4,8 @@
 <nav aria-label="breadcrumb" class="alert-warning">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a class="page" href="{% url 'transports-services-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page" href="{% url 'transports-services-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Atrás">Servicio de Transporte</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Modificando</li>
@@ -13,13 +14,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
-            <div class="white-box">
-                {% include 'partials/_partial_form_horizontal.html' %}
-            </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
+    <div class="col-md-6">
+        <img id="image_p" src="{{service.image.url}}" alt="your image" height="100px" width="100px"/>
+    </div>
+</div>
 {% endblock %}
 
 {% block code_js %}

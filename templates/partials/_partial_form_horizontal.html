@@ -4,11 +4,11 @@
         {% for field in form %}
 
             <div class="form-group {{ field.name }} {% if field.errors %}has-error{% endif %}">
-                <label class="control-label col-sm-3" for="{{ field.auto_id }}">
+                <label class="control-label col-12" for="{{ field.auto_id }}">
                     {{ field.label }}
                 </label>
 
-                <div class="col-sm-9">
+                <div class="col-12">
                     {{ field }}
                     {% for error in field.errors %}
                         <span class="help-block">{{ error }}</span>
@@ -26,11 +26,11 @@
 
             <div class="form-group {{ field.name }} {% if field.errors %}has-error{% endif %}">
 
-                <label class="control-label col-sm-3" for="{{ field.auto_id }}">
+                <label class="control-label col-12" for="{{ field.auto_id }}">
                     {{ field.label }}
                 </label>
 
-                <div class="col-sm-9">
+                <div class="col-12">
                     {{ field }}
                     {% for error in field.errors %}
                         <span class="help-block">{{ error }}</span>
@@ -43,9 +43,9 @@
             </div>
         {% endfor %}
     {% endblock %}
-    <div class="form-group m-b-0">
-        <div class="col-lg-9 col-lg-offset-3 text-right">
-            <button type="submit" class="btn btn-info waves-effect waves-light">
+    <div class="form-group">
+        <div class="col-12 text-right">
+            <button type="submit" class="mt-3 btn btn-info waves-effect waves-light">
                 {% if btn_title %}
                     {{ btn_title }}
                 {% else %}

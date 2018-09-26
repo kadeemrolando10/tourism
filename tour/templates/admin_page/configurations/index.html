@@ -29,40 +29,42 @@
         <div class="row">
             <div class="col-12">
                 <h5 class="text-center blink">SECRETARIO</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th data-field="content" data-sortable="true">Datos</th>
-                        <th class="text-center">
-                            {% if not secretaries %}
-                            <span>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th data-field="content" data-sortable="true">Datos</th>
+                            <th class="text-center">
+                                {% if not secretaries %}
+                                <span>
                             {% url 'secretaries-new' as view_url %}
                             {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                         </span>
-                            {% else %}
-                            <span> Opciones</span>
-                            {% endif %}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for secretary in secretaries %}
-                    <tr>
-                        <td class="text-center">
-                            <img src="{{secretary.image.url}}" width="200px"><br>
-                            {{ secretary.full_name }}<br>
-                            {{ secretary.rol }}
-                        </td>
-                        <td class="text-center">
-                            {% url 'secretaries-edit' secretary.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'secretaries-delete' secretary.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                                {% else %}
+                                <span> Opciones</span>
+                                {% endif %}
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for secretary in secretaries %}
+                        <tr>
+                            <td class="text-center">
+                                <img src="{{secretary.image.url}}" width="200px"><br>
+                                {{ secretary.full_name }}<br>
+                                {{ secretary.rol }}
+                            </td>
+                            <td class="text-center">
+                                {% url 'secretaries-edit' secretary.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'secretaries-delete' secretary.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -70,36 +72,38 @@
         <div class="row">
             <div class="col-12">
                 <h5 class="text-center blink">OBJETIVO</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th data-field="name" data-sortable="true">Descripcion</th>
-                        <th class="text-center">
-                            {% if not objectives %}
-                            <span>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th data-field="name" data-sortable="true">Descripcion</th>
+                            <th class="text-center">
+                                {% if not objectives %}
+                                <span>
                             {% url 'objectives-new' as view_url %}
                             {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                         </span>
-                            {% else %}
-                            <span> Opciones</span>
-                            {% endif %}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for objective in objectives %}
-                    <tr>
-                        <td>{{ objective.title }}</td>
-                        <td class="text-center">
-                            {% url 'objectives-edit' objective.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'objectives-delete' objective.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                                {% else %}
+                                <span> Opciones</span>
+                                {% endif %}
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for objective in objectives %}
+                        <tr>
+                            <td>{{ objective.title }}</td>
+                            <td class="text-center">
+                                {% url 'objectives-edit' objective.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'objectives-delete' objective.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -111,39 +115,41 @@
                 {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
             </span>
                 <h5 class="text-center blink">FUNCIONES</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th data-field="name" data-sortable="true">Descripcion</th>
-                        <th data-field="is_active" data-sortable="true">Estado</th>
-                        <th class="text-center">Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for function in functions %}
-                    <tr>
-                        <td width="5%">{{ forloop.counter }}</td>
-                        <td>{{ function.title }}</td>
-                        <td class="text-center" width="8%">
-                            {% if function.is_active %}
-                            <a href="{% url 'functions-inactive-admin' function.id %}"
-                               class="badge badge-pill badge-success text-white">ACTIVO</a>
-                            {% else%}
-                            <a href="{% url 'functions-active-admin' function.id %}"
-                               class="badge badge-pill badge-danger text-white">INACTIVO</a>
-                            {% endif %}
-                        </td>
-                        <td class="text-center" width="20%">
-                            {% url 'functions-edit' function.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'functions-delete' function.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th data-field="name" data-sortable="true">Descripcion</th>
+                            <th data-field="is_active" data-sortable="true">Estado</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for function in functions %}
+                        <tr>
+                            <td width="5%">{{ forloop.counter }}</td>
+                            <td>{{ function.title }}</td>
+                            <td class="text-center" width="8%">
+                                {% if function.is_active %}
+                                <a href="{% url 'functions-inactive-admin' function.id %}"
+                                   class="badge badge-pill badge-success text-white">ACTIVO</a>
+                                {% else%}
+                                <a href="{% url 'functions-active-admin' function.id %}"
+                                   class="badge badge-pill badge-danger text-white">INACTIVO</a>
+                                {% endif %}
+                            </td>
+                            <td class="text-center" width="20%">
+                                {% url 'functions-edit' function.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'functions-delete' function.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -155,46 +161,47 @@
                 {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
             </span>
                 <h5 class="text-center blink">LEYES</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th width="5%">#</th>
-                        <th data-field="name" data-sortable="true">Descripcion</th>
-                        <th data-field="content" data-sortable="true" width="10%">Contenido</th>
-                        <th data-field="is_active" data-sortable="true" width="10%">Estado</th>
-                        <th class="text-center" width="20%">Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for law in laws %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ law.title }}</td>
-                        <td class="text-center">
-                            <a href="{{law.file.url}}" target="_blank">
-                                <i class="glyphicon glyphicon-save" style="font-size:20px;"></i>
-                            </a>
-                        </td>
-                        <td class="text-center" width="8%">
-                            {% if law.is_active %}
-                            <a href="{% url 'laws-inactive-admin' law.id %}"
-                               class="badge badge-pill badge-success text-white">ACTIVO</a>
-                            {% else%}
-                            <a href="{% url 'laws-active-admin' law.id %}"
-                               class="badge badge-pill badge-danger text-white">INACTIVO</a>
-                            {% endif %}
-                        </td>
-                        <td class="text-center">
-                            {% url 'laws-edit' law.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'laws-delete' law.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <hr>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th width="5%">#</th>
+                            <th data-field="name" data-sortable="true">Descripcion</th>
+                            <th data-field="content" data-sortable="true" width="10%">Contenido</th>
+                            <th data-field="is_active" data-sortable="true" width="10%">Estado</th>
+                            <th class="text-center" width="20%">Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for law in laws %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ law.title }}</td>
+                            <td class="text-center">
+                                <a href="{{law.file.url}}" target="_blank">
+                                    <i class="glyphicon glyphicon-save" style="font-size:20px;"></i>
+                                </a>
+                            </td>
+                            <td class="text-center" width="8%">
+                                {% if law.is_active %}
+                                <a href="{% url 'laws-inactive-admin' law.id %}"
+                                   class="badge badge-pill badge-success text-white">ACTIVO</a>
+                                {% else%}
+                                <a href="{% url 'laws-active-admin' law.id %}"
+                                   class="badge badge-pill badge-danger text-white">INACTIVO</a>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% url 'laws-edit' law.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'laws-delete' law.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -202,42 +209,44 @@
         <div class="row">
             <div class="col-12">
                 <h5 class="text-center blink">REDES SOCIALES</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Red Social</th>
-                        <th class="text-center">
-                            {% if not socials %}
-                            <span>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Red Social</th>
+                            <th class="text-center">
+                                {% if not socials %}
+                                <span>
                             {% url 'socials-new' as view_url %}
                             {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
                             </span>
-                            {% else %}
-                            <span> Opciones</span>
-                            {% endif %}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for social in socials %}
-                    <tr>
-                        <td>
-                            <p><b>Facebook</b><br>{{ social.facebook }}</p>
-                            <p><b>Whatsapp</b><br>{{ social.whatsapp }}</p>
-                            <p><b>Instagram</b><br>{{ social.instagram }}</p>
-                            <p><b>Twitter</b><br>{{ social.twitter }}</p>
-                            <p><b>Youtube</b><br>{{ social.youtube }}</p>
-                        </td>
-                        <td class="text-center">
-                            {% url 'socials-edit' social.id as edit_url %}
-                            {% include 'partials/actions/edit.html' with url=edit_url %}
-                            {% url 'socials-delete' social.id as delete_url %}
-                            {% include 'partials/actions/delete.html' with url=delete_url %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                                {% else %}
+                                <span> Opciones</span>
+                                {% endif %}
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for social in socials %}
+                        <tr>
+                            <td>
+                                <p><b>Facebook</b><br>{{ social.facebook }}</p>
+                                <p><b>Whatsapp</b><br>{{ social.whatsapp }}</p>
+                                <p><b>Instagram</b><br>{{ social.instagram }}</p>
+                                <p><b>Twitter</b><br>{{ social.twitter }}</p>
+                                <p><b>Youtube</b><br>{{ social.youtube }}</p>
+                            </td>
+                            <td class="text-center">
+                                {% url 'socials-edit' social.id as edit_url %}
+                                {% include 'partials/actions/edit.html' with url=edit_url %}
+                                {% url 'socials-delete' social.id as delete_url %}
+                                {% include 'partials/actions/delete.html' with url=delete_url %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -264,6 +273,7 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         })
+
 
 
 

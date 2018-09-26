@@ -304,9 +304,9 @@ class TransportTypeService(models.Model):
     destination = models.ForeignKey(TransportDestination, on_delete=models.CASCADE, verbose_name='Destino')
     title = models.CharField(max_length=150, default='NA', verbose_name='Tipo de Servicio')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=5.1, verbose_name='Precio')
-    service = models.ManyToManyField(TransportService, verbose_name='Servicios', blank=True)
     image_bus = models.ImageField(upload_to='media/transports/buses/', null='true', verbose_name='Imagen de Bus')
     image_seat = models.ImageField(upload_to='media/transports/seats/', null='true', verbose_name='Imagen de Butacas')
+    service = models.ManyToManyField(TransportService, verbose_name='Servicios', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -550,12 +550,12 @@ class TourismSiteSchedule(models.Model):
 class TourismRoute(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Localizacion')
     title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
+    image = models.ImageField(upload_to='media/t-routes/', verbose_name='Imagen')
+    description = models.TextField(verbose_name='Descripcion', blank=True)
     lat_origin = models.CharField(max_length=50, verbose_name='Latitud de Origen')
     lng_origin = models.CharField(max_length=50, verbose_name='Longitud de Origen')
     lat_destination = models.CharField(max_length=50, verbose_name='Latitud de Destino')
     lng_destination = models.CharField(max_length=50, verbose_name='Longitud de Destino')
-    image = models.ImageField(upload_to='media/t-routes/', verbose_name='Imagen')
-    description = models.TextField(verbose_name='Descripcion', blank=True)
     score = models.DecimalField(max_digits=2, decimal_places=1, verbose_name='Calificacion', blank=True)
     date = models.DateField(verbose_name='Fecha de Evento', blank=True)
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')

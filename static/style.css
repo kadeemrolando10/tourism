@@ -191,11 +191,11 @@ p {
 
 .img-normal {
     max-width: 100%;
-    height: auto;
-    min-height:350px;
+    height: 300px !important;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 
 .mt-15 {
     margin-top: 15px;

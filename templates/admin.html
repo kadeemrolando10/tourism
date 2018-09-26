@@ -54,21 +54,13 @@
 <div class="wrapper">
 
     <header class="main-header">
-        <!-- Logo -->
-        <a href="{% url 'index_admin' %}" class="logo">
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">
-		    <img src="{% static 'images/turismo.png' %}" height="40px" alt="logo" class="light-logo">
-	  	    <img src="{% static 'images/turismo.png' %}" height="40px" alt="logo" class="dark-logo">
-	        </span>
-        </a>
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
-
+            <h3 class="title_main">SISTOUR</h3>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 
@@ -252,7 +244,7 @@
                                              alt="User Avatar">
                                     </div>
                                     <h3 class="widget-user-username uppercase"> {{request.user.username}}</h3>
-                                    {% get_user_groups request as group_user%}
+                                    {% get_user_groups request as group_user %}
                                     <h6 class="widget-user-desc">{{group_user.first}}</h6>
                                     {% endif %}
                                 </div>
@@ -284,16 +276,10 @@
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
         <!-- sidebar -->
+        {% get_request_rol request request.user.id as role %}
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel text-center">
-                <a href="{% url 'index_admin' %}" class="d-block d-sm-none">SISTOUR</a>
-                <a href="{% url 'index_admin' %}" class="d-none d-sm-block">ST</a>
-            </div>
-            <!-- sidebar menu -->
-
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="nav-devider"></li>
+                {% if request.user.is_superuser %}
                 <li class="header nav-small-cap oldclass" id="mydiv">ADMINISTRACION</li>
                 <li>
                     <a href="{% url 'user-index' %}">
@@ -327,11 +313,11 @@
                         </span>
                     </a>
                 </li>
-
+                {% endif %}
 
                 <li class="nav-devider"></li>
                 <li class="header nav-small-cap">TURISMO</li>
-
+                {% if role == 1 or request.user.is_superuser %}
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-building-o"></i> <span>Area Hospedajes</span>
@@ -351,6 +337,8 @@
                         </li>
                     </ul>
                 </li>
+                {% endif %}
+                {% if role == 2 or request.user.is_superuser %}
                 <li class="treeview">
                     <a href="{% url 'transports-index-admin'%}">
                         <i class="fa fa-bus"></i> <span>Area Transportes</span>
@@ -366,6 +354,8 @@
                                     class="fa fa-thumb-tack"></i>Servicios</a></li>
                     </ul>
                 </li>
+                {% endif %}
+                {% if role == 3 or request.user.is_superuser %}
                 <li class="treeview">
                     <a href="{% url 'restaurants-index-admin'%}">
                         <i class="glyphicon glyphicon-cutlery"></i> <span>Area Restaurantes</span>
@@ -383,6 +373,8 @@
                     </ul>
 
                 </li>
+                {% endif %}
+                {% if role == 4 or request.user.is_superuser %}
                 <li>
                     <a href="{% url 'agencies-index-admin'%}">
                         <i class="glyphicon glyphicon-queen"></i> <span>Agencias de Turismo</span>
@@ -391,11 +383,12 @@
                         </span>
                     </a>
                 </li>
-
+                {% endif %}
             </ul>
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="nav-devider"></li>
                 <li class="header nav-small-cap">CULTURA</li>
+                {% if request.user.is_superuser %}
                 <li>
                     <a href="{% url 'events-index-admin'%}">
                         <i class="fa fa-bullhorn"></i> <span>Eventos</span>
@@ -404,6 +397,8 @@
                         </span>
                     </a>
                 </li>
+                {% endif %}
+                {% if role == 5 or request.user.is_superuser %}
                 <li class="treeview">
                     <a href="{% url 'tourism_sites-index-admin'%}">
                         <i class="fa fa-podcast"></i> <span>Area Sitios Turisticos</span>
@@ -424,6 +419,8 @@
                         </li>
                     </ul>
                 </li>
+                {% endif %}
+                {% if request.user.is_superuser %}
                 <li>
                     <a href="{% url 'tourism_routes-index-admin'%}">
                         <i class="fa fa-map-signs"></i> <span>Rutas Turisticas</span>
@@ -432,6 +429,7 @@
                         </span>
                     </a>
                 </li>
+                {% endif %}
             </ul>
         </section>
     </aside>
@@ -471,190 +469,6 @@
         </div>
         &copy; 2018 SisTour Corporations</a>. All Rights Reserved.
     </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li class="nav-item"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a>
-            </li>
-            <li class="nav-item"><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
-                    class="fa fa-cog fa-spin"></i></a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Admin Birthday</h4>
-
-                                <p>Will be July 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-user bg-yellow"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Jhone Updated His Profile</h4>
-
-                                <p>New Email : jhone_doe@demo.com</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Disha Joined Mailing List</h4>
-
-                                <p>disha@demo.com</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Code Change</h4>
-
-                                <p>Execution time 15 Days</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Web Design
-                                <span class="label label-danger pull-right">40%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-danger" style="width: 40%"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Update Data
-                                <span class="label label-success pull-right">75%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-success" style="width: 75%"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Order Process
-                                <span class="label label-warning pull-right">89%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-warning" style="width: 89%"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Development
-                                <span class="label label-primary pull-right">72%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-primary" style="width: 72%"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-            </div>
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-            <!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <div class="tab-pane" id="control-sidebar-settings-tab">
-                <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
-
-                    <div class="form-group">
-                        <input type="checkbox" id="report_panel" class="chk-col-grey">
-                        <label for="report_panel" class="control-sidebar-subheading ">Report panel usage</label>
-
-                        <p>
-                            general settings information
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <input type="checkbox" id="allow_mail" class="chk-col-grey">
-                        <label for="allow_mail" class="control-sidebar-subheading ">Mail redirect</label>
-
-                        <p>
-                            Other sets of options are available
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <input type="checkbox" id="expose_author" class="chk-col-grey">
-                        <label for="expose_author" class="control-sidebar-subheading ">Expose author name</label>
-
-                        <p>
-                            Allow the user to show his name in blog posts
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-                    <div class="form-group">
-                        <input type="checkbox" id="show_me_online" class="chk-col-grey">
-                        <label for="show_me_online" class="control-sidebar-subheading ">Show me as online</label>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <input type="checkbox" id="off_notifications" class="chk-col-grey">
-                        <label for="off_notifications" class="control-sidebar-subheading ">Turn off
-                            notifications</label>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            <a href="javascript:void(0)" class="text-red margin-r-5"><i class="fa fa-trash-o"></i></a>
-                            Delete chat history
-                        </label>
-                    </div>
-                    <!-- /.form-group -->
-                </form>
-            </div>
-            <!-- /.tab-pane -->
-        </div>
-    </aside>
-    <!-- /.control-sidebar -->
 
     <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
@@ -737,6 +551,21 @@
         })
 
 
+</script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#image_p').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#id_image").change(function () {
+        readURL(this);
+    });
 </script>
 
 {% block code_js %}

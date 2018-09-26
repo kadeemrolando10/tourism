@@ -19,7 +19,8 @@
             {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-center">
+        <img class="mb-4" id="image_p" src="{{route.image.url}}" alt="your image" height="300px"/>
         <div class="row">
             <div class="col-md-12">
                 <div class="white-box">
@@ -27,9 +28,8 @@
                     <div id="gmaplocation" class="map"></div>
                 </div>
             </div>
-            <br>
             <div class="col-md-12">
-                <div class="white-box">
+                <div class="white-box mt-4">
                     <h6>Ubicacion Destino</h6>
                     <div id="gmaplocation2" class="map"></div>
                 </div>
@@ -134,6 +134,7 @@
         window.onload = function () {
             initialize()
         };
+
 
 </script>
 {% endblock %}

@@ -1,9 +1,11 @@
 # encoding:utf-8
 import logging
+
 from django import template
+from django.template.context_processors import request
 
 from tour.models import DAYS, TourismRoute, TourismRouteMenu, ROLE_USERS, GENDER, MENU, Location, Transport, Restaurant, \
-    Agency, Social
+    Agency, Social, Client
 from tour.models import TransportTypeService
 from tour.models import TransportDestination
 from tour.models import TourismSiteType
@@ -196,6 +198,21 @@ def get_role_user(rol):
             return status[1]
     return None
 
+
+@register.simple_tag
+def get_request_rol(request, user):
+    if not request.user.is_superuser:
+        client=Client.objects.get(user=user)
+        if client.rol == 'US-L':
+            return 1
+        elif client.rol=='US-T':
+            return 2
+        elif client.rol == 'US-R':
+            return 3
+        elif client.rol == 'US-AT':
+            return 4
+        elif client.rol == 'US-ST':
+            return 5
 
 @register.filter(name='times')
 def times(number):

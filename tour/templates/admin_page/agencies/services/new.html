@@ -1,5 +1,5 @@
 {% extends 'admin.html' %}
-
+{% load static %}
 {% block content-header %}
 <nav aria-label="breadcrumb" class="alert-warning">
     <ol class="breadcrumb">
@@ -22,10 +22,13 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
         <div class="white-box">
             {% include 'partials/_partial_form_horizontal.html' %}
         </div>
+    </div>
+    <div class="col-md-6">
+        <img id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="300px" width="300px"/>
     </div>
 </div>
 {% endblock %}

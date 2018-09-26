@@ -82,6 +82,8 @@ def user_new(request):
             if client.rol == 'AD':  # ADMINISTRADOR
                 g = Group.objects.get(id=1)
                 g.user_set.add(user.id)
+                client.user.is_superuser = True
+                client.save()
             elif client.rol == 'US-L':  # USUARIO HOSPEDAJE
                 g = Group.objects.get(id=2)
                 g.user_set.add(user.id)
@@ -182,7 +184,6 @@ def change_main(request, id):
 
 # PAGINA INICIO CLIENTE
 def index(request):
-    request.session['id_main'] = 1
     restaurants = Restaurant.objects.all
     transports = Transport.objects.all
     agencies = Agency.objects.all
@@ -242,7 +243,12 @@ def agency_show(request, id):
 # AGENCIAS DE TURISMO ADMINISTRADOR
 @permission_required('tour.index_agency', login_url='/accounts/login/')
 def agency_index_admin(request):
-    agencies_list = Agency.objects.all()
+    if request.user.is_superuser:
+        agencies_list = Agency.objects.all()
+    else:
+        ass = AssignmentAgency.objects.filter(client__user=request.user.id)
+        for a in ass:
+            agencies_list = Agency.objects.filter(id=a.agency.id)
     query = request.GET.get('q')
     if query:
         agencies_list = agencies_list.filter(
@@ -251,7 +257,6 @@ def agency_index_admin(request):
     paginator = Paginator(agencies_list, 10)  # Show 15 contacts per page
     page = request.GET.get('page')
     agencies = paginator.get_page(page)
-
     return render(request, 'admin_page/agencies/index.html', {
         'agencies': agencies,
         'agency_obj': Agency,
@@ -318,7 +323,6 @@ def agency_edit_admin(request, id):
         form = AgencyForm(request.POST, request.FILES, instance=agency)
         if form.is_valid():
             save = form.save()
-
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
             return HttpResponseRedirect(reverse('agencies-index-admin', kwargs={'id': agency.id}))
@@ -699,7 +703,12 @@ def restaurant_show(request, id):
 # RESTAURANTS ADMIN
 @permission_required('tour.index_restaurant', login_url='/accounts/login/')
 def restaurant_index_admin(request):
-    restaurants_list = Restaurant.objects.all()
+    if request.user.is_superuser:
+        restaurants_list = Restaurant.objects.all()
+    else:
+        ass = AssignmentRestaurant.objects.filter(client__user=request.user.id)
+        for a in ass:
+            restaurants_list = Restaurant.objects.filter(id=a.restaurant.id)
     query = request.GET.get('q')
     if query:
         restaurants_list = restaurants_list.filter(
@@ -1100,7 +1109,12 @@ def transport_show(request, id):
 # TRANSPORTES ADMINISTRADOR
 @permission_required('tour.index_transport', login_url='/accounts/login/')
 def transport_index_admin(request):
-    transports_list = Transport.objects.all()
+    if request.user.is_superuser:
+        transports_list = Transport.objects.all()
+    else:
+        ass = AssignmentTransport.objects.filter(client__user=request.user.id)
+        for a in ass:
+            transports_list = Transport.objects.filter(id=a.transport.id)
     query = request.GET.get('q')
     if query:
         transports_list = transports_list.filter(
@@ -1610,7 +1624,12 @@ def tourism_site_show(request, id):
 # SITIOS TURISTICOS ADMINISTRADOR
 @permission_required('tour.index_tourismsite', login_url='/accounts/login/')
 def tourism_site_index_admin(request):
-    sites_list = TourismSite.objects.all()
+    if request.user.is_superuser:
+        sites_list = TourismSite.objects.all()
+    else:
+        ass = AssignmentSite.objects.filter(client__user=request.user.id)
+        for a in ass:
+            sites_list = TourismSite.objects.filter(id=a.site.id)
     query = request.GET.get('q')
     if query:
         sites_list = sites_list.filter(
@@ -2311,7 +2330,12 @@ def lodging_show(request, id):
 # HOSPEDAJES ADMINISTRADOR
 @permission_required('tour.index_lodging', login_url='/accounts/login/')
 def lodging_index_admin(request):
-    lodgings_list = Lodging.objects.all()
+    if request.user.is_superuser:
+        lodgings_list = Lodging.objects.all()
+    else:
+        ass = AssignmentLodging.objects.filter(client__user=request.user.id)
+        for a in ass:
+            lodgings_list = Lodging.objects.filter(id=a.lodging.id)
     query = request.GET.get('q')
     if query:
         lodgings_list = lodgings_list.filter(

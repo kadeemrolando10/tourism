@@ -1,13 +1,14 @@
 {% extends 'admin.html' %}
-
+{% load static %}
 {% block content-header %}
 <nav aria-label="breadcrumb" class="alert-warning">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">Agencias</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">Modificando</li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'agencies-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Agencias</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+    </ol>
 </nav>
 {% endblock %}
 
@@ -18,7 +19,8 @@
             {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-center">
+        <img class="mb-4" id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="300px"/>
         <div class="white-box">
             <div id="gmaplocation" class="map"></div>
         </div>
@@ -26,10 +28,9 @@
 </div>
 {% endblock %}
 {% block code_js %}
-    {% include 'partials/_url_gmaps.html' %}
-    <script type="text/javascript">
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
         $('[data-mask]').inputmask();
-
         var map;
         var markers = [];
         function initialize() {
@@ -72,5 +73,5 @@
 
 
 
-    </script>
+</script>
 {% endblock %}
