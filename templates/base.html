@@ -111,12 +111,22 @@
                 </nav>
 
                 <div class="btn-group float-right fixed-right">
-                    <a class="btn btn-warning">{% get_location request.session.id_main %}</a>
+                    <a class="btn btn-warning">
+                        {% if request.session.id_main == 0 %}
+                            Potosi (Departamental)
+                        {% else %}
+                            {% get_location request.session.id_main %}
+                        {% endif %}
+                    </a>
                     <a class="btn btn-warning dropdown-toggle dropdown-toggle-split"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-caret-down inline-block"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right bg-warning">
+                        <a class="dropdown-item" href="{% url 'change-id-main' 0 %}">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            Potosi (Departamental)
+                        </a>
                         {% get_locations as locations %}
                         {% for location in locations %}
                         <a class="dropdown-item" href="{% url 'change-id-main' location.id %}">

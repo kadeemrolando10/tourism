@@ -179,11 +179,35 @@ def index_admin(request):
 # CAMBIO DE LOCALIZACION EN TODA LA PLANTILLA CLIENTE
 def change_main(request, id):
     request.session['id_main'] = id
-    return HttpResponseRedirect(reverse(index))
+    id_page =request.session['id_page']
+    if id_page == 1:
+        return HttpResponseRedirect(reverse(transport_index))
+    elif id_page == 2:
+        return HttpResponseRedirect(reverse(lodging_index))
+    elif id_page == 3:
+        return HttpResponseRedirect(reverse(restaurant_index))
+    elif id_page == 4:
+        return HttpResponseRedirect(reverse(agency_index))
+    elif id_page == 5:
+        return HttpResponseRedirect(reverse(event_index))
+    elif id_page == 6:
+        return HttpResponseRedirect(reverse(tourism_site_index))
+    elif id_page == 7:
+        return HttpResponseRedirect(reverse(tourism_route_index))
+    elif id_page == 8:
+        return HttpResponseRedirect(reverse(secretary))
+    else:
+        return HttpResponseRedirect(reverse(index))
+
+
+def change_main_tourism_site(request, id):
+    request.session['id_main'] = id
+    return HttpResponseRedirect(reverse(tourism_site_index))
 
 
 # PAGINA INICIO CLIENTE
 def index(request):
+    request.session['id_page'] = 0
     restaurants = Restaurant.objects.all
     transports = Transport.objects.all
     agencies = Agency.objects.all
@@ -201,6 +225,7 @@ def index(request):
 
 # SECRETARIA CLIENTE
 def secretary(request):
+    request.session['id_page'] = 8
     objectives = Objective.objects.all
     secretaries = Secretary.objects.all
     laws = Law.objects.all
@@ -215,8 +240,9 @@ def secretary(request):
 
 # AGENCIAS DE TURISMO CLIENTE
 def agency_index(request):
+    request.session['id_page'] = 4
     ids = request.session['id_main']
-    if ids is None or '':
+    if ids == 0:
         agencies = Agency.objects.all
     else:
         agencies = Agency.objects.filter(destination=ids)
@@ -541,11 +567,12 @@ def agency_schedule_delete_admin(request, id):
 # EVENTOS CLIENTE
 
 def event_index(request):
-    id = request.session['id_main']
-    if id is None:
+    request.session['id_page'] = 5
+    ids = request.session['id_main']
+    if ids == 0:
         events = Event.objects.all
     else:
-        events = Event.objects.filter(destination=id)
+        events = Event.objects.filter(destination=ids)
     return render(request, 'tour/events-index.html', {
         'events': events,
         'event_obj': Event
@@ -656,8 +683,9 @@ def event_delete_admin(request, id):
 
 # RESTAURANTS CLIENTE
 def restaurant_index(request):
+    request.session['id_page'] = 3
     id = request.session['id_main']
-    if id is None:
+    if id == 0:
         restaurants = Restaurant.objects.all
     else:
         restaurants = Restaurant.objects.filter(destination=id)
@@ -1080,8 +1108,9 @@ def restaurant_service_delete_admin(request, id):
 
 # TRANSPORTES CLIENTE
 def transport_index(request):
+    request.session['id_page'] = 1
     id = request.session['id_main']
-    if id is None:
+    if id == 0:
         transports = Transport.objects.all
     else:
         transports = Transport.objects.filter(destination=id)
@@ -1599,8 +1628,9 @@ def transport_schedule_delete_admin(request, id):
 # SITIOS TURISTICOS CLIENTE
 
 def tourism_site_index(request):
+    request.session['id_page'] = 6
     id = request.session['id_main']
-    if id is None:
+    if id == 0:
         sites = TourismSite.objects.all
     else:
         sites = TourismSite.objects.filter(destination=id)
@@ -2082,8 +2112,9 @@ def tourism_site_service_delete_admin(request, id):
 # RUTAS TURISTICAS CLIENTE
 
 def tourism_route_index(request):
+    request.session['id_page'] = 7
     id = request.session['id_main']
-    if id is None:
+    if id == 0:
         routes = TourismRoute.objects.all
     else:
         routes = TourismRoute.objects.filter(destination=id)
@@ -2302,8 +2333,9 @@ def tourism_route_menu_delete_admin(request, id):
 
 # HOSPEDAJES CLIENTE
 def lodging_index(request):
+    request.session['id_page'] = 2
     id = request.session['id_main']
-    if id is None:
+    if id == 0:
         lodgings = Lodging.objects.all
     else:
         lodgings = Lodging.objects.filter(destination=id)

@@ -9,6 +9,7 @@ urlpatterns = [
     path('index_admin/', views.index_admin, name='index_admin'),
     path('notifications/', views.notification, name='notifications'),
     path('<int:id>/change', views.change_main, name='change-id-main'),
+    path('<int:id>/change-site', views.change_main_tourism_site, name='change_main_tourism_site'),
     url(r'^logout/$', logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
     path('users/', include([
