@@ -109,7 +109,7 @@
                         <h6 class="underline"><i class="fa fa-info text-light"></i> Informacion</h6>
                         <div class="opening-hours">
                             <p>
-                               <label class="les"><i class="fa fa-phone" aria-hidden="true"></i> Telefono</label><br>
+                                <label class="les"><i class="fa fa-phone" aria-hidden="true"></i> Telefono</label><br>
                                 <span class="alert bg-success link">{{ transport.phone }}</span>
                             </p>
                             {% if transport.web is None %}
@@ -146,38 +146,42 @@
 {% block js_code %}
 {% include 'partials/_url_gmaps.html' %}
 <script type="text/javascript">
-        var map;
-        var markers = [];
-        var lat = '{{ transport.lat }}';
-        var lng = '{{ transport.lng }}';
-        function initialize() {
-            var myLatlng = new google.maps.LatLng(lat, lng);
-            var myOptions = {
-                zoom: 16,
-                center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                gestureHandling: 'greedy'
-            };
-
-            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
-
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map
-            });
-            markers.push(marker);
-        }
-
-        window.onload = function () {
-            initialize()
+    var map;
+    var markers = [];
+    var lat = '{{ transport.lat }}';
+    var lng = '{{ transport.lng }}';
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(lat, lng);
+        var myOptions = {
+            zoom: 16,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            gestureHandling: 'greedy'
         };
 
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        })
+        map = new google.maps.Map(document.getElementById("gmap"), myOptions);
 
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            map: map
+        });
+        markers.push(marker);
+    }
 
+    window.onload = function () {
+        initialize()
+    };
 
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#tourism_web').toggleClass("active");
+
+    $('.tourism_web a').removeClass('active');
+    $('#transports_web').toggleClass("active");
 </script>
 {% endblock %}
 

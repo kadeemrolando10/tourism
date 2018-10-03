@@ -16,9 +16,15 @@
 
 {% block code_js %}
 <script>
-        $(document).ready(function () {
-            $('input').addClass('form-control');
-        });
+    $(document).ready(function () {
+        $('input').addClass('form-control');
+    });
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#settings').toggleClass("active");
 
+    $('.treeview-menu li').removeClass('active');
+    $('#users').toggleClass("active");
 </script>
 {% endblock %}

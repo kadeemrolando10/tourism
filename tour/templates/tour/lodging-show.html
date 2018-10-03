@@ -136,40 +136,42 @@
 {% block js_code %}
 {% include 'partials/_url_gmaps.html' %}
 <script type="text/javascript">
-        var map;
-        var markers = [];
-        var lat = '{{ lodging.lat }}';
-        var lng = '{{ lodging.lng }}';
-        function initialize() {
-            var myLatlng = new google.maps.LatLng(lat, lng);
-            var myOptions = {
-                zoom: 18,
-                center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                gestureHandling: 'greedy'
-            };
-
-            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
-
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map
-            });
-            markers.push(marker);
-        }
-
-        window.onload = function () {
-            initialize()
+    var map;
+    var markers = [];
+    var lat = '{{ lodging.lat }}';
+    var lng = '{{ lodging.lng }}';
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(lat, lng);
+        var myOptions = {
+            zoom: 18,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            gestureHandling: 'greedy'
         };
 
-        $(function () {
+        map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            map: map
+        });
+        markers.push(marker);
+    }
+
+    window.onload = function () {
+        initialize()
+    };
+
+    $(function () {
         $('[data-toggle="tooltip"]').tooltip()
-        })
+    })
+</script>
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#tourism_web').toggleClass("active");
 
-
-
-
-
+    $('.tourism_web a').removeClass('active');
+    $('#lodgings_web').toggleClass("active");
 </script>
 {% endblock %}
 

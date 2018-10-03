@@ -50,3 +50,12 @@
 </section>
 <!-- ***** Features Events Area End ***** -->
 {% endblock %}
+{% block js_code %}
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#tourism_web').toggleClass("active");
+
+    $('.tourism_web a').removeClass('active');
+    $('#lodgings_web').toggleClass("active");
+</script>
+{% endblock %}

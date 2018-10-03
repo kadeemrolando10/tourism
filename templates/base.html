@@ -61,49 +61,49 @@
                             aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span
                             class="fa fa-bars"></span></button>
                     <!-- Nav -->
-                    <div class="collapse navbar-collapse" id="dorneNav" style="text-align:center;">
-                        <ul class="navbar-nav mr-auto" id="dorneMenu" style="text-align:center;">
-                            <li class="nav-item" style="text-align:center;">
+                    <div class="collapse navbar-collapse" id="dorneNav">
+                        <ul class="navbar-nav mr-auto text-center" id="dorneMenu">
+                            <li id="home_web" class="nav-item">
                                 <a class="nav-link " href="\"><i class="fa fa-home" aria-hidden="true"></i> <br>Inicio
                                 </a>
                             </li>
 
-                            <li class="nav-item dropdown">
+                            <li id="tourism_web" class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                         class="fa fa-camera-retro" aria-hidden="true"></i> <br>Turismo <i
                                         class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'transports-index' %}">
+                                <div class="dropdown-menu tourism_web" aria-labelledby="navbarDropdown">
+                                    <a id="transports_web" class="dropdown-item" href="{% url 'transports-index' %}">
                                         <i class="fa fa-bus" aria-hidden="true"></i> Transportes</a>
-                                    <a class="dropdown-item" href="{% url 'lodging-index' %}">
+                                    <a id="lodgings_web" class="dropdown-item" href="{% url 'lodging-index' %}">
                                         <i class="fa fa-hotel" aria-hidden="true"></i> Hospedajes</a>
-                                    <a class="dropdown-item" href="{% url 'restaurants-index' %}">
+                                    <a id="restaurants_web" class="dropdown-item" href="{% url 'restaurants-index' %}">
                                         <i class="fa fa-cutlery"></i> Restaurantes</a>
-                                    <a class="dropdown-item" href="{% url 'agencies-index' %}">
+                                    <a id="agencies_web" class="dropdown-item" href="{% url 'agencies-index' %}">
                                         <i class="fa fa-street-view" aria-hidden="true"></i> Agencias de turismo</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                            <li id="events_web" class="nav-item">
                                 <a class="nav-link" href="{% url 'events-index' %}">
                                     <i class="fa fa-bell" aria-hidden="true"></i> <br>Eventos Culturales</a>
                             </li>
-                            <li class="nav-item">
+                            <li id="sites_web" class="nav-item">
                                 <a class="nav-link" href="{% url 'tourism_sites-index' %}">
                                     <i class="fa fa-universal-access" aria-hidden="true"></i><br> Sitios Turisticos</a>
                             </li>
-                            <li class="nav-item">
+                            <li id="routes_web" class="nav-item">
                                 <a class="nav-link" href="{% url 'tourism_routes-index' %}">
                                     <i class="fa fa-road" aria-hidden="true"></i><br>Rutas Turisticas</a>
                             </li>
-                            <li class="nav-item">
+                            <li id="secretary_web" class="nav-item">
                                 <a class="nav-link" href="{% url 'secretary' %}">
                                     <i class="fa fa-institution " aria-hidden="true"></i> <br>Secretaria</a>
                             </li>
                         </ul>
                         <!-- Signin btn -->
-                        <div class="dorne-signin-btn nav-item">
-                            <a class="nav-link btn btn-info" href="{% url 'login' %}" target="_blank">
+                        <div class="dorne-signin-btn nav-item text-center">
+                            <a class="nav-link" href="{% url 'login' %}" target="_blank">
                                 <i class="fa fa-user-circle-o"></i><br>Login</a>
                         </div>
                     </div>
@@ -112,10 +112,10 @@
 
                 <div class="btn-group float-right fixed-right">
                     <a class="btn btn-warning">
-                        {% if request.session.id_main == 0 %}
-                            Potosi (Departamental)
+                        {% if request.session.id_main == 0 or request.session.id_main is None %}
+                        Potosi (Departamental)
                         {% else %}
-                            {% get_location request.session.id_main %}
+                        {% get_location request.session.id_main %}
                         {% endif %}
                     </a>
                     <a class="btn btn-warning dropdown-toggle dropdown-toggle-split"
@@ -172,24 +172,16 @@
 </footer>
 
 
-<div class="dropdown fixed-position-message">
-    <a id="navbarDropdown_" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-       aria-expanded="false"><i class="fa fa-comment"></i>
-    </a>
-    <ul class="dropdown-menu gres bg-transparent align-social-btn" aria-labelledby="navbarDropdown_">
-        <li class="dropdown-toggle dropdown-item bg-transparent" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <a href="https://api.whatsapp.com/send?phone=59172434117" target="_blank">
-                <img src="{% static 'img/core-img/007-whatsapp.png' %}" alt="" width="40px">
-            </a>
-        </li>
-        <li class="dropdown-toggle dropdown-item bg-transparent" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <a href="https://m.me/MessengerTaskBot">
-                <img src="{% static 'img/core-img/044-messenger.png' %}" alt="" width="40px">
-            </a>
-        </li>
-    </ul>
+<div class="fixed-position-message">
+    <a href="#" onclick="toggle_visibility('content-message');"><i class="fa fa-weixin"></i></a>
+    <div id="content-message">
+        <a href="https://api.whatsapp.com/send?phone=59172434117" target="_blank">
+            <img class="pb-2" src="{% static 'img/core-img/007-whatsapp.png' %}" alt="" width="40px">
+        </a>
+        <a href="https://m.me/MessengerTaskBot" target="_blank">
+            <img src="{% static 'img/core-img/044-messenger.png' %}" alt="" width="40px">
+        </a>
+    </div>
 </div>
 
 <div class="floating-wpp"></div>
@@ -208,13 +200,19 @@
 <!-- Active JS -->
 <script src="{% static 'js/active.js' %}"></script>
 <script>
-
-$('ul.gres li').on("click", function(e) {
-  var go_to_url = $(this).find("a").prop("href").val();
-  window.open(go_to_url, '_blank');
-});
-
-
+    $('ul.gres li').on("click", function (e) {
+        var go_to_url = $(this).find("a").prop("href").val();
+        window.open(go_to_url, '_blank');
+    });
+</script>
+<script type="text/javascript">
+    function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        if (e.style.display == 'block')
+            e.style.display = 'none';
+        else
+            e.style.display = 'block';
+    }
 </script>
 {% block js_code %}
 

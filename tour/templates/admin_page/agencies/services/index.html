@@ -90,24 +90,8 @@
 {% endblock %}
 
 {% block code_js %}
-<script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-tooltip="tooltip"]').tooltip();
-            $('[title]').tooltip();
-
-            $('#confirm-delete').on('show.bs.modal', function (e) {
-
-                var title = $(e.relatedTarget).data('title');
-                var message = $(e.relatedTarget).data('message');
-
-                if (title !== undefined)
-                    $(this).find('.modal-header').html(title);
-                if (message !== undefined)
-                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
-                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            });
-        })
-
-
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#agencies').toggleClass("active");
 </script>
 {% endblock %}

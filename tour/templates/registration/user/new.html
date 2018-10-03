@@ -3,20 +3,27 @@
 
 {% block content %}
 <nav aria-label="breadcrumb" class="alert-warning">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <a class="page" href="{% url 'user-index' %}" >Usuarios</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">Agregando</li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'user-index' %}">Usuarios</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Agregando</li>
+    </ol>
 </nav>
-    {% include 'partials/_partial_form_horizontal.html' %}
+{% include 'partials/_partial_form_horizontal.html' %}
 {% endblock %}
 
 {% block code_js %}
 <script>
-        $(document).ready(function () {
-            $('input').addClass('form-control');
-        });
+    $(document).ready(function () {
+        $('input').addClass('form-control');
+    });
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#settings').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#users').toggleClass("active");
 </script>
 {% endblock %}

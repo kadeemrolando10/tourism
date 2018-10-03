@@ -146,11 +146,8 @@ def get_socials():
 
 @register.simple_tag
 def get_location(id):
-    if id is None or id=='':
-        return Location.objects.get(id=1)
-    else:
-        id = int(id)
-        return Location.objects.get(id=id)
+    id = int(id)
+    return Location.objects.get(id=id)
 
 
 @register.simple_tag
@@ -202,10 +199,10 @@ def get_role_user(rol):
 @register.simple_tag
 def get_request_rol(request, user):
     if not request.user.is_superuser:
-        client=Client.objects.get(user=user)
+        client = Client.objects.get(user=user)
         if client.rol == 'US-L':
             return 1
-        elif client.rol=='US-T':
+        elif client.rol == 'US-T':
             return 2
         elif client.rol == 'US-R':
             return 3
@@ -213,6 +210,7 @@ def get_request_rol(request, user):
             return 4
         elif client.rol == 'US-ST':
             return 5
+
 
 @register.filter(name='times')
 def times(number):

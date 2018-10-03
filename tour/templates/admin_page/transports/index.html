@@ -46,9 +46,11 @@
             <td>{{ transport.phone }}</td>
             <td class="text-center" width="8%">
                 {% if transport.is_active %}
-                <a  href="{% url 'transports-inactive-admin' transport.id %}" class="badge badge-pill badge-success text-white">ACTIVO</a>
+                <a href="{% url 'transports-inactive-admin' transport.id %}"
+                   class="badge badge-pill badge-success text-white">ACTIVO</a>
                 {% else%}
-                <a  href="{% url 'transports-active-admin' transport.id %}" class="badge badge-pill badge-danger text-white">INACTIVO</a>
+                <a href="{% url 'transports-active-admin' transport.id %}"
+                   class="badge badge-pill badge-danger text-white">INACTIVO</a>
                 {% endif %}
             </td>
             <td class="text-center">
@@ -88,26 +90,12 @@
 {% endblock %}
 
 {% block code_js %}
-<script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-tooltip="tooltip"]').tooltip();
-            $('[title]').tooltip();
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#transports').toggleClass("active");
 
-            $('#confirm-delete').on('show.bs.modal', function (e) {
-
-                var title = $(e.relatedTarget).data('title');
-                var message = $(e.relatedTarget).data('message');
-
-                if (title !== undefined)
-                    $(this).find('.modal-header').html(title);
-                if (message !== undefined)
-                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
-                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            });
-        })
-
-
-
+    $('.treeview-menu li').removeClass('active');
+    $('#transports-transports').toggleClass("active");
 </script>
 {% endblock %}
 

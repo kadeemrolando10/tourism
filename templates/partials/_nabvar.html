@@ -1,0 +1,219 @@
+<!-- Header Navbar -->
+{% load static %}
+{% load utils %}
+<nav class="navbar navbar-static-top">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+    </a>
+    <h3 class="title_main">SISTOUR</h3>
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+
+            <li class="search-box">
+                <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="mdi mdi-magnify"></i></a>
+                <form class="app-search" style="display: none;">
+                    <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
+                        class="srh-btn"><i class="ti-close"></i></a>
+                </form>
+            </li>
+
+            <!-- Messages -->
+            <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="mdi mdi-email"></i>
+                </a>
+                <ul class="dropdown-menu scale-up">
+                    <li class="header">You have 5 messages</li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu inner-content-div">
+                            <li><!-- start message -->
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="{% static 'img/admin-img/user2-160x160.jpg' %}"
+                                             class="rounded-circle"
+                                             alt="User Image">
+                                    </div>
+                                    <div class="mail-contnet">
+                                        <h4>
+                                            Lorem Ipsum
+                                            <small><i class="fa fa-clock-o"></i> 15 mins</small>
+                                        </h4>
+                                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end message -->
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="{% static 'img/admin-img/user3-128x128.jpg' %}"
+                                             class="rounded-circle"
+                                             alt="User Image">
+                                    </div>
+                                    <div class="mail-contnet">
+                                        <h4>
+                                            Nullam tempor
+                                            <small><i class="fa fa-clock-o"></i> 4 hours</small>
+                                        </h4>
+                                        <span>Curabitur facilisis erat quis metus congue viverra.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="{% static 'img/admin-img/user4-128x128.jpg' %}"
+                                             class="rounded-circle"
+                                             alt="User Image">
+                                    </div>
+                                    <div class="mail-contnet">
+                                        <h4>
+                                            Proin venenatis
+                                            <small><i class="fa fa-clock-o"></i> Today</small>
+                                        </h4>
+                                        <span>Vestibulum nec ligula nec quam sodales rutrum sed luctus.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="{% static 'img/admin-img/user3-128x128.jpg' %}"
+                                             class="rounded-circle"
+                                             alt="User Image">
+                                    </div>
+                                    <div class="mail-contnet">
+                                        <h4>
+                                            Praesent suscipit
+                                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                        </h4>
+                                        <span>Curabitur quis risus aliquet, luctus arcu nec, venenatis neque.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="{% static 'img/admin-img/user4-128x128.jpg' %}"
+                                             class="rounded-circle"
+                                             alt="User Image">
+                                    </div>
+                                    <div class="mail-contnet">
+                                        <h4>
+                                            Donec tempor
+                                            <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                        </h4>
+                                        <span>Praesent vitae tellus eget nibh lacinia pretium.</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="#">See all e-Mails</a></li>
+                </ul>
+            </li>
+
+            <!-- Notifications -->
+            <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="mdi mdi-bell"></i>
+                </a>
+                <ul class="dropdown-menu scale-up">
+                    <li class="header">Tienes {% get_quantity_notify %} Notificaciones</li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu inner-content-div">
+                            {% get_notify_transports as notifications %}
+                            {% for notification in notifications %}
+                            <li>
+                                <a href="{% url 'notifications' %}">
+                                    <i class="fa fa-bus text-blue"></i> Actualizacion: {{notification.title}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                            {% get_notify_lodgings as notifications %}
+                            {% for notification in notifications %}
+                            <li>
+                                <a href="{% url 'notifications' %}">
+                                    <i class="fa fa-building-o text-green"></i>Actualizacion:
+                                    {{notification.title}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                            {% get_notify_restaurants as notifications %}
+                            {% for notification in notifications %}
+                            <li>
+                                <a href="{% url 'notifications' %}">
+                                    <i class="glyphicon glyphicon-cutlery text-red"></i>Actualizacion:
+                                    {{notification.title}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                            {% get_notify_agencies as notifications %}
+                            {% for notification in notifications %}
+                            <li>
+                                <a href="{% url 'notifications' %}">
+                                    <i class="glyphicon glyphicon-queen text-yellow"></i>Actualizacion:
+                                    {{notification.title}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                            {% get_notify_sites as notifications %}
+                            {% for notification in notifications %}
+                            <li>
+                                <a href="{% url 'notifications' %}">
+                                    <i class="fa fa-podcast text-black"></i>Actualizacion:
+                                    {{notification.title}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="{% url 'notifications' %}">View all</a></li>
+                </ul>
+            </li>
+            <!-- Tasks -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="mdi mdi-account-card-details"></i>
+                </a>
+                <ul class="dropdown-menu scale-up">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="box box-widget widget-user-2">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-purple">
+                            {% if request.user.is_authenticated %}
+                            <div class="widget-user-image">
+                                <img class="rounded-circle" src="{% static 'img/admin-img/user7-128x128.jpg' %}"
+                                     alt="User Avatar">
+                            </div>
+                            <h3 class="widget-user-username uppercase"> {{request.user.username}}</h3>
+                            {% get_user_groups request as group_user %}
+                            <h6 class="widget-user-desc">{{group_user.first}}</h6>
+                            {% endif %}
+                        </div>
+                        <div class="box-footer p-1">
+                            <ul class="nav d-block nav-stacked  badge bg-red">
+                                {% if request.user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a href="{% url 'logout' %}" class="icon-profile nav-link text-blue">Cerrar
+                                        Sesion
+                                        <i class="pull-left fa fa-power-off"></i></a>
+                                </li>
+                                {% else %}
+                                <li class="nav-item  badge bg-yellow">
+                                    <a href="{% url 'login' %}" class="icon-profile nav-link text-orange">Iniciar
+                                        Sesion
+                                        <i class="pull-left fa fa-power-off"></i></a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

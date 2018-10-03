@@ -14,31 +14,30 @@
     <title>Secretaria de Turismo y Culturas</title>
 
     <!-- Bootstrap 4.0-->
-    <link rel="stylesheet" href="{% static 'assets/vendor_components/bootstrap/dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
 
     <!-- Bootstrap extend-->
     <link rel="stylesheet" href="{% static 'bootstrap-extend.css' %}">
 
     <!-- Morris charts -->
-    <link rel="stylesheet" href="{% static 'assets/vendor_components/morris.js/morris.css' %}">
+    <link rel="stylesheet" href="{% static 'css/morris.js/morris.css' %}">
 
     <!-- Chartist-->
-    <link rel="stylesheet" href="{% static 'assets/vendor_components/chartist-js-develop/chartist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chartist-js-develop/chartist.css' %}">
 
     <!-- weather weather -->
-    <link rel="stylesheet" href="{% static 'assets/vendor_components/weather-icons/weather-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/weather-icons/weather-icons.css' %}">
 
     <!-- theme style -->
     <link rel="stylesheet" href="{% static 'master_style.css' %}">
 
     <!-- Lion_admin skins -->
-    <link rel="stylesheet" href="{% static 'skins/_all-skins.css' %}">
+    <link rel="stylesheet" href="{% static 'css/skins/_all-skins.css' %}">
     <!-- bootstrap datepicker -->
-    <link rel="stylesheet"
-          href="{% static 'assets/vendor_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
 
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{% static 'assets/vendor_plugins/iCheck/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/iCheck/all.css' %}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,387 +53,10 @@
 <div class="wrapper">
 
     <header class="main-header">
-        <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-            <h3 class="title_main">SISTOUR</h3>
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-
-                    <li class="search-box">
-                        <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="mdi mdi-magnify"></i></a>
-                        <form class="app-search" style="display: none;">
-                            <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                class="srh-btn"><i class="ti-close"></i></a>
-                        </form>
-                    </li>
-
-                    <!-- Messages -->
-                    <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="mdi mdi-email"></i>
-                        </a>
-                        <ul class="dropdown-menu scale-up">
-                            <li class="header">You have 5 messages</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu inner-content-div">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{% static 'images/user2-160x160.jpg' %}"
-                                                     class="rounded-circle"
-                                                     alt="User Image">
-                                            </div>
-                                            <div class="mail-contnet">
-                                                <h4>
-                                                    Lorem Ipsum
-                                                    <small><i class="fa fa-clock-o"></i> 15 mins</small>
-                                                </h4>
-                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{% static 'images/user3-128x128.jpg' %}"
-                                                     class="rounded-circle"
-                                                     alt="User Image">
-                                            </div>
-                                            <div class="mail-contnet">
-                                                <h4>
-                                                    Nullam tempor
-                                                    <small><i class="fa fa-clock-o"></i> 4 hours</small>
-                                                </h4>
-                                                <span>Curabitur facilisis erat quis metus congue viverra.</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{% static 'images/user4-128x128.jpg' %}"
-                                                     class="rounded-circle"
-                                                     alt="User Image">
-                                            </div>
-                                            <div class="mail-contnet">
-                                                <h4>
-                                                    Proin venenatis
-                                                    <small><i class="fa fa-clock-o"></i> Today</small>
-                                                </h4>
-                                                <span>Vestibulum nec ligula nec quam sodales rutrum sed luctus.</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{% static 'images/user3-128x128.jpg' %}"
-                                                     class="rounded-circle"
-                                                     alt="User Image">
-                                            </div>
-                                            <div class="mail-contnet">
-                                                <h4>
-                                                    Praesent suscipit
-                                                    <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                                </h4>
-                                                <span>Curabitur quis risus aliquet, luctus arcu nec, venenatis neque.</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{% static 'images/user4-128x128.jpg' %}"
-                                                     class="rounded-circle"
-                                                     alt="User Image">
-                                            </div>
-                                            <div class="mail-contnet">
-                                                <h4>
-                                                    Donec tempor
-                                                    <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                                </h4>
-                                                <span>Praesent vitae tellus eget nibh lacinia pretium.</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">See all e-Mails</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- Notifications -->
-                    <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="mdi mdi-bell"></i>
-                        </a>
-                        <ul class="dropdown-menu scale-up">
-                            <li class="header">Tienes {% get_quantity_notify %} Notificaciones</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu inner-content-div">
-                                    {% get_notify_transports as notifications %}
-                                    {% for notification in notifications %}
-                                    <li>
-                                        <a href="{% url 'notifications' %}">
-                                            <i class="fa fa-bus text-blue"></i> Actualizacion: {{notification.title}}
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                    {% get_notify_lodgings as notifications %}
-                                    {% for notification in notifications %}
-                                    <li>
-                                        <a href="{% url 'notifications' %}">
-                                            <i class="fa fa-building-o text-green"></i>Actualizacion:
-                                            {{notification.title}}
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                    {% get_notify_restaurants as notifications %}
-                                    {% for notification in notifications %}
-                                    <li>
-                                        <a href="{% url 'notifications' %}">
-                                            <i class="glyphicon glyphicon-cutlery text-red"></i>Actualizacion:
-                                            {{notification.title}}
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                    {% get_notify_agencies as notifications %}
-                                    {% for notification in notifications %}
-                                    <li>
-                                        <a href="{% url 'notifications' %}">
-                                            <i class="glyphicon glyphicon-queen text-yellow"></i>Actualizacion:
-                                            {{notification.title}}
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                    {% get_notify_sites as notifications %}
-                                    {% for notification in notifications %}
-                                    <li>
-                                        <a href="{% url 'notifications' %}">
-                                            <i class="fa fa-podcast text-black"></i>Actualizacion:
-                                            {{notification.title}}
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="{% url 'notifications' %}">View all</a></li>
-                        </ul>
-                    </li>
-                    <!-- Tasks -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="mdi mdi-account-card-details"></i>
-                        </a>
-                        <ul class="dropdown-menu scale-up">
-                            <!-- Widget: user widget style 1 -->
-                            <div class="box box-widget widget-user-2">
-                                <!-- Add the bg color to the header using any of the bg-* classes -->
-                                <div class="widget-user-header bg-purple">
-                                    {% if request.user.is_authenticated %}
-                                    <div class="widget-user-image">
-                                        <img class="rounded-circle" src="{% static 'images/user7-128x128.jpg' %}"
-                                             alt="User Avatar">
-                                    </div>
-                                    <h3 class="widget-user-username uppercase"> {{request.user.username}}</h3>
-                                    {% get_user_groups request as group_user %}
-                                    <h6 class="widget-user-desc">{{group_user.first}}</h6>
-                                    {% endif %}
-                                </div>
-                                <div class="box-footer p-1">
-                                    <ul class="nav d-block nav-stacked  badge bg-red">
-                                        {% if request.user.is_authenticated %}
-                                        <li class="nav-item">
-                                            <a href="{% url 'logout' %}" class="icon-profile nav-link text-blue">Cerrar
-                                                Sesion
-                                                <i class="pull-left fa fa-power-off"></i></a>
-                                        </li>
-                                        {% else %}
-                                        <li class="nav-item  badge bg-yellow">
-                                            <a href="{% url 'login' %}" class="icon-profile nav-link text-orange">Iniciar
-                                                Sesion
-                                                <i class="pull-left fa fa-power-off"></i></a>
-                                        </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        {% include 'partials/_nabvar.html'%}
     </header>
 
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar -->
-        {% get_request_rol request request.user.id as role %}
-        <section class="sidebar">
-            <ul class="sidebar-menu" data-widget="tree">
-                {% if request.user.is_superuser %}
-                <li class="header nav-small-cap oldclass" id="mydiv">ADMINISTRACION</li>
-                <li>
-                    <a href="{% url 'user-index' %}">
-                        <i class="fa fa-address-book-o"></i> <span>Usuarios</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                 <li>
-                    <a href="{% url 'assignments-index' %}">
-                        <i class="fa fa-user-plus"></i> <span>Asignaciones</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'location-index-admin' %}">
-                        <i class="fa fa-map-o"></i> <span>Localizaciones</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'configurations-index' %}">
-                        <i class="fa fa-gears"></i> <span>Configuraciones</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                {% endif %}
-
-                <li class="nav-devider"></li>
-                <li class="header nav-small-cap">TURISMO</li>
-                {% if role == 1 or request.user.is_superuser %}
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-building-o"></i> <span>Area Hospedajes</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active">
-                            <a href="{% url 'lodgings-index-admin'%}"><i class="fa fa-building-o"></i>Hospedajes</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'lodgings-types-index-admin'%}"><i class="fa fa-signal"></i>Tipos</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'lodgings-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
-                        </li>
-                    </ul>
-                </li>
-                {% endif %}
-                {% if role == 2 or request.user.is_superuser %}
-                <li class="treeview">
-                    <a href="{% url 'transports-index-admin'%}">
-                        <i class="fa fa-bus"></i> <span>Area Transportes</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active">
-                            <a href="{% url 'transports-index-admin'%}"><i class="fa fa-bus"></i>Transportes</a></li>
-                        <li class="active">
-                            <a href="{% url 'transports-services-index-admin'%}"><i
-                                    class="fa fa-thumb-tack"></i>Servicios</a></li>
-                    </ul>
-                </li>
-                {% endif %}
-                {% if role == 3 or request.user.is_superuser %}
-                <li class="treeview">
-                    <a href="{% url 'restaurants-index-admin'%}">
-                        <i class="glyphicon glyphicon-cutlery"></i> <span>Area Restaurantes</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active">
-                            <a href="{% url 'restaurants-index-admin'%}"><i class="glyphicon glyphicon-cutlery"></i>Restaurantes</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'restaurants-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
-                        </li>
-                    </ul>
-
-                </li>
-                {% endif %}
-                {% if role == 4 or request.user.is_superuser %}
-                <li>
-                    <a href="{% url 'agencies-index-admin'%}">
-                        <i class="glyphicon glyphicon-queen"></i> <span>Agencias de Turismo</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="nav-devider"></li>
-                <li class="header nav-small-cap">CULTURA</li>
-                {% if request.user.is_superuser %}
-                <li>
-                    <a href="{% url 'events-index-admin'%}">
-                        <i class="fa fa-bullhorn"></i> <span>Eventos</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                {% endif %}
-                {% if role == 5 or request.user.is_superuser %}
-                <li class="treeview">
-                    <a href="{% url 'tourism_sites-index-admin'%}">
-                        <i class="fa fa-podcast"></i> <span>Area Sitios Turisticos</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active">
-                            <a href="{% url 'tourism_sites-index-admin'%}"><i class="glyphicon glyphicon-camera"></i>Sitios
-                                Turisticos</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'tourism_sites-types-index-admin'%}"><i class="fa fa-signal"></i>Tipos</a>
-                        </li>
-                        <li class="active">
-                            <a href="{% url 'tourism_sites-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
-                        </li>
-                    </ul>
-                </li>
-                {% endif %}
-                {% if request.user.is_superuser %}
-                <li>
-                    <a href="{% url 'tourism_routes-index-admin'%}">
-                        <i class="fa fa-map-signs"></i> <span>Rutas Turisticas</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </section>
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
+   {% include 'partials/_sidebar.html'%}
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
 
@@ -451,76 +73,50 @@
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
 
-    <footer class="main-footer">
-        <div class="pull-right d-none d-sm-inline-block">
-            <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="https://themeforest.net/item/lion-responsive-bootstrap-4-admin-dashboard-template-and-webapp-template/21335238">Purchase
-                        Now</a>
-                </li>
-            </ul>
-        </div>
-        &copy; 2018 SisTour Corporations</a>. All Rights Reserved.
-    </footer>
-
-    <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+{% include 'partials/_footer.html' %}
 
 </div>
-<!-- ./wrapper -->
-
 
 <!-- jQuery 3 -->
-<script src="{% static 'assets/vendor_components/jquery/dist/jquery.js' %}"></script>
+<script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
 
 <!-- jQuery UI 1.11.4 -->
-<script src="{% static 'assets/vendor_components/jquery-ui/jquery-ui.js' %}"></script>
+<script src="{% static 'js/jquery-ui/jquery-ui.js' %}"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script src="{% static 'assets/vendor_plugins/input-mask/jquery.inputmask.js' %}"></script>
-<script src="{% static 'assets/vendor_plugins/input-mask/jquery.inputmask.date.extensions.js' %}"></script>
-<script src="{% static 'assets/vendor_plugins/input-mask/jquery.inputmask.extensions.js' %}"></script>
+<script src="{% static 'js/input-mask/jquery.inputmask.js' %}"></script>
+<script src="{% static 'js/input-mask/jquery.inputmask.date.extensions.js' %}"></script>
+<script src="{% static 'js/input-mask/jquery.inputmask.extensions.js' %}"></script>
 
 <!-- date-range-picker -->
-<script src="{% static 'assets/vendor_components/moment/min/moment.min.js' %}"></script>
-<script src="{% static 'assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'js/moment/min/moment.min.js' %}"></script>
 
 <!-- bootstrap datepicker -->
-<script src="{% static 'assets/vendor_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
-
-<!-- bootstrap color picker -->
-<script src="{% static 'assets/vendor_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
 
 <!-- bootstrap time picker -->
-<script src="{% static 'assets/vendor_plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'js/timepicker/bootstrap-timepicker.min.js' %}"></script>
+
 <!-- popper -->
-<script src="{% static 'assets/vendor_components/popper/dist/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
 
 <!-- Bootstrap 4.0-->
-<script src="{% static 'assets/vendor_components/bootstrap/dist/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
 
 <!-- Morris.js charts -->
-<script src="{% static 'assets/vendor_components/raphael/raphael.min.js' %}"></script>
-<script src="{% static 'assets/vendor_components/morris.js/morris.min.js' %}"></script>
+<script src="{% static 'js/raphael/raphael.min.js' %}"></script>
+<script src="{% static 'js/morris.js/morris.min.js' %}"></script>
 
 <!-- ChartJS -->
-<script src="{% static 'assets/vendor_components/chart.js-master/Chart.min.js' %}"></script>
+<script src="{% static 'js/chart.js-master/Chart.min.js' %}"></script>
 
 <!-- Chartist  -->
-<script src="{% static 'assets/vendor_components/chartist-js-develop/chartist.min.js' %}"></script>
+<script src="{% static 'js/chartist-js-develop/chartist.min.js' %}"></script>
 
 <!-- Slimscroll -->
-<script src="{% static 'assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
-
-<!-- FastClick -->
-<script src="{% static 'assets/vendor_components/fastclick/lib/fastclick.js' %}"></script>
+<script src="{% static 'js/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
 
 <!-- Lion_admin App -->
 <script src="{% static 'js/template.js' %}"></script>
@@ -531,28 +127,6 @@
 
 <!-- Lion_admin for demo purposes -->
 <script src="{% static 'js/demo.js' %}"></script>
-<script type="text/javascript">
-        $(document).ready(function () {
-            $('#confirm-delete').on('show.bs.modal', function (e) {
-
-                var title = $(e.relatedTarget).data('title');
-                var message = $(e.relatedTarget).data('message');
-
-                if (title !== undefined)
-                    $(this).find('.modal-header').html(title);
-                if (message !== undefined)
-                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
-
-                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            });
-
-         $('#alert_d').delay(5000).fadeOut();
-
-        })
-
-
-</script>
-
 <script>
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -567,7 +141,25 @@
         readURL(this);
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-tooltip="tooltip"]').tooltip();
+        $('[title]').tooltip();
 
+        $('#confirm-delete').on('show.bs.modal', function (e) {
+
+            var title = $(e.relatedTarget).data('title');
+            var message = $(e.relatedTarget).data('message');
+
+            if (title !== undefined)
+                $(this).find('.modal-header').html(title);
+            if (message !== undefined)
+                $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    })
+
+</script>
 {% block code_js %}
 {% endblock %}
 

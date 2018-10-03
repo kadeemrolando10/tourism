@@ -9,11 +9,11 @@
     {% include 'partials/actions/add.html' with type='button' url=view_url title='Añadir' %}
 </div>
 <nav aria-label="breadcrumb" class="alert-warning">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <h6>Servicios de Restaurantes</h6>
-    </li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <h6>Servicios de Restaurantes</h6>
+        </li>
+    </ol>
 </nav>
 <form method="GET" action="" accept-charset="utf-8" class="input-group mb-3 col-10 col-md-8 col-lg-4">
     <input type="text" class="form-control" placeholder="Buscar" name="q" value="{{request.GET.q}}">
@@ -57,8 +57,10 @@
 <div class="pagination">
     <span class="step-links">
         {% if services.has_previous %}
-            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
-            <a class="btn btn-info" href="?page={{ services.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+            <a class="btn btn-info"
+               href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info"
+               href="?page={{ services.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
         {% endif %}
 
         <span class="current btn btn-success">
@@ -66,31 +68,21 @@
         </span>
 
         {% if services.has_next %}
-            <a class="btn btn-primary" href="?page={{ services.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
-            <a class="btn btn-primary" href="?page={{ services.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+            <a class="btn btn-primary"
+               href="?page={{ services.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary"
+               href="?page={{ services.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
         {% endif %}
     </span>
 </div>
 {% endblock %}
 
 {% block code_js %}
-<script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-tooltip="tooltip"]').tooltip();
-            $('[title]').tooltip();
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#restaurants').toggleClass("active");
 
-            $('#confirm-delete').on('show.bs.modal', function (e) {
-
-                var title = $(e.relatedTarget).data('title');
-                var message = $(e.relatedTarget).data('message');
-
-                if (title !== undefined)
-                    $(this).find('.modal-header').html(title);
-                if (message !== undefined)
-                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
-                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            });
-        })
-
+    $('.treeview-menu li').removeClass('active');
+    $('#restaurants-services').toggleClass("active");
 </script>
 {% endblock %}

@@ -52,3 +52,9 @@
 </section>
 
 {% endblock %}
+{% block js_code %}
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#sites_web').toggleClass("active");
+</script>
+{% endblock %}

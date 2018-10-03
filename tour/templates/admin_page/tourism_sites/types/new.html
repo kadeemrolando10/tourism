@@ -4,7 +4,8 @@
 <nav aria-label="breadcrumb" class="alert-warning">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a class="page" href="{% url 'tourism_sites-types-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page" href="{% url 'tourism_sites-types-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Atrás">Tipos de Sitios Turisticos</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Agregando</li>
@@ -22,4 +23,11 @@
 </div>
 {% endblock %}
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#sites').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#sites-types').toggleClass("active");
+</script>
 {% endblock %}

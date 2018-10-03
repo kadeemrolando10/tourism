@@ -7,12 +7,14 @@
             <a class="page" href="{% url 'lodgings-index-admin' %}" data-tooltip="tooltip" data-placement="right"
                title="Atrás">Hospedajes</a>
         </li>
-        <li class="breadcrumb-item">
-            <a class="page_second" href="{% url 'lodgings-show-admin' lodging_id %}" data-tooltip="tooltip" data-placement="right"
+        <li class="breadcrumb-item">-
+            <a class="page_second" href="{% url 'lodgings-show-admin' lodging_id %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Hospedajes">{{lodging_title}}</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_third" href="{% url 'lodgings-room-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_third" href="{% url 'lodgings-room-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Habitaciones">Habitaciones</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Modificando</li>
@@ -21,17 +23,24 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
-            <div class="white-box">
-                {% include 'partials/_partial_form_horizontal.html' %}
-            </div>
-        </div>
-        <div class="col-md-6">
-            <img id="image_p" src="{{room.image.url}}" alt="your image" width="300px"/>
+<div class="row">
+    <div class="col-md-6">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
+    <div class="col-md-6">
+        <img id="image_p" src="{{room.image.url}}" alt="your image" width="300px"/>
+    </div>
+</div>
 {% endblock %}
 
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#lodgings').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#lodgings-lodgings').toggleClass("active");
+</script>
 {% endblock %}

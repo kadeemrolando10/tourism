@@ -27,4 +27,11 @@
 {% endblock %}
 
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#transports').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#transports-services').toggleClass("active");
+</script>
 {% endblock %}

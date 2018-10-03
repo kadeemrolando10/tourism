@@ -34,7 +34,8 @@
                     <div class="card-body height-50">
                         <div class="card-title-z">
                             <h5 class="card-title">{{ s.title }}</h5>
-                            <a class="btn bg-info text-white" href="{% url 'tourism_routes-show' s.id %}">Mas detalles</a>
+                            <a class="btn bg-info text-white" href="{% url 'tourism_routes-show' s.id %}">Mas
+                                detalles</a>
                             <p class="card-text">
                                 <small class="text-muted">Fecha de Evento: {{ s.date }}</small>
                             </p>
@@ -48,4 +49,10 @@
     </div>
 </section>
 
+{% endblock %}
+{% block js_code %}
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#routes_web').toggleClass("active");
+</script>
 {% endblock %}

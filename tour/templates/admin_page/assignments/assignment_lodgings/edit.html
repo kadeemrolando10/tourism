@@ -5,7 +5,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a class="page" href="{% url 'assignments-index' %}" data-tooltip="tooltip" data-placement="right"
-               title="Atrás">Asignacion  de Hospedajes</a>
+               title="Atrás">Asignacion de Hospedajes</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Modificando</li>
     </ol>
@@ -23,4 +23,11 @@
 {% endblock %}
 
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#settings').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#assignments').toggleClass("active");
+</script>
 {% endblock %}

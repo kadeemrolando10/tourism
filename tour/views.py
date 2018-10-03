@@ -54,7 +54,7 @@ def user_index(request):
             Q(first_name__icontains=query) |
             Q(last_name__icontains=query)
         ).distinct()
-    paginator = Paginator(users_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(users_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     users = paginator.get_page(page)
 
@@ -208,6 +208,7 @@ def change_main_tourism_site(request, id):
 # PAGINA INICIO CLIENTE
 def index(request):
     request.session['id_page'] = 0
+    request.session['id_main'] = 0
     restaurants = Restaurant.objects.all
     transports = Transport.objects.all
     agencies = Agency.objects.all
@@ -242,7 +243,7 @@ def secretary(request):
 def agency_index(request):
     request.session['id_page'] = 4
     ids = request.session['id_main']
-    if ids == 0:
+    if ids == 0 or ids is None:
         agencies = Agency.objects.all
     else:
         agencies = Agency.objects.filter(destination=ids)
@@ -280,7 +281,7 @@ def agency_index_admin(request):
         agencies_list = agencies_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(agencies_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(agencies_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     agencies = paginator.get_page(page)
     return render(request, 'admin_page/agencies/index.html', {
@@ -382,7 +383,7 @@ def agency_service_index_admin(request):
         services_list = services_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(services_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     services = paginator.get_page(page)
     agency_title = Agency.objects.get(id=agency)
@@ -478,7 +479,7 @@ def agency_schedule_index_admin(request):
         schedules_list = schedules_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(schedules_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     schedules = paginator.get_page(page)
     agency_title = Agency.objects.get(id=agency)
@@ -569,7 +570,7 @@ def agency_schedule_delete_admin(request, id):
 def event_index(request):
     request.session['id_page'] = 5
     ids = request.session['id_main']
-    if ids == 0:
+    if ids == 0 or  ids is None:
         events = Event.objects.all
     else:
         events = Event.objects.filter(destination=ids)
@@ -588,7 +589,7 @@ def event_index_admin(request):
         events_list = events_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(events_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(events_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     events = paginator.get_page(page)
     return render(request, 'admin_page/events/index.html', {
@@ -742,7 +743,7 @@ def restaurant_index_admin(request):
         restaurants_list = restaurants_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(restaurants_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(restaurants_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     restaurants = paginator.get_page(page)
     return render(request, 'admin_page/restaurants/index.html', {
@@ -845,7 +846,7 @@ def restaurant_menu_index_admin(request):
         menus_list = menus_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(menus_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(menus_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     menus = paginator.get_page(page)
     restaurant_title = Restaurant.objects.get(id=restaurant)
@@ -941,7 +942,7 @@ def restaurant_schedule_index_admin(request):
         schedules_list = schedules_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(schedules_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     schedules = paginator.get_page(page)
     restaurant_title = Restaurant.objects.get(id=restaurant)
@@ -1030,13 +1031,13 @@ def restaurant_schedule_delete_admin(request, id):
 # SERVICIOS DE RESTAURANTES
 @permission_required('tour.index_restaurantservice', login_url='/accounts/login/')
 def restaurant_service_index_admin(request):
-    services_list = RestaurantService.objects.all
+    services_list = RestaurantService.objects.all()
     query = request.GET.get('q')
     if query:
         services_list = services_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(services_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     services = paginator.get_page(page)
     return render(request, 'admin_page/restaurants/services/index.html', {
@@ -1109,11 +1110,11 @@ def restaurant_service_delete_admin(request, id):
 # TRANSPORTES CLIENTE
 def transport_index(request):
     request.session['id_page'] = 1
-    id = request.session['id_main']
-    if id == 0:
+    ids = request.session['id_main']
+    if ids == 0 or ids is None:
         transports = Transport.objects.all
     else:
-        transports = Transport.objects.filter(destination=id)
+        transports = Transport.objects.filter(destination=ids)
 
     return render(request, 'tour/transports-index.html', {
         'transports': transports,
@@ -1149,7 +1150,7 @@ def transport_index_admin(request):
         transports_list = transports_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(transports_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(transports_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     transports = paginator.get_page(page)
     return render(request, 'admin_page/transports/index.html', {
@@ -1254,7 +1255,7 @@ def transport_destination_index_admin(request):
         destinations_list = destinations_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(destinations_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(destinations_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     destinations = paginator.get_page(page)
 
@@ -1346,7 +1347,7 @@ def transport_service_index_admin(request):
         services_list = services_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(services_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     services = paginator.get_page(page)
     return render(request, 'admin_page/transports/services/index.html', {
@@ -1430,7 +1431,7 @@ def transport_type_service_index_admin(request):
         type_services_list = type_services_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(type_services_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(type_services_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     type_services = paginator.get_page(page)
 
@@ -1540,7 +1541,7 @@ def transport_schedule_index_admin(request):
         schedules_list = schedules_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(schedules_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     schedules = paginator.get_page(page)
 
@@ -1665,7 +1666,7 @@ def tourism_site_index_admin(request):
         sites_list = sites_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(sites_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(sites_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     sites = paginator.get_page(page)
     return render(request, 'admin_page/tourism_sites/index.html', {
@@ -1768,7 +1769,7 @@ def tourism_site_menu_index_admin(request):
         menus_list = menus_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(menus_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(menus_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     menus = paginator.get_page(page)
 
@@ -1865,7 +1866,7 @@ def tourism_site_schedule_index_admin(request):
         schedules_list = schedules_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(schedules_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     schedules = paginator.get_page(page)
     site_title = TourismSite.objects.get(id=tourism_site)
@@ -1960,7 +1961,7 @@ def tourism_site_type_index_admin(request):
         types_list = types_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(types_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(types_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     types = paginator.get_page(page)
     return render(request, 'admin_page/tourism_sites/types/index.html', {
@@ -2039,7 +2040,7 @@ def tourism_site_service_index_admin(request):
         services_list = services_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(services_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(services_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     services = paginator.get_page(page)
     return render(request, 'admin_page/tourism_sites/services/index.html', {
@@ -2142,7 +2143,7 @@ def tourism_route_index_admin(request):
         routes_list = routes_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(routes_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(routes_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     routes = paginator.get_page(page)
     return render(request, 'admin_page/tourism_routes/index.html', {
@@ -2244,7 +2245,7 @@ def tourism_route_menu_index_admin(request):
         menus_list = menus_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(menus_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(menus_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     menus = paginator.get_page(page)
 
@@ -2480,7 +2481,7 @@ def lodging_room_index_admin(request):
         rooms_list = rooms_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(rooms_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(rooms_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     rooms = paginator.get_page(page)
     lodging_title = Lodging.objects.get(id=lodging)
@@ -2576,7 +2577,7 @@ def lodging_schedule_index_admin(request):
         schedules_list = schedules_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(schedules_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(schedules_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     schedules = paginator.get_page(page)
     lodging_title = Lodging.objects.get(id=lodging)
@@ -2671,7 +2672,7 @@ def lodging_type_index_admin(request):
         types_list = types_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(types_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(types_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     types = paginator.get_page(page)
     return render(request, 'admin_page/lodgings/types/index.html', {
@@ -2829,7 +2830,7 @@ def location_index_admin(request):
         destinations_list = destinations_list.filter(
             Q(title__icontains=query)
         ).distinct()
-    paginator = Paginator(destinations_list, 10)  # Show 15 contacts per page
+    paginator = Paginator(destinations_list, 10)  # Show 10 contacts per page
     page = request.GET.get('page')
     destinations = paginator.get_page(page)
     return render(request, 'admin_page/locations/index.html', {

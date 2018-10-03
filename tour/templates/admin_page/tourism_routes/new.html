@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="col-md-6 text-center">
-        <img class="mb-4" id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="300px"/>
+        <img class="mb-4" id="image_p" src="{% static 'img/admin-img/noimage.png'%}" alt="your image" height="300px"/>
         <div class="row">
             <div class="col-md-12">
                 <div class="white-box">
@@ -112,8 +112,10 @@
         window.onload = function () {
             initialize()
         };
+</script>
 
-
-
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#routes').toggleClass("active");
 </script>
 {% endblock %}

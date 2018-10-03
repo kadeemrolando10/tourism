@@ -21,9 +21,6 @@ class SocialForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super(SocialForm, self).__init__(*args, **kwargs)
-        self.fields['lat'].widget.attrs['readonly'] = True
-        self.fields['lng'].widget.attrs['readonly'] = True
-
     class Meta:
         model = Social
         fields = '__all__'
@@ -231,7 +228,7 @@ class TourismRouteForm(BaseForm):
 
 class TourismRouteMenuForm(BaseForm):
     def __init__(self, *args, **kwargs):
-        super(TourismSiteMenuForm, self).__init__(*args, **kwargs)
+        super(TourismRouteMenuForm, self).__init__(*args, **kwargs)
         self.fields["image"].widget.attrs['class'] = 'inputfile'
 
     class Meta:

@@ -11,7 +11,7 @@
     </ol>
 </nav>
 {% endblock %}
-
+-
 {% block content %}
 <div class="row">
     <div class="col-md-6">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="col-md-6 text-center">
-        <img class="mb-4" id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="300px"/>
+        <img class="mb-4" id="image_p" src="{% static 'img/admin-img/noimage.png'%}" alt="your image" height="300px"/>
         <div class="white-box">
             <div id="gmaplocation" class="map"></div>
         </div>
@@ -30,50 +30,53 @@
 {% block code_js %}
 {% include 'partials/_url_gmaps.html' %}
 <script type="text/javascript">
-        $('[data-mask]').inputmask();
+    $('[data-mask]').inputmask();
 
-        var map;
-        var markers = [];
-        function initialize() {
-            var myLatlng = new google.maps.LatLng(-19.5874135,-65.7624432);
-            var myOptions = {
-                zoom: 14,
-                center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
+    var map;
+    var markers = [];
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(-19.5874135, -65.7624432);
+        var myOptions = {
+            zoom: 14,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
 
-            map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
-            // marker refers to a global variable
+        map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
+        // marker refers to a global variable
 
-            google.maps.event.addListener(map, "click", function (event) {
-                // get lat/lon of click
-                var clickLat = event.latLng.lat();
-                var clickLon = event.latLng.lng();
+        google.maps.event.addListener(map, "click", function (event) {
+            // get lat/lon of click
+            var clickLat = event.latLng.lat();
+            var clickLon = event.latLng.lng();
 
-                // show in input box
-                document.getElementById("id_lat").value = clickLat;
-                document.getElementById("id_lng").value = clickLon;
-                clearMapOnAll(null);
+            // show in input box
+            document.getElementById("id_lat").value = clickLat;
+            document.getElementById("id_lng").value = clickLon;
+            clearMapOnAll(null);
 
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(clickLat, clickLon),
-                    map: map
-                });
-                markers.push(marker)
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(clickLat, clickLon),
+                map: map
             });
+            markers.push(marker)
+        });
+    }
+    function clearMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
         }
-        function clearMapOnAll(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
+    }
 
-        window.onload = function () {
-            initialize()
-        };
+    window.onload = function () {
+        initialize()
+    };
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#restaurants').toggleClass("active");
 
-
-
-
+    $('.treeview-menu li').removeClass('active');
+    $('#restaurants-restaurants').toggleClass("active");
 </script>
 {% endblock %}

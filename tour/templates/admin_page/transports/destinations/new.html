@@ -8,11 +8,13 @@
                title="Atrás">Transportes</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip"
+               data-placement="right"
                title="{{transport_title}}">{{transport_title}}</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_third" href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_third" href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Destinos">Destinos</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Agregando</li>
@@ -30,4 +32,11 @@
 </div>
 {% endblock %}
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#transports').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#transports-transports').toggleClass("active");
+</script>
 {% endblock %}

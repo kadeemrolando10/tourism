@@ -44,7 +44,7 @@
             else{
                 var reader = new FileReader();
                     reader.onload = function (e) {
-                        $('#image_p').attr('src', '{% static 'images/preview_video.png'%}' );
+                        $('#image_p').attr('src', '{% static 'img/admin-img/preview_video.png' %}' );
                     }
                     reader.readAsDataURL(input.files[0]);
             }
@@ -110,5 +110,10 @@
             initialize()
         };
 
+</script>
+
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#events').toggleClass("active");
 </script>
 {% endblock %}

@@ -18,7 +18,7 @@
                 <div class="single-listing-content">
                     <div class="listing-title">
                         <h4>{{route.title}}</h4>
-                         <h6>
+                        <h6>
                             {% for i in score|times %}
                             <i class="fa fa-star underline-star"></i>
                             {% endfor %}
@@ -70,7 +70,8 @@
                         <h6 class="underline"><i class="fa fa-info text-light"></i> Informacion</h6>
                         <div class="opening-hours">
                             <p>
-                               <label class="les"><i class="fa fa-phone" aria-hidden="true"></i> Fecha de Evento</label><br>
+                                <label class="les"><i class="fa fa-phone" aria-hidden="true"></i> Fecha de
+                                    Evento</label><br>
                                 <span class="alert bg-success link">{{ route.date }}</span>
                             </p>
                         </div>
@@ -86,53 +87,57 @@
 
 {% block js_code %}
 {% include 'partials/_url_gmaps.html' %}
-    <script src="{% static 'assets/vendor_components/gmaps/gmaps.min.js' %}"></script>
+<script src="{% static 'assets/vendor_components/gmaps/gmaps.min.js' %}"></script>
 <script type="text/javascript">
-        var map;
-        var lat_or = '{{ route.lat_origin }}';
-        var lng_or = '{{ route.lng_origin }}';
-        var lat_des = '{{ route.lat_destination }}';
-        var lng_des = '{{ route.lng_destination }}';
-        function initialize() {
-            map = new GMaps({
-                el: '#gmap',
-                lat: lat_or,
-                lng: lng_or,
-                gestureHandling: 'greedy'
-              });
-            map.addMarker({
-                lat: lat_or,
-                lng: lng_or,
-                title: 'Marker with InfoWindow',
-                infoWindow: {
-                  content: '<h6>Partida</h6>'
-                }
-            });
-            map.addMarker({
-                lat: lat_des,
-                lng: lng_des,
-                title: 'Marker with InfoWindow',
-                infoWindow: {
-                  content: '<h6>LLegada</h6>'
-                }
-            });
-            map.drawRoute({
-                origin: [lat_or, lng_or ],
-                destination: [lat_des, lng_des],
-                travelMode: 'walking',
-                strokeColor: '#lime',
-                strokeOpacity: 0.6,
-                strokeWeight: 6
-              });
-            map.fitZoom();
-        }
+    var map;
+    var lat_or = '{{ route.lat_origin }}';
+    var lng_or = '{{ route.lng_origin }}';
+    var lat_des = '{{ route.lat_destination }}';
+    var lng_des = '{{ route.lng_destination }}';
+    function initialize() {
+        map = new GMaps({
+            el: '#gmap',
+            lat: lat_or,
+            lng: lng_or,
+            gestureHandling: 'greedy'
+        });
+        map.addMarker({
+            lat: lat_or,
+            lng: lng_or,
+            title: 'Marker with InfoWindow',
+            infoWindow: {
+                content: '<h6>Partida</h6>'
+            }
+        });
+        map.addMarker({
+            lat: lat_des,
+            lng: lng_des,
+            title: 'Marker with InfoWindow',
+            infoWindow: {
+                content: '<h6>LLegada</h6>'
+            }
+        });
+        map.drawRoute({
+            origin: [lat_or, lng_or],
+            destination: [lat_des, lng_des],
+            travelMode: 'walking',
+            strokeColor: '#lime',
+            strokeOpacity: 0.6,
+            strokeWeight: 6
+        });
+        map.fitZoom();
+    }
 
-        window.onload = function () {
-            initialize()
-        };
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        })
+    window.onload = function () {
+        initialize()
+    };
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 
+</script>
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#routes_web').toggleClass("active");
 </script>
 {% endblock %}

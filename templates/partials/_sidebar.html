@@ -1,0 +1,146 @@
+<!-- Left side column. contains the logo and sidebar -->
+{% load static %}
+{% load utils %}
+<aside class="main-sidebar">
+    <!-- sidebar -->
+    {% get_request_rol request request.user.id as role %}
+    <section class="sidebar">
+        <ul class="sidebar-menu" data-widget="tree">
+            {% if request.user.is_superuser %}
+            <li class="header nav-small-cap oldclass" id="mydiv">ADMINISTRACION</li>
+            <li id="home">
+                <a href="{% url 'index_admin'%}">
+                    <i class="fa fa-windows"></i> <span>Inicio</span>
+                </a>
+            </li>
+            <li id="settings" class="treeview">
+                <a href="#">
+                    <i class="fa fa-university"></i> <span>Area Gobierno</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="users" class="submenu">
+                        <a href="{% url 'user-index' %}"><i class="fa fa-address-book-o"></i> Usuarios </a>
+                    </li>
+                    <li id="assignments" class="submenu">
+                        <a href="{% url 'assignments-index' %}"><i class="fa fa-user-plus"></i> Asignaciones </a>
+                    </li>
+                    <li id="locations" class="submenu">
+                        <a href="{% url 'location-index-admin' %}"><i class="fa fa-map-o"></i> Localizaciones </a>
+                    </li>
+                    <li id="configurations" class="submenu">
+                        <a href="{% url 'configurations-index' %}"><i class="fa fa-gears"></i> Configuraciones </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+
+            <li class="nav-devider"></li>
+            <li class="header nav-small-cap">TURISMO</li>
+            {% if role == 1 or request.user.is_superuser %}
+            <li id="lodgings" class="treeview">
+                <a href="#">
+                    <i class="fa fa-building-o"></i> <span>Area Hospedajes</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="lodgings-lodgings" class="submenu">
+                        <a href="{% url 'lodgings-index-admin'%}"><i class="fa fa-building-o"></i>Hospedajes</a>
+                    </li>
+                    <li id="lodgings-types" class="submenu">
+                        <a href="{% url 'lodgings-types-index-admin'%}"><i class="fa fa-signal"></i>Tipos</a>
+                    </li>
+                    <li id="lodgings-services" class="submenu">
+                        <a href="{% url 'lodgings-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+            {% if role == 2 or request.user.is_superuser %}
+            <li id="transports" class="treeview">
+                <a href="{% url 'transports-index-admin'%}">
+                    <i class="fa fa-bus"></i> <span>Area Transportes</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="transports-transports" class="submenu">
+                        <a href="{% url 'transports-index-admin'%}"><i class="fa fa-bus"></i>Transportes</a></li>
+                    <li id="transports-services" class="submenu">
+                        <a href="{% url 'transports-services-index-admin'%}"><i
+                                class="fa fa-thumb-tack"></i>Servicios</a></li>
+                </ul>
+            </li>
+            {% endif %}
+            {% if role == 3 or request.user.is_superuser %}
+            <li id="restaurants" class="treeview">
+                <a href="{% url 'restaurants-index-admin'%}">
+                    <i class="glyphicon glyphicon-cutlery"></i> <span>Area Restaurantes</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="restaurants-restaurants" class="submenu">
+                        <a href="{% url 'restaurants-index-admin'%}"><i class="glyphicon glyphicon-cutlery"></i>Restaurantes</a>
+                    </li>
+                    <li id="restaurants-services" class="submenu">
+                        <a href="{% url 'restaurants-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
+                    </li>
+                </ul>
+
+            </li>
+            {% endif %}
+            {% if role == 4 or request.user.is_superuser %}
+            <li id="agencies">
+                <a href="{% url 'agencies-index-admin'%}">
+                    <i class="glyphicon glyphicon-queen"></i> <span>Agencias de Turismo</span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="nav-devider"></li>
+            <li class="header nav-small-cap">CULTURA</li>
+            {% if request.user.is_superuser %}
+            <li id="events">
+                <a href="{% url 'events-index-admin'%}">
+                    <i class="fa fa-bullhorn"></i> <span>Eventos</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if role == 5 or request.user.is_superuser %}
+            <li id="sites" class="treeview">
+                <a href="{% url 'tourism_sites-index-admin'%}">
+                    <i class="fa fa-podcast"></i> <span>Area Sitios Turisticos</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="sites-sites" class="submenu">
+                        <a href="{% url 'tourism_sites-index-admin'%}"><i class="glyphicon glyphicon-camera"></i>Sitios
+                            Turisticos</a>
+                    </li>
+                    <li id="sites-types" class="submenu">
+                        <a href="{% url 'tourism_sites-types-index-admin'%}"><i class="fa fa-signal"></i>Tipos</a>
+                    </li>
+                    <li id="sites-services" class="submenu">
+                        <a href="{% url 'tourism_sites-services-index-admin'%}"><i class="fa fa-thumb-tack"></i>Servicios</a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+            {% if request.user.is_superuser %}
+            <li id="routes">
+                <a href="{% url 'tourism_routes-index-admin'%}">
+                    <i class="fa fa-map-signs"></i> <span>Rutas Turisticas</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </section>
+</aside>

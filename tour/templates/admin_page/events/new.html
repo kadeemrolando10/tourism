@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="col-md-6 text-center">
-        <img class="pb-4" id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="300px" width="300px"/>
+        <img class="pb-4" id="image_p" src="{% static 'img/admin-img/noimage.png'%}" alt="your image" height="300px" width="300px"/>
         <div class="white-box">
             <div id="gmaplocation" class="map"></div>
         </div>
@@ -44,7 +44,7 @@
             else{
                 var reader = new FileReader();
                     reader.onload = function (e) {
-                        $('#image_p').attr('src', '{% static 'images/preview_video.png'%}' );
+                        $('#image_p').attr('src', '{% static 'img/admin-img/preview_video.png'%}' );
                     }
                     reader.readAsDataURL(input.files[0]);
             }
@@ -101,10 +101,9 @@
         window.onload = function () {
             initialize()
         };
-
-
-
-
-
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#events').toggleClass("active");
 </script>
 {% endblock %}

@@ -52,7 +52,7 @@
                             </a>
                         </div>
                         <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md"mb-2>
+                        <div class="col-12 col-sm-6 col-md" mb-2>
                             <a href="{% url 'restaurants-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="0.4s">
                                     <div class="catagory-content">
@@ -73,17 +73,6 @@
                                 </div>
                             </a>
                         </div>
-                          <!-- Single Catagory Area -->
-                        <div class="col-12 col-sm-6 col-md mb-2">
-                            <a href="{% url 'events-index' %}">
-                                <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
-                                    <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/calendario.png' %}" alt="">
-                                        <h6>Eventos</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
                         <!-- Single Catagory Area -->
                         <div class="col-12 col-sm-6 col-md mb-2">
                             <a href="{% url 'agencies-index' %}">
@@ -100,7 +89,8 @@
                             <a href="{% url 'tourism_sites-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
                                     <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/icons8-arriba-de-una-colina-filled-50.png' %}" alt="">
+                                        <img src="{% static 'img/core-img/icons8-arriba-de-una-colina-filled-50.png' %}"
+                                             alt="">
                                         <h6>Rutas Turisticas</h6>
                                     </div>
                                 </div>
@@ -111,7 +101,8 @@
                             <a href="{% url 'tourism_routes-index' %}">
                                 <div class="imgstyle single-catagory-area wow fadeInUpBig" data-wow-delay="1s">
                                     <div class="catagory-content">
-                                        <img src="{% static 'img/core-img/icons8-estatua-de-la-libertad-filled-50.png' %}" alt="">
+                                        <img src="{% static 'img/core-img/icons8-estatua-de-la-libertad-filled-50.png' %}"
+                                             alt="">
                                         <h6>Sitios Turisticos</h6>
                                     </div>
                                 </div>
@@ -364,5 +355,9 @@
 
 {% endblock %}
 
-{% block js_scripts %}
+{% block js_code %}
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#home_web').toggleClass("active");
+</script>
 {% endblock %}

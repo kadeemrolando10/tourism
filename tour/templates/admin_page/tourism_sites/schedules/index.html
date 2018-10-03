@@ -16,7 +16,8 @@
                title="Sitios Turisticos">Sitios Turisticos</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_second" href="{% url 'tourism_sites-show-admin' site_id %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_second" href="{% url 'tourism_sites-show-admin' site_id %}" data-tooltip="tooltip"
+               data-placement="right"
                title="{{site_title}}">{{site_title}}</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Horarios</li>
@@ -64,8 +65,10 @@
 <div class="pagination">
     <span class="step-links">
         {% if schedules.has_previous %}
-            <a  class="btn btn-info" href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
-            <a class="btn btn-info" href="?page={{ schedules.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
+            <a class="btn btn-info"
+               href="?page=1 {% if request.GET.q %}&q={{request.GET.q}}{% endif %}">&laquo; Primero</a>
+            <a class="btn btn-info"
+               href="?page={{ schedules.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Anterior</a>
         {% endif %}
 
         <span class="current btn btn-success">
@@ -73,31 +76,20 @@
         </span>
 
         {% if schedules.has_next %}
-            <a class="btn btn-primary" href="?page={{ schedules.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
-            <a class="btn btn-primary" href="?page={{ schedules.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
+            <a class="btn btn-primary"
+               href="?page={{ schedules.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Siguiente</a>
+            <a class="btn btn-primary"
+               href="?page={{ schedules.paginator.num_pages }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Ultimo &raquo;</a>
         {% endif %}
     </span>
 </div>
 {% endblock %}
 
 {% block code_js %}
-<script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-tooltip="tooltip"]').tooltip();
-            $('[title]').tooltip();
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#sites').toggleClass("active");
 
-            $('#confirm-delete').on('show.bs.modal', function (e) {
-
-                var title = $(e.relatedTarget).data('title');
-                var message = $(e.relatedTarget).data('message');
-
-                if (title !== undefined)
-                    $(this).find('.modal-header').html(title);
-                if (message !== undefined)
-                    $(this).find('.modal-body').html('<strong class="text-warning">' + message + '</strong>');
-                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            });
-        })
-
+    v
 </script>
 {% endblock %}

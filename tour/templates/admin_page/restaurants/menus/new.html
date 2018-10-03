@@ -8,11 +8,13 @@
                title="Atrás">Hospedajes</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_second" href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_second" href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Hospedajes">{{restaurant_title}}</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_third" href="{% url 'restaurants-menus-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_third" href="{% url 'restaurants-menus-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Menu">Menu</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Agregando</li>
@@ -28,9 +30,16 @@
         </div>
     </div>
     <div class="col-md-6">
-        <img id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="200px"/>
+        <img id="image_p" src="{% static 'img/admin-img/noimage.png'%}" alt="your image" height="200px"/>
     </div>
 </div>
 {% endblock %}
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#restaurants').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#restaurants-restaurants').toggleClass("active");
+</script>
 {% endblock %}

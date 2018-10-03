@@ -5,7 +5,8 @@
 
 {% block content %}
 <!-- ***** Breadcumb Area Start ***** -->
-<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/img_90386435f5e7.jpg' %})"></div>
+<div class="breadcumb-area bg-img bg-overlay"
+     style="background-image: url({% static 'img/bg-img/img_90386435f5e7.jpg' %})"></div>
 <!-- ***** Breadcumb Area End ***** -->
 
 <section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-0-50"
@@ -15,7 +16,8 @@
             <div class="col-12">
                 <div class="section-heading text-center">
                     <span></span>
-                    <h4>Eventos</h4><hr>
+                    <h4>Eventos</h4>
+                    <hr>
                 </div>
             </div>
         </div>
@@ -38,10 +40,10 @@
                             <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s"
                                  style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                                 {% is_image event.file as r %}
-                                {% if  r %}
+                                {% if r %}
                                 <img class="imgstyle" src="{{ event.file.url }}" alt="">
                                 {% else %}
-                                 <video class="imgstyle" controls poster preload>
+                                <video class="imgstyle" controls poster preload>
                                     <source src="{{ event.file.url }}">
                                 </video>
                                 {% endif %}
@@ -62,4 +64,10 @@
     </div>
 </section>
 
+{% endblock %}
+{% block js_code %}
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#events_web').toggleClass("active");
+</script>
 {% endblock %}

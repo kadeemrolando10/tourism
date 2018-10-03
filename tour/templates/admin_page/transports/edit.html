@@ -2,83 +2,91 @@
 
 {% block content-header %}
 <nav aria-label="breadcrumb" class="alert-warning">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <a  class="page" href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">Transporte</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">Modificando</li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="page" href="{% url 'transports-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+               title="Atrás">Transporte</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Modificando</li>
+    </ol>
 </nav>
 
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
-            <div class="white-box">
-                {% include 'partials/_partial_form_horizontal.html' %}
-            </div>
-        </div>
-        <div class="col-md-6 text-center">
-        <img class="mb-4" id="image_p" src="{{transports.image.url}}" alt="your image" height="300px"/>
-            <div class="white-box">
-                <div id="gmaplocation" class="map"></div>
-            </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
+    <div class="col-md-6 text-center">
+        <img class="mb-4" id="image_p" src="{{transports.image.url}}" alt="your image" height="300px"/>
+        <div class="white-box">
+            <div id="gmaplocation" class="map"></div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block code_js %}
-    {% include 'partials/_url_gmaps.html' %}
-    <script type="text/javascript">
-        $('[data-mask]').inputmask();
+{% include 'partials/_url_gmaps.html' %}
+<script type="text/javascript">
+    $('[data-mask]').inputmask();
 
-        var map;
-        var markers = [];
+    var map;
+    var markers = [];
 
-        function initialize() {
-            var myLatlng = new google.maps.LatLng('{{ transports.lat }}', '{{ transports.lng }}');
-            var myOptions = {
-                zoom: 14,
-                center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-            };
+    function initialize() {
+        var myLatlng = new google.maps.LatLng('{{ transports.lat }}', '{{ transports.lng }}');
+        var myOptions = {
+            zoom: 14,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+        };
 
-            map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
-            // marker refers to a global variable
+        map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
+        // marker refers to a global variable
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng('{{ transports.lat }}', '{{ transports.lng }}'),
+            map: map
+        });
+        markers.push(marker);
+
+        google.maps.event.addListener(map, "click", function (event) {
+            // get lat/lon of click
+            var clickLat = event.latLng.lat();
+            var clickLon = event.latLng.lng();
+
+            // show in input box
+            document.getElementById("id_lat").value = clickLat;
+            document.getElementById("id_lng").value = clickLon;
+            clearMapOnAll(null);
 
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng('{{ transports.lat }}', '{{ transports.lng }}'),
+                position: new google.maps.LatLng(clickLat, clickLon),
                 map: map
             });
-            markers.push(marker);
+            markers.push(marker)
+        });
+    }
 
-            google.maps.event.addListener(map, "click", function (event) {
-                // get lat/lon of click
-                var clickLat = event.latLng.lat();
-                var clickLon = event.latLng.lng();
-
-                // show in input box
-                document.getElementById("id_lat").value = clickLat;
-                document.getElementById("id_lng").value = clickLon;
-                clearMapOnAll(null);
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(clickLat, clickLon),
-                    map: map
-                });
-                markers.push(marker)
-            });
+    function clearMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
         }
+    }
 
-        function clearMapOnAll(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
+    window.onload = function () {
+        initialize()
+    };
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#transports').toggleClass("active");
 
-        window.onload = function () {
-            initialize()
-        };
-    </script>
+    $('.treeview-menu li').removeClass('active');
+    $('#transports-transports').toggleClass("active");
+</script>
 {% endblock %}

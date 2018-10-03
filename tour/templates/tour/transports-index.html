@@ -57,3 +57,12 @@
 </section>
 <!-- ***** Listing Destinations Area End ***** -->
 {% endblock %}
+{% block js_code %}
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#tourism_web').toggleClass("active");
+
+    $('.tourism_web a').removeClass('active');
+    $('#transports_web').toggleClass("active");
+</script>
+{% endblock %}

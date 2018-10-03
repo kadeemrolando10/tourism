@@ -8,11 +8,13 @@
                title="Atrás">Transportes</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_second" href="{% url 'transports-show-admin' transport_id %}" data-tooltip="tooltip"
+               data-placement="right"
                title="{{transport_title}}">{{transport_title}}</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_third" href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_third" href="{% url 'transports-destination-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
                title="{{destination_title}}">{{destination_title}}</a>
         </li>
         <li class="breadcrumb-item">
@@ -31,10 +33,10 @@
             {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
-        <div class="col-md-6">
-        <img id="image_ps" src="{% static 'images/noimage.png'%}" alt="your image" height="200px"/>
-            <div style="height:10px;"></div>
-        <img id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="200px"/>
+    <div class="col-md-6">
+        <img id="image_ps" src="{% static 'img/admin-img/noimage.png'%}" alt="your image" height="200px"/>
+        <div style="height:10px;"></div>
+        <img id="image_p" src="{% static 'img/admin-img/noimage.png'%}" alt="your image" height="200px"/>
     </div>
 </div>
 {% endblock %}
@@ -65,5 +67,12 @@
     $("#id_image_seat").change(function () {
         readURL1(this);
     });
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#transports').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#transports-transports').toggleClass("active");
 </script>
 {% endblock %}

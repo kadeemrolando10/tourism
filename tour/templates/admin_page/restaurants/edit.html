@@ -31,55 +31,62 @@
 {% block code_js %}
 {% include 'partials/_url_gmaps.html' %}
 <script type="text/javascript">
-        $('[data-mask]').inputmask();
+    $('[data-mask]').inputmask();
 
-        var map;
-        var markers = [];
+    var map;
+    var markers = [];
 
-        function initialize() {
-            var myLatlng = new google.maps.LatLng('{{ restaurant.lat }}', '{{ restaurant.lng }}');
-            var myOptions = {
-                zoom: 16,
-                center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-            };
-
-            map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
-            // marker refers to a global variable
-
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng('{{ restaurant.lat }}', '{{ restaurant.lng }}'),
-                map: map
-            });
-            markers.push(marker);
-
-            google.maps.event.addListener(map, "click", function (event) {
-                // get lat/lon of click
-                var clickLat = event.latLng.lat();
-                var clickLon = event.latLng.lng();
-
-                // show in input box
-                document.getElementById("id_lat").value = clickLat;
-                document.getElementById("id_lng").value = clickLon;
-                clearMapOnAll(null);
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(clickLat, clickLon),
-                    map: map
-                });
-                markers.push(marker)
-            });
-        }
-
-        function clearMapOnAll(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
-
-        window.onload = function () {
-            initialize()
+    function initialize() {
+        var myLatlng = new google.maps.LatLng('{{ restaurant.lat }}', '{{ restaurant.lng }}');
+        var myOptions = {
+            zoom: 16,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
         };
 
+        map = new google.maps.Map(document.getElementById("gmaplocation"), myOptions);
+        // marker refers to a global variable
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng('{{ restaurant.lat }}', '{{ restaurant.lng }}'),
+            map: map
+        });
+        markers.push(marker);
+
+        google.maps.event.addListener(map, "click", function (event) {
+            // get lat/lon of click
+            var clickLat = event.latLng.lat();
+            var clickLon = event.latLng.lng();
+
+            // show in input box
+            document.getElementById("id_lat").value = clickLat;
+            document.getElementById("id_lng").value = clickLon;
+            clearMapOnAll(null);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(clickLat, clickLon),
+                map: map
+            });
+            markers.push(marker)
+        });
+    }
+
+    function clearMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    window.onload = function () {
+        initialize()
+    };
+
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#restaurants').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#restaurants-restaurants').toggleClass("active");
 </script>
 {% endblock %}

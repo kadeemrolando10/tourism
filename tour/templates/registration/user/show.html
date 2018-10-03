@@ -53,5 +53,11 @@
 </div>
 {% endblock %}
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#settings').toggleClass("active");
 
+    $('.treeview-menu li').removeClass('active');
+    $('#users').toggleClass("active");
+</script>
 {% endblock %}

@@ -25,9 +25,16 @@
 
 {% block code_js %}
 <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-tooltip="tooltip"]').tooltip();
-            $('[title]').tooltip();
-            });
+    $(document).ready(function () {
+        $('[data-tooltip="tooltip"]').tooltip();
+        $('[title]').tooltip();
+    });
+</script>
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#settings').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#users').toggleClass("active");
 </script>
 {% endblock %}

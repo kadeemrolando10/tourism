@@ -28,9 +28,14 @@
         </div>
     </div>
     <div class="col-md-6">
-        <img id="image_p" src="{% static 'images/noimage.png'%}" alt="your image" height="300px"/>
+        <img id="image_p" src="{% static 'img/admin-img/noimage.png'%}" alt="your image" height="300px"/>
     </div>
 </div>
 {% endblock %}
 {% block code_js %}
+
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#routes').toggleClass("active");
+</script>
 {% endblock %}

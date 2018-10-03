@@ -11,3 +11,9 @@
 {% block content%}
 <h5>Bienvenido a la pagina de Secretaria de Turismo y Culturas</h5>
 {% endblock %}
+{% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#home').toggleClass("active");
+</script>
+{% endblock %}

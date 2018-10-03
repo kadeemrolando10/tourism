@@ -23,4 +23,11 @@
 {% endblock %}
 
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#lodgings').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#lodgings-types').toggleClass("active");
+</script>
 {% endblock %}

@@ -8,11 +8,13 @@
                title="Atrás">Hospedajes</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_second" href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_second" href="{% url 'restaurants-show-admin' restaurant_id %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Hospedajes">{{restaurant_title}}</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="page_third" href="{% url 'restaurants-schedules-index-admin' %}" data-tooltip="tooltip" data-placement="right"
+            <a class="page_third" href="{% url 'restaurants-schedules-index-admin' %}" data-tooltip="tooltip"
+               data-placement="right"
                title="Habitaciones">Horario</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Modificando</li>
@@ -21,14 +23,21 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
-            <div class="white-box">
-                {% include 'partials/_partial_form_horizontal.html' %}
-            </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="white-box">
+            {% include 'partials/_partial_form_horizontal.html' %}
         </div>
     </div>
+</div>
 {% endblock %}
 
 {% block code_js %}
+<script>
+    $('.sidebar-menu li').removeClass('active');
+    $('#restaurants').toggleClass("active");
+
+    $('.treeview-menu li').removeClass('active');
+    $('#restaurants-restaurants').toggleClass("active");
+</script>
 {% endblock %}

@@ -64,7 +64,8 @@
                                    role="tab" aria-controls="pills-breakfast" aria-selected="true">Desayunos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link brn" id="pills-entrance-tab" data-toggle="pill" href="#pills-entrance"
+                                <a class="nav-link brn" id="pills-entrance-tab" data-toggle="pill"
+                                   href="#pills-entrance"
                                    role="tab" aria-controls="pills-entrance" aria-selected="false">Entradas</a>
                             </li>
                             <li class="nav-item">
@@ -232,7 +233,7 @@
                         <h6 class="underline"><i class="fa fa-info text-light"></i> Informacion</h6>
                         <div class="opening-hours">
                             <p>
-                               <label class="les"><i class="fa fa-phone" aria-hidden="true"></i> Telefono</label><br>
+                                <label class="les"><i class="fa fa-phone" aria-hidden="true"></i> Telefono</label><br>
                                 <span class="alert bg-success link">{{ restaurant.phone }}</span>
                             </p>
                             {% if restaurant.web is None %}
@@ -269,40 +270,37 @@
 {% block js_code %}
 {% include 'partials/_url_gmaps.html' %}
 <script type="text/javascript">
-        var map;
-        var markers = [];
-        var lat = '{{ restaurant.lat }}';
-        var lng = '{{ restaurant.lng }}';
-        function initialize() {
-            var myLatlng = new google.maps.LatLng(lat, lng);
-            var myOptions = {
-                zoom: 18,
-                center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                gestureHandling: 'greedy'
-            };
-
-            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
-
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map
-            });
-            markers.push(marker);
-        }
-
-        window.onload = function () {
-            initialize()
+    var map;
+    var markers = [];
+    var lat = '{{ restaurant.lat }}';
+    var lng = '{{ restaurant.lng }}';
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(lat, lng);
+        var myOptions = {
+            zoom: 18,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            gestureHandling: 'greedy'
         };
 
+        map = new google.maps.Map(document.getElementById("gmap"), myOptions);
 
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            map: map
+        });
+        markers.push(marker);
+    }
 
+    window.onload = function () {
+        initialize()
+    };
+</script>
+<script>
+    $('.navbar-nav li').removeClass('active');
+    $('#tourism_web').toggleClass("active");
 
-
-
-
-
-
-
+    $('.tourism_web a').removeClass('active');
+    $('#restaurants_web').toggleClass("active");
 </script>
 {% endblock %}
