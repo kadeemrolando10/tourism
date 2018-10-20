@@ -18,6 +18,7 @@
     <!-- Core Stylesheet -->
     <link href="{% static 'style.css' %}" rel="stylesheet">
     <link href="{% static 'css/responsive/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'css/panellum/pannellum.css' %}" rel="stylesheet">
     <!-- Responsive CSS -->
 </head>
 
@@ -99,6 +100,10 @@
                             <li id="secretary_web" class="nav-item">
                                 <a class="nav-link" href="{% url 'secretary' %}">
                                     <i class="fa fa-institution " aria-hidden="true"></i> <br>Secretaria</a>
+                            </li>
+                            <li id="gallery_web" class="nav-item">
+                                <a class="nav-link" href="{% url 'gallery' %}">
+                                    <i class="fa fa-camera-retro " aria-hidden="true"></i> <br>Galeria</a>
                             </li>
                         </ul>
                         <!-- Signin btn -->
@@ -199,6 +204,7 @@
 <script src="{% static 'js/others/plugins.js' %}"></script>
 <!-- Active JS -->
 <script src="{% static 'js/active.js' %}"></script>
+<script src="{% static 'js/panellum/pannellum.js' %}"></script>
 <script>
     $('ul.gres li').on("click", function (e) {
         var go_to_url = $(this).find("a").prop("href").val();

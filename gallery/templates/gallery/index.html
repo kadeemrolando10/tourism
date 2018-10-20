@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+<!-- ***** Breadcumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-overlay"
+     style="background-image: url({% static 'img/bg-img/hero-23.jpg' %})"></div>
+<!-- ***** Breadcumb Area End ***** -->
+
+<div id="panorama"></div>
+
+{% endblock %}
+{% block js_code %}
+<script>
+    pannellum.viewer('panorama', {
+        "type": "equirectangular",
+        "panorama": "{% static 'img/360degree/cerro-toco-0.jpg' %}",
+        "autoLoad": true,
+        "compass": true,
+        "northOffset": 247.5,
+        "autoRotate": -2
+    });
+    $('.navbar-nav li').removeClass('active');
+    $('#gallery_web').toggleClass("active");
+</script>
+{% endblock %}

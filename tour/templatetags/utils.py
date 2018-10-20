@@ -15,6 +15,12 @@ from tour.models import Lodging
 
 register = template.Library()
 
+import datetime
+
+@register.simple_tag()
+def get_time():
+    return  datetime.datetime.now().year
+
 
 @register.filter()
 def to_int(value):

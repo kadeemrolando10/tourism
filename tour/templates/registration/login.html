@@ -22,9 +22,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'master_style.css' %}">
 
-    <!-- Lion_admin skins -->
-    <link rel="stylesheet" href="{% static 'skins/_all-skins.css' %}">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,13 +31,13 @@
 
 </head>
 <body class="hold-transition login-page">
-<div class="align-center">
-    <h3>SECRETARIA DEPARTAMENTAL DE TURISMO Y CULTURAS - POTOSI</h3>
+<div class="align-center mt-4 text-dark">
+    <h1 class="box-shadow-all-sides"><strong>SECRETARIA DEPARTAMENTAL DE TURISMO Y CULTURAS "POTOSI" </strong></h1>
 </div>
 <div class="login-box">
     <!-- /.login-logo -->
-    <div class="login-box-body">
-        <h5 class="login-box-msg">INICIO DE SESION</h5>
+    <div class="login-box-body bg-info ">
+        <h3 class="login-box-msg">INICIO DE SESION</h3>
 
         <form method="post" class="form-element">
             {% csrf_token %}
@@ -60,17 +57,18 @@
             <div class="form-group has-feedback">
                 <label>Usuario</label>
                 {{ form.username }}
-                <span class="fa fa-user-circle form-control-feedback fa_login"></span>
+                <span class="fa fa-user-circle form-control-feedback fa_login" style="font-size: 35px"></span>
             </div>
             <div class="form-group has-feedback">
                 <label>Contraseña</label>
                 {{ form.password }}
-                <span class="fa fa-key form-control-feedback fa_login"></span>
+                <span class="fa fa-key form-control-feedback fa_login" style="font-size: 35px"></span>
             </div>
             <div class="row">
                 <!-- /.col -->
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-info btn-block margin-top-10" value="Iniciar Sesion">SIGN IN</button>
+                    <button type="submit" class="btn btn-dark btn-block margin-top-10">INICIAR SESION
+                    </button>
                     <input type="hidden" name="next" value="{{ next }}"/>
                 </div>
                 <!-- /.col -->

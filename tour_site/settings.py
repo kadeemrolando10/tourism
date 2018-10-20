@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 from django.contrib.messages import constants as messages
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'tour',
+    'gallery'
 ]
 
 LOGIN_REQUIRED_FOR_CRUD = False
@@ -127,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/La_Paz'
 DATETIME_FORMAT = '%d-%m-%Y %H:%M:S'

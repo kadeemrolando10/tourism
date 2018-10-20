@@ -173,13 +173,14 @@ def user_delete(request, id):
 # PAGINA INICIO ADMINISTRADOR
 @login_required
 def index_admin(request):
+    request.session['id_tab_config'] = 1
     return render(request, 'admin_page/index.html', {})
 
 
 # CAMBIO DE LOCALIZACION EN TODA LA PLANTILLA CLIENTE
 def change_main(request, id):
     request.session['id_main'] = id
-    id_page =request.session['id_page']
+    id_page = request.session['id_page']
     if id_page == 1:
         return HttpResponseRedirect(reverse(transport_index))
     elif id_page == 2:
@@ -244,9 +245,9 @@ def agency_index(request):
     request.session['id_page'] = 4
     ids = request.session['id_main']
     if ids == 0 or ids is None:
-        agencies = Agency.objects.all
+        agencies = Agency.objects.filter(is_active=True)
     else:
-        agencies = Agency.objects.filter(destination=ids)
+        agencies = Agency.objects.filter(destination=ids).filter(is_active=True)
     return render(request, 'tour/agencies-index.html', {
         'agencies': agencies,
         'agency_obj': Agency,
@@ -570,7 +571,7 @@ def agency_schedule_delete_admin(request, id):
 def event_index(request):
     request.session['id_page'] = 5
     ids = request.session['id_main']
-    if ids == 0 or  ids is None:
+    if ids == 0 or ids is None:
         events = Event.objects.all
     else:
         events = Event.objects.filter(destination=ids)
@@ -687,9 +688,9 @@ def restaurant_index(request):
     request.session['id_page'] = 3
     id = request.session['id_main']
     if id == 0:
-        restaurants = Restaurant.objects.all
+        restaurants = Restaurant.objects.filter(is_active=True)
     else:
-        restaurants = Restaurant.objects.filter(destination=id)
+        restaurants = Restaurant.objects.filter(destination=id).filter(is_active=True)
 
     return render(request, 'tour/restaurants-index.html', {
         'restaurants': restaurants,
@@ -1112,9 +1113,9 @@ def transport_index(request):
     request.session['id_page'] = 1
     ids = request.session['id_main']
     if ids == 0 or ids is None:
-        transports = Transport.objects.all
+        transports = Transport.objects.filter(is_active=True)
     else:
-        transports = Transport.objects.filter(destination=ids)
+        transports = Transport.objects.filter(destination=ids).filter(is_active=True)
 
     return render(request, 'tour/transports-index.html', {
         'transports': transports,
@@ -1632,9 +1633,9 @@ def tourism_site_index(request):
     request.session['id_page'] = 6
     id = request.session['id_main']
     if id == 0:
-        sites = TourismSite.objects.all
+        sites = TourismSite.objects.filter(is_active=True)
     else:
-        sites = TourismSite.objects.filter(destination=id)
+        sites = TourismSite.objects.filter(destination=id).filter(is_active=True)
     return render(request, 'tour/tourism_sites-index.html', {
         'sites': sites,
         'tourism_site_obj': TourismSite
@@ -2337,9 +2338,9 @@ def lodging_index(request):
     request.session['id_page'] = 2
     id = request.session['id_main']
     if id == 0:
-        lodgings = Lodging.objects.all
+        lodgings = Lodging.objects.filter(is_active=True)
     else:
-        lodgings = Lodging.objects.filter(destination=id)
+        lodgings = Lodging.objects.filter(destination=id).filter(is_active=True)
     return render(request, 'tour/lodging-index.html', {
         'lodgings': lodgings,
         'lodging_obj': Lodging
@@ -2908,12 +2909,14 @@ def configuration_index(request):
     laws = Law.objects.all
     functions = Function.objects.all
     socials = Social.objects.all
+    request.session['id_tab_config'] = 1
     return render(request, 'admin_page/configurations/index.html', {
         'objectives': objectives,
         'secretaries': secretaries,
         'laws': laws,
         'functions': functions,
         'socials': socials,
+        'session_tab': 1
     })
 
 

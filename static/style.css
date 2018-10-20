@@ -1744,7 +1744,7 @@ body {
 .organigrama li::after {
     right: auto;
     left: 50%;
-    border-left: 3px solid black;
+    border-left: 4px solid black;
 }
 
 .organigrama li:only-child::before, .organigrama li:only-child::after {
@@ -1777,7 +1777,7 @@ body {
     position: absolute;
     top: 0;
     left: 50%;
-    border-left: 3px solid black;
+    border-left: 4px solid black;
     width: 0;
     height: 20px;
 }
@@ -3535,4 +3535,93 @@ a.link.github:active {
 
 .bg-violet {
     background-color: #7643ea;
+}
+
+.o-base {
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid black;
+    padding: 6px;
+    margin: 12px;
+    border-radius: 5px;
+    max-width: max-content;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 0 0 10px black;
+}
+
+@media (max-width: 576px) {
+    .o-base {
+        font-size: 12px;
+    }
+
+}
+
+.o-secretary {
+    position: relative;
+    background-color: #5d25dd;
+    border-left: 4px solid black;
+    box-shadow: 0 0 30px blue !important;
+}
+
+.o-s-secretary {
+    position: relative;
+    background-color: #12a766;
+    border: 1px solid black;
+    border-left: 4px solid black;
+}
+
+.o-c-secretary {
+    position: relative;
+    background-color: #5e5e5e;
+    border: 1px solid black;
+    margin-left: 90px;
+    border-left: 4px solid black;
+}
+
+.o-unity {
+    position: relative;
+    background-color: #e36502;
+    border: 1px solid black;
+    margin-left: 40px;
+    border-left: 4px solid black;
+    box-shadow: 0 0 30px red !important;
+}
+
+.o-u-unity {
+    position: relative;
+    background-color: #70b10c;
+    border: 1px solid black;
+    margin-left: 80px;
+    border-left: 4px solid black;
+}
+
+.o-c-unity {
+    position: relative;
+    background-color: #e36735;
+    border: 1px solid black;
+    margin-left: 120px;
+    border-left: 4px solid black;
+}
+
+.o-o-unity {
+    position: relative;
+    background-color: #e39d10;
+    border: 1px solid black;
+    margin-left: 120px;
+    border-left: 4px solid black;
+}
+
+.o-oc-unity {
+    position: relative;
+    background-color: #11e3d7;
+    border: 1px solid black;
+    margin-left: 160px;
+    border-left: 4px solid black;
+}
+
+#panorama {
+    width: 1400px;
+    height: 400px;
 }

@@ -10,8 +10,11 @@
         <li class="breadcrumb-item active" aria-current="page">Modificando</li>
     </ol>
 </nav>
-
-{% include 'partials/_partial_form_horizontal.html' %}
+<div class="row">
+    <div class="col-md-6">
+        {% include 'partials/_partial_form_horizontal.html' %}
+    </div>
+</div>
 {% endblock %}
 
 {% block code_js %}
