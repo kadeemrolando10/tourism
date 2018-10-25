@@ -127,18 +127,24 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-caret-down inline-block"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right bg-warning">
-                        <a class="dropdown-item" href="{% url 'change-id-main' 0 %}">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            Potosi (Departamental)
-                        </a>
-                        {% get_locations as locations %}
-                        {% for location in locations %}
-                        <a class="dropdown-item" href="{% url 'change-id-main' location.id %}">
-                            <i id="locat-icon" class="fa fa-map-marker" aria-hidden="true"></i>
-                            {{location.title}}
-                        </a>
-                        {% endfor %}
+                    <div class="dropdown-menu multi-column bg-light">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="dropdown-item" href="{% url 'change-id-main' 0 %}">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    Potosi (Departamental)
+                                </a>
+                            </div>
+                            {% get_locations as locations %}
+                            {% for location in locations %}
+                            <div class="col-md-6">
+                                <a class="dropdown-item" href="{% url 'change-id-main' location.id %}">
+                                    <i id="locat-icon" class="fa fa-map-marker" aria-hidden="true"></i>
+                                    {{location.title}}
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

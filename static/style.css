@@ -182,6 +182,7 @@ p {
 .imgstyle {
     max-width: 100%;
     height: auto;
+    min-height: 200px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -3624,4 +3625,15 @@ a.link.github:active {
 #panorama {
     width: 1400px;
     height: 400px;
+}
+
+
+@media (max-width: 768px) {
+.dropdown-menu.multi-column {
+    width: 200px !important;
+}
+}
+
+.dropdown-menu.multi-column {
+    width: 440px;
 }

@@ -181,7 +181,9 @@ def index_admin(request):
 def change_main(request, id):
     request.session['id_main'] = id
     id_page = request.session['id_page']
-    if id_page == 1:
+    if id_page == 0:
+        return HttpResponseRedirect(reverse(index))
+    elif id_page == 1:
         return HttpResponseRedirect(reverse(transport_index))
     elif id_page == 2:
         return HttpResponseRedirect(reverse(lodging_index))
@@ -209,7 +211,7 @@ def change_main_tourism_site(request, id):
 # PAGINA INICIO CLIENTE
 def index(request):
     request.session['id_page'] = 0
-    request.session['id_main'] = 0
+
     restaurants = Restaurant.objects.all
     transports = Transport.objects.all
     agencies = Agency.objects.all

@@ -42,7 +42,7 @@ class Social(models.Model):
 
 
 class Location(models.Model):
-    title = models.CharField(max_length=150, verbose_name='Nombre')
+    title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -152,7 +152,7 @@ class Event(models.Model):
 
 
 class RestaurantService(models.Model):
-    title = models.TextField(max_length=150, default='NA', verbose_name='Nombre')
+    title = models.TextField(max_length=150, default='NA', unique=True, verbose_name='Nombre')
     image = models.ImageField(upload_to='media/restaurants/services/', null='true', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
@@ -283,7 +283,7 @@ class TransportDestination(models.Model):
 
 
 class TransportService(models.Model):
-    title = models.CharField(max_length=150, default='NA', verbose_name='Item de servicio')
+    title = models.CharField(max_length=150, default='NA', unique=True, verbose_name='Item de servicio')
     image = models.ImageField(upload_to='media/transports/services/', null='true', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
@@ -342,7 +342,7 @@ class TransportSchedule(models.Model):
 
 
 class LodgingType(models.Model):
-    title = models.CharField(max_length=150, verbose_name='Nombre')
+    title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -359,7 +359,7 @@ class LodgingType(models.Model):
 
 
 class LodgingService(models.Model):
-    title = models.CharField(max_length=150, default='NA', verbose_name='Nombre')
+    title = models.CharField(max_length=150, unique=True, default='NA', verbose_name='Nombre')
     image = models.ImageField(upload_to='media/lodgings/services/', null='true', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
@@ -445,7 +445,7 @@ class LodgingSchedule(models.Model):
 
 
 class TourismSiteType(models.Model):
-    title = models.CharField(max_length=150, verbose_name='Nombre')
+    title = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
     def __str__(self):
@@ -462,7 +462,7 @@ class TourismSiteType(models.Model):
 
 
 class TourismSiteService(models.Model):
-    title = models.CharField(max_length=150, default='NA', verbose_name='Item de servicio')
+    title = models.CharField(max_length=150, default='NA', unique=True, verbose_name='Item de servicio')
     image = models.ImageField(upload_to='media/t-sites/services/', verbose_name='Imagen')
     register_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de Registro')
 
